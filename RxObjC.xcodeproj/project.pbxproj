@@ -1,0 +1,747 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		17EEC01D13F593AA752F91BA /* RxBinaryDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC0D09BEEE61DD3CF8B84 /* RxBinaryDisposable.m */; };
+		17EEC065957C3438802EFFEF /* RxObservableConvertibleType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECE10B2E394F65DED36BE /* RxObservableConvertibleType.h */; };
+		17EEC0715276F5B9DEFD2E55 /* RxSerialDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC3999409C5E1B996CBF8 /* RxSerialDisposable.h */; };
+		17EEC0D50AF0A27359980A6A /* RxCompositeDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC916AF1930BFCFB47CD2 /* RxCompositeDisposable.h */; };
+		17EEC0D78D1422B5BD623DA4 /* RxBooleanDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC2757133CE904F29D094 /* RxBooleanDisposable.h */; };
+		17EEC0EFD2612F89791CA150 /* RxNopDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF3C73A546D8D1F2C06B /* RxNopDisposable.m */; };
+		17EEC1AA713EC2221B34E08F /* RxError.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE9C9A555E9A447D2D22 /* RxError.m */; };
+		17EEC1E6ED157ECFA4EACA77 /* RxDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC3078C462AFB9371114D /* RxDisposable.h */; };
+		17EEC2B566A5234CE5F60F19 /* RxCompositeDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7A4F1FE96881F235587 /* RxCompositeDisposable.m */; };
+		17EEC2F24B15924976712FBB /* RxSubscriptionDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECE4123CF79EA37012DC9 /* RxSubscriptionDisposable.h */; };
+		17EEC2F61B5CE4D994EE2EE2 /* RxDisposeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC158A65485D5E12CC9DA /* RxDisposeBase.m */; };
+		17EEC38F61B6DBD0C3A2FD79 /* RxSingleAssignmentDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC9AC194AE6643D8C8DE5 /* RxSingleAssignmentDisposable.h */; };
+		17EEC3DB2B702C7F70D46F4B /* RxDisposeBag.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC21C493966B71C832775 /* RxDisposeBag.h */; };
+		17EEC41FE7AE905ADC7FF389 /* RxObserverBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC83E393AC0A82A7E1404 /* RxObserverBase.h */; };
+		17EEC53D759411B8A60C6C73 /* RxCancelable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC8D58B0EAAB6F0E47881 /* RxCancelable.h */; };
+		17EEC54EBD36766E6CB086FD /* RxError.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECA38958D800F5EA40163 /* RxError.h */; };
+		17EEC58B47859B3ADE8065DA /* RxSerialDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC9ED58FFA9B13D9AFB47 /* RxSerialDisposable.m */; };
+		17EEC5AB5DCFB2065276098B /* RxSubscriptionDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC20896492F901375562D /* RxSubscriptionDisposable.m */; };
+		17EEC5D7732BCF0A94B8D643 /* RxNopDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC55CB1C753321609C0CF /* RxNopDisposable.h */; };
+		17EEC63424071308EBAE0B03 /* RxEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC56B9636EB60C52471F7 /* RxEvent.h */; };
+		17EEC667FC695AC71EB8BE0D /* RxAnonymousObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC04D3BCB57AF66375DFF /* RxAnonymousObserver.h */; };
+		17EEC6915FFDF32FDBFDB96F /* NSObject+RxObserverType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECBADA7BE1E3B4E02437A /* NSObject+RxObserverType.h */; };
+		17EEC696AF9059FA36ADFEB8 /* RxStableCompositeDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC44716BCA249885043C6 /* RxStableCompositeDisposable.m */; };
+		17EEC6B6E55B9458D22EA471 /* RxBinaryDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECF3E17C0589E7D552E0E /* RxBinaryDisposable.h */; };
+		17EEC893EB0D56D6ADC70FF0 /* RxTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC670691317AE01F6DD5C /* RxTuple.m */; };
+		17EEC901BFDD01A7C2E92436 /* RxObservableType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC98112FAD318175C414C /* RxObservableType.h */; };
+		17EEC90D9D3D13780C0A28CD /* RxObserverType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECA887346B2CE6570F58A /* RxObserverType.h */; };
+		17EEC94CAE2B8252A58794AC /* NSObject+RxObservableType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEDD8AA39A1AD54D3694 /* NSObject+RxObservableType.m */; };
+		17EEC95CA29563617163273A /* RxObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECE395B9B3E396A5C71C5 /* RxObservable.h */; };
+		17EECA58B0C2DC04257D1483 /* RxObserverBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE517351E269D1E8C445 /* RxObserverBase.m */; };
+		17EECB5B460B930307A8EFE7 /* RxStableCompositeDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECF5500632D6087B198BE /* RxStableCompositeDisposable.h */; };
+		17EECB8AE684CB56CBBE82CC /* RxSingleAssignmentDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECCA9C4DF7FCF07B9AB29 /* RxSingleAssignmentDisposable.m */; };
+		17EECC6564617DCF7BCA805A /* RxDisposeBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD677672C86DF7113CC8 /* RxDisposeBag.m */; };
+		17EECC78C02D9805A98CEF96 /* RxTuple.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECFEC3CC63C1959093A43 /* RxTuple.h */; };
+		17EECC95DC24BFCE8073E669 /* RxAnonymousDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC62ADF8D7915248125E1 /* RxAnonymousDisposable.m */; };
+		17EECD41CE367C6E81229491 /* RxRefCountDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC6886F2C986EDCFA8C4F /* RxRefCountDisposable.h */; };
+		17EECD4417B070E72FEFE1E5 /* NSObject+RxObservableType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC4335B174F6E8B903967 /* NSObject+RxObservableType.h */; };
+		17EECD6C3FE4C54469075F77 /* RxAnonymousObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2D8CEAE83E7EDFE5721 /* RxAnonymousObserver.m */; };
+		17EECD9F934CC9FC7AABE297 /* RxBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC564FD57D08ACB320B14 /* RxBag.m */; };
+		17EECDE39BC697D0E37353E5 /* RxAnonymousDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC76F5A89B72EB614B329 /* RxAnonymousDisposable.h */; };
+		17EECDF7AE451DE01D8920E8 /* RxScheduledDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC8AA4E1C88682DC5556C /* RxScheduledDisposable.h */; };
+		17EECE0A3B38D06896F6D77B /* RxEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEFD0E78FE2DA62A24AF /* RxEvent.m */; };
+		17EECE56618380B1879B7B45 /* RxBooleanDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC509BC4D9FC8184F1D83 /* RxBooleanDisposable.m */; };
+		17EECE74F9DC2E02526C8915 /* RxDisposeBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC4194A682F605ED770E0 /* RxDisposeBase.h */; };
+		17EECF04366D12B5F27F2559 /* RxScheduledDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC926CEFB396687D514C4 /* RxScheduledDisposable.m */; };
+		17EECF44B13A4C1ABDB0A88F /* RxObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC720402F5C6F6F87472A /* RxObservable.m */; };
+		17EECF6E0BEA2174336E6CB8 /* NSObject+RxObserverType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD9D4CB7C519FB299941 /* NSObject+RxObserverType.m */; };
+		17EECF75A3BB51E560FC7E99 /* RxRefCountDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECAD4F31829ACCDDCF965 /* RxRefCountDisposable.m */; };
+		17EECFA43C5898DAA5C95B56 /* RxBag.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC654B0A15987D2506783 /* RxBag.h */; };
+		17EECFD855C3CE41FE8952E7 /* RxObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECA16BACE27D6E912A953 /* RxObjC.m */; };
+		365043FD1D155DDE008CBABA /* RxObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 365043FC1D155DDE008CBABA /* RxObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		365044041D155DDF008CBABA /* RxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365043F91D155DDE008CBABA /* RxObjC.framework */; };
+		365044091D155DDF008CBABA /* RxObjCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 365044081D155DDF008CBABA /* RxObjCTests.m */; };
+		A6D791401A3AD6821587E34B /* Pods_RxObjCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 702FC3579BB558BBBF6A9650 /* Pods_RxObjCTests.framework */; };
+		E8DB990A7C3BDC97F19F1024 /* Pods_RxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698537D5C6F019B70DB547AC /* Pods_RxObjC.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		365044051D155DDF008CBABA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 365043F81D155DDE008CBABA;
+			remoteInfo = RxObjC;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		17EEC04D3BCB57AF66375DFF /* RxAnonymousObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxAnonymousObserver.h; sourceTree = "<group>"; };
+		17EEC0D09BEEE61DD3CF8B84 /* RxBinaryDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxBinaryDisposable.m; sourceTree = "<group>"; };
+		17EEC158A65485D5E12CC9DA /* RxDisposeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxDisposeBase.m; sourceTree = "<group>"; };
+		17EEC20896492F901375562D /* RxSubscriptionDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSubscriptionDisposable.m; sourceTree = "<group>"; };
+		17EEC21C493966B71C832775 /* RxDisposeBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDisposeBag.h; sourceTree = "<group>"; };
+		17EEC2757133CE904F29D094 /* RxBooleanDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxBooleanDisposable.h; sourceTree = "<group>"; };
+		17EEC2D8CEAE83E7EDFE5721 /* RxAnonymousObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxAnonymousObserver.m; sourceTree = "<group>"; };
+		17EEC3078C462AFB9371114D /* RxDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDisposable.h; sourceTree = "<group>"; };
+		17EEC3999409C5E1B996CBF8 /* RxSerialDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSerialDisposable.h; sourceTree = "<group>"; };
+		17EEC4194A682F605ED770E0 /* RxDisposeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDisposeBase.h; sourceTree = "<group>"; };
+		17EEC4335B174F6E8B903967 /* NSObject+RxObservableType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RxObservableType.h"; sourceTree = "<group>"; };
+		17EEC44716BCA249885043C6 /* RxStableCompositeDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxStableCompositeDisposable.m; sourceTree = "<group>"; };
+		17EEC509BC4D9FC8184F1D83 /* RxBooleanDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxBooleanDisposable.m; sourceTree = "<group>"; };
+		17EEC55CB1C753321609C0CF /* RxNopDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxNopDisposable.h; sourceTree = "<group>"; };
+		17EEC564FD57D08ACB320B14 /* RxBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxBag.m; sourceTree = "<group>"; };
+		17EEC56B9636EB60C52471F7 /* RxEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxEvent.h; sourceTree = "<group>"; };
+		17EEC62ADF8D7915248125E1 /* RxAnonymousDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxAnonymousDisposable.m; sourceTree = "<group>"; };
+		17EEC654B0A15987D2506783 /* RxBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxBag.h; sourceTree = "<group>"; };
+		17EEC670691317AE01F6DD5C /* RxTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxTuple.m; sourceTree = "<group>"; };
+		17EEC6886F2C986EDCFA8C4F /* RxRefCountDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxRefCountDisposable.h; sourceTree = "<group>"; };
+		17EEC720402F5C6F6F87472A /* RxObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxObservable.m; sourceTree = "<group>"; };
+		17EEC76F5A89B72EB614B329 /* RxAnonymousDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxAnonymousDisposable.h; sourceTree = "<group>"; };
+		17EEC7A4F1FE96881F235587 /* RxCompositeDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxCompositeDisposable.m; sourceTree = "<group>"; };
+		17EEC83E393AC0A82A7E1404 /* RxObserverBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObserverBase.h; sourceTree = "<group>"; };
+		17EEC8AA4E1C88682DC5556C /* RxScheduledDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxScheduledDisposable.h; sourceTree = "<group>"; };
+		17EEC8D58B0EAAB6F0E47881 /* RxCancelable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxCancelable.h; sourceTree = "<group>"; };
+		17EEC916AF1930BFCFB47CD2 /* RxCompositeDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxCompositeDisposable.h; sourceTree = "<group>"; };
+		17EEC926CEFB396687D514C4 /* RxScheduledDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxScheduledDisposable.m; sourceTree = "<group>"; };
+		17EEC98112FAD318175C414C /* RxObservableType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObservableType.h; sourceTree = "<group>"; };
+		17EEC9AC194AE6643D8C8DE5 /* RxSingleAssignmentDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSingleAssignmentDisposable.h; sourceTree = "<group>"; };
+		17EEC9ED58FFA9B13D9AFB47 /* RxSerialDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSerialDisposable.m; sourceTree = "<group>"; };
+		17EECA16BACE27D6E912A953 /* RxObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxObjC.m; sourceTree = "<group>"; };
+		17EECA38958D800F5EA40163 /* RxError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxError.h; sourceTree = "<group>"; };
+		17EECA887346B2CE6570F58A /* RxObserverType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObserverType.h; sourceTree = "<group>"; };
+		17EECAD4F31829ACCDDCF965 /* RxRefCountDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxRefCountDisposable.m; sourceTree = "<group>"; };
+		17EECBADA7BE1E3B4E02437A /* NSObject+RxObserverType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RxObserverType.h"; sourceTree = "<group>"; };
+		17EECCA9C4DF7FCF07B9AB29 /* RxSingleAssignmentDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSingleAssignmentDisposable.m; sourceTree = "<group>"; };
+		17EECD677672C86DF7113CC8 /* RxDisposeBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxDisposeBag.m; sourceTree = "<group>"; };
+		17EECD9D4CB7C519FB299941 /* NSObject+RxObserverType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RxObserverType.m"; sourceTree = "<group>"; };
+		17EECE10B2E394F65DED36BE /* RxObservableConvertibleType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObservableConvertibleType.h; sourceTree = "<group>"; };
+		17EECE395B9B3E396A5C71C5 /* RxObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObservable.h; sourceTree = "<group>"; };
+		17EECE4123CF79EA37012DC9 /* RxSubscriptionDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSubscriptionDisposable.h; sourceTree = "<group>"; };
+		17EECE517351E269D1E8C445 /* RxObserverBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxObserverBase.m; sourceTree = "<group>"; };
+		17EECE9C9A555E9A447D2D22 /* RxError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxError.m; sourceTree = "<group>"; };
+		17EECEDD8AA39A1AD54D3694 /* NSObject+RxObservableType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RxObservableType.m"; sourceTree = "<group>"; };
+		17EECEFD0E78FE2DA62A24AF /* RxEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxEvent.m; sourceTree = "<group>"; };
+		17EECF3C73A546D8D1F2C06B /* RxNopDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxNopDisposable.m; sourceTree = "<group>"; };
+		17EECF3E17C0589E7D552E0E /* RxBinaryDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxBinaryDisposable.h; sourceTree = "<group>"; };
+		17EECF5500632D6087B198BE /* RxStableCompositeDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxStableCompositeDisposable.h; sourceTree = "<group>"; };
+		17EECFEC3CC63C1959093A43 /* RxTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTuple.h; sourceTree = "<group>"; };
+		365043F91D155DDE008CBABA /* RxObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		365043FC1D155DDE008CBABA /* RxObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxObjC.h; sourceTree = "<group>"; };
+		365043FE1D155DDE008CBABA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		365044031D155DDF008CBABA /* RxObjCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxObjCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		365044081D155DDF008CBABA /* RxObjCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RxObjCTests.m; sourceTree = "<group>"; };
+		3650440A1D155DDF008CBABA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AEDFD4E4E9F6F1FE05FA9EA /* Pods-RxObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxObjC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC.debug.xcconfig"; sourceTree = "<group>"; };
+		698537D5C6F019B70DB547AC /* Pods_RxObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A546AA2BD3F368B81F3EA54 /* Pods-RxObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxObjC.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC.release.xcconfig"; sourceTree = "<group>"; };
+		702FC3579BB558BBBF6A9650 /* Pods_RxObjCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxObjCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D050A5F00AB39FDDE12B5E28 /* Pods-RxObjCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxObjCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E4ADEBAC9D4DE3B1B7746E14 /* Pods-RxObjCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxObjCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		365043F51D155DDE008CBABA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8DB990A7C3BDC97F19F1024 /* Pods_RxObjC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		365044001D155DDF008CBABA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				365044041D155DDF008CBABA /* RxObjC.framework in Frameworks */,
+				A6D791401A3AD6821587E34B /* Pods_RxObjCTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17EEC329BA3CF476F188623C /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				17EEC564FD57D08ACB320B14 /* RxBag.m */,
+				17EEC654B0A15987D2506783 /* RxBag.h */,
+				17EEC670691317AE01F6DD5C /* RxTuple.m */,
+				17EECFEC3CC63C1959093A43 /* RxTuple.h */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		17EEC3B1DFF5CF04F59C22F4 /* Disposables */ = {
+			isa = PBXGroup;
+			children = (
+				17EEC62ADF8D7915248125E1 /* RxAnonymousDisposable.m */,
+				17EEC76F5A89B72EB614B329 /* RxAnonymousDisposable.h */,
+				17EEC0D09BEEE61DD3CF8B84 /* RxBinaryDisposable.m */,
+				17EECF3E17C0589E7D552E0E /* RxBinaryDisposable.h */,
+				17EEC509BC4D9FC8184F1D83 /* RxBooleanDisposable.m */,
+				17EEC2757133CE904F29D094 /* RxBooleanDisposable.h */,
+				17EEC7A4F1FE96881F235587 /* RxCompositeDisposable.m */,
+				17EEC916AF1930BFCFB47CD2 /* RxCompositeDisposable.h */,
+				17EECD677672C86DF7113CC8 /* RxDisposeBag.m */,
+				17EEC21C493966B71C832775 /* RxDisposeBag.h */,
+				17EEC158A65485D5E12CC9DA /* RxDisposeBase.m */,
+				17EEC4194A682F605ED770E0 /* RxDisposeBase.h */,
+				17EECF3C73A546D8D1F2C06B /* RxNopDisposable.m */,
+				17EEC55CB1C753321609C0CF /* RxNopDisposable.h */,
+				17EECAD4F31829ACCDDCF965 /* RxRefCountDisposable.m */,
+				17EEC6886F2C986EDCFA8C4F /* RxRefCountDisposable.h */,
+				17EEC926CEFB396687D514C4 /* RxScheduledDisposable.m */,
+				17EEC8AA4E1C88682DC5556C /* RxScheduledDisposable.h */,
+				17EEC9ED58FFA9B13D9AFB47 /* RxSerialDisposable.m */,
+				17EEC3999409C5E1B996CBF8 /* RxSerialDisposable.h */,
+				17EECCA9C4DF7FCF07B9AB29 /* RxSingleAssignmentDisposable.m */,
+				17EEC9AC194AE6643D8C8DE5 /* RxSingleAssignmentDisposable.h */,
+				17EEC44716BCA249885043C6 /* RxStableCompositeDisposable.m */,
+				17EECF5500632D6087B198BE /* RxStableCompositeDisposable.h */,
+				17EEC20896492F901375562D /* RxSubscriptionDisposable.m */,
+				17EECE4123CF79EA37012DC9 /* RxSubscriptionDisposable.h */,
+			);
+			path = Disposables;
+			sourceTree = "<group>";
+		};
+		17EEC446F1A0A94DAF5DA070 /* ProtocolExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				17EECEDD8AA39A1AD54D3694 /* NSObject+RxObservableType.m */,
+				17EEC4335B174F6E8B903967 /* NSObject+RxObservableType.h */,
+				17EECD9D4CB7C519FB299941 /* NSObject+RxObserverType.m */,
+				17EECBADA7BE1E3B4E02437A /* NSObject+RxObserverType.h */,
+			);
+			path = ProtocolExtensions;
+			sourceTree = "<group>";
+		};
+		17EECA53F164067123E7FF5E /* Observers */ = {
+			isa = PBXGroup;
+			children = (
+				17EEC2D8CEAE83E7EDFE5721 /* RxAnonymousObserver.m */,
+				17EEC04D3BCB57AF66375DFF /* RxAnonymousObserver.h */,
+				17EECE517351E269D1E8C445 /* RxObserverBase.m */,
+				17EEC83E393AC0A82A7E1404 /* RxObserverBase.h */,
+			);
+			path = Observers;
+			sourceTree = "<group>";
+		};
+		365043EF1D155DDE008CBABA = {
+			isa = PBXGroup;
+			children = (
+				365043FB1D155DDE008CBABA /* RxObjC */,
+				365044071D155DDF008CBABA /* RxObjCTests */,
+				365043FA1D155DDE008CBABA /* Products */,
+				D807438153B2014BB305FA89 /* Pods */,
+				7586E40B6D30A86159CFC095 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		365043FA1D155DDE008CBABA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				365043F91D155DDE008CBABA /* RxObjC.framework */,
+				365044031D155DDF008CBABA /* RxObjCTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		365043FB1D155DDE008CBABA /* RxObjC */ = {
+			isa = PBXGroup;
+			children = (
+				365043FC1D155DDE008CBABA /* RxObjC.h */,
+				365043FE1D155DDE008CBABA /* Info.plist */,
+				17EECEFD0E78FE2DA62A24AF /* RxEvent.m */,
+				17EEC56B9636EB60C52471F7 /* RxEvent.h */,
+				17EEC720402F5C6F6F87472A /* RxObservable.m */,
+				17EECE395B9B3E396A5C71C5 /* RxObservable.h */,
+				17EEC98112FAD318175C414C /* RxObservableType.h */,
+				17EECE10B2E394F65DED36BE /* RxObservableConvertibleType.h */,
+				17EEC3078C462AFB9371114D /* RxDisposable.h */,
+				17EECA887346B2CE6570F58A /* RxObserverType.h */,
+				17EECA16BACE27D6E912A953 /* RxObjC.m */,
+				17EECE9C9A555E9A447D2D22 /* RxError.m */,
+				17EECA38958D800F5EA40163 /* RxError.h */,
+				17EECA53F164067123E7FF5E /* Observers */,
+				17EEC3B1DFF5CF04F59C22F4 /* Disposables */,
+				17EEC8D58B0EAAB6F0E47881 /* RxCancelable.h */,
+				17EEC329BA3CF476F188623C /* DataStructures */,
+				17EEC446F1A0A94DAF5DA070 /* ProtocolExtensions */,
+			);
+			path = RxObjC;
+			sourceTree = "<group>";
+		};
+		365044071D155DDF008CBABA /* RxObjCTests */ = {
+			isa = PBXGroup;
+			children = (
+				365044081D155DDF008CBABA /* RxObjCTests.m */,
+				3650440A1D155DDF008CBABA /* Info.plist */,
+			);
+			path = RxObjCTests;
+			sourceTree = "<group>";
+		};
+		7586E40B6D30A86159CFC095 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				698537D5C6F019B70DB547AC /* Pods_RxObjC.framework */,
+				702FC3579BB558BBBF6A9650 /* Pods_RxObjCTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D807438153B2014BB305FA89 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4AEDFD4E4E9F6F1FE05FA9EA /* Pods-RxObjC.debug.xcconfig */,
+				6A546AA2BD3F368B81F3EA54 /* Pods-RxObjC.release.xcconfig */,
+				D050A5F00AB39FDDE12B5E28 /* Pods-RxObjCTests.debug.xcconfig */,
+				E4ADEBAC9D4DE3B1B7746E14 /* Pods-RxObjCTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		365043F61D155DDE008CBABA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				365043FD1D155DDE008CBABA /* RxObjC.h in Headers */,
+				17EEC63424071308EBAE0B03 /* RxEvent.h in Headers */,
+				17EEC95CA29563617163273A /* RxObservable.h in Headers */,
+				17EEC901BFDD01A7C2E92436 /* RxObservableType.h in Headers */,
+				17EEC065957C3438802EFFEF /* RxObservableConvertibleType.h in Headers */,
+				17EEC1E6ED157ECFA4EACA77 /* RxDisposable.h in Headers */,
+				17EEC90D9D3D13780C0A28CD /* RxObserverType.h in Headers */,
+				17EEC54EBD36766E6CB086FD /* RxError.h in Headers */,
+				17EEC667FC695AC71EB8BE0D /* RxAnonymousObserver.h in Headers */,
+				17EEC41FE7AE905ADC7FF389 /* RxObserverBase.h in Headers */,
+				17EECDE39BC697D0E37353E5 /* RxAnonymousDisposable.h in Headers */,
+				17EEC6B6E55B9458D22EA471 /* RxBinaryDisposable.h in Headers */,
+				17EEC0D78D1422B5BD623DA4 /* RxBooleanDisposable.h in Headers */,
+				17EEC0D50AF0A27359980A6A /* RxCompositeDisposable.h in Headers */,
+				17EEC3DB2B702C7F70D46F4B /* RxDisposeBag.h in Headers */,
+				17EECE74F9DC2E02526C8915 /* RxDisposeBase.h in Headers */,
+				17EEC5D7732BCF0A94B8D643 /* RxNopDisposable.h in Headers */,
+				17EECD41CE367C6E81229491 /* RxRefCountDisposable.h in Headers */,
+				17EECDF7AE451DE01D8920E8 /* RxScheduledDisposable.h in Headers */,
+				17EEC0715276F5B9DEFD2E55 /* RxSerialDisposable.h in Headers */,
+				17EEC38F61B6DBD0C3A2FD79 /* RxSingleAssignmentDisposable.h in Headers */,
+				17EECB5B460B930307A8EFE7 /* RxStableCompositeDisposable.h in Headers */,
+				17EEC2F24B15924976712FBB /* RxSubscriptionDisposable.h in Headers */,
+				17EEC53D759411B8A60C6C73 /* RxCancelable.h in Headers */,
+				17EECFA43C5898DAA5C95B56 /* RxBag.h in Headers */,
+				17EECC78C02D9805A98CEF96 /* RxTuple.h in Headers */,
+				17EECD4417B070E72FEFE1E5 /* NSObject+RxObservableType.h in Headers */,
+				17EEC6915FFDF32FDBFDB96F /* NSObject+RxObserverType.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		365043F81D155DDE008CBABA /* RxObjC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3650440D1D155DDF008CBABA /* Build configuration list for PBXNativeTarget "RxObjC" */;
+			buildPhases = (
+				727625C1F7926B79BBE6FEC8 /* [CP] Check Pods Manifest.lock */,
+				365043F41D155DDE008CBABA /* Sources */,
+				365043F51D155DDE008CBABA /* Frameworks */,
+				365043F61D155DDE008CBABA /* Headers */,
+				365043F71D155DDE008CBABA /* Resources */,
+				656D750FAC710B116CDE8EF0 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RxObjC;
+			productName = RxObjC;
+			productReference = 365043F91D155DDE008CBABA /* RxObjC.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		365044021D155DDF008CBABA /* RxObjCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 365044101D155DDF008CBABA /* Build configuration list for PBXNativeTarget "RxObjCTests" */;
+			buildPhases = (
+				D44B128759FCF403E1CEC087 /* [CP] Check Pods Manifest.lock */,
+				365043FF1D155DDF008CBABA /* Sources */,
+				365044001D155DDF008CBABA /* Frameworks */,
+				365044011D155DDF008CBABA /* Resources */,
+				4C20106110BDF09FD7CA2E1C /* [CP] Embed Pods Frameworks */,
+				0C1A40E4BDBD43A8A8A6DCC6 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				365044061D155DDF008CBABA /* PBXTargetDependency */,
+			);
+			name = RxObjCTests;
+			productName = RxObjCTests;
+			productReference = 365044031D155DDF008CBABA /* RxObjCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		365043F01D155DDE008CBABA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Rx;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Pavel Malkov";
+				TargetAttributes = {
+					365043F81D155DDE008CBABA = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					365044021D155DDF008CBABA = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 365043F31D155DDE008CBABA /* Build configuration list for PBXProject "RxObjC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 365043EF1D155DDE008CBABA;
+			productRefGroup = 365043FA1D155DDE008CBABA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				365043F81D155DDE008CBABA /* RxObjC */,
+				365044021D155DDF008CBABA /* RxObjCTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		365043F71D155DDE008CBABA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		365044011D155DDF008CBABA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C1A40E4BDBD43A8A8A6DCC6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C20106110BDF09FD7CA2E1C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		656D750FAC710B116CDE8EF0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		727625C1F7926B79BBE6FEC8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D44B128759FCF403E1CEC087 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		365043F41D155DDE008CBABA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17EECE0A3B38D06896F6D77B /* RxEvent.m in Sources */,
+				17EECF44B13A4C1ABDB0A88F /* RxObservable.m in Sources */,
+				17EECFD855C3CE41FE8952E7 /* RxObjC.m in Sources */,
+				17EEC1AA713EC2221B34E08F /* RxError.m in Sources */,
+				17EECD6C3FE4C54469075F77 /* RxAnonymousObserver.m in Sources */,
+				17EECA58B0C2DC04257D1483 /* RxObserverBase.m in Sources */,
+				17EECC95DC24BFCE8073E669 /* RxAnonymousDisposable.m in Sources */,
+				17EEC01D13F593AA752F91BA /* RxBinaryDisposable.m in Sources */,
+				17EECE56618380B1879B7B45 /* RxBooleanDisposable.m in Sources */,
+				17EEC2B566A5234CE5F60F19 /* RxCompositeDisposable.m in Sources */,
+				17EECC6564617DCF7BCA805A /* RxDisposeBag.m in Sources */,
+				17EEC2F61B5CE4D994EE2EE2 /* RxDisposeBase.m in Sources */,
+				17EEC0EFD2612F89791CA150 /* RxNopDisposable.m in Sources */,
+				17EECF75A3BB51E560FC7E99 /* RxRefCountDisposable.m in Sources */,
+				17EECF04366D12B5F27F2559 /* RxScheduledDisposable.m in Sources */,
+				17EEC58B47859B3ADE8065DA /* RxSerialDisposable.m in Sources */,
+				17EECB8AE684CB56CBBE82CC /* RxSingleAssignmentDisposable.m in Sources */,
+				17EEC696AF9059FA36ADFEB8 /* RxStableCompositeDisposable.m in Sources */,
+				17EEC5AB5DCFB2065276098B /* RxSubscriptionDisposable.m in Sources */,
+				17EECD9F934CC9FC7AABE297 /* RxBag.m in Sources */,
+				17EEC893EB0D56D6ADC70FF0 /* RxTuple.m in Sources */,
+				17EEC94CAE2B8252A58794AC /* NSObject+RxObservableType.m in Sources */,
+				17EECF6E0BEA2174336E6CB8 /* NSObject+RxObserverType.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		365043FF1D155DDF008CBABA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				365044091D155DDF008CBABA /* RxObjCTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		365044061D155DDF008CBABA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 365043F81D155DDE008CBABA /* RxObjC */;
+			targetProxy = 365044051D155DDF008CBABA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3650440B1D155DDF008CBABA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3650440C1D155DDF008CBABA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3650440E1D155DDF008CBABA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AEDFD4E4E9F6F1FE05FA9EA /* Pods-RxObjC.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RxObjC/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3650440F1D155DDF008CBABA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A546AA2BD3F368B81F3EA54 /* Pods-RxObjC.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RxObjC/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		365044111D155DDF008CBABA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D050A5F00AB39FDDE12B5E28 /* Pods-RxObjCTests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = RxObjCTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjCTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		365044121D155DDF008CBABA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4ADEBAC9D4DE3B1B7746E14 /* Pods-RxObjCTests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = RxObjCTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjCTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		365043F31D155DDE008CBABA /* Build configuration list for PBXProject "RxObjC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3650440B1D155DDF008CBABA /* Debug */,
+				3650440C1D155DDF008CBABA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3650440D1D155DDF008CBABA /* Build configuration list for PBXNativeTarget "RxObjC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3650440E1D155DDF008CBABA /* Debug */,
+				3650440F1D155DDF008CBABA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		365044101D155DDF008CBABA /* Build configuration list for PBXNativeTarget "RxObjCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				365044111D155DDF008CBABA /* Debug */,
+				365044121D155DDF008CBABA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 365043F01D155DDE008CBABA /* Project object */;
+}
