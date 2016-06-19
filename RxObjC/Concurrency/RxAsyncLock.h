@@ -28,6 +28,8 @@ That means that enqueued work could possibly be executed later on a different th
 
 - (nonnull instancetype)init;
 
+- (void)invoke:(nonnull I)action;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -25,12 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonnull, nonatomic, readonly) NSArray<ObjectType> *array;
 
+- (nonnull instancetype)init;
+
 /**
 Creates new queue.
 
 - parameter capacity: Capacity of newly created queue.
 */
-- (nonnull instancetype)initWithCapacity:(NSUInteger)capacity;
+- (nonnull instancetype)initWithCapacity:(NSUInteger)capacity NS_DESIGNATED_INITIALIZER;
 
 /**
 - returns: Element in front of a list of elements to `dequeue`.

@@ -14,6 +14,10 @@
     NSUInteger _count;
 }
 
+- (nonnull instancetype)init {
+    return [self initWithCapacity:0];
+}
+
 - (nonnull instancetype)initWithCapacity:(NSUInteger)capacity {
     self = [super init];
     if (self) {
