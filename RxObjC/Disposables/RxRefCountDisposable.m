@@ -5,6 +5,7 @@
 
 #import "RxRefCountDisposable.h"
 #import "RxNopDisposable.h"
+#import "NSRecursiveLock+RxAdditions.h"
 
 @interface RxRefCountDisposable ()
 - (void)rx_release;
@@ -36,7 +37,7 @@
 @end
 
 @implementation RxRefCountDisposable {
-    NSRecursiveLock *__nonnull _lock;
+    RxSpinLock *__nonnull _lock;
     id <RxDisposable> __nullable _disposable;
     BOOL _primaryDisposed;
     NSInteger _count;
@@ -62,68 +63,69 @@
 
 
 - (nonnull id <RxDisposable>)rx_retain {
-    [_lock lock];
-    id <RxDisposable> result = nil;
-    if (_disposable) {
-        @try {
-            rx_incrementChecked(&_count);
+    return [_lock calculateLocked:^id <RxDisposable> {
+        if (_disposable) {
+            @try {
+                rx_incrementChecked(&_count);
+            }
+            @catch (NSException *exception) {
+                rx_fatalError(@"RefCountDisposable increment failed");
+            }
+            return [[RxRefCountInnerDisposable alloc] initWithParent:self];
+        } else {
+            return [RxNopDisposable sharedInstance];
         }
-        @catch (NSException *exception) {
-            rx_fatalError(@"RefCountDisposable increment failed");
-        }
-        result = [[RxRefCountInnerDisposable alloc] initWithParent:self];
-    } else {
-        result = [RxNopDisposable sharedInstance];
-    }
-    [_lock unlock];
-    return result;
+    }];
 }
 
 /**
  Disposes the underlying disposable only when all dependent disposables have been disposed.
  */
 - (void)dispose {
-    [_lock lock];
-
-    id <RxDisposable> oldDisposable = _disposable;
-    if (_disposable && !_primaryDisposed) {
-        _primaryDisposed = YES;
-        if (_count == 0) {
-            _disposable = nil;
+    id <RxDisposable> oldDisposable = [_lock calculateLocked:^id <RxDisposable> {
+        id <RxDisposable> _oldDisposable = _disposable;
+        if (_oldDisposable && !_primaryDisposed) {
+            _primaryDisposed = YES;
+            if (_count == 0) {
+                _disposable = nil;
+                return _oldDisposable;
+            }
         }
-    } else {
-        oldDisposable = nil;
+        return nil;
+    }];
+
+    if (oldDisposable) {
+        [oldDisposable dispose];
     }
-
-    [_lock unlock];
-
-    [oldDisposable dispose];
 }
 
 - (void)rx_release {
-    [_lock lock];
+    id <RxDisposable> oldDisposable = [_lock calculateLocked:^id <RxDisposable> {
+        id <RxDisposable> _oldDisposable = _disposable;
+        if (_oldDisposable) {
+            @try {
+                rx_decrementChecked(&_count);
+            }
+            @catch (NSException *exception) {
+                rx_fatalError(@"RefCountDisposable decrement on release failed");
+            }
 
-    id <RxDisposable> oldDisposable = _disposable;
+            if (_count < 0) {
+                rx_fatalError(@"RefCountDisposable counter is lower than 0");
+            }
+
+            if (_primaryDisposed && _count == 0) {
+                _disposable = nil;
+                return _oldDisposable;
+            }
+        }
+        return nil;
+    }];
+
     if (oldDisposable) {
-        @try {
-            rx_decrementChecked(&_count);
-        }
-        @catch (NSException *exception) {
-            rx_fatalError(@"RefCountDisposable decrement on release failed");
-        }
-
-        if (_count < 0) {
-            rx_fatalError(@"RefCountDisposable counter is lower than 0");
-        }
-
-        if (_primaryDisposed && _count == 0) {
-            _disposable = nil;
-        }
+        [oldDisposable dispose];
     }
 
-    [_lock unlock];
-
-    [oldDisposable dispose];
 }
 
 @end

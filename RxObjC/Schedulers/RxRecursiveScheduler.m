@@ -10,7 +10,7 @@
 #import "NSRecursiveLock+RxAdditions.h"
 
 @implementation RxRecursiveImmediateScheduler {
-    NSRecursiveLock *__nonnull _lock;
+    RxSpinLock *__nonnull _lock;
     RxCompositeDisposable *__nonnull _group;
     RxRecursiveImmediateAction _action;
     id <RxImmediateSchedulerType> __nonnull _scheduler;
