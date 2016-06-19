@@ -8,8 +8,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+Represents a disposable that does nothing on disposal.
+
+Nop = No Operation
+*/
 @interface RxNopDisposable : NSObject <RxDisposable>
-+ (instancetype)sharedInstance;
+
+/**
+Singleton instance of `NopDisposable`.
+*/
++ (nonnull instancetype)sharedInstance;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,11 +8,11 @@
 #import "RxObjC.h"
 #import "RxError.h"
 
- void rx_abstractMethod() {
-    rx_fatalMessage(@"Abstract method");
+void rx_abstractMethod() {
+    rx_fatalError(@"Abstract method");
 }
 
-void rx_fatalMessage(NSString *message) {
+void rx_fatalError(NSString *message) {
     assert(NO && [message cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 

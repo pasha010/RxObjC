@@ -8,7 +8,7 @@
 
 
 @implementation RxCompositeDisposable {
-    NSLock *__nonnull _lock;
+    NSRecursiveLock *__nonnull _lock;
     RxBag<id <RxDisposable>> *__nullable _disposables;
 }
 
@@ -37,7 +37,7 @@
 - (nonnull instancetype)initWithDisposableArray:(nonnull NSArray<id <RxDisposable>> *)disposables {
     self = [super init];
     if (self) {
-        _lock = [[NSLock alloc] init];
+        _lock = [[NSRecursiveLock alloc] init];
         _disposables = [[RxBag alloc] init];
         if (disposables) {
             for (id <RxDisposable> disposable in disposables) {

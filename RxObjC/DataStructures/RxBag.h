@@ -16,9 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
 Class that enables using memory allocations as a means to uniquely identify objects.
 */
-@interface RxIdentity : NSObject {
-    int32_t _forceAllocation;
-}
+@interface RxIdentity : NSObject
 @end
 
 /**
@@ -96,6 +94,6 @@ Enumerates elements inside the bag.
 
 @end
 
-FOUNDATION_EXTERN_INLINE void rx_disposeAllInBag(RxBag<id <RxDisposable>> *bag);
+FOUNDATION_EXTERN void rx_disposeAllInBag(RxBag<id <RxDisposable>> *bag);
 
 NS_ASSUME_NONNULL_END

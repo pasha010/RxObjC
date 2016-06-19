@@ -6,10 +6,23 @@
 #import "RxNopDisposable.h"
 
 
-@implementation RxNopDisposable {
+@implementation RxNopDisposable
+
++ (instancetype)sharedInstance {
+    static dispatch_once_t token = nil;
+    static RxNopDisposable *nopDisposable = nil;
+    dispatch_once(&token, ^{
+        nopDisposable = [[RxNopDisposable alloc] init];
+    });
+    return nopDisposable;
+}
+
+/**
+ * Does nothing.
+ */
+- (void)dispose {
 
 }
-+ (instancetype)sharedInstance {
-    return nil;
-}
+
+
 @end

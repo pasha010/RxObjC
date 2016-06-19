@@ -6,11 +6,17 @@
       <sourceFolder url="file://$MODULE_DIR$/RxObjCTests/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Podfile" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Observers/RxAnonymousObserver.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Observers/RxAnonymousObserver.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Observers/RxObserverBase.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Observers/RxObserverBase.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxCancelable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/DataStructures/RxTuple.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/DataStructures/RxBag.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/DataStructures/RxBag.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/DataStructures/RxTuple.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/ProtocolExtensions/NSObject+RxObserverType.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/ProtocolExtensions/NSObject+RxObserverType.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/ProtocolExtensions/NSObject+RxObservableType.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/ProtocolExtensions/NSObject+RxObservableType.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxObservableType.h" isTestSource="false" />
@@ -20,7 +26,7 @@
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxSubscriptionDisposable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxScheduledDisposable.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxAnonymousDisposable.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxSerialDisposable.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxRefCountDisposable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxSingleAssignmentDisposable.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxScheduledDisposable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxNopDisposable.m" isTestSource="false" />
@@ -30,16 +36,16 @@
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxDisposeBase.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxNopDisposable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxCompositeDisposable.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxSerialDisposable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxDisposeBase.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxStableCompositeDisposable.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxBinaryDisposable.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxBooleanDisposable.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxStableCompositeDisposable.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxSerialDisposable.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxBooleanDisposable.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxStableCompositeDisposable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxBinaryDisposable.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxDisposeBag.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxSubscriptionDisposable.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxRefCountDisposable.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxBinaryDisposable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxAnonymousDisposable.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxDisposeBag.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/Disposables/RxRefCountDisposable.m" isTestSource="false" />
@@ -47,20 +53,26 @@
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxObjC.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxObservable.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxEvent.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxObserverType.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Observers/RxAnonymousObserver.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Observers/RxAnonymousObserver.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Observers/RxObserverBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/Observers/RxObserverBase.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxEvent.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxObservable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxObservableConvertibleType.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxObservable.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxEvent.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RxObjC/RxObserverType.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/libextobjc/libextobjc-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/libextobjc/libextobjc.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/libextobjc/libextobjc-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/libextobjc/libextobjc.modulemap" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/libextobjc/libextobjc-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/libextobjc/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-acknowledgements.markdown" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-frameworks.sh" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-resources.sh" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests.release.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-acknowledgements.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests.debug.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC-resources.sh" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC-frameworks.sh" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC.modulemap" isTestSource="false" />
@@ -71,24 +83,15 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC-acknowledgements.markdown" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC.release.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-acknowledgements.markdown" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-frameworks.sh" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests.release.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-resources.sh" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests-acknowledgements.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-RxObjCTests/Pods-RxObjCTests.debug.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTADT.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/NSMethodSignature+EXT.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTRuntimeExtensions.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/metamacros.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTADT.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTKeyPathCoding.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTConcreteProtocol.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/extobjc.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTSafeCategory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/NSMethodSignature+EXT.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTSynthesize.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTConcreteProtocol.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/NSMethodSignature+EXT.h" isTestSource="false" />
@@ -96,11 +99,10 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTSafeCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTSelectorChecking.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTScope.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTSafeCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/NSInvocation+EXT.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/NSInvocation+EXT.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTNil.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTSelectorChecking.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/NSInvocation+EXT.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/NSInvocation+EXT.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTNil.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/libextobjc/extobjc/EXTRuntimeExtensions.m" isTestSource="false" />
     </content>

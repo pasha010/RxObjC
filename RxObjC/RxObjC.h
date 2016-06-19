@@ -20,7 +20,7 @@ FOUNDATION_EXPORT double RxObjCVersionNumber;
 //! Project version string for RxObjC.
 FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 
-FOUNDATION_EXTERN_INLINE void rx_abstractMethod();
-FOUNDATION_EXTERN_INLINE void rx_fatalMessage(NSString *message);
-FOUNDATION_EXTERN_INLINE NSInteger rx_incrementChecked(NSInteger *i);
-FOUNDATION_EXTERN_INLINE NSInteger rx_decrementChecked(NSInteger *i);
+FOUNDATION_EXTERN void rx_abstractMethod();
+FOUNDATION_EXTERN void rx_fatalError(NSString *message);
+FOUNDATION_EXTERN NSInteger rx_incrementChecked(NSInteger *i);
+FOUNDATION_EXTERN NSInteger rx_decrementChecked(NSInteger *i);

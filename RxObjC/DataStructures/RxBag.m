@@ -15,7 +15,9 @@ NSInteger rx_hash(NSInteger _x) {
     return x;
 }
 
-@implementation RxIdentity
+@implementation RxIdentity {
+    int32_t _forceAllocation;
+}
 @end
 
 @implementation RxBagKey
