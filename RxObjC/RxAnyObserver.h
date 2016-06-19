@@ -41,4 +41,10 @@ Construct an instance whose `on(event)` calls `eventHandler(event)`
 
 @end
 
+@interface NSObject (RxAnyObserver) <RxObserverType>
+
+- (nonnull RxAnyObserver<id> *)asObserver;
+
+@end
+
 NS_ASSUME_NONNULL_END

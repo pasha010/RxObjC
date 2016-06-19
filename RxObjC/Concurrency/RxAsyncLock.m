@@ -6,7 +6,6 @@
 #import "RxAsyncLock.h"
 #import "RxInvocableType.h"
 #import "RxQueue.h"
-#import "NSObject+RxSynchronizedDisposeType.h"
 
 
 @implementation RxAsyncLock {

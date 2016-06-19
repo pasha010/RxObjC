@@ -38,6 +38,16 @@ Send `event` to this observer.
     return self;
 }
 
+@end
+#pragma clang diagnostic pop
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+@implementation NSObject (RxAnyObserver)
+
+- (nonnull RxAnyObserver<id> *)asObserver {
+    return [[RxAnyObserver alloc] initWithObserverEvent:self];
+}
 
 @end
 #pragma clang diagnostic pop

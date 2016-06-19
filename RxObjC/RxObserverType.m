@@ -1,10 +1,9 @@
 //
-// Created by Pavel Malkov on 19.06.16.
+// Created by Pavel Malkov on 18.06.16.
 // Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "NSObject+RxObserverType.h"
-
+#import "RxObserverType.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"

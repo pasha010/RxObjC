@@ -13,4 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)_synchronized_dispose;
 @end
 
+@interface NSObject (RxSynchronizedDisposeType) <RxSynchronizedDisposeType>
+
+- (void)synchronizedDispose;
+
+@end
+
 NS_ASSUME_NONNULL_END

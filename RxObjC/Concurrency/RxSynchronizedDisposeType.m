@@ -3,16 +3,16 @@
 // Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "NSObject+RxAnyObserver.h"
-#import "RxAnyObserver.h"
-
+#import "RxSynchronizedDisposeType.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
-@implementation NSObject (RxAnyObserver)
+@implementation NSObject (RxSynchronizedDisposeType)
 
-- (nonnull RxAnyObserver<id> *)asObserver {
-    return [[RxAnyObserver alloc] initWithObserverEvent:self];
+- (void)synchronizedDispose {
+    [self lock];
+    [self _synchronized_dispose];
+    [self unlock];
 }
 
 @end

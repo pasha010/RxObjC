@@ -5,9 +5,12 @@
 
 #import <Foundation/Foundation.h>
 #import "RxObservableConvertibleType.h"
+#import "RxDisposable.h"
+#import "RxObserverType.h"
 
-@protocol RxDisposable;
-@protocol RxObserverType;
+@class RxObservable;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Represents a push style sequence.
@@ -38,6 +41,14 @@
     - returns: Subscription for `observer` that can be used to cancel production of sequence elements and free resources.
     */
 
-- (id <RxDisposable>)subscribe:(id <RxObserverType>)observer;
+- (nonnull id <RxDisposable>)subscribe:(nonnull id <RxObserverType>)observer;
 
 @end
+
+@interface NSObject (RxObservableType) <RxObservableType>
+
+- (nonnull RxObservable *)asObservable;
+
+@end
+
+NS_ASSUME_NONNULL_END
