@@ -4,9 +4,15 @@
 //
 
 #import "RxStableCompositeDisposable.h"
+#import "RxDisposable.h"
+#import "RxBinaryDisposable.h"
 
 
-@implementation RxStableCompositeDisposable {
+@implementation RxStableCompositeDisposable
 
++ (nonnull id <RxDisposable>)createDisposable1:(nonnull id <RxDisposable>)disposable1
+                                   disposable2:(nonnull id <RxDisposable>)disposable2 {
+    return [[RxBinaryDisposable alloc] initWithFirstDisposable:disposable1 andSecondDisposable:disposable2];
 }
+
 @end

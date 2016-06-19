@@ -5,9 +5,15 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol RxDisposable;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RxStableCompositeDisposable : NSObject
+
++ (nonnull id <RxDisposable>)createDisposable1:(nonnull id <RxDisposable>)disposable1
+                                   disposable2:(nonnull id <RxDisposable>)disposable2;
+
 @end
 
 NS_ASSUME_NONNULL_END

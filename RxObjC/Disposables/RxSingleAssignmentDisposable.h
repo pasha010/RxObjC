@@ -4,10 +4,31 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RxDisposeBase.h"
+#import "RxDisposable.h"
+#import "RxCancelable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxSingleAssignmentDisposable : NSObject
+/**
+Represents a disposable resource which only allows a single assignment of its underlying disposable resource.
+
+If an underlying disposable resource has already been set, future attempts to set the underlying disposable resource will throw an exception.
+*/
+@interface RxSingleAssignmentDisposable : RxDisposeBase <RxDisposable, RxCancelable>
+
+/**
+Gets or sets the underlying disposable. After disposal, the result of getting this property is undefined.
+
+**Throws exception if the `SingleAssignmentDisposable` has already been assigned to.**
+*/
+@property (nonnull, strong) id <RxDisposable> disposable;
+
+/**
+Initializes a new instance of the `SingleAssignmentDisposable`.
+*/
+- (nonnull instancetype)init;
+
 @end
 
 NS_ASSUME_NONNULL_END
