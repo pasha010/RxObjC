@@ -5,6 +5,10 @@
 
 #import <Foundation/Foundation.h>
 #import "RxObservableType.h"
+#import "RxObservable.h"
 
 @interface NSObject (RxObservableType) <RxObservableType>
+
+- (nonnull RxObservable<id> *)asObservable;
+
 @end

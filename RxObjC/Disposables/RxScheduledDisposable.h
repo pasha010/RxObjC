@@ -4,10 +4,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RxCancelable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxScheduledDisposable : NSObject
+/**
+Represents a disposable resource whose disposal invocation will be scheduled on the specified scheduler.
+*/
+@interface RxScheduledDisposable : NSObject <RxCancelable>
 @end
 
 NS_ASSUME_NONNULL_END
