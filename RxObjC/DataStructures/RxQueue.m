@@ -138,7 +138,7 @@
         }
         [array addObject:_storage[i]];
     }
-    return array;
+    return [array copy];
 }
 
 @end
