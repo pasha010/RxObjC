@@ -4,16 +4,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#define RxSpinLock NSRecursiveLock
+#import "RxSynchronizedDisposeType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSRecursiveLock (RxAdditions)
+@interface NSObject (RxSynchronizedDisposeType) <RxSynchronizedDisposeType>
 
-- (void)performLock:(void(^)())action;
-
-- (nullable id)calculateLocked:(id(^)())action;
+- (void)synchronizedDispose;
 
 @end
 

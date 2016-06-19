@@ -3,8 +3,7 @@
 // Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "NSRecursiveLock+RxAdditions.h"
-
+#import "RxLock.h"
 
 @implementation NSRecursiveLock (RxAdditions)
 

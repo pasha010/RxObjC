@@ -5,7 +5,7 @@
 
 #import "RxRefCountDisposable.h"
 #import "RxNopDisposable.h"
-#import "NSRecursiveLock+RxAdditions.h"
+#import "RxLock.h"
 
 @interface RxRefCountDisposable ()
 - (void)rx_release;

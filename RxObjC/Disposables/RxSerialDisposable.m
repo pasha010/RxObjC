@@ -4,7 +4,7 @@
 //
 
 #import "RxSerialDisposable.h"
-#import "NSRecursiveLock+RxAdditions.h"
+#import "RxLock.h"
 
 
 @implementation RxSerialDisposable {

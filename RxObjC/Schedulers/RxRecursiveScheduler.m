@@ -7,7 +7,7 @@
 #import "RxCompositeDisposable.h"
 #import "RxImmediateSchedulerType.h"
 #import "RxNopDisposable.h"
-#import "NSRecursiveLock+RxAdditions.h"
+#import "RxLock.h"
 
 @implementation RxRecursiveImmediateScheduler {
     RxSpinLock *__nonnull _lock;

@@ -4,7 +4,7 @@
 //
 
 #import "RxSingleAssignmentDisposable.h"
-#import "NSRecursiveLock+RxAdditions.h"
+#import "RxLock.h"
 #import "RxNopDisposable.h"
 
 
