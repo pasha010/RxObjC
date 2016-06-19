@@ -49,4 +49,6 @@ typedef NS_ENUM(NSUInteger, RxEventType) {
 - (nullable NSError *)error;
 @end
 
+typedef void (^RxEventHandler)(RxEvent<id> *__nonnull);
+
 NS_ASSUME_NONNULL_END

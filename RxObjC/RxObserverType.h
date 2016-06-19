@@ -18,23 +18,6 @@ Supports push-style iteration over an observable sequence.
 */
 - (void)on:(nonnull RxEvent<id> *)event;
 
-/**
-Convenience method equivalent to `on(.Next(element: E))`
-
-- parameter element: Next element to send to observer(s)
-*/
-- (void)onNext:(nullable id)element;
-
-/**
-Convenience method equivalent to `on(.Completed)`
-*/
-- (void)onCompleted;
-
-/**
-Convenience method equivalent to `on(.Error(error: ErrorType))`
-- parameter error: ErrorType to send to observer(s)
-*/
-- (void)onError:(nullable NSError *)error;
 @end
 
 NS_ASSUME_NONNULL_END

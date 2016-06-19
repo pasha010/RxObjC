@@ -8,9 +8,9 @@
 
 @implementation NSObject (RxObservableType)
 
-/*- (nonnull RxObservable<id> *)asObservable {
+- (nonnull RxObservable<id> *)asObservable {
     return nil;
-    *//*TODO return [RxObservable create:[self subscribe:nil]]*//*
-}*/
+    // TODO return [RxObservable create:[self subscribe:nil]]
+}
 
 @end

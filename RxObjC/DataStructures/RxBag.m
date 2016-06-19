@@ -81,7 +81,7 @@ BOOL rx_compareBagKeys(RxBagKey *lhs, RxBagKey *rhs) {
         return key;
     }
 
-    _onlyFastPath = YES;
+    _onlyFastPath = NO;
 
     if (!_key1) {
         _key1 = key;
@@ -180,21 +180,26 @@ A textual representation of `self`, suitable for debugging.
         return;
     }
 
-    if (_value0) {
-        action(_value0);
+    NSArray<RxTuple *> *pairs = [_pairs copy];
+    id value0 = _value0;
+    id value1 = _value1;
+    NSDictionary<RxBagKey *, id> *dictionary = [_dictionary copy];
+
+    if (value0) {
+        action(value0);
     }
 
-    if (_value1) {
-        action(_value1);
+    if (value1) {
+        action(value1);
     }
 
-    for (RxTuple *tuple in _pairs) {
+    for (RxTuple *tuple in pairs) {
         id value = tuple[1];
         action(value);
     }
 
-    if (_dictionary.count > 0) {
-        for (id element in _dictionary.allValues) {
+    if (dictionary.count > 0) {
+        for (id element in dictionary.allValues) {
             action(element);
         }
     }
@@ -205,6 +210,8 @@ A textual representation of `self`, suitable for debugging.
 
 @implementation RxBag (Observer)
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "IncompatibleTypes"
 /**
  Dispatches `event` to app observers contained inside bag.
 
@@ -217,46 +224,40 @@ A textual representation of `self`, suitable for debugging.
         }
         return;
     }
-    
-    if (_value0) {
-        if ([_value0 conformsToProtocol:@protocol(RxObserverType)]) {
-            [_value0 on:event];
+
+    NSArray<RxTuple *> *pairs = [_pairs copy];
+    id value0 = _value0;
+    id value1 = _value1;
+    NSDictionary<RxBagKey *, id> *dictionary = [_dictionary copy];
+
+    if (value0) {
+        if ([value0 conformsToProtocol:@protocol(RxObserverType)]) {
+            [value0 on:event];
         }
     }
     
-    if (_value1) {
-        if ([_value1 conformsToProtocol:@protocol(RxObserverType)]) {
-            [_value1 on:event];
+    if (value1) {
+        if ([value1 conformsToProtocol:@protocol(RxObserverType)]) {
+            [value1 on:event];
         }
     }
     
-    for (RxTuple *tuple in _pairs) {
+    for (RxTuple *tuple in pairs) {
         id value = tuple[1];
         if ([value conformsToProtocol:@protocol(RxObserverType)]) {
             [value on:event];
         }
     }
 
-    if (_dictionary.count > 0) {
-        for (id element in _dictionary.allValues) {
+    if (dictionary.count > 0) {
+        for (id element in dictionary.allValues) {
             if ([element conformsToProtocol:@protocol(RxObserverType)]) {
                 [element on:event];
             }
         }
     }
 }
-
-- (void)onNext:(nullable id)element {
-    [self on:[RxEvent next:element]];
-}
-
-- (void)onCompleted {
-    [self on:[RxEvent completed]];
-}
-
-- (void)onError:(nullable NSError *)error {
-    [self on:[RxEvent error:error]];
-}
+#pragma clang diagnostic pop
 
 @end
 
@@ -274,10 +275,10 @@ void rx_disposeAllInBag(RxBag<id <RxDisposable>> *bag) {
         }
     }
 
-    NSMutableArray<RxTuple *> *pairs = bag->_pairs;
+    NSArray<RxTuple *> *pairs = [bag->_pairs copy];
     id <RxDisposable> value0 = bag->_value0;
     id <RxDisposable> value1 = bag->_value1;
-    NSMutableDictionary<RxBagKey *, id <RxDisposable>> *dictionary = bag->_dictionary;
+    NSDictionary<RxBagKey *, id <RxDisposable>> *dictionary = [bag->_dictionary copy];
     
     if ([value0 conformsToProtocol:@protocol(RxDisposable)]) {
         [value0 dispose];

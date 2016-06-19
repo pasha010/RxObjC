@@ -9,8 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^RxEventHandler)(RxEvent<id> *__nonnull);
-
 @interface RxAnonymousObserver<ElementType> : RxObserverBase<ElementType>
 
 - (nonnull instancetype)initWithEventHandler:(nonnull RxEventHandler)eventHandler;

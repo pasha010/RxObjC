@@ -23,18 +23,6 @@
     }
 }
 
-- (void)onNext:(nullable id)element {
-    [self on:[RxEvent next:element]];
-}
-
-- (void)onCompleted {
-    [self on:[RxEvent completed]];
-}
-
-- (void)onError:(nullable NSError *)error {
-    [self on:[RxEvent error:error]];
-}
-
 - (void)_onCore:(nonnull RxEvent<id> *)event {
     rx_abstractMethod();
 }
