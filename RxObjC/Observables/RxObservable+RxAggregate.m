@@ -21,8 +21,7 @@
 }
 
 - (nonnull RxObservable<NSArray<id> *> *)toArray {
-    return nil;
-    //return [[RxToArray alloc] initWithSource:[self asObservable]];
+    return [[RxToArray alloc] initWithSource:[self asObservable]];
 }
 
 @end

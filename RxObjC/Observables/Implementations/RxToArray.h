@@ -4,10 +4,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RxObservable.h"
+#import "RxProducer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxToArray : NSObject
+@interface RxToArray<SourceType> : RxProducer<NSArray<SourceType> *>
+
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<SourceType> *)source;
+
 @end
 
 NS_ASSUME_NONNULL_END
