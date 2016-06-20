@@ -5,6 +5,7 @@
 
 #import "RxObservable+RxBinding.h"
 #import "RxSubjectType.h"
+#import "RxMulticast.h"
 
 
 #pragma clang diagnostic push
@@ -14,6 +15,10 @@
 
 - (nonnull RxConnectableObservable<id <RxSubjectType>> *)multicast:(nonnull id <RxSubjectType>)subject {
     return [[RxConnectableObservableAdapter alloc] initWithSource:[self asObservable] andSubject:subject];
+}
+
+- (nonnull RxObservable<id> *)multicast:(RxSubjectSelectorType)subjectSelector selector:(RxSelectorType)sel {
+    return [[RxMulticast alloc] initWithSource:[self asObservable] subjectSelector:subjectSelector selector:sel];
 }
 
 @end

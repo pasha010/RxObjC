@@ -11,11 +11,18 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol RxSubjectType;
+
+/// reduce
 typedef id RxAccumulateType;
 typedef id RxSourceType;
 typedef RxAccumulateType (^RxAccumulatorType)(RxAccumulateType , RxSourceType);
 
 typedef id RxResultType;
 typedef RxResultType(^ResultSelectorType)(RxAccumulateType);
+
+/// multicast
+typedef id <RxSubjectType>(^RxSubjectSelectorType)();
+typedef RxObservable<id> *(^RxSelectorType)(RxObservable<id> *);
 
 #endif /* RxObservableBlockTypedef_h */
