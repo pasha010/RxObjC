@@ -5,8 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RxCancelable.h"
-
-@protocol RxImmediateSchedulerType;
+#import "RxImmediateSchedulerType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

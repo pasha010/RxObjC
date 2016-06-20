@@ -4,12 +4,40 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RxSchedulerType.h"
+#import "RxSchedulers.h"
 
 @protocol RxImmediateSchedulerType;
 
 NS_ASSUME_NONNULL_BEGIN
+@class RxAnyRecursiveScheduler;
+@protocol RxSchedulerType;
 
-typedef void (^RxRecursiveImmediateAction)(id, void(^)(id));
+/**
+Type erased recursive scheduler.
+*/
+@interface RxAnyRecursiveScheduler<__covariant State> : NSObject
+
+- (nonnull instancetype)initWithScheduler:(nonnull id <RxSchedulerType>)scheduler andAction:(RxAnyRecursiveSchedulerAction)action;
+
+/**
+Schedules an action to be executed recursively.
+
+- parameter state: State passed to the action to be executed.
+- parameter dueTime: Relative time after which to execute the recursive action.
+*/
+- (void)schedule:(nonnull State)state dueTime:(RxTimeInterval)dueTime;
+
+/**
+Schedules an action to be executed recursively.
+
+- parameter state: State passed to the action to be executed.
+*/
+- (void)schedule:(nonnull State)state;
+
+- (void)dispose;
+
+@end
 
 /**
 Type erased recursive scheduler.

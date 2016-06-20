@@ -5,6 +5,7 @@
 
 #import "RxImmediateSchedulerType.h"
 #import "RxAnonymousDisposable.h"
+#import "RxRecursiveScheduler.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"

@@ -4,10 +4,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RxVirtualTimeConverterType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxTestScheduler : NSObject
+@interface RxTestSchedulerVirtualTimeConverter : NSObject <RxVirtualTimeConverterType>
 @end
 
 NS_ASSUME_NONNULL_END

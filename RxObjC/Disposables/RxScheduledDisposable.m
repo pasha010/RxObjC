@@ -5,7 +5,6 @@
 
 #import "RxScheduledDisposable.h"
 #import "RxObjC.h"
-#import "RxImmediateSchedulerType.h"
 #import "RxNopDisposable.h"
 
 @interface RxScheduledDisposable ()

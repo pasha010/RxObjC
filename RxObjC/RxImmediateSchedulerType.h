@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxRecursiveScheduler.h"
+#import "RxSchedulers.h"
 
 @protocol RxDisposable;
 
