@@ -46,6 +46,16 @@ For specializations with fixed subject types, see `publish` and `replay`.
 @end
 
 @interface NSObject (RxPublish) <RxObservableType>
+/**
+Returns a connectable observable sequence that shares a single subscription to the underlying sequence.
+
+This operator is a specialization of `multicast` using a `PublishSubject`.
+
+- seealso: [publish operator on reactivex.io](http://reactivex.io/documentation/operators/publish.html)
+
+- returns: A connectable observable sequence that shares a single subscription to the underlying sequence.
+*/
+- (nonnull RxConnectableObservable<id> *)publish;
 
 @end
 

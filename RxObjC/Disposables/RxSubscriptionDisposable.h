@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxSubscriptionDisposable<__covariant T : id <RxSynchronizedUnsubscribeType>, __covariant K> : NSObject <RxDisposable>
+@interface RxSubscriptionDisposable<__covariant T : id <RxSynchronizedUnsubscribeType>, K> : NSObject <RxDisposable>
 
-- (nonnull instancetype)initWithOwner:(nonnull __weak T)owner andKey:(nonnull K)key;
+- (nonnull instancetype)initWithOwner:(nonnull T)owner andKey:(nonnull K)key;
 
 @end
 

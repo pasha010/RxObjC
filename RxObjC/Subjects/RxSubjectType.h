@@ -8,8 +8,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef id <RxObserverType> RxSubjectObserverType;
-
 /**
 Represents an object that is both an observable sequence as well as an observer.
 */
@@ -20,7 +18,7 @@ Returns observer interface for subject.
 
 - returns: Observer interface for subject.
 */
-- (RxSubjectObserverType)asObserver;
+- (nonnull id <RxObserverType>)asObserver;
 
 @end
 

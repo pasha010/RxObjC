@@ -6,6 +6,7 @@
 #import "RxObservable+RxBinding.h"
 #import "RxSubjectType.h"
 #import "RxMulticast.h"
+#import "RxPublishSubject.h"
 
 
 #pragma clang diagnostic push
@@ -24,6 +25,10 @@
 @end
 
 @implementation NSObject (RxPublish)
+
+- (nonnull RxConnectableObservable<id> *)publish {
+    return [self multicast:[RxPublishSubject create]];
+}
 
 @end
 

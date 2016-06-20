@@ -12,7 +12,7 @@
     __strong id __nonnull _key;
 }
 
-- (nonnull instancetype)initWithOwner:(nonnull __weak id <RxSynchronizedUnsubscribeType>)owner andKey:(nonnull id)key {
+- (nonnull instancetype)initWithOwner:(nonnull id <RxSynchronizedUnsubscribeType>)owner andKey:(nonnull id)key {
     self = [super init];
     if (self) {
         _owner = owner;

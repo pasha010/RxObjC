@@ -92,6 +92,8 @@ Enumerates elements inside the bag.
 
 @interface RxBag (Observer) <RxObserverType>
 
+- (void)on:(nonnull RxEvent<id> *)event;
+
 @end
 
 FOUNDATION_EXTERN void rx_disposeAllInBag(RxBag<id <RxDisposable>> *bag);
