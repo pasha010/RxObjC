@@ -58,6 +58,7 @@
 @end
 
 @implementation RxEvent (Properties)
+
 - (BOOL)isStopEvent {
     switch (self.type) {
         case RxEventTypeNext:

@@ -29,6 +29,10 @@ Initializes a new instance of the `SingleAssignmentDisposable`.
 */
 - (nonnull instancetype)init;
 
+- (BOOL)disposed;
+
+- (void)dispose;
+
 @end
 
 NS_ASSUME_NONNULL_END
