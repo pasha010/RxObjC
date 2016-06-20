@@ -18,6 +18,7 @@
 		17EEC0EFD2612F89791CA150 /* RxNopDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF3C73A546D8D1F2C06B /* RxNopDisposable.m */; };
 		17EEC1611F483DABC8809FC9 /* RxMutableBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC04F3F990CCC6AC15CB5 /* RxMutableBox.h */; };
 		17EEC18F84CEEF04173C8816 /* RxProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC443AA47078EBCBAC0AE /* RxProducer.m */; };
+		17EEC1923198DAB024475645 /* RxConnectableObservableType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECD24BE229BAEA9423FEF /* RxConnectableObservableType.h */; };
 		17EEC1AA713EC2221B34E08F /* RxError.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE9C9A555E9A447D2D22 /* RxError.m */; };
 		17EEC1DD9044088A9D57A541 /* NSThread+RxLocalStorageValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC8202FFC30DC3219A642 /* NSThread+RxLocalStorageValue.m */; };
 		17EEC1E6ED157ECFA4EACA77 /* RxDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC3078C462AFB9371114D /* RxDisposable.h */; };
@@ -37,6 +38,7 @@
 		17EEC41FE7AE905ADC7FF389 /* RxObserverBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC83E393AC0A82A7E1404 /* RxObserverBase.h */; };
 		17EEC49B1A9C02B08093DC85 /* RxScheduledItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6377D565A38037B37B4 /* RxScheduledItem.m */; };
 		17EEC50135A6977B5A67153F /* RxObserverType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC63E796EA716BA3C6F63 /* RxObserverType.m */; };
+		17EEC517265808C10B78AC5A /* RxConnectableObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECAD302F445862178F17D /* RxConnectableObservable.h */; };
 		17EEC53D759411B8A60C6C73 /* RxCancelable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC8D58B0EAAB6F0E47881 /* RxCancelable.h */; };
 		17EEC54EBD36766E6CB086FD /* RxError.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECA38958D800F5EA40163 /* RxError.h */; };
 		17EEC55E7E77792F5B935CDA /* RxQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC4C243C6AFE467E22819 /* RxQueue.h */; };
@@ -60,16 +62,19 @@
 		17EEC790DB3017A2B26CC412 /* RxRecursiveScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC8934D46341FCF9510CE /* RxRecursiveScheduler.m */; };
 		17EEC7BF8C0D1C120D2174EC /* RxReduce.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6C264034651AC6ABDB4 /* RxReduce.m */; };
 		17EEC849B9028BEE86D02A03 /* RxCurrentThreadScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6DAE57A5B0F8688F5D1 /* RxCurrentThreadScheduler.m */; };
+		17EEC8553F7042BA1D39BEBF /* RxObservable+RxBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC97680159D2C555F43FE /* RxObservable+RxBinding.m */; };
 		17EEC893EB0D56D6ADC70FF0 /* RxTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC670691317AE01F6DD5C /* RxTuple.m */; };
 		17EEC8B2DF484044C6076FD3 /* RxAnyObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC77495CDCC3FC3487412 /* RxAnyObserver.h */; };
 		17EEC901BFDD01A7C2E92436 /* RxObservableType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC98112FAD318175C414C /* RxObservableType.h */; };
 		17EEC90D9D3D13780C0A28CD /* RxObserverType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECA887346B2CE6570F58A /* RxObserverType.h */; };
 		17EEC90EB36B64626BB68907 /* RxAnyObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4460F27DB3B0A80F4EF /* RxAnyObserver.m */; };
+		17EEC91FAC0CFB231BD2F9D3 /* RxObservable+RxBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC5751145C620DA28DADE /* RxObservable+RxBinding.h */; };
 		17EEC95CA29563617163273A /* RxObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECE395B9B3E396A5C71C5 /* RxObservable.h */; };
 		17EEC979CC8BBA51F6DCE77D /* RxAsyncLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC95E4ACB1766EAB88B91 /* RxAsyncLock.m */; };
 		17EEC9AF7645E160BCB2FA0F /* RxProducer.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC178BC8400AFF8AECCB4 /* RxProducer.h */; };
 		17EEC9F57E36DD3AB38B0C89 /* RxSink.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC9FF1FDD75F0AF6D04BD /* RxSink.m */; };
 		17EEC9F72824C82E007BD2E9 /* RxLockOwnerType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECC30D652E46AD62A3F91 /* RxLockOwnerType.h */; };
+		17EECA4DF7245D8A55CD3D40 /* RxConnectableObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC383E6B43804C5A3D5EE /* RxConnectableObservable.m */; };
 		17EECA58B0C2DC04257D1483 /* RxObserverBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE517351E269D1E8C445 /* RxObserverBase.m */; };
 		17EECB072C14E242B98F39F7 /* RxTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4F4A556F3251536F1A8 /* RxTest.m */; };
 		17EECB0E58A6A9389465CB67 /* RxLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD33BED8B329719C19D5 /* RxLock.m */; };
@@ -87,6 +92,7 @@
 		17EECD41CE367C6E81229491 /* RxRefCountDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC6886F2C986EDCFA8C4F /* RxRefCountDisposable.h */; };
 		17EECD6C3FE4C54469075F77 /* RxAnonymousObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2D8CEAE83E7EDFE5721 /* RxAnonymousObserver.m */; };
 		17EECD9F934CC9FC7AABE297 /* RxBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC564FD57D08ACB320B14 /* RxBag.m */; };
+		17EECDA601CE9908BF9AD1DF /* RxSubjectType.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC300E23F1FB735124B13 /* RxSubjectType.h */; };
 		17EECDC16C1C8388A0CBFC28 /* RxCurrentThreadScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC79AA25FD8F14267B6D2 /* RxCurrentThreadScheduler.h */; };
 		17EECDC8F16912A31C347C0B /* RxPriorityQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE1ECD098A2CCD4B076E /* RxPriorityQueue.m */; };
 		17EECDDFB79A464DEC262FE3 /* RxSink.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC8CF277BA0553F0EC0D6 /* RxSink.h */; };
@@ -134,8 +140,10 @@
 		17EEC263E7D2A1028D08AB6B /* RxAnyObserverTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxAnyObserverTest.m; sourceTree = "<group>"; };
 		17EEC2757133CE904F29D094 /* RxBooleanDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxBooleanDisposable.h; sourceTree = "<group>"; };
 		17EEC2D8CEAE83E7EDFE5721 /* RxAnonymousObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxAnonymousObserver.m; sourceTree = "<group>"; };
+		17EEC300E23F1FB735124B13 /* RxSubjectType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSubjectType.h; sourceTree = "<group>"; };
 		17EEC3078C462AFB9371114D /* RxDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDisposable.h; sourceTree = "<group>"; };
 		17EEC33A822FE54A77707729 /* RxBagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxBagTest.m; sourceTree = "<group>"; };
+		17EEC383E6B43804C5A3D5EE /* RxConnectableObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxConnectableObservable.m; sourceTree = "<group>"; };
 		17EEC3999409C5E1B996CBF8 /* RxSerialDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSerialDisposable.h; sourceTree = "<group>"; };
 		17EEC4194A682F605ED770E0 /* RxDisposeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDisposeBase.h; sourceTree = "<group>"; };
 		17EEC41A9DAC70B31FCFE8BE /* RxQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxQueueTest.m; sourceTree = "<group>"; };
@@ -149,6 +157,7 @@
 		17EEC55CB1C753321609C0CF /* RxNopDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxNopDisposable.h; sourceTree = "<group>"; };
 		17EEC564FD57D08ACB320B14 /* RxBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxBag.m; sourceTree = "<group>"; };
 		17EEC56B9636EB60C52471F7 /* RxEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxEvent.h; sourceTree = "<group>"; };
+		17EEC5751145C620DA28DADE /* RxObservable+RxBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RxObservable+RxBinding.h"; sourceTree = "<group>"; };
 		17EEC5D56562D87BFF7809C6 /* RxMutableBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxMutableBox.m; sourceTree = "<group>"; };
 		17EEC62ADF8D7915248125E1 /* RxAnonymousDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxAnonymousDisposable.m; sourceTree = "<group>"; };
 		17EEC6377D565A38037B37B4 /* RxScheduledItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxScheduledItem.m; sourceTree = "<group>"; };
@@ -176,6 +185,7 @@
 		17EEC916AF1930BFCFB47CD2 /* RxCompositeDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxCompositeDisposable.h; sourceTree = "<group>"; };
 		17EEC926CEFB396687D514C4 /* RxScheduledDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxScheduledDisposable.m; sourceTree = "<group>"; };
 		17EEC95E4ACB1766EAB88B91 /* RxAsyncLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxAsyncLock.m; sourceTree = "<group>"; };
+		17EEC97680159D2C555F43FE /* RxObservable+RxBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RxObservable+RxBinding.m"; sourceTree = "<group>"; };
 		17EEC98112FAD318175C414C /* RxObservableType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObservableType.h; sourceTree = "<group>"; };
 		17EEC9AC194AE6643D8C8DE5 /* RxSingleAssignmentDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSingleAssignmentDisposable.h; sourceTree = "<group>"; };
 		17EEC9D1E938B2A0648E0A5F /* RxObservableBlockTypedef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObservableBlockTypedef.h; sourceTree = "<group>"; };
@@ -188,6 +198,7 @@
 		17EECA5977291C2B3B4AE11D /* RxObservable+RxAggregate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RxObservable+RxAggregate.h"; sourceTree = "<group>"; };
 		17EECA887346B2CE6570F58A /* RxObserverType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObserverType.h; sourceTree = "<group>"; };
 		17EECAA7018B9BDF8E4D0640 /* RxTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTest.h; sourceTree = "<group>"; };
+		17EECAD302F445862178F17D /* RxConnectableObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxConnectableObservable.h; sourceTree = "<group>"; };
 		17EECAD4F31829ACCDDCF965 /* RxRefCountDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxRefCountDisposable.m; sourceTree = "<group>"; };
 		17EECB2A2067D030C46D7A19 /* RxPriorityQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxPriorityQueue.h; sourceTree = "<group>"; };
 		17EECB8CC8F393D8E8D97B1F /* RxToArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxToArray.h; sourceTree = "<group>"; };
@@ -200,6 +211,7 @@
 		17EECCE00D0D5D8B7CCCE07E /* RxInfiniteSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxInfiniteSequence.h; sourceTree = "<group>"; };
 		17EECCE9D0C3DA6B2807BDAF /* RxSynchronizedDisposeType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSynchronizedDisposeType.m; sourceTree = "<group>"; };
 		17EECD0A4AECE341239BB621 /* RxLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxLock.h; sourceTree = "<group>"; };
+		17EECD24BE229BAEA9423FEF /* RxConnectableObservableType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxConnectableObservableType.h; sourceTree = "<group>"; };
 		17EECD33BED8B329719C19D5 /* RxLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxLock.m; sourceTree = "<group>"; };
 		17EECD5C217509663D571620 /* NSThread+RxLocalStorageValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+RxLocalStorageValue.h"; sourceTree = "<group>"; };
 		17EECD677672C86DF7113CC8 /* RxDisposeBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxDisposeBag.m; sourceTree = "<group>"; };
@@ -260,6 +272,8 @@
 				17EECA5977291C2B3B4AE11D /* RxObservable+RxAggregate.h */,
 				17EECF0E2776464792075949 /* Implementations */,
 				17EEC9D1E938B2A0648E0A5F /* RxObservableBlockTypedef.h */,
+				17EEC97680159D2C555F43FE /* RxObservable+RxBinding.m */,
+				17EEC5751145C620DA28DADE /* RxObservable+RxBinding.h */,
 			);
 			path = Observables;
 			sourceTree = "<group>";
@@ -326,6 +340,14 @@
 			path = Disposables;
 			sourceTree = "<group>";
 		};
+		17EEC520CC62B962771DC977 /* Subjects */ = {
+			isa = PBXGroup;
+			children = (
+				17EEC300E23F1FB735124B13 /* RxSubjectType.h */,
+			);
+			path = Subjects;
+			sourceTree = "<group>";
+		};
 		17EEC793E857BB1A3FEFB546 /* Concurrency */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +400,8 @@
 				17EEC178BC8400AFF8AECCB4 /* RxProducer.h */,
 				17EEC9FF1FDD75F0AF6D04BD /* RxSink.m */,
 				17EEC8CF277BA0553F0EC0D6 /* RxSink.h */,
+				17EEC383E6B43804C5A3D5EE /* RxConnectableObservable.m */,
+				17EECAD302F445862178F17D /* RxConnectableObservable.h */,
 			);
 			path = Implementations;
 			sourceTree = "<group>";
@@ -443,6 +467,8 @@
 				17EECFB8F18B33A046439FE7 /* RxImmediateSchedulerType.m */,
 				17EEC0F0C55530F9A1BE2BDE /* Observables */,
 				17EECF321E2A28E17BA3A87E /* Platform */,
+				17EEC520CC62B962771DC977 /* Subjects */,
+				17EECD24BE229BAEA9423FEF /* RxConnectableObservableType.h */,
 			);
 			path = RxObjC;
 			sourceTree = "<group>";
@@ -538,6 +564,10 @@
 				17EECE770B4F31D4EC6BFB19 /* RxScheduledItemType.h in Headers */,
 				17EEC5A14AA81C3A0BFF53D1 /* NSThread+RxLocalStorageValue.h in Headers */,
 				17EEC0DAED847223385C5D33 /* RxScheduledItem.h in Headers */,
+				17EEC91FAC0CFB231BD2F9D3 /* RxObservable+RxBinding.h in Headers */,
+				17EECDA601CE9908BF9AD1DF /* RxSubjectType.h in Headers */,
+				17EEC517265808C10B78AC5A /* RxConnectableObservable.h in Headers */,
+				17EEC1923198DAB024475645 /* RxConnectableObservableType.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,6 +794,8 @@
 				17EEC849B9028BEE86D02A03 /* RxCurrentThreadScheduler.m in Sources */,
 				17EEC1DD9044088A9D57A541 /* NSThread+RxLocalStorageValue.m in Sources */,
 				17EEC49B1A9C02B08093DC85 /* RxScheduledItem.m in Sources */,
+				17EEC8553F7042BA1D39BEBF /* RxObservable+RxBinding.m in Sources */,
+				17EECA4DF7245D8A55CD3D40 /* RxConnectableObservable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
