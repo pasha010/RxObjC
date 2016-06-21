@@ -55,9 +55,9 @@ Schedules an action to be executed immediatelly.
  - parameter action: Action to be executed.
  - returns: The disposable object used to cancel the scheduled action (best effort).
  */
-- (nonnull id <RxDisposable>)scheduleRelativeVirtual:(nonnull id)state
+- (nonnull id <RxDisposable>)scheduleRelativeVirtual:(nullable id)state
                                              dueTime:(RxVirtualTimeIntervalUnit)dueTime
-                                              action:(id <RxDisposable>(^)(id))action;
+                                              action:(id <RxDisposable>(^)(id __nullable))action;
 
 /**
  Schedules an action to be executed at absolute virtual time.
@@ -67,9 +67,9 @@ Schedules an action to be executed immediatelly.
  - parameter action: Action to be executed.
  - returns: The disposable object used to cancel the scheduled action (best effort).
  */
-- (nonnull id <RxDisposable>)scheduleAbsoluteVirtual:(id)state
-                                                time:(RxVirtualTimeUnit)time
-                                              action:(id <RxDisposable>(^)(id))action;
+- (nonnull id <RxDisposable>)scheduleAbsoluteVirtual:(nullable id)state
+                                                time:(nonnull RxVirtualTimeUnit)time
+                                              action:(id <RxDisposable>(^)(id __nullable))action;
 
 /**
 Adjusts time of scheduling before adding item to schedule queue.

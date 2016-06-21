@@ -12,6 +12,9 @@
 #import <Foundation/Foundation.h>
 
 @protocol RxSubjectType;
+@protocol RxDisposable;
+@class RxAnyObserver;
+@class RxObservable;
 
 /// reduce
 typedef id RxAccumulateType;
@@ -23,6 +26,9 @@ typedef RxResultType(^ResultSelectorType)(RxAccumulateType);
 
 /// multicast
 typedef id <RxSubjectType>(^RxSubjectSelectorType)();
-typedef RxObservable<id> *(^RxSelectorType)(RxObservable<id> *);
+typedef RxObservable *(^RxSelectorType)(RxObservable *);
+
+/// AnonymousObservable
+typedef id <RxDisposable>(^RxAnonymousSubscribeHandler)(RxAnyObserver *);
 
 #endif /* RxObservableBlockTypedef_h */

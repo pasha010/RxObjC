@@ -23,7 +23,7 @@ Construct an instance whose `on(event)` calls `observer.on(event)`
 
 - parameter observer: Observer that receives sequence events.
 */
-- (nonnull instancetype)initWithObserverEvent:(nonnull id <RxObserverType>)observer;
+- (nonnull instancetype)initWithObserver:(nonnull id <RxObserverType>)observer;
 
 /**
 Construct an instance whose `on(event)` calls `eventHandler(event)`

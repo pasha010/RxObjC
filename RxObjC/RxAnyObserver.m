@@ -4,13 +4,15 @@
 //
 
 #import "RxAnyObserver.h"
+#import "RxObservable.h"
+#import "RxDisposable.h"
 
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 @implementation RxAnyObserver
 
-- (nonnull instancetype)initWithObserverEvent:(nonnull id <RxObserverType>)observer {
+- (nonnull instancetype)initWithObserver:(nonnull id <RxObserverType>)observer {
     return [self initWithEventHandler:^(RxEvent *event) {
         [observer on:event];
     }];
@@ -46,7 +48,7 @@ Send `event` to this observer.
 @implementation NSObject (RxAnyObserver)
 
 - (nonnull RxAnyObserver<id> *)asObserver {
-    return [[RxAnyObserver alloc] initWithObserverEvent:self];
+    return [[RxAnyObserver alloc] initWithObserver:self];
 }
 
 @end

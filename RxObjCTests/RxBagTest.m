@@ -91,9 +91,9 @@ typedef void (^RxDoSomething)();
                             XCTAssertTrue(bag.value.count == i - j);
                         }];
 
-            XCTAssertTrue(numberForEachActions == i - j, @"numberForEachActions = %d i = %d j = %d", numberForEachActions, i, j);
-            XCTAssertTrue(numberObservers == i - j, @"numberObservers = %d i = %d j = %d", numberObservers, i, j);
-            XCTAssertTrue(numberDisposables == i - j, @"numberDisposables = %d i = %d j = %d", numberDisposables, i, j);
+            XCTAssertTrue(numberForEachActions == i - j, @"numberForEachActions = %zd i = %zd j = %zd", numberForEachActions, i, j);
+            XCTAssertTrue(numberObservers == i - j, @"numberObservers = %zd i = %zd j = %zd", numberObservers, i, j);
+            XCTAssertTrue(numberDisposables == i - j, @"numberDisposables = %zd i = %zd j = %zd", numberDisposables, i, j);
         }
     }
 }

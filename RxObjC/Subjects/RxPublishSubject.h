@@ -8,6 +8,7 @@
 #import "RxSubjectType.h"
 #import "RxSynchronizedUnsubscribeType.h"
 #import "RxCancelable.h"
+#import "RxObservable+Extension.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

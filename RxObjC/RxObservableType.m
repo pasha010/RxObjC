@@ -4,15 +4,18 @@
 //
 
 #import "RxObservableType.h"
-#import "RxObservableType.h"
+#import "RxObservable.h"
+#import "RxObservable+Creation.h"
+#import "RxAnyObserver.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 @implementation NSObject (RxObservableType)
 
 - (nonnull RxObservable *)asObservable {
-    return nil;
-    // TODO return [RxObservable create:[self subscribe:nil]]
+    return [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
+        return [self subscribe:observer];
+    }];
 }
 
 @end

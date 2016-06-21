@@ -30,8 +30,7 @@
 }
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
-    rx_abstractMethod();
-    return nil;
+    return rx_abstractMethod();
 }
 
 @end

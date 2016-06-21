@@ -8,8 +8,9 @@
 #import "RxObjC.h"
 #import "RxError.h"
 
-void rx_abstractMethod() {
+id rx_abstractMethod() {
     rx_fatalError(@"Abstract method");
+    return nil;
 }
 
 void rx_fatalError(NSString *message) {

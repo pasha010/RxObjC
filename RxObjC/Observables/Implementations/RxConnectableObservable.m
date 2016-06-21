@@ -63,8 +63,7 @@
 @implementation RxConnectableObservable
 
 - (nonnull id <RxDisposable>)connect {
-    rx_abstractMethod();
-    return nil;
+    return rx_abstractMethod();
 }
 
 @end

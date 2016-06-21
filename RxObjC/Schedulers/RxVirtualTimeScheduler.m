@@ -101,16 +101,16 @@
     return [self scheduleAbsoluteVirtual:state time:adjustedTime action:action];
 }
 
-- (nonnull id <RxDisposable>)scheduleRelativeVirtual:(nonnull id)state
+- (nonnull id <RxDisposable>)scheduleRelativeVirtual:(nullable id)state
                                              dueTime:(RxVirtualTimeIntervalUnit)dueTime
-                                              action:(id <RxDisposable>(^)(id))action {
+                                              action:(id <RxDisposable>(^)(id __nullable))action {
     RxVirtualTimeUnit time = [_converter offsetVirtualTime:self.clock offset:dueTime];
     return [self scheduleAbsoluteVirtual:state time:time action:action];
 }
 
-- (nonnull id <RxDisposable>)scheduleAbsoluteVirtual:(id)state
-                                                time:(RxVirtualTimeUnit)time
-                                              action:(id <RxDisposable>(^)(id))action {
+- (nonnull id <RxDisposable>)scheduleAbsoluteVirtual:(nullable id)state
+                                                time:(nonnull RxVirtualTimeUnit)time
+                                              action:(id <RxDisposable>(^)(id __nullable))action {
    
     [RxMainScheduler ensureExecutingOnScheduler];
     
