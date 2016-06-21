@@ -24,6 +24,17 @@ operator please use `ConcurrentMainScheduler` because it is more optimized for t
  */
 
 /**
+Singleton instance of `MainScheduler`
+*/
++ (nonnull instancetype)sharedInstance;
+
+/**
+Singleton instance of `MainScheduler` that always schedules work asynchronously
+and doesn't perform optimizations for calls scheduled from main thread.
+*/
++ (nonnull RxSerialDispatchQueueScheduler *)asyncInstance;
+
+/**
 In case this method is called on a background thread it will throw an exception.
 */
 + (void)ensureExecutingOnScheduler;

@@ -132,6 +132,8 @@
 		17EECFD855C3CE41FE8952E7 /* RxObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECA16BACE27D6E912A953 /* RxObjC.m */; };
 		365043FD1D155DDE008CBABA /* RxObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 365043FC1D155DDE008CBABA /* RxObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		365044041D155DDF008CBABA /* RxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365043F91D155DDE008CBABA /* RxObjC.framework */; };
+		36F1FEE61D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 36F1FEE41D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.h */; };
+		36F1FEE71D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F1FEE51D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.m */; };
 		A6D791401A3AD6821587E34B /* Pods_RxObjCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 702FC3579BB558BBBF6A9650 /* Pods_RxObjCTests.framework */; };
 		E8DB990A7C3BDC97F19F1024 /* Pods_RxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698537D5C6F019B70DB547AC /* Pods_RxObjC.framework */; };
 /* End PBXBuildFile section */
@@ -277,6 +279,8 @@
 		365043FE1D155DDE008CBABA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		365044031D155DDF008CBABA /* RxObjCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxObjCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3650440A1D155DDF008CBABA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36F1FEE41D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDispatchQueueSchedulerQOS.h; sourceTree = "<group>"; };
+		36F1FEE51D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxDispatchQueueSchedulerQOS.m; sourceTree = "<group>"; };
 		4AEDFD4E4E9F6F1FE05FA9EA /* Pods-RxObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxObjC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC.debug.xcconfig"; sourceTree = "<group>"; };
 		698537D5C6F019B70DB547AC /* Pods_RxObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A546AA2BD3F368B81F3EA54 /* Pods-RxObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxObjC.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxObjC/Pods-RxObjC.release.xcconfig"; sourceTree = "<group>"; };
@@ -366,6 +370,8 @@
 				17EEC07704F79F45ADAE6058 /* RxSerialDispatchQueueScheduler.m */,
 				17EECC5C7E0F8E5741F24637 /* RxSerialDispatchQueueScheduler.h */,
 				17EEC01CAA1389BC188DEEA8 /* RxSchedulers.h */,
+				36F1FEE41D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.h */,
+				36F1FEE51D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.m */,
 			);
 			path = Schedulers;
 			sourceTree = "<group>";
@@ -599,6 +605,7 @@
 				17EEC0D50AF0A27359980A6A /* RxCompositeDisposable.h in Headers */,
 				17EEC3DB2B702C7F70D46F4B /* RxDisposeBag.h in Headers */,
 				17EECE74F9DC2E02526C8915 /* RxDisposeBase.h in Headers */,
+				36F1FEE61D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.h in Headers */,
 				17EEC5D7732BCF0A94B8D643 /* RxNopDisposable.h in Headers */,
 				17EECD41CE367C6E81229491 /* RxRefCountDisposable.h in Headers */,
 				17EECDF7AE451DE01D8920E8 /* RxScheduledDisposable.h in Headers */,
@@ -832,6 +839,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17EECE0A3B38D06896F6D77B /* RxEvent.m in Sources */,
+				36F1FEE71D19885800FC31E9 /* RxDispatchQueueSchedulerQOS.m in Sources */,
 				17EECF44B13A4C1ABDB0A88F /* RxObservable.m in Sources */,
 				17EECFD855C3CE41FE8952E7 /* RxObjC.m in Sources */,
 				17EEC1AA713EC2221B34E08F /* RxError.m in Sources */,
