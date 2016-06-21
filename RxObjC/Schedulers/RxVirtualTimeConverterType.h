@@ -24,7 +24,7 @@ Parametrization for virtual time used by `VirtualTimeScheduler`s.
  - parameter virtualTime: Virtual time to convert to `NSDate`.
  - returns: `NSDate` corresponding to virtual time.
 */
-- (RxTime *)convertFromVirtualTime:(nonnull RxVirtualTimeUnit)virtualTime;
+- (nonnull RxTime *)convertFromVirtualTime:(nonnull RxVirtualTimeUnit)virtualTime;
 
 /**
  Converts real time to virtual time.
@@ -57,7 +57,7 @@ Parametrization for virtual time used by `VirtualTimeScheduler`s.
  - parameter offset: Virtual time interval.
  - returns: Time corresponding to time offsetted by virtual time interval.
 */
-- (nonnull RxVirtualTimeUnit)offsetVirtualTime:(RxVirtualTimeUnit)time offset:(RxVirtualTimeIntervalUnit)offset;
+- (nonnull RxVirtualTimeUnit)offsetVirtualTime:(nonnull RxVirtualTimeUnit)time offset:(nonnull RxVirtualTimeIntervalUnit)offset;
 
 /**
  This is aditional abstraction because `NSDate` is unfortunately not comparable.
@@ -81,10 +81,10 @@ typedef NS_ENUM(NSUInteger, RxVirtualTimeComparisonType) {
 */
 @interface RxVirtualTimeComparison : NSObject
 
-@property (assign, nonatomic) RxVirtualTimeComparisonType type;
-@property (assign, nonatomic) BOOL lessThan;
-@property (assign, nonatomic) BOOL greaterThan;
-@property (assign, nonatomic) BOOL equal;
+@property (assign, nonatomic, readonly) RxVirtualTimeComparisonType type;
+@property (assign, nonatomic, readonly) BOOL lessThan;
+@property (assign, nonatomic, readonly) BOOL greaterThan;
+@property (assign, nonatomic, readonly) BOOL equal;
 
 /**
  lhs < rhs.

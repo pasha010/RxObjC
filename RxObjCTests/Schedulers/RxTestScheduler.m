@@ -4,9 +4,22 @@
 //
 
 #import "RxTestScheduler.h"
+#import "RxTestSchedulerVirtualTimeConverter.h"
 
 
 @implementation RxTestScheduler {
-
+    BOOL _simulateProcessingDelay;
 }
+
+- (nonnull instancetype)initWithInitialClock:(NSUInteger)initialClock
+                                  resolution:(double)resolution
+                     simulateProcessingDelay:(BOOL)simulateProcessingDelay {
+    // complete test scheduler
+    self = [super initWithInitialClock:@(initialClock) andConverter:[[RxTestSchedulerVirtualTimeConverter alloc] initWithResolution:resolution]];
+    if (self) {
+        _simulateProcessingDelay = simulateProcessingDelay;
+    }
+    return self;
+}
+
 @end
