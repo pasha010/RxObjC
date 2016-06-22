@@ -188,3 +188,28 @@
 }
 
 @end
+
+@implementation RxTupleUnpackingTrampoline
+
+#pragma mark Lifecycle
+
++ (instancetype)trampoline {
+    static dispatch_once_t onceToken;
+    static id trampoline = nil;
+    dispatch_once(&onceToken, ^{
+        trampoline = [[self alloc] init];
+    });
+
+    return trampoline;
+}
+
+- (void)setObject:(RxTuple *)tuple forKeyedSubscript:(NSArray *)variables {
+    NSCParameterAssert(variables != nil);
+
+    [variables enumerateObjectsUsingBlock:^(NSValue *value, NSUInteger index, BOOL *stop) {
+        __strong id *ptr = (__strong id *)value.pointerValue;
+        *ptr = tuple[index];
+    }];
+}
+
+@end

@@ -5,15 +5,14 @@
 
 #import "RxSynchronizedSubscribeType.h"
 
-
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 @implementation NSObject (RxSynchronizedSubscribeType)
 
 - (nonnull id <RxDisposable>)synchronizedSubscribe:(nonnull id <RxObserverType>)observer {
-    [self lock];
+    [self _lock];
     id <RxDisposable> disposable = [self _synchronized_subscribe:observer];
-    [self unlock];
+    [self _unlock];
     return disposable;
 }
 

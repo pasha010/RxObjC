@@ -8,6 +8,38 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// Creates a new tuple with the given values. At least one value must be given.
+/// Values can be nil.
+#define RxTuplePack(...) \
+    RxTuplePack_(__VA_ARGS__)
+
+/// Declares new object variables and unpacks a RACTuple into them.
+///
+/// This macro should be used on the left side of an assignment, with the
+/// tuple on the right side. Nothing else should appear on the same line, and the
+/// macro should not be the only statement in a conditional or loop body.
+///
+/// If the tuple has more values than there are variables listed, the excess
+/// values are ignored.
+///
+/// If the tuple has fewer values than there are variables listed, the excess
+/// variables are initialized to nil.
+///
+/// Examples
+///
+///   RACTupleUnpack(NSString *string, NSNumber *num) = [RACTuple tupleWithObjects:@"foo", @5, nil];
+///   NSLog(@"string: %@", string);
+///   NSLog(@"num: %@", num);
+///
+///   /* The above is equivalent to: */
+///   RACTuple *t = [RACTuple tupleWithObjects:@"foo", @5, nil];
+///   NSString *string = t[0];
+///   NSNumber *num = t[1];
+///   NSLog(@"string: %@", string);
+///   NSLog(@"num: %@", num);
+#define RxTupleUnpack(...) \
+        RxTupleUnpack_(__VA_ARGS__)
+
 /// A sentinel object that represents nils in the tuple.
 ///
 /// It should never be necessary to create a tuple nil yourself. Just use
@@ -22,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  * A tuple is an ordered collection of objects. It may contain nils, represented
  * by RxTupleNil.
  */
+
 @interface RxTuple : NSObject <NSCoding, NSCopying, NSFastEnumeration>
 
 /// The number of objects in the tuple, including any nil values.
@@ -96,5 +129,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define RxTupleUnpack_value(INDEX, ARG) \
     [NSValue valueWithPointer:&RxTupleUnpack_decl_name(INDEX)],
+
+@interface RxTupleUnpackingTrampoline : NSObject
+
++ (instancetype)trampoline;
+- (void)setObject:(RxTuple *)tuple forKeyedSubscript:(NSArray *)variables;
+
+@end
 
 NS_ASSUME_NONNULL_END

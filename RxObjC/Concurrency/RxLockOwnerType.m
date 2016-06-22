@@ -3,18 +3,21 @@
 // Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "RxSynchronizedOnType.h"
+#import "RxLockOwnerType.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
-@implementation NSObject (RxSynchronizedOnType)
+@implementation NSObject (RxLockOwnerType)
 
-- (void)synchronizedOn:(RxEvent *)event {
-    [self _lock];
-    [self _synchronized_on:event];
-    [self _unlock];
+- (void)_lock {
+    [[self lock] lock];
+}
+
+- (void)_unlock {
+    [[self lock] unlock];
 }
 
 
 @end
+
 #pragma clang diagnostic pop

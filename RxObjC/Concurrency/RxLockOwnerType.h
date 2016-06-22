@@ -8,8 +8,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol RxLockOwnerType <NSObject>
+@protocol RxLockOwnerType <RxLock>
 - (nonnull RxSpinLock *)lock;
+@end
+
+@interface NSObject (RxLockOwnerType) <RxLockOwnerType>
 @end
 
 NS_ASSUME_NONNULL_END

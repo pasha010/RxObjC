@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol RxSynchronizedUnsubscribeType <NSObject>
 
-- (void)synchronizedUnsubscribe:(id)disposeKey;
+- (void)synchronizedUnsubscribe:(nonnull id)disposeKey;
 
 @end
 

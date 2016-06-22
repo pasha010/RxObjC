@@ -10,9 +10,9 @@
 @implementation NSObject (RxSynchronizedDisposeType)
 
 - (void)synchronizedDispose {
-    [self lock];
+    [self _lock];
     [self _synchronized_dispose];
-    [self unlock];
+    [self _unlock];
 }
 
 @end

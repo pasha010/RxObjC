@@ -6,6 +6,7 @@
 #import "RxAnyObserver.h"
 #import "RxObservable.h"
 #import "RxDisposable.h"
+#import "RxTuple.h"
 
 
 #pragma clang diagnostic push

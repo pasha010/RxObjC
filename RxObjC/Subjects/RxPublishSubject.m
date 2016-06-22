@@ -91,7 +91,7 @@
     return [[RxSubscriptionDisposable alloc] initWithOwner:self andKey:key];
 }
 
-- (void)synchronizedUnsubscribe:(RxBagKey *)disposeKey {
+- (void)synchronizedUnsubscribe:(nonnull RxBagKey *)disposeKey {
     [_lock performLock:^{
         [self _synchronized_unsubscribe:disposeKey];
     }];

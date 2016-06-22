@@ -39,6 +39,31 @@
     return self;
 }
 
+- (BOOL)isEqual:(id)other {
+    if (other == self) {
+        return YES;
+    }
+    if (!other || ![[other class] isEqual:[self class]]) {
+        return NO;
+    }
+
+    RxEvent *_other = other;
+
+    if (self.type == _other.type) {
+        switch (self.type) {
+            case RxEventTypeNext:
+                return [self.value isEqual:_other.value];
+            case RxEventTypeError:
+                return [self.error isEqual:_other.error];
+            case RxEventTypeCompleted:
+                return YES;
+        }
+    }
+
+    return NO;
+}
+
+
 @end
 
 @implementation RxEvent (DebugDescription)

@@ -31,7 +31,7 @@
 }
 
 - (NSString *)debugDescription {
-    return [NSString stringWithFormat:@"(%zd : %@)", _subscribe, _subscribe != NSUIntegerMax ? @(_subscribe) : @"infinity"];
+    return [NSString stringWithFormat:@"(%zd : %@)", _subscribe, _unsubscribe != NSUIntegerMax ? @(_unsubscribe) : @"infinity"];
 }
 
 - (BOOL)isEqual:(id)other {

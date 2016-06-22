@@ -15,6 +15,7 @@
 @protocol RxDisposable;
 @class RxAnyObserver;
 @class RxObservable;
+@class RxTuple;
 
 /// reduce
 typedef id RxAccumulateType;
@@ -30,5 +31,17 @@ typedef RxObservable *(^RxSelectorType)(RxObservable *);
 
 /// AnonymousObservable
 typedef id <RxDisposable>(^RxAnonymousSubscribeHandler)(RxAnyObserver *);
+
+/// zip
+typedef id (^RxZip2ResultSelector)(id o1, id o2);
+typedef id (^RxZip3ResultSelector)(id o1, id o2, id o3);
+typedef id (^RxZip4ResultSelector)(id o1, id o2, id o3, id o4);
+typedef id (^RxZip5ResultSelector)(id o1, id o2, id o3, id o4, id o5);
+typedef id (^RxZip6ResultSelector)(id o1, id o2, id o3, id o4, id o5, id o6);
+typedef id (^RxZip7ResultSelector)(id o1, id o2, id o3, id o4, id o5, id o6, id o7);
+typedef id (^RxZip8ResultSelector)(id o1, id o2, id o3, id o4, id o5, id o6, id o7, id o8);
+typedef id (^RxZipTupleResultSelector)(RxTuple *__nonnull);
+
+typedef void (^RxZipObserverValueSetter)(id);
 
 #endif /* RxObservableBlockTypedef_h */

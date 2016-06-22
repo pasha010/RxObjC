@@ -26,11 +26,11 @@
     return self;
 }
 
-- (void)lock {
+- (void)_lock {
     [_lock lock];
 }
 
-- (void)unlock {
+- (void)_unlock {
     [_lock unlock];
 }
 

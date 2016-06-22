@@ -7,7 +7,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol RxLock <NSLocking>
+@protocol RxLock <NSObject>
+- (void)_lock;
+- (void)_unlock;
 @end
 
 #define RxSpinLock NSRecursiveLock

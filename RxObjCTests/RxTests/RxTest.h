@@ -7,8 +7,9 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "RxObjC.h"
 #import <UIKit/UIKit.h>
+#import "RxObjC.h"
+#import "RxRecorded.h"
 
 #if TRACE_RESOURCES
 static int64_t const RxTestsTotalNumberOfAllocations = 0;
