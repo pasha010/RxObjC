@@ -12,6 +12,7 @@
 #import "RxTuple.h"
 #import "RxAnyObserver.h"
 #import "RxMutableBox.h"
+#import "RxTestError.h"
 
 @interface RxSubjectConcurrencyTest : RxTest
 
@@ -80,6 +81,75 @@
     XCTAssertTrue(allDone);
 }
 
-// TODO complete this!
+- (void)testSubjectIsReentrantForNextAndComplete {
+    RxTuple *tuple = [self createSubject];
+    __block RxObservable<NSNumber *> *observable = tuple[0];
+    __block RxAnyObserver<NSNumber *> *_observer = tuple[1];
+
+    __block int state = 0;
+
+    __block RxMutableBox *o = [[RxMutableBox alloc] initWithValue:_observer];
+
+    __block BOOL ranAll = NO;
+
+    [observable subscribeOnNext:^(NSNumber *n) {
+        if (n.unsignedIntegerValue < 0) {
+            return;
+        }
+
+        if (state == 0) {
+            state = 1;
+
+            // if isn't reentrant, this will cause deadlock
+            [o.value onNext:@1];
+        } else if (state == 1) {
+            // if isn't reentrant, this will cause deadlock
+            [o.value onCompleted];
+        }
+    } onError:nil onCompleted:^{
+        ranAll = YES;
+    }];
+
+    [o.value onNext:@0];
+
+    XCTAssertTrue(ranAll);
+}
+
+- (void)testSubjectIsReentrantForNextAndError {
+    RxTuple *tuple = [self createSubject];
+    __block RxObservable<NSNumber *> *observable = tuple[0];
+    __block RxAnyObserver<NSNumber *> *_observer = tuple[1];
+
+    __block int state = 0;
+
+    __block RxMutableBox *o = [[RxMutableBox alloc] initWithValue:_observer];
+
+    __block BOOL ranAll = NO;
+
+    [observable subscribeOnNext:^(NSNumber *n) {
+        if (n.unsignedIntegerValue < 0) {
+            return;
+        }
+
+        if (state == 0) {
+            state = 1;
+
+            // if isn't reentrant, this will cause deadlock
+            [o.value onNext:@1];
+        } else if (state == 1) {
+            // if isn't reentrant, this will cause deadlock
+            [o.value onError:[RxTestError testError]];
+
+        }
+    } onError:^(NSError *error) {
+        XCTAssertTrue(error != nil && error == [RxTestError testError]);
+        ranAll = YES;
+    }];
+
+    [o.value onNext:@0];
+
+
+    XCTAssertTrue(ranAll);
+}
 
 @end

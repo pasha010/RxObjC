@@ -36,6 +36,14 @@ Subscribes an element handler, an error handler, a completion handler and dispos
                                 onCompleted:(nullable void(^)())onCompleted
                                  onDisposed:(nullable void(^)())onDisposed;
 
+
+- (nonnull id<RxDisposable>)subscribeOnNext:(nonnull void(^)(id __nonnull))onNext
+                                    onError:(nullable void(^)(NSError *__nonnull))onError;
+
+- (nonnull id<RxDisposable>)subscribeOnNext:(nonnull void(^)(id __nonnull))onNext
+                                    onError:(nullable void(^)(NSError *__nonnull))onError
+                                onCompleted:(nullable void(^)())onCompleted;
+
 /**
 Subscribes an element handler to an observable sequence.
 

@@ -63,6 +63,18 @@
     return [[RxBinaryDisposable alloc] initWithFirstDisposable:[self subscribeSafe:observer] andSecondDisposable:disposable];
 }
 
+
+- (nonnull id <RxDisposable>)subscribeOnNext:(nonnull void (^)(id __nonnull))onNext
+                                     onError:(nullable void (^)(NSError *__nonnull))onError {
+    return [self subscribeOnNext:onNext onError:onError onCompleted:nil];
+}
+
+- (nonnull id <RxDisposable>)subscribeOnNext:(nonnull void (^)(id __nonnull))onNext
+                                     onError:(nullable void (^)(NSError *__nonnull))onError
+                                 onCompleted:(nullable void (^)())onCompleted {
+    return [self subscribeOnNext:onNext onError:onError onCompleted:onCompleted onDisposed:nil];
+}
+
 - (id <RxDisposable>)subscribeNext:(void (^)(id __nonnull))onNext {
     RxAnonymousObserver *observer = [[RxAnonymousObserver alloc] initWithEventHandler:^(RxEvent *event) {
         if (event.type == RxEventTypeNext) {
