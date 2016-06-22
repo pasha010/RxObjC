@@ -70,7 +70,7 @@
             [self next:270 element:@5],
             [self next:330 element:@6],
             [self next:340 element:@7],
-            [self error:390 error:[RxTestError testError]]
+            [self error:390 testError:[RxTestError testError]]
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
@@ -87,7 +87,7 @@
             [self next:270 element:@5],
             [self next:330 element:@6],
             [self next:340 element:@7],
-            [self error:390 error:[RxTestError testError]]
+            [self error:390 testError:[RxTestError testError]]
     ];
     XCTAssertTrue([res.events isEqualToArray:array]);
 
@@ -162,6 +162,52 @@
     XCTAssertTrue([res.events isEqualToArray:array]);
 
     XCTAssertTrue([xs.subscriptions isEqualToArray:@[[[RxSubscription alloc] initWithSubscribe:200 unsubscribe:390]]]);
+}
+
+- (void)testMulticast_SubjectSelectorThrowsError {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            [self next:210 element:@1],
+            [self next:240 element:@2],
+            [self completed:300]
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [xs multicast:^id <RxSubjectType> {
+            @throw [RxTestError testError];
+            return [RxPublishSubject create];
+        } selector:^RxObservable *(RxObservable *observable) {
+            return observable;
+        }];
+    }];
+
+    XCTAssertTrue([res.events isEqualToArray:@[[self error:200 testError:[RxTestError testError]]]], @"");
+
+    XCTAssertTrue(xs.subscriptions.count == 0);
+}
+
+- (void)testMulticast_SubjectSelectorThrowsException {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            [self next:210 element:@1],
+            [self next:240 element:@2],
+            [self completed:300]
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [xs multicast:^id <RxSubjectType> {
+            id error = [[NSObject alloc] init];
+            [error objectAtIndex:0];
+            return [RxPublishSubject create];
+        } selector:^RxObservable *(RxObservable *observable) {
+            return observable;
+        }];
+    }];
+
+    XCTAssertTrue(res.events.count == 1);
+    RxRecorded<RxEvent *> *type = res.events[0];
+    XCTAssertTrue(type.value.error.code == 105);
+    XCTAssertTrue(xs.subscriptions.count == 0);
 }
 
 @end

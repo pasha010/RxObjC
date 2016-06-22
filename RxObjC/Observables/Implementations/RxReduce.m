@@ -44,10 +44,14 @@
             [self forwardOn:[RxEvent next:result]];
             [self forwardOn:[RxEvent completed]];
         }
-        @catch (NSException *exception) {
-            NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxReduceSink + %@", exception.name]
-                                                 code:104
-                                             userInfo:exception.userInfo];
+        @catch (id e) {
+            NSError *error = e;
+            if ([e isKindOfClass:[NSException class]]) {
+                NSException *exception = e;
+                error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxReduceSink + %@", exception.name]
+                                            code:104
+                                        userInfo:exception.userInfo];
+            }
             [self forwardOn:[RxEvent error:error]];
         }
         [self dispose];

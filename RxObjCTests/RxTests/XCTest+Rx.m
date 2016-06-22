@@ -20,7 +20,7 @@
     return [[RxRecorded alloc] initWithTime:time value:[RxEvent completed]];
 }
 
-- (nonnull RxRecorded<RxEvent *> *)error:(RxTestTime)time error:(nonnull NSError *)error {
+- (nonnull RxRecorded<RxEvent *> *)error:(RxTestTime)time testError:(nonnull NSError *)error {
     return [[RxRecorded alloc] initWithTime:time value:[RxEvent error:error]];
 }
 @end

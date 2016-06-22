@@ -38,10 +38,14 @@
         
         return [[RxBinaryDisposable alloc] initWithFirstDisposable:subscription andSecondDisposable:connection];
     }
-    @catch (NSException *exception) {
-        NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxMulticastSink + %@", exception.name]
-                                             code:105
-                                         userInfo:exception.userInfo];
+    @catch (id e) {
+        NSError *error = e;
+        if ([e isKindOfClass:[NSException class]]) {
+            NSException *exception = e;
+            error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxMulticastSink + %@", exception.name]
+                                        code:105
+                                    userInfo:exception.userInfo];
+        }
         [self forwardOn:[RxEvent error:error]];
         [self dispose];
         return [RxNopDisposable sharedInstance];

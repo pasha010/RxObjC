@@ -43,7 +43,7 @@ Factory method for an `.Error` event recorded at a given time with a given error
 
  - parameter time: Recorded virtual time the `.Completed` event occurs.
 */
-- (nonnull RxRecorded<RxEvent *> *)error:(RxTestTime)time error:(nonnull NSError *)error;
+- (nonnull RxRecorded<RxEvent *> *)error:(RxTestTime)time testError:(nonnull NSError *)error;
 
 @end
 

@@ -52,8 +52,13 @@
             id result = [self getResult];
             [self forwardOn:[RxEvent next:result]];
         }
-        @catch (NSException *exception) {
-            [self forwardOn:[RxEvent error:[NSError errorWithDomain:@"zip" code:100 userInfo:exception.userInfo]]];
+        @catch (id e) {
+            NSError *error = e;
+            if ([e isKindOfClass:[NSException class]]) {
+                NSException *exception = e;
+                error = [NSError errorWithDomain:exception.name code:-140 userInfo:exception.userInfo];
+            }
+            [self forwardOn:[RxEvent error:error]];
             [self dispose];
         }
     } else {
