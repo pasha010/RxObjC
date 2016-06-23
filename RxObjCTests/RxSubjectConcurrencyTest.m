@@ -13,9 +13,22 @@
 #import "RxAnyObserver.h"
 #import "RxMutableBox.h"
 #import "RxTestError.h"
+#import "RxReplaySubject.h"
 
 @interface RxSubjectConcurrencyTest : RxTest
 
+@end
+
+@interface RxReplaySubjectConcurrencyTest : RxSubjectConcurrencyTest
+@end
+
+@implementation RxReplaySubjectConcurrencyTest
+- (RxTuple *)createSubject {
+    RxReplaySubject<NSNumber *> *subject = [RxReplaySubject createWithBufferSize:1];
+    return [RxTuple tupleWithArray:@[subject.asObservable, [[RxAnyObserver alloc] initWithEventHandler:^(RxEvent<NSNumber *> *event) {
+        [[subject asObservable] on:event];
+    }]]];
+}
 @end
 
 @implementation RxSubjectConcurrencyTest

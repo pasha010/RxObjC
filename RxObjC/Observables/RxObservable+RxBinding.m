@@ -7,6 +7,7 @@
 #import "RxSubjectType.h"
 #import "RxMulticast.h"
 #import "RxPublishSubject.h"
+#import "RxReplaySubject.h"
 
 
 #pragma clang diagnostic push
@@ -33,6 +34,14 @@
 @end
 
 @implementation NSObject (RxReplay)
+
+- (nonnull RxConnectableObservable<id> *)replay:(NSUInteger)bufferSize {
+    return [self multicast:[RxReplaySubject createWithBufferSize:bufferSize]];
+}
+
+- (nonnull RxConnectableObservable<id> *)replayAll {
+    return [self multicast:[RxReplaySubject createUnbounded]];
+}
 
 @end
 

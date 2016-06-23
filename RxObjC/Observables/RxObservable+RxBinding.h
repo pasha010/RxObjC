@@ -60,7 +60,28 @@ This operator is a specialization of `multicast` using a `PublishSubject`.
 @end
 
 @interface NSObject (RxReplay) <RxObservableType>
+/**
+Returns a connectable observable sequence that shares a single subscription to the underlying sequence replaying bufferSize elements.
 
+This operator is a specialization of `multicast` using a `ReplaySubject`.
+
+- seealso: [replay operator on reactivex.io](http://reactivex.io/documentation/operators/replay.html)
+
+- parameter bufferSize: Maximum element count of the replay buffer.
+- returns: A connectable observable sequence that shares a single subscription to the underlying sequence.
+*/
+- (nonnull RxConnectableObservable<id> *)replay:(NSUInteger)bufferSize;
+
+/**
+Returns a connectable observable sequence that shares a single subscription to the underlying sequence replaying all elements.
+
+This operator is a specialization of `multicast` using a `ReplaySubject`.
+
+- seealso: [replay operator on reactivex.io](http://reactivex.io/documentation/operators/replay.html)
+
+- returns: A connectable observable sequence that shares a single subscription to the underlying sequence.
+*/
+- (nonnull RxConnectableObservable<id> *)replayAll;
 @end
 
 @interface NSObject (RxRefcount) <RxObservableType>
