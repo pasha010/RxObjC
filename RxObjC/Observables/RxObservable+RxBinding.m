@@ -8,6 +8,7 @@
 #import "RxMulticast.h"
 #import "RxPublishSubject.h"
 #import "RxReplaySubject.h"
+#import "RxRefCount.h"
 
 
 #pragma clang diagnostic push
@@ -47,6 +48,9 @@
 
 @implementation NSObject (RxRefcount)
 
+- (nonnull RxObservable *)refCount {
+    return [[RxRefCount alloc] initWithSource:self];
+}
 @end
 
 @implementation NSObject (RxShare)

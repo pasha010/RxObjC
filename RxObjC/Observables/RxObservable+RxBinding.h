@@ -84,7 +84,15 @@ This operator is a specialization of `multicast` using a `ReplaySubject`.
 - (nonnull RxConnectableObservable<id> *)replayAll;
 @end
 
-@interface NSObject (RxRefcount) <RxObservableType>
+@interface NSObject (RxRefcount) <RxConnectableObservableType>
+/**
+Returns an observable sequence that stays connected to the source as long as there is at least one subscription to the observable sequence.
+
+- seealso: [refCount operator on reactivex.io](http://reactivex.io/documentation/operators/refCount.html)
+
+- returns: An observable sequence that stays connected to the source as long as there is at least one subscription to the observable sequence.
+*/
+- (nonnull RxObservable *)refCount;
 
 @end
 

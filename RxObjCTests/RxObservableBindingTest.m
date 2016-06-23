@@ -17,6 +17,7 @@
 #import "RxSubscription.h"
 #import "RxTestError.h"
 #import "RxObservable+RxZip.h"
+#import "RxObservable+Creation.h"
 
 @interface RxObservableBindingTest : RxTest
 
@@ -241,11 +242,110 @@
 }
 
 - (void)testRefCount_Error {
-    
+    RxObservable<NSNumber *> *xs = [RxObservable error:[RxTestError testError]];
+
+    RxObservable *res = [[xs publish] refCount];
+    [res subscribeOn:^(RxEvent *event) {
+        switch (event.type) {
+            case RxEventTypeNext:
+                XCTAssertTrue(NO);
+                break;
+            case RxEventTypeError:
+                XCTAssertTrue([event.error isEqual:[RxTestError testError]]);
+                break;
+            case RxEventTypeCompleted:
+                XCTAssertTrue(NO);
+                break;
+        }
+    }];
+    [res subscribeOn:^(RxEvent *event) {
+        switch (event.type) {
+            case RxEventTypeNext:
+                XCTAssertTrue(NO);
+                break;
+            case RxEventTypeError:
+                XCTAssertTrue([event.error isEqual:[RxTestError testError]]);
+                break;
+            case RxEventTypeCompleted:
+                XCTAssertTrue(NO);
+                break;
+        }
+    }];
 }
 
 - (void)testRefCount_Publish {
+    __block RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            [self next:210 element:@1],
+            [self next:220 element:@2],
+            [self next:230 element:@3],
+            [self next:240 element:@4],
+            [self next:250 element:@5],
+            [self next:260 element:@6],
+            [self next:270 element:@7],
+            [self next:280 element:@8],
+            [self next:290 element:@9],
+            [self completed:300]
+    ]];
+
+    __block RxObservable *res = [[xs publish] refCount];
     
+    __block id <RxDisposable> d1 = nil;
+    __block RxTestableObserver<NSNumber *> *o1 = [scheduler createObserver];
+    [scheduler scheduleAt:215 action:^{ d1 = [res subscribe:o1]; }];
+    [scheduler scheduleAt:235 action:^{ [d1 dispose]; }];
+
+    __block id <RxDisposable> d2 = nil;
+    __block __block RxTestableObserver<NSNumber *> *o2 = [scheduler createObserver];
+    [scheduler scheduleAt:225 action:^{ d2 = [res subscribe:o2]; }];
+    [scheduler scheduleAt:275 action:^{ [d2 dispose]; }];
+
+    __block id <RxDisposable> d3 = nil;
+    __block __block RxTestableObserver<NSNumber *> *o3 = [scheduler createObserver];
+    [scheduler scheduleAt:255 action:^{ d3 = [res subscribe:o3]; }];
+    [scheduler scheduleAt:265 action:^{ [d3 dispose]; }];
+
+    __block id <RxDisposable> d4 = nil;
+    __block __block RxTestableObserver<NSNumber *> *o4 = [scheduler createObserver];
+    [scheduler scheduleAt:285 action:^{ d4 = [res subscribe:o4]; }];
+    [scheduler scheduleAt:320 action:^{ [d4 dispose]; }];
+
+    [scheduler start];
+
+    NSArray *array = @[
+            [self next:220 element:@2],
+            [self next:230 element:@3],
+    ];
+    
+    XCTAssertTrue([o1.events isEqualToArray:array]);
+
+    NSArray *otherArray = @[
+            [self next:230 element:@3],
+            [self next:240 element:@4],
+            [self next:250 element:@5],
+            [self next:260 element:@6],
+            [self next:270 element:@7],
+    ];
+    XCTAssertTrue([o2.events isEqualToArray:otherArray]);
+
+    NSArray *array1 = @[
+            [self next:260 element:@6]
+    ];
+    XCTAssertTrue([o3.events isEqualToArray:array1]);
+
+    NSArray *array2 = @[
+            [self next:290 element:@9],
+            [self completed:300]
+    ];
+    XCTAssertTrue([o4.events isEqualToArray:array2]);
+
+
+    NSArray *array3 = @[
+            [[RxSubscription alloc] initWithSubscribe:215 unsubscribe:275],
+            [[RxSubscription alloc] initWithSubscribe:285 unsubscribe:300],
+    ];
+    XCTAssertTrue([xs.subscriptions isEqualToArray:array3]);
 }
 
 #pragma mark - replay

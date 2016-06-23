@@ -26,8 +26,17 @@ Creates an observable sequence from a specified subscribe method implementation.
 */
 + (nonnull instancetype)create:(RxAnonymousSubscribeHandler)subscribe;
 
-// TODO complete this!
+@end
 
+@interface RxObservable (Fail)
+/**
+Returns an observable sequence that terminates with an `error`.
+
+- seealso: [throw operator on reactivex.io](http://reactivex.io/documentation/operators/empty-never-throw.html)
+
+- returns: The observable sequence that terminates with specified error.
+*/
++ (nonnull instancetype)error:(nonnull NSError *)error;
 @end
 
 NS_ASSUME_NONNULL_END
