@@ -117,6 +117,39 @@
     return self;
 }
 
+- (id)first {
+    return self[0];
+}
+
+- (id)second {
+    return self[1];
+}
+
+- (id)third {
+    return self[2];
+}
+
+- (id)fourth {
+    return self[3];
+}
+
+- (id)fifth {
+    return self[4];
+}
+
+- (id)sixth {
+    return self[5];
+}
+
+- (id)seventh {
+    return self[6];
+}
+
+- (id)eighth {
+    return self[6];
+}
+
+
 #pragma mark NSObject
 
 - (NSString *)description {
@@ -212,4 +245,17 @@
     }];
 }
 
+@end
+
+@implementation RxTuple2
+@end
+@implementation RxTuple3
+@end
+@implementation RxTuple4
+@end
+@implementation RxTuple5
+@end
+@implementation RxTuple6
+@end
+@implementation RxTuple7
 @end

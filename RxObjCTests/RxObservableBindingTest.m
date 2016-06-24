@@ -18,6 +18,7 @@
 #import "RxTestError.h"
 #import "RxObservable+RxZip.h"
 #import "RxObservable+Creation.h"
+#import "RxObservable+Multiple.h"
 
 @interface RxObservableBindingTest : RxTest
 
@@ -1020,8 +1021,84 @@
     XCTAssertTrue([xs.subscriptions isEqualToArray:otherArray]);
 }
 
-#pragma mark - shareReplay
+#pragma mark - shareReplay(1)
+
+- (void)_testIdenticalBehaviorOfShareReplayOptimizedAndComposed:(void(^)(RxObservable<NSNumber *> *(^)(RxObservable<NSNumber *> *)))action {
+    action(^RxObservable<NSNumber *> *(RxObservable<NSNumber *> *observable) {
+        return [observable shareReplay:1];
+    });
+    action(^RxObservable<NSNumber *> *(RxObservable<NSNumber *> *observable) {
+        return [[observable replay:1] refCount];
+    });
+}
+
+- (void)testShareReplay_DeadlockImmediatelly {
+    [self _testIdenticalBehaviorOfShareReplayOptimizedAndComposed:^(RxObservable<NSNumber *> *(^transform)(RxObservable<NSNumber *> *)) {
+        __block int nEvents = 0;
+
+        RxObservable<NSNumber *> *observable = transform([RxObservable of:@[@0, @1, @2]]);
+
+        [observable subscribeNext:^(NSNumber *n) {
+            nEvents++;
+        }];
+        XCTAssertTrue(nEvents == 3);
+    }];
+}
+
+- (void)testShareReplay_DeadlockEmpty {
+    [self _testIdenticalBehaviorOfShareReplayOptimizedAndComposed:^(RxObservable<NSNumber *> *(^transform)(RxObservable<NSNumber *> *)) {
+        __block int nextEventsCount = 0;
+        __block int completedEventsCount = 0;
+
+        RxObservable<NSNumber *> *observable = transform([RxObservable empty]);
+
+        [observable subscribeOnNext:^(NSNumber *n) {
+            nextEventsCount++;
+        } onError:nil onCompleted:^{
+            completedEventsCount++;
+        }];
 
 
+        XCTAssertTrue(nextEventsCount == 0);
+        XCTAssertTrue(completedEventsCount == 1);
+    }];
+}
+
+- (void)testShareReplay_DeadlockError {
+    [self _testIdenticalBehaviorOfShareReplayOptimizedAndComposed:^(RxObservable<NSNumber *> *(^transform)(RxObservable<NSNumber *> *)) {
+        __block int eEvents = 0;
+        __block NSError *_error = nil;
+
+        RxObservable<NSNumber *> *observable = transform([RxObservable error:[RxTestError testError]]);
+
+        [observable subscribeError:^(NSError *error) {
+            eEvents++;
+            _error = error;
+        }];
+
+        XCTAssertTrue(eEvents == 1);
+        XCTAssertTrue(_error == [RxTestError testError]);
+    }];
+}
+
+- (void)testShareReplay1_DeadlockErrorAfterN {
+    [self _testIdenticalBehaviorOfShareReplayOptimizedAndComposed:^(RxObservable<NSNumber *> *(^transform)(RxObservable<NSNumber *> *)) {
+        __block int eEvents = 0;
+        __block NSError *_error = nil;
+
+        RxObservable<NSNumber *> *observable = transform(
+                @[[RxObservable of:@[@1, @2, @3]],
+                  [RxObservable error:[RxTestError testError]]
+                ].concat);
+
+        [observable subscribeError:^(NSError *error) {
+            eEvents++;
+            _error = error;
+        }];
+
+        XCTAssertTrue(eEvents == 1);
+        XCTAssertTrue(_error == [RxTestError testError]);
+    }];
+}
 
 @end

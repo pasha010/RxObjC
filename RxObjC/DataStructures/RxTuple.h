@@ -54,8 +54,16 @@ NS_ASSUME_NONNULL_BEGIN
  * A tuple is an ordered collection of objects. It may contain nils, represented
  * by RxTupleNil.
  */
+@interface RxTuple<E1, E2, E3, E4, E5, E6, E7, E8> : NSObject <NSCoding, NSCopying, NSFastEnumeration>
 
-@interface RxTuple : NSObject <NSCoding, NSCopying, NSFastEnumeration>
+@property (nullable, nonatomic, readonly) E1 first;
+@property (nullable, nonatomic, readonly) E2 second;
+@property (nullable, nonatomic, readonly) E3 third;
+@property (nullable, nonatomic, readonly) E4 fourth;
+@property (nullable, nonatomic, readonly) E5 fifth;
+@property (nullable, nonatomic, readonly) E6 sixth;
+@property (nullable, nonatomic, readonly) E7 seventh;
+@property (nullable, nonatomic, readonly) E8 eighth;
 
 /// The number of objects in the tuple, including any nil values.
 @property (nonatomic, readonly) NSUInteger count;
@@ -135,6 +143,24 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)trampoline;
 - (void)setObject:(RxTuple *)tuple forKeyedSubscript:(NSArray *)variables;
 
+@end
+
+@interface RxTuple7<E1, E2, E3, E4, E5, E6, E7> : RxTuple<E1, E2, E3, E4, E5, E6, E7, id>
+@end
+
+@interface RxTuple6<E1, E2, E3, E4, E5, E6> : RxTuple7<E1, E2, E3, E4, E5, E6, id>
+@end
+
+@interface RxTuple5<E1, E2, E3, E4, E5> : RxTuple6<E1, E2, E3, E4, E5, id>
+@end
+
+@interface RxTuple4<E1, E2, E3, E4> : RxTuple5<E1, E2, E3, E4, id>
+@end
+
+@interface RxTuple3<E1, E2, E3> : RxTuple4<E1, E2, E3, id>
+@end
+
+@interface RxTuple2<E1, E2> : RxTuple3<E1, E2, id>
 @end
 
 NS_ASSUME_NONNULL_END

@@ -5,6 +5,7 @@
 
 #import "RxSink.h"
 #import "RxObserverType.h"
+#import "RxProducer.h"
 
 @interface RxSinkForwarder<__covariant O : id <RxObserverType>> : NSObject <RxObserverType>
 @end

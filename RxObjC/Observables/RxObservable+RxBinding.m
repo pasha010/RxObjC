@@ -9,6 +9,7 @@
 #import "RxPublishSubject.h"
 #import "RxReplaySubject.h"
 #import "RxRefCount.h"
+#import "RxShareReplay1.h"
 
 
 #pragma clang diagnostic push
@@ -55,9 +56,27 @@
 
 @implementation NSObject (RxShare)
 
+- (nonnull RxObservable *)share {
+    return [[self publish] refCount];
+}
 @end
 
 @implementation NSObject (RxShareReplay)
+
+- (nonnull RxObservable *)shareReplay:(NSUInteger)bufferSize {
+    if (bufferSize == 1) {
+        return [[RxShareReplay1 alloc] initWithSource:[self asObservable]];
+    }
+    return [[self replay:bufferSize] refCount];
+    /*
+     * if bufferSize == 1 {
+            return ShareReplay1(source: self.asObservable())
+        }
+        else {
+            return self.replay(bufferSize).refCount()
+        }
+     */
+}
 
 @end
 #pragma clang diagnostic pop
