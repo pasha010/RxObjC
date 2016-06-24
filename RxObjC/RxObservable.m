@@ -9,6 +9,7 @@
 #import "RxAnonymousDisposable.h"
 #import "RxNopDisposable.h"
 #import "RxBinaryDisposable.h"
+#import "RxMap.h"
 
 @implementation RxObservable
 
@@ -37,8 +38,8 @@
     return self;
 }
 
-- (nonnull RxObservable *)_composeMap:(nonnull SEL)mapSelector {
-    return nil;
+- (nonnull RxObservable *)_composeMap:(nonnull RxMapSelector)mapSelector {
+    return [[RxMap alloc] initWithSource:self selector:mapSelector];
 }
 
 

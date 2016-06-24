@@ -44,4 +44,8 @@ typedef id (^RxZipTupleResultSelector)(RxTuple *__nonnull);
 
 typedef void (^RxZipObserverValueSetter)(id);
 
+/// map
+typedef id (^RxMapSelector)(id);
+typedef id (^RxMapWithIndexSelector)(id, NSInteger);
+
 #endif /* RxObservableBlockTypedef_h */

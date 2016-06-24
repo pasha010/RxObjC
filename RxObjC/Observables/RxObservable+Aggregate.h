@@ -37,6 +37,16 @@ For aggregation behavior with incremental intermediate results, see `scan`.
 */
 - (nonnull RxObservable<id> *)reduce:(id)seed accumulator:(RxAccumulatorType)accumulator;
 
+/**
+Converts an Observable into another Observable that emits the whole sequence as a single array and then terminates.
+
+For aggregation behavior see `reduce`.
+
+- seealso: [toArray operator on reactivex.io](http://reactivex.io/documentation/operators/to.html)
+
+- returns: An observable sequence containing all the emitted elements as array.
+*/
+- (nonnull RxObservable<NSArray<id> *> *)toArray;
 
 @end
 

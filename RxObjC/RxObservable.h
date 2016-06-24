@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 #import "RxObservableType.h"
 #import "RxEvent.h"
+#import "RxObservableBlockTypedef.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,7 @@ It represents a push style sequence.
 
 - (nonnull instancetype)init;
 
-- (nonnull RxObservable *)_composeMap:(nonnull SEL)mapSelector;
+- (nonnull RxObservable *)_composeMap:(nonnull RxMapSelector)mapSelector;
 
 @end
 

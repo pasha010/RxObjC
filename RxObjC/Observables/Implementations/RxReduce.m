@@ -10,7 +10,7 @@
 @end
 
 @implementation RxReduceSink {
-    /*__weak*/ RxReduce<id> *__nonnull _parent;
+    RxReduce<id> *__nonnull _parent;
     RxAccumulateType _accumulation;
 }
 
@@ -28,10 +28,14 @@
         @try {
             _accumulation = _parent->_accumulator(_accumulation, [event element]);
         }
-        @catch (NSException *exception) {
-            NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxReduceSink + %@", exception.name]
-                                                 code:104
-                                             userInfo:exception.userInfo];
+        @catch (id e) {
+            NSError *error = e;
+            if ([e isKindOfClass:[NSException class]]) {
+                NSException *exception = e;
+                error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxReduceSink + %@", exception.name]
+                                            code:[self hash]
+                                        userInfo:exception.userInfo];
+            }
             [self forwardOn:[RxEvent error:error]];
             [self dispose];
         }
@@ -39,8 +43,8 @@
         [self forwardOn:[RxEvent error:event.error]];
         [self dispose];
     } else if (event.type == RxEventTypeCompleted) {
-        RxResultType result = _parent->_mapResult(_accumulation);
         @try {
+            RxResultType result = _parent->_mapResult(_accumulation);
             [self forwardOn:[RxEvent next:result]];
             [self forwardOn:[RxEvent completed]];
         }
@@ -49,7 +53,7 @@
             if ([e isKindOfClass:[NSException class]]) {
                 NSException *exception = e;
                 error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxReduceSink + %@", exception.name]
-                                            code:104
+                                            code:[self hash]
                                         userInfo:exception.userInfo];
             }
             [self forwardOn:[RxEvent error:error]];
