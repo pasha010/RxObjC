@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxObservable (RxZip2)
+@interface RxObservable (Zip)
 
 /**
 Merges the specified observable sequences into one observable sequence by using the selector function whenever all of the observable sequences have produced an element at a corresponding index.
@@ -28,7 +28,7 @@ Merges the specified observable sequences into one observable sequence by using 
 
 @end
 
-@interface RxObservable (RxZip3)
+@interface RxObservable (Zip3)
 
 + (nonnull RxObservable *)zip:(nonnull id <RxObservableType>)source1
                           and:(nonnull id <RxObservableType>)source2
@@ -37,7 +37,7 @@ Merges the specified observable sequences into one observable sequence by using 
 
 @end
 
-@interface RxObservable (RxZip4)
+@interface RxObservable (Zip4)
 
 + (nonnull RxObservable *)zip:(nonnull id <RxObservableType>)source1
                           and:(nonnull id <RxObservableType>)source2
@@ -47,7 +47,7 @@ Merges the specified observable sequences into one observable sequence by using 
 
 @end
 
-@interface RxObservable (RxZip5)
+@interface RxObservable (Zip5)
 
 + (nonnull RxObservable *)zip:(nonnull id <RxObservableType>)source1
                           and:(nonnull id <RxObservableType>)source2
@@ -58,7 +58,7 @@ Merges the specified observable sequences into one observable sequence by using 
 
 @end
 
-@interface RxObservable (RxZip6)
+@interface RxObservable (Zip6)
 
 + (nonnull RxObservable *)zip:(nonnull id <RxObservableType>)source1
                           and:(nonnull id <RxObservableType>)source2
@@ -70,7 +70,7 @@ Merges the specified observable sequences into one observable sequence by using 
 
 @end
 
-@interface RxObservable (RxZip7)
+@interface RxObservable (Zip7)
 
 + (nonnull RxObservable *)zip:(nonnull id <RxObservableType>)source1
                           and:(nonnull id <RxObservableType>)source2
@@ -83,7 +83,7 @@ Merges the specified observable sequences into one observable sequence by using 
 
 @end
 
-@interface RxObservable (RxZip8)
+@interface RxObservable (Zip8)
 
 + (nonnull RxObservable *)zip:(nonnull id <RxObservableType>)source1
                           and:(nonnull id <RxObservableType>)source2
@@ -97,7 +97,7 @@ Merges the specified observable sequences into one observable sequence by using 
 
 @end
 
-@interface RxObservable (RxZipArray)
+@interface RxObservable (ZipArray)
 
 + (nonnull RxObservable *)zip:(nonnull NSArray<id <RxObservableType>> *)sources
                resultSelector:(RxZipTupleResultSelector)resultSelector;

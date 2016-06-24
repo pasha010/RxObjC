@@ -3,7 +3,7 @@
 // Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "RxObservable+RxBinding.h"
+#import "RxObservable+Binding.h"
 #import "RxSubjectType.h"
 #import "RxMulticast.h"
 #import "RxPublishSubject.h"

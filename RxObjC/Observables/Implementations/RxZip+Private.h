@@ -71,20 +71,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/*@interface RxZip8Sink<O : id<RxObserverType>> : RxZipSink<O>
-@end
-
-@interface RxZip8<R> : RxProducer<R>
-// private source
-@property (nonnull, strong, readonly) id source1;
-@property (nonnull, strong, readonly) id source2;
-@property (nonnull, strong, readonly) id source3;
-@property (nonnull, strong, readonly) id source4;
-@property (nonnull, strong, readonly) id source5;
-@property (nonnull, strong, readonly) id source6;
-@property (nonnull, strong, readonly) id source7;
-@property (nonnull, strong, readonly) id source8;
-@property (copy, readonly) RxZip8ResultSelector resultSelector;
-@end*/
-
 NS_ASSUME_NONNULL_END

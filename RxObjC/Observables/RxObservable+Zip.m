@@ -6,12 +6,12 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "RxObservable+RxZip.h"
+#import "RxObservable+Zip.h"
 #import "RxSink.h"
 #import "RxZip.h"
 #import "RxZip+Private.h"
 
-@implementation RxObservable (RxZip)
+@implementation RxObservable (Zip)
 
 + (nonnull RxObservable *)zip:(nonnull id <RxObservableType>)source1
                           and:(nonnull id <RxObservableType>)source2
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation RxObservable (RxZip3)
+@implementation RxObservable (Zip3)
 + (nonnull RxObservable *)zip:(nonnull id <RxObservableType>)source1
                           and:(nonnull id <RxObservableType>)source2
                           and:(nonnull id <RxObservableType>)source3

@@ -3,7 +3,7 @@
 // Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "RxObservable+RxAggregate.h"
+#import "RxObservable+Aggregate.h"
 #import "RxReduce.h"
 #import "RxToArray.h"
 

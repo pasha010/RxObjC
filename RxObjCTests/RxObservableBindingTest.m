@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "RxObservable+RxBinding.h"
+#import "RxObservable+Binding.h"
 #import "RxTest.h"
 #import "RxTestScheduler.h"
 #import "XCTest+Rx.h"
@@ -16,10 +16,12 @@
 #import "RxTestableObserver.h"
 #import "RxSubscription.h"
 #import "RxTestError.h"
-#import "RxObservable+RxZip.h"
+#import "RxObservable+Zip.h"
 #import "RxObservable+Creation.h"
 #import "RxObservable+Multiple.h"
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCDFAInspection"
 @interface RxObservableBindingTest : RxTest
 
 @end
@@ -1102,3 +1104,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop
