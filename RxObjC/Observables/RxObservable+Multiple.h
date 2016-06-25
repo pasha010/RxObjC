@@ -48,6 +48,10 @@ Optimizations will be performed in cases equivalent to following:
 - (nonnull RxObservable *)concat;
 @end
 
+@interface NSEnumerator (RxConcat)
+- (nonnull RxObservable *)concat;
+@end
+
 @interface NSObject (RxConcat) <RxObservableType>
 /**
 Concatenates all inner observable sequences, as long as the previous observable sequence terminated successfully.

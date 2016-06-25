@@ -15,11 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RxSequence<Element> : RxProducer<Element> {
 @package
-    NSArray<id> *__nonnull _elements;
+    NSEnumerator<id> *__nonnull _elements;
     id <RxImmediateSchedulerType> __nullable _scheduler;
 }
 
-- (nonnull instancetype)initWithElements:(nonnull NSArray<Element> *)elements
+- (nonnull instancetype)initWithElements:(nonnull NSEnumerator<Element> *)elements
                                scheduler:(nullable id <RxImmediateSchedulerType>)scheduler;
 @end
 

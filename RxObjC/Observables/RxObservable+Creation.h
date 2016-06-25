@@ -128,12 +128,12 @@ to run the loop send out observer messages.
 - parameter scheduler: Scheduler on which to run the generator loop.
 - returns: The generated sequence.
 */
-+ (nonnull RxObservable *)generate:(id)initialState
++ (nonnull RxObservable *)generate:(nonnull id)initialState
                          condition:(BOOL(^)(id))condition
                          scheduler:(id <RxImmediateSchedulerType>)scheduler
                            iterate:(id(^)(id))iterate;
 
-+ (nonnull RxObservable *)generate:(id)initialState
++ (nonnull RxObservable *)generate:(nonnull id)initialState
                          condition:(BOOL(^)(id))condition
                            iterate:(id(^)(id))iterate;
 
@@ -146,10 +146,10 @@ Generates an observable sequence that repeats the given element infinitely, usin
 - parameter scheduler: Scheduler to run the producer loop on.
 - returns: An observable sequence that repeats the given element infinitely.
 */
-+ (nonnull RxObservable *)repeatElement:(id)initialState
-                              scheduler:(id <RxImmediateSchedulerType>)scheduler;
++ (nonnull RxObservable *)repeatElement:(nonnull id)element
+                              scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
-+ (nonnull RxObservable *)repeatElement:(id)initialState;
++ (nonnull RxObservable *)repeatElement:(nonnull id)element;
 
 /**
 Constructs an observable sequence that depends on a resource object, whose lifetime is tied to the resulting observable sequence's lifetime.
@@ -161,8 +161,51 @@ Constructs an observable sequence that depends on a resource object, whose lifet
 - returns: An observable sequence whose lifetime controls the lifetime of the dependent resource object.
 */
 + (nonnull RxObservable *)using:(id <RxDisposable>(^)())resourceFactory
-              observableFactory:(RxObservable *(^)(id <RxImmediateSchedulerType>))observableFactory;
+              observableFactory:(RxObservable *(^)(id <RxDisposable>))observableFactory;
 
+@end
+
+@interface RxObservable (Range)
+/**
+Generates an observable sequence of integral numbers within a specified range, using the specified scheduler to generate and send out observer messages.
+
+- seealso: [range operator on reactivex.io](http://reactivex.io/documentation/operators/range.html)
+
+- parameter start: The value of the first integer in the sequence.
+- parameter count: The number of sequential integers to generate.
+- parameter scheduler: Scheduler to run the generator loop on.
+- returns: An observable sequence that contains a range of sequential integral numbers.
+*/
++ (nonnull RxObservable *)range:(nonnull NSNumber *)start
+                          count:(NSUInteger)count
+                      scheduler:(nonnull id<RxImmediateSchedulerType>)scheduler;
+
++ (nonnull RxObservable *)range:(nonnull NSNumber *)start
+                          count:(NSUInteger)count;
+
+@end
+
+@interface NSArray (RxToObservable)
+/**
+Converts a sequence to an observable sequence.
+
+- seealso: [from operator on reactivex.io](http://reactivex.io/documentation/operators/from.html)
+
+- returns: The observable sequence whose elements are pulled from the given enumerable sequence.
+*/
+- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
+- (nonnull RxObservable *)toObservable;
+
+@end
+
+@interface NSSet (RxToObservable)
+- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
+- (nonnull RxObservable *)toObservable;
+@end
+
+@interface NSEnumerator (RxToObservable)
+- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
+- (nonnull RxObservable *)toObservable;
 @end
 
 NS_ASSUME_NONNULL_END

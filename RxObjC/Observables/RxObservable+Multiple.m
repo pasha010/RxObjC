@@ -23,7 +23,7 @@
 @implementation NSArray (RxConcat)
 
 - (nonnull RxObservable *)concat {
-    return [[RxConcat alloc] initWithSources:[self objectEnumerator]];
+    return [[self objectEnumerator] concat];
 }
 
 @end
@@ -31,7 +31,15 @@
 @implementation NSSet (RxConcat)
 
 - (nonnull RxObservable *)concat {
-    return [[RxConcat alloc] initWithSources:[self objectEnumerator]];
+    return [[self objectEnumerator] concat];
+}
+
+@end
+
+@implementation NSEnumerator (RxConcat)
+
+- (nonnull RxObservable *)concat {
+    return [[RxConcat alloc] initWithSources:self];
 }
 
 @end

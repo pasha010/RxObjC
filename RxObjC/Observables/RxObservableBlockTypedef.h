@@ -20,7 +20,7 @@
 /// reduce
 typedef id RxAccumulateType;
 typedef id RxSourceType;
-typedef RxAccumulateType (^RxAccumulatorType)(RxAccumulateType , RxSourceType);
+typedef RxAccumulateType (^RxAccumulatorType)(RxAccumulateType __nonnull, RxSourceType __nonnull);
 
 typedef id RxResultType;
 typedef RxResultType(^ResultSelectorType)(RxAccumulateType);
@@ -49,6 +49,10 @@ typedef id (^RxMapSelector)(id);
 typedef id (^RxMapWithIndexSelector)(id, NSInteger);
 
 /// defer
-typedef RxObservable *(^RxObservableFactory)(void);
+typedef RxObservable *(^RxObservableFactory)();
+
+/// using
+typedef id <RxDisposable> (^RxUsingResourceFactory)();
+typedef RxObservable *(^RxUsingObservableFactory)(id <RxDisposable> __nonnull);
 
 #endif /* RxObservableBlockTypedef_h */

@@ -28,7 +28,7 @@
 
 - (nonnull id<RxDisposable>)run {
     NSObject <RxImmediateSchedulerType> *scheduler = _parent->_scheduler;
-    return [scheduler scheduleRecursive:@[@0, _parent->_elements] action:^(NSArray *state, void (^recurse)(id)) {
+    return [scheduler scheduleRecursive:@[@0, _parent->_elements.allObjects] action:^(NSArray *state, void (^recurse)(id)) {
         NSNumber *number = state[0];
         NSArray *array = (NSArray *) state[1];
         NSUInteger index = number.unsignedIntegerValue;
@@ -45,7 +45,7 @@
 
 @implementation RxSequence
 
-- (nonnull instancetype)initWithElements:(nonnull NSArray<id> *)elements 
+- (nonnull instancetype)initWithElements:(nonnull NSEnumerator<id> *)elements
                                scheduler:(nullable id <RxImmediateSchedulerType>)scheduler {
     self = [super init];
     if (self) {

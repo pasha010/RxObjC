@@ -13,7 +13,7 @@
 
 @class RxAnyRecursiveScheduler;
 
-typedef void (^RxRecursiveImmediateAction)(id, void(^)(id));
+typedef void (^RxRecursiveImmediateAction)(id, void(^recurse)(id));
 
 typedef void (^RxAnyRecursiveSchedulerAction)(id state, RxAnyRecursiveScheduler *scheduler);
 

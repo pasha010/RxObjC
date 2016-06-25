@@ -16,6 +16,11 @@
 #import "RxJust.h"
 #import "RxNever.h"
 #import "RxDeferred.h"
+#import "RxCurrentThreadScheduler.h"
+#import "RxGenerate.h"
+#import "RxRepeatElement.h"
+#import "RxUsing.h"
+#import "RxRange.h"
 
 
 @implementation RxObservable (Create)
@@ -69,7 +74,7 @@
 }
 
 + (nonnull RxObservable *)of:(nonnull NSArray *)elements scheduler:(nullable id <RxImmediateSchedulerType>)scheduler {
-    return [[RxSequence alloc] initWithElements:elements scheduler:scheduler];
+    return [[RxSequence alloc] initWithElements:[elements objectEnumerator] scheduler:scheduler];
 }
 
 @end
@@ -78,6 +83,87 @@
 
 + (nonnull RxObservable *)deferred:(RxObservableFactory)observableFactory {
     return [[RxDeferred alloc] initWithObservableFactory:observableFactory];
+}
+
++ (nonnull RxObservable *)generate:(nonnull id)initialState
+                         condition:(BOOL(^)(id))condition
+                         scheduler:(id <RxImmediateSchedulerType>)scheduler
+                           iterate:(id(^)(id))iterate {
+    return [[RxGenerate alloc] initWithInitialState:initialState
+                                          condition:condition
+                                            iterate:iterate
+                                     resultSelector:^id(id o) {return o;}
+                                          scheduler:scheduler];
+}
+
++ (nonnull RxObservable *)generate:(nonnull id)initialState
+                         condition:(BOOL(^)(id))condition
+                           iterate:(id(^)(id))iterate {
+    return [self generate:initialState condition:condition scheduler:[RxCurrentThreadScheduler sharedInstance] iterate:iterate];
+}
+
++ (nonnull RxObservable *)repeatElement:(nonnull id)element
+                              scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
+    return [[RxRepeatElement alloc] initWithElement:element scheduler:scheduler];
+}
+
++ (nonnull RxObservable *)repeatElement:(nonnull id)element {
+    return [self repeatElement:element scheduler:[RxCurrentThreadScheduler sharedInstance]];
+}
+
++ (nonnull RxObservable *)using:(id <RxDisposable>(^)())resourceFactory
+              observableFactory:(RxObservable *(^)(id <RxDisposable>))observableFactory {
+    return [[RxUsing alloc] initWithResourceFactory:resourceFactory observableFactory:observableFactory];
+}
+
+@end
+
+@implementation RxObservable (Range)
+
++ (nonnull RxObservable *)range:(nonnull NSNumber *)start
+                          count:(NSUInteger)count
+                      scheduler:(nonnull id<RxImmediateSchedulerType>)scheduler {
+    return [[RxRangeProducer alloc] initWithStart:start count:count scheduler:scheduler];
+}
+
++ (nonnull RxObservable *)range:(nonnull NSNumber *)start
+                          count:(NSUInteger)count {
+    return [self range:start count:count scheduler:[RxCurrentThreadScheduler sharedInstance]];
+}
+@end
+
+@implementation NSArray (RxToObservable)
+
+- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler {
+    return [[self objectEnumerator] toObservable:scheduler];
+}
+
+- (nonnull RxObservable *)toObservable {
+    return [self toObservable:nil];
+}
+
+@end
+
+@implementation NSSet (RxToObservable)
+
+- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler {
+    return [[self objectEnumerator] toObservable:scheduler];
+}
+
+- (nonnull RxObservable *)toObservable {
+    return [self toObservable:nil];
+}
+
+@end
+
+@implementation NSEnumerator (RxToObservable)
+
+- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler {
+    return [[RxSequence alloc] initWithElements:self scheduler:scheduler];
+}
+
+- (nonnull RxObservable *)toObservable {
+    return [self toObservable:nil];
 }
 
 @end
