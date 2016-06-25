@@ -14,6 +14,8 @@
 #import "RxSequence.h"
 #import "RxEmpty.h"
 #import "RxJust.h"
+#import "RxNever.h"
+#import "RxDeferred.h"
 
 
 @implementation RxObservable (Create)
@@ -35,8 +37,7 @@
 @implementation RxObservable (Never)
 
 + (nonnull RxObservable *)never {
-    // TODO implement never
-    return nil;
+    return [[RxNever alloc] init];
 }
 
 @end
@@ -48,8 +49,7 @@
 }
 
 + (nonnull RxObservable *)just:(nonnull id)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
-    // TODO implement JustScheduled
-    return nil;
+    return [[RxJustScheduled alloc] initWithElement:element scheduler:scheduler];
 }
 
 @end
@@ -70,6 +70,14 @@
 
 + (nonnull RxObservable *)of:(nonnull NSArray *)elements scheduler:(nullable id <RxImmediateSchedulerType>)scheduler {
     return [[RxSequence alloc] initWithElements:elements scheduler:scheduler];
+}
+
+@end
+
+@implementation RxObservable (Defer)
+
++ (nonnull RxObservable *)deferred:(RxObservableFactory)observableFactory {
+    return [[RxDeferred alloc] initWithObservableFactory:observableFactory];
 }
 
 @end

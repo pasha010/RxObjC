@@ -102,6 +102,67 @@ This method creates a new Observable instance with a variable number of elements
 + (nonnull RxObservable *)of:(nonnull NSArray *)elements;
 
 + (nonnull RxObservable *)of:(nonnull NSArray *)elements scheduler:(nullable id <RxImmediateSchedulerType>)scheduler;
+
+@end
+
+@interface RxObservable (Defer)
+/**
+Returns an observable sequence that invokes the specified factory function whenever a new observer subscribes.
+
+- seealso: [defer operator on reactivex.io](http://reactivex.io/documentation/operators/defer.html)
+
+- parameter observableFactory: Observable factory function to invoke for each observer that subscribes to the resulting sequence.
+- returns: An observable sequence whose observers trigger an invocation of the given observable factory function.
+*/
++ (nonnull RxObservable *)deferred:(RxObservableFactory)observableFactory;
+
+/**
+Generates an observable sequence by running a state-driven loop producing the sequence's elements, using the specified scheduler
+to run the loop send out observer messages.
+
+- seealso: [create operator on reactivex.io](http://reactivex.io/documentation/operators/create.html)
+
+- parameter initialState: Initial state.
+- parameter condition: Condition to terminate generation (upon returning `false`).
+- parameter iterate: Iteration step function.
+- parameter scheduler: Scheduler on which to run the generator loop.
+- returns: The generated sequence.
+*/
++ (nonnull RxObservable *)generate:(id)initialState
+                         condition:(BOOL(^)(id))condition
+                         scheduler:(id <RxImmediateSchedulerType>)scheduler
+                           iterate:(id(^)(id))iterate;
+
++ (nonnull RxObservable *)generate:(id)initialState
+                         condition:(BOOL(^)(id))condition
+                           iterate:(id(^)(id))iterate;
+
+/**
+Generates an observable sequence that repeats the given element infinitely, using the specified scheduler to send out observer messages.
+
+- seealso: [repeat operator on reactivex.io](http://reactivex.io/documentation/operators/repeat.html)
+
+- parameter element: Element to repeat.
+- parameter scheduler: Scheduler to run the producer loop on.
+- returns: An observable sequence that repeats the given element infinitely.
+*/
++ (nonnull RxObservable *)repeatElement:(id)initialState
+                              scheduler:(id <RxImmediateSchedulerType>)scheduler;
+
++ (nonnull RxObservable *)repeatElement:(id)initialState;
+
+/**
+Constructs an observable sequence that depends on a resource object, whose lifetime is tied to the resulting observable sequence's lifetime.
+
+- seealso: [using operator on reactivex.io](http://reactivex.io/documentation/operators/using.html)
+
+- parameter resourceFactory: Factory function to obtain a resource object.
+- parameter observableFactory: Factory function to obtain an observable sequence that depends on the obtained resource.
+- returns: An observable sequence whose lifetime controls the lifetime of the dependent resource object.
+*/
++ (nonnull RxObservable *)using:(id <RxDisposable>(^)())resourceFactory
+              observableFactory:(RxObservable *(^)(id <RxImmediateSchedulerType>))observableFactory;
+
 @end
 
 NS_ASSUME_NONNULL_END

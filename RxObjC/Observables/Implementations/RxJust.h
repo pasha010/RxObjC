@@ -9,7 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
 
+@protocol RxImmediateSchedulerType;
+
 NS_ASSUME_NONNULL_BEGIN
+
+@interface RxJustScheduled<Element> : RxProducer<Element> {
+@package
+    id __nonnull _element;
+    id <RxImmediateSchedulerType> __nonnull _scheduler;
+}
+- (instancetype)initWithElement:(nonnull Element)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
+
+@end
 
 @interface RxJust<Element> : RxProducer<Element>
 

@@ -48,4 +48,7 @@ typedef void (^RxZipObserverValueSetter)(id);
 typedef id (^RxMapSelector)(id);
 typedef id (^RxMapWithIndexSelector)(id, NSInteger);
 
+/// defer
+typedef RxObservable *(^RxObservableFactory)(void);
+
 #endif /* RxObservableBlockTypedef_h */

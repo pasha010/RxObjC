@@ -10,6 +10,8 @@
 #import "RxReplaySubject.h"
 #import "RxRefCount.h"
 #import "RxShareReplay1.h"
+#import "RxAnyObserver.h"
+#import "RxShareReplay1WhileConnected.h"
 
 
 #pragma clang diagnostic push
@@ -68,14 +70,10 @@
         return [[RxShareReplay1 alloc] initWithSource:[self asObservable]];
     }
     return [[self replay:bufferSize] refCount];
-    /*
-     * if bufferSize == 1 {
-            return ShareReplay1(source: self.asObservable())
-        }
-        else {
-            return self.replay(bufferSize).refCount()
-        }
-     */
+}
+
+- (nonnull RxObservable *)shareReplayLatestWhileConnected {
+    return [[RxShareReplay1WhileConnected alloc] initWithSource:[self asObservable]];
 }
 
 @end

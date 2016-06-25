@@ -1,45 +1,41 @@
 //
-//  RxShareReplay1
+//  RxShareReplay1WhileConnected
 //  RxObjC
 // 
 //  Created by Pavel Malkov on 24.06.16.
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "RxShareReplay1.h"
+#import "RxShareReplay1WhileConnected.h"
 #import "RxSingleAssignmentDisposable.h"
 #import "RxBag.h"
 #import "RxAnyObserver.h"
 #import "RxLock.h"
 #import "RxSynchronizedSubscribeType.h"
-#import "RxNopDisposable.h"
 #import "RxSubscriptionDisposable.h"
 
 
-@implementation RxShareReplay1 {
+@implementation RxShareReplay1WhileConnected {
     RxObservable *__nonnull _source;
     NSRecursiveLock *__nonnull _lock;
+    RxBag<RxAnyObserver *> *__nonnull _observers;
     RxSingleAssignmentDisposable *__nullable _connection;
     id __nullable _element;
-    BOOL _stopped;
-    RxEvent *__nullable _stopEvent;
-    RxBag<RxAnyObserver *> *__nonnull _observers;
 }
 
-- (nonnull instancetype)initWithSource:(nonnull RxObservable *)observable {
+- (nonnull instancetype)initWithSource:(nonnull RxObservable *)source {
     self = [super init];
     if (self) {
         _lock = [[NSRecursiveLock alloc] init];
-        _stopped = NO;
         _observers = [[RxBag alloc] init];
-        _stopEvent = nil;
-        _source = observable;
+        _source = source;
     }
+
     return self;
 }
 
 - (nonnull id <RxDisposable>)subscribe:(nonnull id <RxObserverType>)observer {
-    return [_lock calculateLocked:^id <RxDisposable> {
+    return [_lock calculateLocked:^id {
         return [self _synchronized_subscribe:observer];
     }];
 }
@@ -47,11 +43,6 @@
 - (nonnull id <RxDisposable>)_synchronized_subscribe:(nonnull id <RxObserverType>)observer {
     if (_element) {
         [observer on:[RxEvent next:_element]];
-    }
-    
-    if (_stopEvent) {
-        [observer on:_stopEvent];
-        return [RxNopDisposable sharedInstance];
     }
 
     NSUInteger initialCount = _observers.count;
@@ -61,10 +52,8 @@
     if (initialCount == 0) {
         RxSingleAssignmentDisposable *connection = [[RxSingleAssignmentDisposable alloc] init];
         _connection = connection;
-
         connection.disposable = [_source subscribe:self];
     }
-
     return [[RxSubscriptionDisposable alloc] initWithOwner:self andKey:disposeKey];
 }
 
@@ -75,14 +64,15 @@
 }
 
 - (void)_synchronized_unsubscribe:(nonnull RxBagKey *)disposeKey {
-    /// if already unsubscribed, just return
+    // if already unsubscribed, just return
     if ([_observers removeKey:disposeKey] == nil) {
         return;
     }
-
+    
     if (_observers.count == 0) {
         [_connection dispose];
         _connection = nil;
+        _element = nil;
     }
 }
 
@@ -93,19 +83,18 @@
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {
-    if (_stopped) {
-        return;
-    }
-
     if (event.type == RxEventTypeNext) {
         _element = event.element;
+        [_observers on:event];
     } else {
-        _stopEvent = event;
-        _stopped = YES;
+        _element = nil;
         [_connection dispose];
         _connection = nil;
+        RxBag<RxAnyObserver *> *observers = _observers;
+        _observers = [[RxBag alloc] init];
+        [observers on:event];
     }
-    [_observers on:event];
 }
+
 
 @end
