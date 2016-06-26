@@ -16,7 +16,7 @@
 
 @implementation NSObject (RxObservableTypeExtension)
 
-- (nonnull id <RxDisposable>)subscribeOn:(nonnull void (^)(RxEvent<id> *__nonnull ))on {
+- (nonnull id <RxDisposable>)subscribeWith:(nonnull void (^)(RxEvent<id> *__nonnull ))on {
     id <RxObserverType> observer = [[RxAnonymousObserver alloc] initWithEventHandler:^(RxEvent<id> *__nonnull e) {
         on(e);
     }];

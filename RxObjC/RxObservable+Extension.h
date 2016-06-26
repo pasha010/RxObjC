@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - parameter on: Action to invoke for each event in the observable sequence.
 - returns: Subscription object used to unsubscribe from the observable sequence.
 */
-- (nonnull id <RxDisposable>)subscribeOn:(nonnull void(^)(RxEvent<id> *__nonnull))on;
+- (nonnull id <RxDisposable>)subscribeWith:(nonnull void(^)(RxEvent<id> *__nonnull))on;
 
 /**
 Subscribes an element handler, an error handler, a completion handler and disposed handler to an observable sequence.

@@ -251,7 +251,7 @@
     RxObservable<NSNumber *> *xs = [RxObservable error:[RxTestError testError]];
 
     RxObservable *res = [[xs publish] refCount];
-    [res subscribeOn:^(RxEvent *event) {
+    [res subscribeWith:^(RxEvent *event) {
         switch (event.type) {
             case RxEventTypeNext:
                 XCTAssertTrue(NO);
@@ -264,7 +264,7 @@
                 break;
         }
     }];
-    [res subscribeOn:^(RxEvent *event) {
+    [res subscribeWith:^(RxEvent *event) {
         switch (event.type) {
             case RxEventTypeNext:
                 XCTAssertTrue(NO);
