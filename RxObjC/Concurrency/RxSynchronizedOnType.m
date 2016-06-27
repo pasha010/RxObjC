@@ -9,7 +9,7 @@
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 @implementation NSObject (RxSynchronizedOnType)
 
-- (void)synchronizedOn:(RxEvent *)event {
+- (void)synchronizedOn:(nonnull RxEvent *)event {
     [self _lock];
     [self _synchronized_on:event];
     [self _unlock];

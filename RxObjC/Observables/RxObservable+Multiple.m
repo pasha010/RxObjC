@@ -8,6 +8,7 @@
 
 #import "RxObservable+Multiple.h"
 #import "RxConcat.h"
+#import "RxMerge.h"
 
 
 #pragma clang diagnostic push
@@ -47,8 +48,22 @@
 @implementation NSObject (RxConcat)
 
 + (nonnull RxObservable *)concat {
-    return nil; // return [self mergeWithMaxConcurrent:1];
+    return [self merge:1];
 }
 
 @end
+
+@implementation NSObject (RxMerge)
+
+- (nonnull RxObservable *)merge {
+    return [[RxMerge alloc] initWithSource:[self asObservable]];
+}
+
+- (nonnull RxObservable *)merge:(NSUInteger)maxConcurrent {
+    return [[RxMergeLimited alloc] initWithSource:[self asObservable] maxConcurrent:maxConcurrent];
+}
+
+
+@end
+
 #pragma clang diagnostic pop

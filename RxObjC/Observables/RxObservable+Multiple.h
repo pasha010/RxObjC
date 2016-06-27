@@ -64,4 +64,26 @@ Concatenates all inner observable sequences, as long as the previous observable 
 
 @end
 
+@interface NSObject (RxMerge) <RxObservableType>
+
+/**
+Merges elements from all observable sequences in the given enumerable sequence into a single observable sequence.
+
+- seealso: [merge operator on reactivex.io](http://reactivex.io/documentation/operators/merge.html)
+
+- returns: The observable sequence that merges the elements of the observable sequences.
+*/
+- (nonnull RxObservable *)merge;
+
+/**
+Merges elements from all inner observable sequences into a single observable sequence, limiting the number of concurrent subscriptions to inner sequences.
+
+- seealso: [merge operator on reactivex.io](http://reactivex.io/documentation/operators/merge.html)
+
+- parameter maxConcurrent: Maximum number of inner observable sequences being subscribed to concurrently.
+- returns: The observable sequence that merges the elements of the inner sequences.
+*/
+- (nonnull RxObservable *)merge:(NSUInteger)maxConcurrent;
+@end
+
 NS_ASSUME_NONNULL_END

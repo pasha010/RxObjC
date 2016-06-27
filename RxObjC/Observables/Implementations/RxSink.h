@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+void rx_tryCatch(id self, void (^tryBlock)(), void (^catchBlock)(NSError *));
+
 @interface RxSink<__covariant O : id <RxObserverType>> : RxSingleAssignmentDisposable {
 @package
     id <RxObserverType> __nonnull _observer;
