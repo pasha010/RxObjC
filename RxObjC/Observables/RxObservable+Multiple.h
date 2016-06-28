@@ -86,4 +86,74 @@ Merges elements from all inner observable sequences into a single observable seq
 - (nonnull RxObservable *)merge:(NSUInteger)maxConcurrent;
 @end
 
+@interface NSObject (RxCatch) <RxObservableType>
+/**
+Continues an observable sequence that is terminated by an error with the observable sequence produced by the handler.
+
+- seealso: [catch operator on reactivex.io](http://reactivex.io/documentation/operators/catch.html)
+
+- parameter handler: Error handler function, producing another observable sequence.
+- returns: An observable sequence containing the source sequence's elements, followed by the elements produced by the handler's resulting observable sequence in case an error occurred.
+*/
+- (nonnull RxObservable *)catchError:(RxObservable *(^)(NSError *))handler;
+
+/**
+Continues an observable sequence that is terminated by an error with a single element.
+
+- seealso: [catch operator on reactivex.io](http://reactivex.io/documentation/operators/catch.html)
+
+- parameter element: Last element in an observable sequence in case error occurs.
+- returns: An observable sequence containing the source sequence's elements, followed by the `element` in case an error occurred.
+*/
+- (nonnull RxObservable *)catchErrorJustReturn:(nonnull id)element;
+
+@end
+
+@interface NSArray (RxCatch)
+/**
+Continues an observable sequence that is terminated by an error with the next observable sequence.
+
+- seealso: [catch operator on reactivex.io](http://reactivex.io/documentation/operators/catch.html)
+
+- returns: An observable sequence containing elements from consecutive source sequences until a source sequence terminates successfully.
+*/
+- (nonnull RxObservable *)catchError;
+
+@end
+
+@interface NSSet (RxCatch)
+- (nonnull RxObservable *)catchError;
+@end
+
+@interface NSEnumerator (RxCatch)
+- (nonnull RxObservable *)catchError;
+@end
+
+@interface NSObject (RxTakeUntil) <RxObservableType>
+/**
+Returns the elements from the source observable sequence until the other observable sequence produces an element.
+
+- seealso: [takeUntil operator on reactivex.io](http://reactivex.io/documentation/operators/takeuntil.html)
+
+- parameter other: Observable sequence that terminates propagation of elements of the source sequence.
+- returns: An observable sequence containing the elements of the source sequence up to the point the other sequence interrupted further propagation.
+*/
+- (nonnull RxObservable *)takeUntil:(nonnull id <RxObservableType>)other;
+
+@end
+
+@interface NSObject (RxSkipUntil) <RxObservableType>
+/**
+Returns the elements from the source observable sequence that are emitted after the other observable sequence produces an element.
+
+- seealso: [skipUntil operator on reactivex.io](http://reactivex.io/documentation/operators/skipuntil.html)
+
+- parameter other: Observable sequence that starts propagation of elements of the source sequence.
+- returns: An observable sequence containing the elements of the source sequence that are emitted after the other sequence emits an item.
+*/
+- (nonnull RxObservable *)skipUntil:(nonnull id <RxObservableType>)other;
+
+@end
+
+
 NS_ASSUME_NONNULL_END

@@ -55,4 +55,7 @@ typedef RxObservable *__nonnull (^RxObservableFactory)();
 typedef id <RxDisposable> __nonnull (^RxUsingResourceFactory)();
 typedef RxObservable *__nonnull (^RxUsingObservableFactory)(id <RxDisposable> __nonnull);
 
+/// catch
+typedef RxObservable *__nonnull (^RxCatchHandler)(NSError *__nonnull error);
+
 #endif /* RxObservableBlockTypedef_h */
