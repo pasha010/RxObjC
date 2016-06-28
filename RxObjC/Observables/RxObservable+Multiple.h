@@ -155,5 +155,55 @@ Returns the elements from the source observable sequence that are emitted after 
 
 @end
 
+@interface NSObject (RxAmb) <RxObservableType>
+/**
+Propagates the observable sequence that reacts first.
+
+- seealso: [amb operator on reactivex.io](http://reactivex.io/documentation/operators/amb.html)
+
+- parameter right: Second observable sequence.
+- returns: An observable sequence that surfaces either of the given sequences, whichever reacted first.
+*/
+- (nonnull RxObservable *)amb:(nonnull id <RxObservableType>)right;
+
+@end
+
+@interface NSArray (RxAmb)
+/**
+Propagates the observable sequence that reacts first.
+
+- seealso: [amb operator on reactivex.io](http://reactivex.io/documentation/operators/amb.html)
+
+- returns: An observable sequence that surfaces any of the given sequences, whichever reacted first.
+*/
+- (nonnull RxObservable *)amb;
+
+@end
+
+@interface NSSet (RxAmb)
+- (nonnull RxObservable *)amb;
+@end
+
+@interface NSEnumerator (RxAmb)
+- (nonnull RxObservable *)amb;
+@end
+
+@interface NSObject (RxWithLatestFrom) <RxObservableType>
+/**
+Merges two observable sequences into one observable sequence by combining each element from self with the latest element from the second source, if any.
+
+- seealso: [combineLatest operator on reactivex.io](http://reactivex.io/documentation/operators/combinelatest.html)
+
+- parameter second: Second observable source.
+- parameter resultSelector: Function to invoke for each element from the self combined with the latest element from the second source, if any.
+- returns: An observable sequence containing the result of combining each element of the self  with the latest element from the second source, if any, using the specified result selector function.
+*/
+- (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second
+                          resultSelector:(id __nonnull(^)(id __nonnull, id __nonnull))resultSelector;
+
+- (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

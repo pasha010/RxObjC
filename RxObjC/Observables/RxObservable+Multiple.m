@@ -13,6 +13,9 @@
 #import "RxCatch.h"
 #import "RxTakeUntil.h"
 #import "RxSkipUntil.h"
+#import "RxAmb.h"
+#import "RxObservable+Aggregate.h"
+#import "RxWithLatestFrom.h"
 
 
 #pragma clang diagnostic push
@@ -120,6 +123,66 @@
 
 - (nonnull RxObservable *)skipUntil:(nonnull id <RxObservableType>)other {
     return [[RxSkipUntil alloc] initWithSource:[self asObservable] other:[other asObservable]];
+}
+
+@end
+
+@implementation NSObject (RxAmb)
+
+- (nonnull RxObservable *)amb:(nonnull id <RxObservableType>)right {
+    return [[RxAmb alloc] initWithLeft:[self asObservable] right:[right asObservable]];
+}
+
+@end
+
+@implementation NSArray (RxAmb)
+
+- (nonnull RxObservable *)amb {
+    return [self.objectEnumerator amb];
+}
+
+@end
+
+@implementation NSSet (RxAmb)
+
+- (nonnull RxObservable *)amb {
+    return [self.objectEnumerator amb];
+}
+
+@end
+
+@implementation NSEnumerator (RxAmb)
+
+- (nonnull id)reduce:(nonnull id)start combine:(id(^)(id __nonnull initial, id __nonnull element))combine {
+    id res = start;
+    for (id o in self) {
+        res = combine(res, o);
+    }
+    return res;
+}
+
+- (nonnull RxObservable *)amb {
+    return [self reduce:[RxObservable never] combine:^RxObservable *(RxObservable *initial, RxObservable *element) {
+        return [initial amb:[element asObservable]];
+    }];
+}
+
+@end
+
+@implementation NSObject (RxWithLatestFrom)
+
+- (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second
+                          resultSelector:(id __nonnull(^)(id __nonnull, id __nonnull))resultSelector {
+
+    return [[RxWithLatestFrom alloc] initWithFirst:[self asObservable]
+                                            second:[second asObservable]
+                                    resultSelector:resultSelector];
+}
+
+- (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second {
+    return [self withLatestFrom:second resultSelector:^id(id o0, id o1) {
+        return o1;
+    }];
 }
 
 @end

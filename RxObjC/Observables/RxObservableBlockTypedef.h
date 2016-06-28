@@ -58,4 +58,7 @@ typedef RxObservable *__nonnull (^RxUsingObservableFactory)(id <RxDisposable> __
 /// catch
 typedef RxObservable *__nonnull (^RxCatchHandler)(NSError *__nonnull error);
 
+/// withLatestFrom
+typedef id __nonnull (^RxWithLatestFromResultSelector)(id __nonnull first, id __nonnull second);
+
 #endif /* RxObservableBlockTypedef_h */
