@@ -11,6 +11,11 @@
 #import "RxMap.h"
 #import "RxFilter.h"
 #import "RxTakeWhile.h"
+#import "RxObservable+Creation.h"
+#import "RxTake.h"
+#import "RxTakeLast.h"
+#import "RxSkip.h"
+#import "RxSkipWhile.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
@@ -31,6 +36,45 @@
 
 - (nonnull RxObservable *)takeWhileWithIndex:(nonnull BOOL (^)(id, NSUInteger))predicate {
     return [[RxTakeWhile alloc] initWithSource:[self asObservable] indexPredicate:predicate];
+}
+
+@end
+
+@implementation NSObject (RxTake)
+
+- (nonnull RxObservable *)take:(NSUInteger)count {
+    if (count == 0) {
+        return [RxObservable empty];
+    }
+    return [[RxTakeCount alloc] initWithSource:[self asObservable] count:count];
+}
+
+@end
+
+@implementation NSObject (RxTakeLast)
+
+- (nonnull RxObservable *)takeLast:(NSUInteger)count {
+    return [[RxTakeLast alloc] initWithSource:[self asObservable] count:count];
+}
+
+@end
+
+@implementation NSObject (RxSkip)
+
+- (nonnull RxObservable *)skip:(NSInteger)count {
+    return [[RxSkipCount alloc] initWithSource:[self asObservable] count:count];
+}
+
+@end
+
+@implementation NSObject (RxSkipWhile)
+
+- (nonnull RxObservable *)skipWhile:(nonnull BOOL(^)(id __nonnull))predicate {
+    return [[RxSkipWhile alloc] initWithSource:[self asObservable] predicate:predicate];
+}
+
+- (nonnull RxObservable *)skipWhileWithIndex:(nonnull BOOL(^)(id __nonnull, NSUInteger))predicate {
+    return [[RxSkipWhile alloc] initWithSource:[self asObservable] indexPredicate:predicate];
 }
 
 @end

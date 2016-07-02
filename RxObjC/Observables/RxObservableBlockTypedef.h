@@ -79,4 +79,8 @@ typedef BOOL (^RxFilterPredicate)(id __nonnull element);
 typedef BOOL (^RxTakeWhilePredicate)(id __nonnull element);
 typedef BOOL (^RxTakeWhileWithIndexPredicate)(id __nonnull element, NSUInteger index);
 
+/// skip while
+typedef BOOL (^RxSkipWhilePredicate)(id __nonnull element);
+typedef BOOL (^RxSkipWhileWithIndexPredicate)(id __nonnull element, NSUInteger index);
+
 #endif /* RxObservableBlockTypedef_h */
