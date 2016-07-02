@@ -75,4 +75,8 @@ typedef id __nonnull(^RxScanAccumulator)(id __nonnull accumulate, id __nonnull e
 /// filter
 typedef BOOL (^RxFilterPredicate)(id __nonnull element);
 
+/// take while
+typedef BOOL (^RxTakeWhilePredicate)(id __nonnull element);
+typedef BOOL (^RxTakeWhileWithIndexPredicate)(id __nonnull element, NSUInteger index);
+
 #endif /* RxObservableBlockTypedef_h */
