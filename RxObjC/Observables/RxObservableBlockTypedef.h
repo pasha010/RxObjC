@@ -72,4 +72,7 @@ typedef void (^RxDoOnEventHandler)(RxEvent *__nonnull event);
 /// scan
 typedef id __nonnull(^RxScanAccumulator)(id __nonnull accumulate, id __nonnull element);
 
+/// filter
+typedef BOOL (^RxFilterPredicate)(id __nonnull element);
+
 #endif /* RxObservableBlockTypedef_h */

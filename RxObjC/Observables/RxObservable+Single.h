@@ -152,7 +152,7 @@ If the source observable errors and the notifier completes, it will complete the
 - parameter notificationHandler: A handler that is passed an observable sequence of errors raised by the source observable and returns and observable that either continues, completes or errors. This behavior is then applied to the source observable.
 - returns: An observable sequence producing the elements of the given sequence repeatedly until it terminates successfully or is notified to error or complete.
 */
-- (nonnull RxObservable *)retryWhen:(id <RxObservableType>(^)(RxObservable<NSError *> *))notificationHandler;
+- (nonnull RxObservable *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<NSError *> *))notificationHandler;
 
 @end
 
@@ -168,7 +168,7 @@ For aggregation behavior with no intermediate results, see `reduce`.
 - parameter accumulator: An accumulator function to be invoked on each element.
 - returns: An observable sequence containing the accumulated values.
 */
-- (nonnull RxObservable *)scan:(nonnull id)seed accumulator:(id __nonnull(^)(id __nonnull, id __nonnull))accumulator;
+- (nonnull RxObservable *)scan:(nonnull id)seed accumulator:(nonnull id __nonnull(^)(id __nonnull, id __nonnull))accumulator;
 
 @end
 

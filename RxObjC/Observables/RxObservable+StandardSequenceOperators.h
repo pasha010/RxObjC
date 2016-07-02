@@ -12,6 +12,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface NSObject (RxFilter) <RxObservableType>
+/**
+Filters the elements of an observable sequence based on a predicate.
+
+- seealso: [filter operator on reactivex.io](http://reactivex.io/documentation/operators/filter.html)
+
+- parameter predicate: A function to test each source element for a condition.
+- returns: An observable sequence that contains elements from the input sequence that satisfy the condition.
+*/
+- (nonnull RxObservable *)filter:(nonnull BOOL(^)(id __nonnull))predicate;
+@end
+
 @interface NSObject (RxMap) <RxObservableType>
 /**
 Projects each element of an observable sequence into a new form.

@@ -9,9 +9,19 @@
 #import "RxObservable+StandardSequenceOperators.h"
 #import "RxObservable.h"
 #import "RxMap.h"
+#import "RxFilter.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
+
+@implementation NSObject (RxFilter)
+
+- (nonnull RxObservable *)filter:(nonnull BOOL(^)(id __nonnull))predicate {
+    return [[RxFilter alloc] initWithSource:[self asObservable] predicate:predicate];
+}
+
+@end
+
 @implementation NSObject (RxMap)
 
 - (nonnull RxObservable *)map:(RxMapSelector)mapSelector {
