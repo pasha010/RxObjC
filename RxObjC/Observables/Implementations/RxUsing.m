@@ -30,27 +30,23 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    RxNopDisposable *disposable = [RxNopDisposable sharedInstance];
+    __block RxNopDisposable *disposable = [RxNopDisposable sharedInstance];
 
-    @try {
+    __block id <RxDisposable> res = nil;
+
+    rx_tryCatch(self, ^{
         id <RxDisposable> resource = _parent->_resourceFactory();
         disposable = resource;
 
         RxObservable *source = _parent->_observableFactory(resource);
 
-        return [RxStableCompositeDisposable createDisposable1:[source subscribe:self] disposable2:disposable];
-    }
-    @catch (id e) {
-        NSError *error = e;
-        if ([e isKindOfClass:[NSException class]]) {
-            NSException *exception = e;
-            error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxUsingSink + %@", exception.name]
-                                        code:[self hash]
-                                    userInfo:exception.userInfo];
-        }
-        return [RxStableCompositeDisposable createDisposable1:[[RxObservable error:error] subscribe:self]
-                                                  disposable2:disposable];
-    }
+        res = [RxStableCompositeDisposable createDisposable1:[source subscribe:self] disposable2:disposable];
+    }, ^(NSError *error) {
+        res = [RxStableCompositeDisposable createDisposable1:[[RxObservable error:error] subscribe:self]
+                                                 disposable2:disposable];
+    });
+
+    return res;
 }
 
 @end

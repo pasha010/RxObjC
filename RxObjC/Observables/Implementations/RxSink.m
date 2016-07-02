@@ -31,7 +31,7 @@
 
 @end
 
-void rx_tryCatch(id self, void (^tryBlock)(), void (^catchBlock)(NSError *)) {
+void __rx_tryCatch__(id self, void (^tryBlock)(), void (^catchBlock)(NSError *)) {
     @try {
         tryBlock();
     }

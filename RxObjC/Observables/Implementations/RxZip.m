@@ -48,19 +48,13 @@
     }
 
     if (hasValueAll) {
-        @try {
+        rx_tryCatch(self, ^{
             id result = [self getResult];
             [self forwardOn:[RxEvent next:result]];
-        }
-        @catch (id e) {
-            NSError *error = e;
-            if ([e isKindOfClass:[NSException class]]) {
-                NSException *exception = e;
-                error = [NSError errorWithDomain:exception.name code:-140 userInfo:exception.userInfo];
-            }
+        }, ^(NSError *error) {
             [self forwardOn:[RxEvent error:error]];
             [self dispose];
-        }
+        });
     } else {
         BOOL allOthersDone = YES;
 

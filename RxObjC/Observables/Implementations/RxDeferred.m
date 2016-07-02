@@ -26,22 +26,16 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    @try {
+    __block id <RxDisposable> res = nil;
+    rx_tryCatch(self, ^{
         RxObservable *result = _observableFactory();
-        return [result subscribe:self];
-    }
-    @catch (id e) {
-        NSError *error = e;
-        if ([e isKindOfClass:[NSException class]]) {
-            NSException *exception = e;
-            error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxDeferredSink + %@", exception.name]
-                                        code:[self hash]
-                                    userInfo:exception.userInfo];
-        }
+        res = [result subscribe:self];
+    }, ^(NSError *error) {
         [self forwardOn:[RxEvent error:error]];
         [self dispose];
-        return [RxNopDisposable sharedInstance];
-    }
+        res = [RxNopDisposable sharedInstance];
+    });
+    return res;
 }
 
 - (void)on:(nonnull RxEvent *)event {

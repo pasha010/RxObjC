@@ -201,6 +201,14 @@ Merges two observable sequences into one observable sequence by combining each e
 - (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second
                           resultSelector:(id __nonnull(^)(id __nonnull, id __nonnull))resultSelector;
 
+/**
+Merges two observable sequences into one observable sequence by using latest element from the second sequence every time when `self` emitts an element.
+
+- seealso: [combineLatest operator on reactivex.io](http://reactivex.io/documentation/operators/combinelatest.html)
+
+- parameter second: Second observable source.
+- returns: An observable sequence containing the result of combining each element of the self  with the latest element from the second source, if any, using the specified result selector function.
+*/
 - (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second;
 
 @end

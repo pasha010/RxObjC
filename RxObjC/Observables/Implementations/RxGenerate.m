@@ -33,33 +33,25 @@
     @weakify(self);
     return [scheduler scheduleRecursive:@(YES) action:^(NSNumber *isFirstNumber, void (^recurse)(id)) {
         @strongify(self);
-        @try {
+        rx_tryCatch(self, ^{
             BOOL isFirst = isFirstNumber.boolValue;
             if (!isFirst) {
                 self->_state = self->_parent->_iterate(self->_state);
             }
-            
+
             if (self->_parent->_condition(self->_state)) {
                 id result = self->_parent->_resultSelector(self->_state);
                 [self forwardOn:[RxEvent next:result]];
-                
+
                 recurse(@NO);
             } else {
                 [self forwardOn:[RxEvent completed]];
                 [self dispose];
             }
-        }
-        @catch (id e) {
-            NSError *error = e;
-            if ([e isKindOfClass:[NSException class]]) {
-                NSException *exception = e;
-                error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxGenerateSink + %@", exception.name]
-                                            code:[self hash]
-                                        userInfo:exception.userInfo];
-            }
+        }, ^(NSError *error) {
             [self forwardOn:[RxEvent error:error]];
             [self dispose];
-        }
+        });
     }];
 }
 

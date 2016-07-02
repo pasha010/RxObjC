@@ -10,9 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
 Sequence that repeats `repeatedValue` infinite number of times.
 */
-@interface RxInfiniteSequence<ObjectType> : NSObject
-
-@property (nonnull, nonatomic, readonly) NSArray<ObjectType> *array;
+@interface RxInfiniteSequence<ObjectType> : NSEnumerator<ObjectType>
 
 - (nonnull instancetype)initWithRepeatedValue:(nonnull ObjectType)repeatedValue;
 

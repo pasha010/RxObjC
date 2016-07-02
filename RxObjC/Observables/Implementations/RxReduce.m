@@ -25,39 +25,23 @@
 
 - (void)on:(RxEvent<id> *)event {
     if (event.type == RxEventTypeNext) {
-        @try {
+        rx_tryCatch(self, ^{
             _accumulation = _parent->_accumulator(_accumulation, [event element]);
-        }
-        @catch (id e) {
-            NSError *error = e;
-            if ([e isKindOfClass:[NSException class]]) {
-                NSException *exception = e;
-                error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxReduceSink + %@", exception.name]
-                                            code:[self hash]
-                                        userInfo:exception.userInfo];
-            }
+        }, ^(NSError *error) {
             [self forwardOn:[RxEvent error:error]];
             [self dispose];
-        }
+        });
     } else if (event.type == RxEventTypeError) {
         [self forwardOn:[RxEvent error:event.error]];
         [self dispose];
     } else if (event.type == RxEventTypeCompleted) {
-        @try {
+        rx_tryCatch(self, ^{
             RxResultType result = _parent->_mapResult(_accumulation);
             [self forwardOn:[RxEvent next:result]];
             [self forwardOn:[RxEvent completed]];
-        }
-        @catch (id e) {
-            NSError *error = e;
-            if ([e isKindOfClass:[NSException class]]) {
-                NSException *exception = e;
-                error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxReduceSink + %@", exception.name]
-                                            code:[self hash]
-                                        userInfo:exception.userInfo];
-            }
+        }, ^(NSError *error) {
             [self forwardOn:[RxEvent error:error]];
-        }
+        });
         [self dispose];
     }
 }

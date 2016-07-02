@@ -16,6 +16,7 @@
 @class RxAnyObserver;
 @class RxObservable;
 @class RxTuple;
+@class RxEvent;
 
 /// reduce
 typedef id RxAccumulateType;
@@ -60,5 +61,15 @@ typedef RxObservable *__nonnull (^RxCatchHandler)(NSError *__nonnull error);
 
 /// withLatestFrom
 typedef id __nonnull (^RxWithLatestFromResultSelector)(id __nonnull first, id __nonnull second);
+
+/// distinctUntilChanged
+typedef id __nonnull (^RxDistinctUntilChangedKeySelector)(id __nonnull element);
+typedef BOOL (^RxDistinctUntilChangedEqualityComparer)(id __nonnull lhs, id __nonnull rhs);
+
+/// doOn
+typedef void (^RxDoOnEventHandler)(RxEvent *__nonnull event);
+
+/// scan
+typedef id __nonnull(^RxScanAccumulator)(id __nonnull accumulate, id __nonnull element);
 
 #endif /* RxObservableBlockTypedef_h */

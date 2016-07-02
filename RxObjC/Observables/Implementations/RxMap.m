@@ -29,21 +29,13 @@ static int rx_numberOfMapOperators = 0;
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
-        @try {
+        rx_tryCatch(self, ^{
             id mappedElement = _selector(event.element);
             [self forwardOn:[RxEvent next:mappedElement]];
-        }
-        @catch (id e) {
-            NSError *error = e;
-            if ([e isKindOfClass:[NSException class]]) {
-                NSException *exception = e;
-                error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxMapSink + %@", exception.name]
-                                            code:[self hash]
-                                        userInfo:exception.userInfo];
-            }
+        }, ^(NSError *error) {
             [self forwardOn:[RxEvent error:error]];
             [self dispose];
-        }
+        });
     }
     if (event.type == RxEventTypeError) {
         [self forwardOn:[RxEvent error:event.error]];
@@ -119,21 +111,13 @@ static int rx_numberOfMapOperators = 0;
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
-        @try {
+        rx_tryCatch(self, ^{
             id mappedElement = _selector(event.element, rx_incrementChecked(&_index));
             [self forwardOn:[RxEvent next:mappedElement]];
-        }
-        @catch (id e) {
-            NSError *error = e;
-            if ([e isKindOfClass:[NSException class]]) {
-                NSException *exception = e;
-                error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxMapWithIndexSink + %@", exception.name]
-                                            code:[self hash]
-                                        userInfo:exception.userInfo];
-            }
+        }, ^(NSError *error) {
             [self forwardOn:[RxEvent error:error]];
             [self dispose];
-        }
+        });
     } else {
         [self forwardOn:event];
         [self dispose];

@@ -27,7 +27,8 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    @try {
+    __block id <RxDisposable> res;
+    rx_tryCatch(self, ^{
         id <RxSubjectType> subject = _parent->_subjectSelector();
         RxConnectableObservableAdapter *connectable = [[RxConnectableObservableAdapter alloc] initWithSource:_parent->_source andSubject:subject];
 
@@ -35,21 +36,14 @@
 
         id <RxDisposable> subscription = [observable subscribe:self];
         id <RxDisposable> connection = [connectable connect];
-        
-        return [[RxBinaryDisposable alloc] initWithFirstDisposable:subscription andSecondDisposable:connection];
-    }
-    @catch (id e) {
-        NSError *error = e;
-        if ([e isKindOfClass:[NSException class]]) {
-            NSException *exception = e;
-            error = [NSError errorWithDomain:[NSString stringWithFormat:@"RxMulticastSink + %@", exception.name]
-                                        code:105
-                                    userInfo:exception.userInfo];
-        }
+
+        res = [[RxBinaryDisposable alloc] initWithFirstDisposable:subscription andSecondDisposable:connection];
+    }, ^(NSError *error) {
         [self forwardOn:[RxEvent error:error]];
         [self dispose];
-        return [RxNopDisposable sharedInstance];
-    }
+        res = [RxNopDisposable sharedInstance];
+    });
+    return res;
 }
 
 - (void)on:(nonnull RxEvent *)event {
