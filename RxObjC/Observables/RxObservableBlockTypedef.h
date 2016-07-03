@@ -13,6 +13,7 @@
 
 @protocol RxSubjectType;
 @protocol RxDisposable;
+@protocol RxObservableConvertibleType;
 @class RxAnyObserver;
 @class RxObservable;
 @class RxTuple;
@@ -82,5 +83,12 @@ typedef BOOL (^RxTakeWhileWithIndexPredicate)(id __nonnull element, NSUInteger i
 /// skip while
 typedef BOOL (^RxSkipWhilePredicate)(id __nonnull element);
 typedef BOOL (^RxSkipWhileWithIndexPredicate)(id __nonnull element, NSUInteger index);
+
+/// flat map
+typedef id <RxObservableConvertibleType> __nonnull (^RxFlatMapSelector)(id __nonnull element);
+typedef id <RxObservableConvertibleType> __nonnull (^RxFlatMapWithIndexSelector)(id __nonnull element, NSUInteger index);
+
+/// combine latest collection type
+typedef id (^RxCombineLatestResultSelector)(NSArray *__nonnull elements);
 
 #endif /* RxObservableBlockTypedef_h */

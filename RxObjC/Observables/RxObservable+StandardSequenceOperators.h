@@ -139,6 +139,56 @@ Projects each element of an observable sequence into a new form by incorporating
 @end
 
 @interface NSObject (RxFlatMap) <RxObservableType>
+/**
+Projects each element of an observable sequence to an observable sequence and merges the resulting observable sequences into one observable sequence.
+
+- seealso: [flatMap operator on reactivex.io](http://reactivex.io/documentation/operators/flatmap.html)
+
+- parameter selector: A transform function to apply to each element.
+- returns: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.
+*/
+- (nonnull RxObservable *)flatMap:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector;
+
+/**
+Projects each element of an observable sequence to an observable sequence by incorporating the element's index and merges the resulting observable sequences into one observable sequence.
+
+- seealso: [flatMap operator on reactivex.io](http://reactivex.io/documentation/operators/flatmap.html)
+
+- parameter selector: A transform function to apply to each element; the second parameter of the function represents the index of the source element.
+- returns: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.
+*/
+- (nonnull RxObservable *)flatMapWithIndex:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element, NSUInteger index))selector;
+
+@end
+
+@interface NSObject (RxFlatMapFirst) <RxObservableType>
+/**
+ Projects each element of an observable sequence to an observable sequence and merges the resulting observable sequences into one observable sequence.
+ If element is received while there is some projected observable sequence being merged it will simply be ignored.
+
+- seealso: [flatMapFirst operator on reactivex.io](http://reactivex.io/documentation/operators/flatmap.html)
+
+- parameter selector: A transform function to apply to element that was observed while no observable is executing in parallel.
+- returns: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence that was received while no other sequence was being calculated.
+*/
+- (nonnull RxObservable *)flatMapFirst:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector;
+
+@end
+
+@interface NSObject (RxFlatMapLatest) <RxObservableType>
+/**
+ Projects each element of an observable sequence into a new sequence of observable sequences and then
+ transforms an observable sequence of observable sequences into an observable sequence producing values only from the most recent observable sequence.
+
+ It is a combination of `map` + `switchLatest` operator
+
+ - seealso: [flatMapLatest operator on reactivex.io](http://reactivex.io/documentation/operators/flatmap.html)
+
+ - parameter selector: A transform function to apply to each element.
+ - returns: An observable sequence whose elements are the result of invoking the transform function on each element of source producing an
+    Observable of Observable sequences and that at any point in time produces the elements of the most recent inner observable sequence that has been received.
+ */
+- (nonnull RxObservable *)flatMapLatest:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector;
 
 @end
 

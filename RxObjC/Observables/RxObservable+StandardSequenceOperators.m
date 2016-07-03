@@ -16,6 +16,8 @@
 #import "RxTakeLast.h"
 #import "RxSkip.h"
 #import "RxSkipWhile.h"
+#import "RxMerge.h"
+#import "RxSwitch.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
@@ -92,6 +94,31 @@
 @end
 
 @implementation NSObject (RxFlatMap)
+
+- (nonnull RxObservable *)flatMap:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector {
+    return [[RxFlatMap alloc] initWithSource:[self asObservable] selector:selector];
+}
+
+- (nonnull RxObservable *)flatMapWithIndex:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element, NSUInteger index))selector {
+    return [[RxFlatMapWithIndex alloc] initWithSource:[self asObservable] selector:selector];
+}
+
+@end
+
+@implementation NSObject (RxFlatMapFirst)
+
+- (nonnull RxObservable *)flatMapFirst:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector {
+    return [[RxFlatMapFirst alloc] initWithSource:[self asObservable] selector:selector];
+}
+
+@end
+
+@implementation NSObject (RxFlatMapLatest)
+
+- (nonnull RxObservable *)flatMapLatest:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector {
+    return [[RxFlatMapLatest alloc] initWithSource:[self asObservable] selector:selector];
+}
+
 @end
 
 

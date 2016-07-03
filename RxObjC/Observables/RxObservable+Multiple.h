@@ -12,6 +12,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+//TODO zipcollection, switchLatest
+
+@interface NSArray (RxCombineLatest) <RxObservableType>
+/**
+Merges the specified observable sequences into one observable sequence by using the selector function whenever any of the observable sequences produces an element.
+
+- seealso: [combinelatest operator on reactivex.io](http://reactivex.io/documentation/operators/combinelatest.html)
+
+- parameter resultSelector: Function to invoke whenever any of the sources produces an element.
+- returns: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
+*/
+- (nonnull RxObservable *)combineLatest:(nonnull id(^)(NSArray *__nonnull))resultSelector;
+
+@end
+
+
+
 @interface RxObservable (Concat)
 /**
 Concatenates the second observable sequence to `self` upon successful termination of `self`.

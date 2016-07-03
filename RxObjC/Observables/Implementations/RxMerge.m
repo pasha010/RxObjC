@@ -215,3 +215,141 @@
 }
 
 @end
+
+@interface RxFlatMapSink<SourceType, S : id <RxObservableConvertibleType>, O : id<RxObserverType>> : RxMergeSink<SourceType, S, O>
+@end
+
+@implementation RxFlatMapSink {
+    RxFlatMapSelector __nonnull _selector;
+}
+
+- (nonnull instancetype)initWithSelector:(RxFlatMapSelector)selector observer:(nonnull id <RxObserverType>)observer {
+    self = [super initWithObserver:observer];
+    if (self) {
+        _selector = selector;
+    }
+    return self;
+}
+
+- (nonnull id <RxObservableConvertibleType>)performMap:(nonnull id)element {
+    return _selector(element);
+}
+
+@end
+
+@implementation RxFlatMap {
+    RxObservable *__nonnull _source;
+    RxFlatMapSelector __nonnull _selector;
+}
+
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source selector:(RxFlatMapSelector)aSelector {
+    self = [super init];
+    if (self) {
+        _source = source;
+        _selector = aSelector;
+    }
+
+    return self;
+}
+
+- (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
+    RxFlatMapSink *sink = [[RxFlatMapSink alloc] initWithSelector:_selector observer:observer];
+    sink.disposable = [sink run:_source];
+    return sink;
+}
+
+@end
+
+@interface RxFlatMapWithIndexSink<SourceType, S : id <RxObservableConvertibleType>, O : id<RxObserverType>> : RxMergeSink<SourceType, S, O>
+@end
+
+@implementation RxFlatMapWithIndexSink {
+    RxFlatMapWithIndexSelector __nonnull _selector;
+    NSUInteger _index;
+}
+
+- (nonnull instancetype)initWithSelector:(RxFlatMapWithIndexSelector)selector observer:(nonnull id <RxObserverType>)observer {
+    self = [super initWithObserver:observer];
+    if (self) {
+        _index = 0;
+        _selector = selector;
+    }
+    return self;
+}
+
+- (nonnull id <RxObservableConvertibleType>)performMap:(nonnull id)element {
+    return _selector(element, rx_incrementCheckedUnsinged(&_index));
+}
+
+@end
+
+@implementation RxFlatMapWithIndex {
+    RxObservable *__nonnull _source;
+    RxFlatMapWithIndexSelector __nonnull _selector;
+}
+
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source selector:(RxFlatMapWithIndexSelector)aSelector {
+    self = [super init];
+    if (self) {
+        _source = source;
+        _selector = aSelector;
+    }
+
+    return self;
+}
+
+- (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
+    RxFlatMapWithIndexSink *sink = [[RxFlatMapWithIndexSink alloc] initWithSelector:_selector observer:observer];
+    sink.disposable = [sink run:_source];
+    return sink;
+}
+
+@end
+
+@interface RxFlatMapFirstSink<SourceType, S : id <RxObservableConvertibleType>, O : id<RxObserverType>> : RxMergeSink<SourceType, S, O>
+@end
+
+@implementation RxFlatMapFirstSink {
+    RxFlatMapSelector __nonnull _selector;
+}
+
+- (nonnull instancetype)initWithSelector:(RxFlatMapSelector)selector observer:(nonnull id <RxObserverType>)observer {
+    self = [super initWithObserver:observer];
+    if (self) {
+        _selector = selector;
+    }
+    return self;
+}
+
+- (BOOL)subscribeNext {
+    return self.group.count == RxMergeNoIterators;
+}
+
+- (nonnull id <RxObservableConvertibleType>)performMap:(nonnull id)element {
+    return _selector(element);
+}
+
+@end
+
+@implementation RxFlatMapFirst {
+    RxObservable *__nonnull _source;
+    RxFlatMapSelector __nonnull _selector;
+}
+
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source selector:(RxFlatMapSelector)aSelector {
+    self = [super init];
+    if (self) {
+        _source = source;
+        _selector = aSelector;
+    }
+
+    return self;
+}
+
+- (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
+    RxFlatMapFirstSink *sink = [[RxFlatMapFirstSink alloc] initWithSelector:_selector observer:observer];
+    sink.disposable = [sink run:_source];
+    return sink;
+}
+
+@end

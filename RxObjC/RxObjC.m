@@ -27,7 +27,7 @@ NSInteger rx_incrementChecked(NSInteger *i) {
 }
 
  NSInteger rx_decrementChecked(NSInteger *i) {
-    if (*i == NSIntegerMax) {
+    if (*i == NSIntegerMin) {
         @throw [RxError overflow];
     }
     NSInteger result = *i;
@@ -35,5 +35,22 @@ NSInteger rx_incrementChecked(NSInteger *i) {
     return result;
 }
 
+NSUInteger rx_incrementCheckedUnsinged(NSUInteger *i) {
+    if (*i == NSUIntegerMax) {
+        @throw [RxError overflow];
+    }
+    NSUInteger result = *i;
+    *i = *i + 1;
+    return result;
+}
+
+NSUInteger rx_decrementCheckedUnsinged(NSUInteger *i) {
+    if (*i == 0) {
+        @throw [RxError overflow];
+    }
+    NSUInteger result = *i;
+    *i = *i - 1;
+    return result;
+}
 
 

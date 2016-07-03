@@ -16,10 +16,20 @@
 #import "RxAmb.h"
 #import "RxObservable+Aggregate.h"
 #import "RxWithLatestFrom.h"
+#import "RxCombineLatest+CollectionType.h"
 
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
+
+@implementation NSArray (RxCombineLatest)
+
+- (nonnull RxObservable *)combineLatest:(nonnull id(^)(NSArray *__nonnull))resultSelector {
+    return [[RxCombineLatestCollectionType alloc] initWithSources:self resultSelector:resultSelector];
+}
+
+@end
+
 @implementation RxObservable (Concat)
 
 + (nonnull RxObservable *)concatWith:(nonnull RxObservable *)second {
