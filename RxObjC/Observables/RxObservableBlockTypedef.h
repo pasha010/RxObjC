@@ -91,4 +91,7 @@ typedef id <RxObservableConvertibleType> __nonnull (^RxFlatMapWithIndexSelector)
 /// combine latest collection type
 typedef id (^RxCombineLatestResultSelector)(NSArray *__nonnull elements);
 
+/// zip collection type
+typedef id (^RxZipCollectionTypeResultSelector)(NSArray *__nonnull elements);
+
 #endif /* RxObservableBlockTypedef_h */

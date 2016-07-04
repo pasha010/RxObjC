@@ -18,9 +18,8 @@
     RxCombineLatestCollectionType *__nonnull _parent;
     NSRecursiveLock *__nonnull _lock;
     NSUInteger _numberOfValues;
-    NSMutableDictionary<NSNumber *, id> *__nonnull _values;
-
-    NSMutableDictionary<NSNumber *, NSNumber/* BOOL */ *> *__nonnull _isDone;
+    NSMutableArray<id> *__nonnull _values;
+    NSMutableArray<NSNumber/* BOOL */ *> *__nonnull _isDone;
     NSUInteger _numberOfDone;
     NSMutableArray<RxSingleAssignmentDisposable *> *__nonnull _subscriptions;
 }
@@ -30,12 +29,14 @@
     if (self) {
         _lock = [[NSRecursiveLock alloc] init];
         _numberOfValues = 0;
-        _values = [NSMutableDictionary dictionaryWithCapacity:parent->_count];
-        _isDone = [NSMutableDictionary dictionaryWithCapacity:parent->_count];
+        _values = [NSMutableArray arrayWithCapacity:parent->_count];
+        _isDone = [NSMutableArray arrayWithCapacity:parent->_count];
         _subscriptions = [NSMutableArray arrayWithCapacity:parent->_count];
         _parent = parent;
 
         for (NSUInteger i = 0; i < parent->_count; i++) {
+            _values[i] = [EXTNil null];
+            _isDone[i] = @NO;
             [_subscriptions addObject:[[RxSingleAssignmentDisposable alloc] init]];
         }
     }
@@ -60,21 +61,19 @@
     return [[RxCompositeDisposable alloc] initWithDisposableArray:[_subscriptions copy]];
 }
 
-- (void)on:(nonnull RxEvent *)event atIndex:(NSUInteger)index {
+- (void)on:(nonnull RxEvent *)event atIndex:(NSUInteger)atIndex {
     [_lock lock];
-    
-    NSNumber *atIndex = @(index);
-    
+
     switch (event.type) {
         case RxEventTypeNext: {
-            if (!_values[atIndex]) {
+            if (_values[atIndex] == [EXTNil null]) {
                 _numberOfValues++;
             }
             
             _values[atIndex] = event.element;
             
             if (_numberOfValues < _parent->_count) {
-                NSUInteger numberOfOthersThatAreDone = _numberOfDone - (_isDone[atIndex] ? 1 : 0);
+                NSUInteger numberOfOthersThatAreDone = _numberOfDone - (_isDone[atIndex].boolValue ? 1 : 0);
                 if (numberOfOthersThatAreDone == _parent->_count - 1) {
                     [self forwardOn:[RxEvent completed]];
                     [self dispose];
@@ -83,7 +82,7 @@
             }
             
             rx_tryCatch(self, ^{
-                id result = _parent->_resultSelector(_values.allValues);
+                id result = _parent->_resultSelector(_values);
                 [self forwardOn:[RxEvent next:result]];
             }, ^(NSError *error) {
                 [self forwardOn:[RxEvent error:error]];
@@ -108,7 +107,7 @@
                 [self forwardOn:[RxEvent completed]];
                 [self dispose];
             } else {
-                [_subscriptions[index] dispose];
+                [_subscriptions[atIndex] dispose];
             }
 
             break;
@@ -127,7 +126,7 @@
     if (self) {
         _sources = sources;
         _resultSelector = resultSelector;
-        _count = NSUIntegerMax;
+        _count = _sources.count;
     }
 
     return self;

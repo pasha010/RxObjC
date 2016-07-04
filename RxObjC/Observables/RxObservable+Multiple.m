@@ -17,6 +17,8 @@
 #import "RxObservable+Aggregate.h"
 #import "RxWithLatestFrom.h"
 #import "RxCombineLatest+CollectionType.h"
+#import "RxZip+CollectionType.h"
+#import "RxSwitch.h"
 
 
 #pragma clang diagnostic push
@@ -26,6 +28,22 @@
 
 - (nonnull RxObservable *)combineLatest:(nonnull id(^)(NSArray *__nonnull))resultSelector {
     return [[RxCombineLatestCollectionType alloc] initWithSources:self resultSelector:resultSelector];
+}
+
+@end
+
+@implementation NSArray (RxZip)
+
+- (nonnull RxObservable *)zip:(nonnull id(^)(NSArray *__nonnull))resultSelector {
+    return [[RxZipCollectionType alloc] initWithSources:self resultSelector:resultSelector];
+}
+
+@end
+
+@implementation NSObject (RxSwitch)
+
+- (nonnull RxObservable *)switchLatest {
+    return [[RxSwitch alloc] initWithSource:[self asObservable]];
 }
 
 @end

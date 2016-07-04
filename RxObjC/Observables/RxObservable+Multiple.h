@@ -27,7 +27,34 @@ Merges the specified observable sequences into one observable sequence by using 
 
 @end
 
+@interface NSArray (RxZip) <RxObservableType>
+/**
+Merges the specified observable sequences into one observable sequence by using the selector function whenever all of the observable sequences have produced an element at a corresponding index.
 
+- seealso: [zip operator on reactivex.io](http://reactivex.io/documentation/operators/zip.html)
+
+- parameter resultSelector: Function to invoke for each series of elements at corresponding indexes in the sources.
+- returns: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
+*/
+- (nonnull RxObservable *)zip:(nonnull id(^)(NSArray *__nonnull))resultSelector;
+
+@end
+
+@interface NSObject (RxSwitch) <RxObservableType>
+/**
+Transforms an observable sequence of observable sequences into an observable sequence
+producing values only from the most recent observable sequence.
+
+Each time a new inner observable sequence is received, unsubscribe from the
+previous inner observable sequence.
+
+- seealso: [switch operator on reactivex.io](http://reactivex.io/documentation/operators/switch.html)
+
+- returns: The observable sequence that at any point in time produces the elements of the most recent inner observable sequence that has been received.
+*/
+- (nonnull RxObservable *)switchLatest;
+
+@end
 
 @interface RxObservable (Concat)
 /**
