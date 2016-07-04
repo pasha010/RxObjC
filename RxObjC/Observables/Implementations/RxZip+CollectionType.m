@@ -23,14 +23,12 @@
     NSMutableArray<RxQueue *> *__nonnull _values;
     NSMutableArray<NSNumber/*BOOL*/ *> *__nonnull _isDone;
     NSMutableArray<RxSingleAssignmentDisposable *> *__nonnull _subscriptions;
-    NSRecursiveLock *__nonnull _lock;
 }
 
 - (nonnull instancetype)initWithParent:(nonnull RxZipCollectionType *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
         _parent = parent;
-        _lock = [[NSRecursiveLock alloc] init];
         _numberOfValues = 0;
         _numberOfDone = 0;
         _values = [NSMutableArray arrayWithCapacity:parent->_count];

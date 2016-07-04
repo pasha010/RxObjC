@@ -27,13 +27,13 @@
 - (void)on:(nonnull RxEvent *)event {
     switch (event.type) {
         case RxEventTypeNext: {
-            [_parent.lock performLock:^{
+            [_parent->_lock performLock:^{
                 [_parent forwardOn:[RxEvent next:event.element]];
             }];
             break;
         }
         case RxEventTypeError: {
-            [_parent.lock performLock:^{
+            [_parent->_lock performLock:^{
                 [_parent forwardOn:[RxEvent error:event.error]];
                 [_parent dispose];
             }];
@@ -47,7 +47,7 @@
             // it will set observer to nil, and thus prevent further complete messages
             // to be sent, and thus preserving the sequence grammar.
             if (_parent.stopped && _parent.group.count == RxMergeNoIterators) {
-                [_parent.lock performLock:^{
+                [_parent->_lock performLock:^{
                     [_parent forwardOn:[RxEvent completed]];
                     [_parent dispose];
                 }];
@@ -64,7 +64,6 @@
 - (nonnull instancetype)initWithObserver:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _lock = [[NSRecursiveLock alloc] init];
         _group = [[RxCompositeDisposable alloc] init];
         _sourceSubscription = [[RxSingleAssignmentDisposable alloc] init];
         _stopped = NO;

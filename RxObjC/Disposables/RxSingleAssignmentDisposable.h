@@ -7,6 +7,7 @@
 #import "RxDisposeBase.h"
 #import "RxDisposable.h"
 #import "RxCancelable.h"
+#import "RxLock.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,10 @@ Represents a disposable resource which only allows a single assignment of its un
 
 If an underlying disposable resource has already been set, future attempts to set the underlying disposable resource will throw an exception.
 */
-@interface RxSingleAssignmentDisposable : RxDisposeBase <RxDisposable, RxCancelable>
+@interface RxSingleAssignmentDisposable : RxDisposeBase <RxDisposable, RxCancelable> {
+@package
+    RxSpinLock *__nonnull _lock;
+}
 
 /**
 Gets or sets the underlying disposable. After disposal, the result of getting this property is undefined.

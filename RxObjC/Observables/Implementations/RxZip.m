@@ -18,7 +18,6 @@
 - (nonnull instancetype)initWithArity:(NSUInteger)arity andObserver:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _lock = [[NSRecursiveLock alloc] init];
         _arity = arity;
         NSMutableArray<NSNumber *> *isDone = [NSMutableArray arrayWithCapacity:arity];
         for (NSUInteger i = 0; i < arity; i++) {

@@ -14,7 +14,6 @@
 
 @interface RxWithLatestFromSink<FirstType, SecondType, O : id<RxObserverType>> : RxSink<O> <RxObserverType, RxLockOwnerType, RxSynchronizedOnType>
 
-@property (nonnull, readonly) NSRecursiveLock *lock;
 @property (nullable) SecondType latest;
 
 @end
@@ -71,7 +70,6 @@
 - (nonnull instancetype)initWithParent:(nonnull RxWithLatestFrom *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _lock = [[NSRecursiveLock alloc] init];
         _parent = parent;
     }
     return self;

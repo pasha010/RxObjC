@@ -26,8 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RxZipSink<O : id <RxObserverType>> : RxSink<O> <RxZipSinkProtocol>
 
-@property (nonnull, strong, readonly) NSRecursiveLock *lock;
-
 - (nonnull instancetype)initWithArity:(NSUInteger)arity andObserver:(nonnull id <RxObserverType>)observer;
 - (nonnull id)getResult;
 - (BOOL)hasElements:(NSUInteger)index;

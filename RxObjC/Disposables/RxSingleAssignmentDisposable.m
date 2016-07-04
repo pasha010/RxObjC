@@ -9,7 +9,6 @@
 
 
 @implementation RxSingleAssignmentDisposable {
-    RxSpinLock *__nonnull _lock;
     BOOL _disposed;
     BOOL _disposableSet;
     id <RxDisposable> __nullable _disposable;

@@ -31,16 +31,13 @@
 - (nonnull instancetype)initWithParent:(nonnull RxSwitchSink *)parent id:(NSUInteger)id _self:(nonnull id <RxDisposable>)__self;
 @end
 
-@implementation RxSwitchSink {
-    NSRecursiveLock *__nonnull _lock;
-}
+@implementation RxSwitchSink
 
 - (nonnull instancetype)initWithObserver:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
         _subscriptions = [[RxSingleAssignmentDisposable alloc] init];
         _innerSubscription = [[RxSerialDisposable alloc] init];
-        _lock = [[NSRecursiveLock alloc] init];
         _stopped = NO;
         _latest = 0;
         _hasLatest = NO;

@@ -21,7 +21,6 @@ static NSInteger const RxMergeNoIterators = 1;
 @interface RxMergeSink<SourceType, S : id <RxObservableConvertibleType>, O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 
 @property (assign, readonly) BOOL subscribeNext;
-@property (nonnull, nonatomic, strong, readonly) NSRecursiveLock *lock;
 @property (nonnull, nonatomic, strong, readonly) RxCompositeDisposable *group;
 @property (nonnull, nonatomic, strong, readonly) RxSingleAssignmentDisposable *sourceSubscription;
 @property (nonatomic, readonly) BOOL stopped;

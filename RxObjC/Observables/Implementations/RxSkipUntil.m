@@ -14,7 +14,6 @@
 
 @interface RxSkipUntilSink<O : id<RxObserverType>> : RxSink<O>
 
-@property (nonnull, readonly) NSRecursiveLock *lock;
 @property BOOL forwardElements;
 @property (nonnull, readonly) RxSingleAssignmentDisposable *sourceSubscription;
 
@@ -82,7 +81,6 @@
 - (nonnull instancetype)initWithParent:(nonnull RxSkipUntil *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _lock = [[NSRecursiveLock alloc] init];
         _forwardElements = NO;
         _sourceSubscription = [[RxSingleAssignmentDisposable alloc] init];
         _parent = parent;

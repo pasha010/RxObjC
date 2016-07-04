@@ -65,14 +65,12 @@ typedef void (^RxAmbSinkAction)(RxAmbObserver *__nonnull, RxEvent *__nonnull);
 
 @implementation RxAmbSink {
     RxAmb *__nonnull _parent;
-    NSRecursiveLock *__nonnull _lock;
     RxAmbState _choice;
 }
 
 - (nonnull instancetype)initWithParent:(nonnull RxAmb *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _lock = [[NSRecursiveLock alloc] init];
         _choice = RxAmbStateNeither;
         _parent = parent;
     }

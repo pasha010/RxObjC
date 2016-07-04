@@ -16,7 +16,6 @@
 
 @implementation RxCombineLatestCollectionTypeSink {
     RxCombineLatestCollectionType *__nonnull _parent;
-    NSRecursiveLock *__nonnull _lock;
     NSUInteger _numberOfValues;
     NSMutableArray<id> *__nonnull _values;
     NSMutableArray<NSNumber/* BOOL */ *> *__nonnull _isDone;
@@ -27,7 +26,6 @@
 - (nonnull instancetype)initWithParent:(nonnull RxCombineLatestCollectionType *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _lock = [[NSRecursiveLock alloc] init];
         _numberOfValues = 0;
         _values = [NSMutableArray arrayWithCapacity:parent->_count];
         _isDone = [NSMutableArray arrayWithCapacity:parent->_count];

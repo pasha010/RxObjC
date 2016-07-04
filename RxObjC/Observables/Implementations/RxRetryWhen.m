@@ -14,7 +14,6 @@
 #import "RxStableCompositeDisposable.h"
 
 @interface RxRetryWhenSequenceSink<O : id<RxObserverType>> : RxTailRecursiveSink
-@property (nonnull, readonly) NSRecursiveLock *lock;
 @property (nullable) NSError *lastError;
 @property (nonnull, readonly) RxPublishSubject<NSError *> *errorSubject;
 @property (nonnull, readonly) RxObservable *handler;
@@ -123,7 +122,6 @@
         _errorSubject = [RxPublishSubject create];
         _handler = [parent->_notificationHandler(_errorSubject) asObservable];
         _notifier = [RxPublishSubject create];
-        _lock = [[NSRecursiveLock alloc] init];
         _parent = parent;
     }
     return self;

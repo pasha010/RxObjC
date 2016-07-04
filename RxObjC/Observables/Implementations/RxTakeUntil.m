@@ -13,7 +13,6 @@
 #import "RxLockOwnerType.h"
 
 @interface RxTakeUntilSink<O : id<RxObserverType>> : RxSink<O>
-@property (nonnull, readonly) NSRecursiveLock *lock;
 @property BOOL open;
 @end
 
@@ -80,7 +79,6 @@
 - (nonnull instancetype)initWithParent:(nonnull RxTakeUntil *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _lock = [[NSRecursiveLock alloc] init];
         _open = NO;
         _parent = parent;
     }

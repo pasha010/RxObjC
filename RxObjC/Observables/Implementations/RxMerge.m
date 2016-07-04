@@ -49,7 +49,6 @@
 @interface RxMergeLimitedSink<S: id <RxObservableConvertibleType>, O: id <RxObserverType>> : RxSink<O> <RxObserverType, RxLockOwnerType, RxSynchronizedOnType>
 @property (readonly) BOOL stopped;
 @property (readwrite) NSUInteger activeCount;
-@property (nonnull, readonly) NSRecursiveLock *lock;
 @property (nonnull, readonly) RxCompositeDisposable *group;
 @property (nonnull, readonly) RxQueue<S> *queue;
 
@@ -120,7 +119,6 @@
 - (nonnull instancetype)initWithMaxConcurrent:(NSUInteger)maxConcurrent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _lock = [[NSRecursiveLock alloc] init];
         _stopped = NO;
         _activeCount = 0;
         _queue = [[RxQueue alloc] initWithCapacity:2];
