@@ -278,7 +278,7 @@
 }
 
 - (nonnull id <RxObservableConvertibleType>)performMap:(nonnull id)element {
-    return _selector(element, rx_incrementCheckedUnsinged(&_index));
+    return _selector(element, rx_incrementCheckedUnsigned(&_index));
 }
 
 @end

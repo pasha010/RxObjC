@@ -35,7 +35,7 @@ NSInteger rx_incrementChecked(NSInteger *i) {
     return result;
 }
 
-NSUInteger rx_incrementCheckedUnsinged(NSUInteger *i) {
+NSUInteger rx_incrementCheckedUnsigned(NSUInteger *i) {
     if (*i == NSUIntegerMax) {
         @throw [RxError overflow];
     }
@@ -44,7 +44,7 @@ NSUInteger rx_incrementCheckedUnsinged(NSUInteger *i) {
     return result;
 }
 
-NSUInteger rx_decrementCheckedUnsinged(NSUInteger *i) {
+NSUInteger rx_decrementCheckedUnsigned(NSUInteger *i) {
     if (*i == 0) {
         @throw [RxError overflow];
     }

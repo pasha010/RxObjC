@@ -18,6 +18,7 @@
 #import "RxSkipWhile.h"
 #import "RxMerge.h"
 #import "RxSwitch.h"
+#import "RxElementAt.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
@@ -121,5 +122,12 @@
 
 @end
 
+@implementation NSObject (RxElementAt)
+
+- (nonnull RxObservable *)elementAt:(NSUInteger)index {
+    return [[RxElementAt alloc] initWithSource:[self asObservable] index:index throwOnEmpty:YES];
+}
+
+@end
 
 #pragma clang diagnostic pop

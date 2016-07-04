@@ -192,4 +192,10 @@ Projects each element of an observable sequence to an observable sequence by inc
 
 @end
 
+@interface NSObject (RxElementAt) <RxObservableType>
+
+- (nonnull RxObservable *)elementAt:(NSUInteger)index;
+
+@end
+
 NS_ASSUME_NONNULL_END
