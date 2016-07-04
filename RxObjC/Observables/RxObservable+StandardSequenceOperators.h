@@ -193,8 +193,39 @@ Projects each element of an observable sequence to an observable sequence by inc
 @end
 
 @interface NSObject (RxElementAt) <RxObservableType>
+/**
+Returns a sequence emitting only item _n_ emitted by an Observable
 
+- seealso: [elementAt operator on reactivex.io](http://reactivex.io/documentation/operators/elementat.html)
+
+- parameter index: The index of the required item (starting from 0).
+- returns: An observable sequence that emits the desired item as its own sole emission.
+*/
 - (nonnull RxObservable *)elementAt:(NSUInteger)index;
+
+@end
+
+@interface NSObject (RxSingle) <RxObservableType>
+/**
+The single operator is similar to first, but throws a `RxError.NoElements` or `RxError.MoreThanOneElement`
+if the source Observable does not emit exactly one item before successfully completing.
+
+- seealso: [single operator on reactivex.io](http://reactivex.io/documentation/operators/first.html)
+
+- returns: An observable sequence that emits a single item or throws an exception if more (or none) of them are emitted.
+*/
+- (nonnull RxObservable *)single;
+
+/**
+The single operator is similar to first, but throws a `RxError.NoElements` or `RxError.MoreThanOneElement`
+if the source Observable does not emit exactly one item before successfully completing.
+
+- seealso: [single operator on reactivex.io](http://reactivex.io/documentation/operators/first.html)
+
+- parameter predicate: A function to test each source element for a condition.
+- returns: An observable sequence that emits a single item or throws an exception if more (or none) of them are emitted.
+*/
+- (nonnull RxObservable *)single:(nonnull BOOL(^)(id __nonnull))predicate;
 
 @end
 

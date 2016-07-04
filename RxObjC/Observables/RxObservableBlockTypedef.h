@@ -94,4 +94,7 @@ typedef id (^RxCombineLatestResultSelector)(NSArray *__nonnull elements);
 /// zip collection type
 typedef id (^RxZipCollectionTypeResultSelector)(NSArray *__nonnull elements);
 
+/// single async
+typedef BOOL (^RxSingleAsyncPredicate)(id __nonnull element);
+
 #endif /* RxObservableBlockTypedef_h */

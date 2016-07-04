@@ -19,6 +19,7 @@
 #import "RxMerge.h"
 #import "RxSwitch.h"
 #import "RxElementAt.h"
+#import "RxSingleAsync.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
@@ -126,6 +127,18 @@
 
 - (nonnull RxObservable *)elementAt:(NSUInteger)index {
     return [[RxElementAt alloc] initWithSource:[self asObservable] index:index throwOnEmpty:YES];
+}
+
+@end
+
+@implementation NSObject (RxSingle)
+
+- (nonnull RxObservable *)single {
+    return [[RxSingleAsync alloc] initWithSource:[self asObservable]];
+}
+
+- (nonnull RxObservable *)single:(nonnull BOOL(^)(id __nonnull))predicate {
+    return [[RxSingleAsync alloc] initWithSource:[self asObservable] predicate:predicate];
 }
 
 @end
