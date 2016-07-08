@@ -8,6 +8,10 @@
 
 #import "RxTake.h"
 #import "RxSink.h"
+#import "RxSynchronizedOnType.h"
+#import "RxNopDisposable.h"
+#import "RxBinaryDisposable.h"
+#import "RxLockOwnerType.h"
 
 @interface RxTakeCountSink<O : id<RxObserverType>> : RxSink<O>
 @end
@@ -47,7 +51,7 @@
 
 @implementation RxTakeCount
 
-- (nonnull instancetype)initWithSource:(nonnull RxObservable *)source count:(NSUInteger)count {
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source count:(NSUInteger)count {
     self = [super init];
     if (self) {
         _source = source;
@@ -59,6 +63,88 @@
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
     RxTakeCountSink *sink = [[RxTakeCountSink alloc] initWithParent:self observer:observer];
     sink.disposable = [_source subscribe:sink];
+    return sink;
+}
+
+@end
+
+@interface RxTakeTimeSink<O : id<RxObserverType>> : RxSink<O> <RxLockOwnerType, RxObserverType, RxSynchronizedOnType>
+@end
+
+@implementation RxTakeTimeSink {
+    RxTakeTime *__nonnull _parent;
+}
+
+- (nonnull instancetype)initWithParent:(nonnull RxTakeTime *)parent observer:(nonnull id <RxObserverType>)observer {
+    self = [super initWithObserver:observer];
+    if (self) {
+        _parent = parent;
+    }
+    return self;
+}
+
+- (void)on:(nonnull RxEvent *)event {
+    [self synchronizedOn:event];
+}
+
+- (void)_synchronized_on:(nonnull RxEvent *)event {
+    switch (event.type) {
+        case RxEventTypeNext: {
+            [self forwardOn:[RxEvent next:event.element]];
+            break;
+        }
+        case RxEventTypeError: {
+            [self forwardOn:event];
+            [self dispose];
+            break;
+        }
+        case RxEventTypeCompleted: {
+            [self forwardOn:event];
+            [self dispose];
+            break;
+        }
+    }
+}
+
+- (void)tick {
+    [_lock lock];
+    
+    [self forwardOn:[RxEvent completed]];
+    [self dispose];
+    
+    [_lock unlock];
+}
+
+- (nonnull id <RxDisposable>)run {
+    @weakify(self);
+    id <RxDisposable> disposeTimer = [_parent->_scheduler scheduleRelative:nil dueTime:_parent->_duration action:^id <RxDisposable>(id _) {
+        @strongify(self);
+        [self tick];
+        return [RxNopDisposable sharedInstance];
+    }];
+    id <RxDisposable> disposeSubscription = [_parent->_source subscribe:self];
+    return [[RxBinaryDisposable alloc] initWithFirstDisposable:disposeTimer andSecondDisposable:disposeSubscription];
+}
+
+@end
+
+@implementation RxTakeTime
+
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source
+                              duration:(RxTimeInterval)duration
+                             scheduler:(nonnull id <RxSchedulerType>)scheduler {
+    self = [super init];
+    if (self) {
+        _source = source;
+        _duration = duration;
+        _scheduler = scheduler;
+    }
+    return self;
+}
+
+- (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
+    RxTakeTimeSink *sink = [[RxTakeTimeSink alloc] initWithParent:self observer:observer];
+    sink.disposable = [sink run];
     return sink;
 }
 

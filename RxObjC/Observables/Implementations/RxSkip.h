@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
+#import "RxSchedulerType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,20 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nonnull instancetype)initWithSource:(nonnull RxObservable *)source count:(NSInteger)count;
+
+@end
+
+@interface RxSkipTime<Element> : RxProducer<Element> {
+@package
+    RxObservable<Element> *__nonnull _source;
+    RxTimeInterval _duration;
+    id <RxSchedulerType> __nonnull _scheduler;
+}
+
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<Element> *)source
+                              duration:(RxTimeInterval)duration
+                             scheduler:(nonnull id <RxSchedulerType>)scheduler;
+
 
 @end
 

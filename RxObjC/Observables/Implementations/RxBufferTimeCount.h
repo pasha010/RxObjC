@@ -1,8 +1,8 @@
 //
-//  RxTake
+//  RxBufferTimeCount
 //  RxObjC
 // 
-//  Created by Pavel Malkov on 02.07.16.
+//  Created by Pavel Malkov on 08.07.16.
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
@@ -12,27 +12,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxTakeCount<Element> : RxProducer<Element> {
+@interface RxBufferTimeCount<Element> : RxProducer<Element> {
 @package
     RxObservable<Element> *__nonnull _source;
+    RxTimeInterval _timeSpan;
     NSUInteger _count;
-}
-
-- (nonnull instancetype)initWithSource:(nonnull RxObservable<Element> *)source count:(NSUInteger)count;
-
-@end
-
-@interface RxTakeTime<Element> : RxProducer<Element> {
-@package
-    RxObservable<Element> *__nonnull _source;
-    RxTimeInterval _duration;
     id <RxSchedulerType> __nonnull _scheduler;
 }
 
 - (nonnull instancetype)initWithSource:(nonnull RxObservable<Element> *)source
-                              duration:(RxTimeInterval)duration
+                              timeSpan:(RxTimeInterval)timeSpan
+                                 count:(NSUInteger)count
                              scheduler:(nonnull id <RxSchedulerType>)scheduler;
-
 
 @end
 
