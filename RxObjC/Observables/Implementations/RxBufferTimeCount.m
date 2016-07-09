@@ -123,7 +123,6 @@
     return self;
 }
 
-
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
     RxBufferTimeCountSink *sink = [[RxBufferTimeCountSink alloc] initWithParent:self observer:observer];
     sink.disposable = [sink run];

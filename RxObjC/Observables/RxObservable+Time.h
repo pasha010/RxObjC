@@ -155,7 +155,54 @@ A useful real-world analogy of this overload is the behavior of a ferry leaving 
 - returns: An observable sequence of buffers.
 
 */
-- (nonnull RxObservable<NSArray<id> *> *)buffer:(RxTimeInterval)timeSpan count:(NSUInteger)count scheduler:(nonnull id <RxSchedulerType>)scheduler;
+- (nonnull RxObservable<NSArray<id> *> *)buffer:(RxTimeInterval)timeSpan
+                                          count:(NSUInteger)count
+                                      scheduler:(nonnull id <RxSchedulerType>)scheduler;
+
+@end
+
+@interface NSObject (RxWindow) <RxObservableType>
+/**
+ Projects each element of an observable sequence into a window that is completed when either it’s full or a given amount of time has elapsed.
+
+ - seealso: [window operator on reactivex.io](http://reactivex.io/documentation/operators/window.html)
+
+ - parameter timeSpan: Maximum time length of a window.
+ - parameter count: Maximum element count of a window.
+ - parameter scheduler: Scheduler to run windowing timers on.
+ - returns: An observable sequence of windows (instances of `Observable`).
+ */
+- (nonnull RxObservable<RxObservable *> *)window:(RxTimeInterval)timeSpan
+                                           count:(NSUInteger)count
+                                       scheduler:(nonnull id <RxSchedulerType>)scheduler;
+
+@end
+
+@interface NSObject (RxTimeout) <RxObservableType>
+/**
+ Applies a timeout policy for each element in the observable sequence. If the next element isn't received within the specified timeout duration starting from its predecessor, a TimeoutError is propagated to the observer.
+
+ - seealso: [timeout operator on reactivex.io](http://reactivex.io/documentation/operators/timeout.html)
+
+ - parameter dueTime: Maximum duration between values before a timeout occurs.
+ - parameter scheduler: Scheduler to run the timeout timer on.
+ - returns: An observable sequence with a TimeoutError in case of a timeout.
+ */
+- (nonnull RxObservable *)timeout:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler;
+
+/**
+ Applies a timeout policy for each element in the observable sequence, using the specified scheduler to run timeout timers. If the next element isn't received within the specified timeout duration starting from its predecessor, the other observable sequence is used to produce future messages from that point on.
+
+ - seealso: [timeout operator on reactivex.io](http://reactivex.io/documentation/operators/timeout.html)
+
+ - parameter dueTime: Maximum duration between values before a timeout occurs.
+ - parameter other: Sequence to return in case of a timeout.
+ - parameter scheduler: Scheduler to run the timeout timer on.
+ - returns: The source sequence switching to the other sequence in case of a timeout.
+ */
+- (nonnull RxObservable *)timeout:(RxTimeInterval)dueTime
+                            other:(nonnull id <RxObservableConvertibleType>)other
+                        scheduler:(nonnull id <RxSchedulerType>)scheduler;
 
 @end
 

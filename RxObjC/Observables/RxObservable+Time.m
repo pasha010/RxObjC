@@ -15,6 +15,10 @@
 #import "RxObservable+StandardSequenceOperators.h"
 #import "RxDelaySubscription.h"
 #import "RxBufferTimeCount.h"
+#import "RxWindow.h"
+#import "RxObservable+Creation.h"
+#import "RxError.h"
+#import "RxTimeout.h"
 
 
 #pragma clang diagnostic push
@@ -102,6 +106,29 @@
 
 - (nonnull RxObservable<NSArray<id> *> *)buffer:(RxTimeInterval)timeSpan count:(NSUInteger)count scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxBufferTimeCount alloc] initWithSource:[self asObservable] timeSpan:timeSpan count:count scheduler:scheduler];
+}
+
+@end
+
+@implementation NSObject (RxWindow)
+
+- (nonnull RxObservable<RxObservable *> *)window:(RxTimeInterval)timeSpan count:(NSUInteger)count scheduler:(nonnull id <RxSchedulerType>)scheduler {
+    return [[RxWindowTimeCount alloc] initWithSource:[self asObservable] timeSpan:timeSpan count:count scheduler:scheduler];
+}
+
+@end
+
+@implementation NSObject (RxTimeout)
+
+- (nonnull RxObservable *)timeout:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler {
+    return [[RxTimeout alloc] initWithSource:[self asObservable] dueTime:dueTime other:[RxObservable error:[RxError timeout]] scheduler:scheduler];
+}
+
+- (nonnull RxObservable *)timeout:(RxTimeInterval)dueTime
+                            other:(nonnull id <RxObservableConvertibleType>)other
+                        scheduler:(nonnull id <RxSchedulerType>)scheduler {
+    return [[RxTimeout alloc] initWithSource:[self asObservable] dueTime:dueTime other:[other asObservable] scheduler:scheduler];
+
 }
 
 @end

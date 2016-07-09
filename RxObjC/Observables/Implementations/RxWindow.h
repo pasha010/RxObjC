@@ -1,0 +1,30 @@
+//
+//  RxWindow
+//  RxObjC
+// 
+//  Created by Pavel Malkov on 09.07.16.
+//  Copyright (c) 2016 Pavel Malkov. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "RxProducer.h"
+#import "RxSchedulerType.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface RxWindowTimeCount<Element> : RxProducer<RxObservable <Element> *> {
+@package
+    RxObservable<Element> *__nonnull _source;
+    RxTimeInterval _timeSpan;
+    NSUInteger _count;
+    id <RxSchedulerType> __nonnull _scheduler;
+}
+
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<Element> *)source
+                              timeSpan:(RxTimeInterval)timeSpan
+                                 count:(NSUInteger)count
+                             scheduler:(nonnull id <RxSchedulerType>)scheduler;
+
+@end
+
+NS_ASSUME_NONNULL_END
