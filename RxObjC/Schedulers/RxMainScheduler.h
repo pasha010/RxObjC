@@ -19,9 +19,6 @@ This scheduler is optimized for `observeOn` operator. To ensure observable seque
 operator please use `ConcurrentMainScheduler` because it is more optimized for that purpose.
 */
 @interface RxMainScheduler : RxSerialDispatchQueueScheduler
-/**
- * TODO заимплементить RxMainScheduler, RxSerialDispatchQueueScheduler, RxTestScheduler
- */
 
 /**
 Singleton instance of `MainScheduler`

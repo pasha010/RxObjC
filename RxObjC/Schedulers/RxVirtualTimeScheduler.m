@@ -92,7 +92,7 @@
     }];
 }
 
-- (nonnull id <RxDisposable>)scheduleRelative:(nonnull id)state
+- (nonnull id <RxDisposable>)scheduleRelative:(nullable id)state
                                       dueTime:(RxTimeInterval)dueTime
                                        action:(id <RxDisposable>(^)(id))action {
     RxTime *time = [[self now] dateByAddingTimeInterval:dueTime];

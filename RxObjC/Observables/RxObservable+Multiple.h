@@ -12,8 +12,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//TODO zipcollection, switchLatest
-
 @interface NSArray (RxCombineLatest) <RxObservableType>
 /**
 Merges the specified observable sequences into one observable sequence by using the selector function whenever any of the observable sequences produces an element.

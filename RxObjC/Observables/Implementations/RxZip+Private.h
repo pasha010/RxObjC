@@ -56,6 +56,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/// 5
+
+@interface RxZip5<E1, E2, E3, E4, E5, R> : RxZipArray<R>
+
+- (nonnull instancetype)initWithSource1:(nonnull RxObservable<E1> *)source1
+                                    and:(nonnull RxObservable<E2> *)source2
+                                    and:(nonnull RxObservable<E3> *)source3
+                                    and:(nonnull RxObservable<E4> *)source4
+                                    and:(nonnull RxObservable<E4> *)source5
+                         resultSelector:(RxZip5ResultSelector)resultSelector;
+
+@end
+
+/// 6
+
+@interface RxZip6<E1, E2, E3, E4, E5, E6, R> : RxZipArray<R>
+
+- (nonnull instancetype)initWithSource1:(nonnull RxObservable<E1> *)source1
+                                    and:(nonnull RxObservable<E2> *)source2
+                                    and:(nonnull RxObservable<E3> *)source3
+                                    and:(nonnull RxObservable<E4> *)source4
+                                    and:(nonnull RxObservable<E4> *)source5
+                                    and:(nonnull RxObservable<E4> *)source6
+                         resultSelector:(RxZip6ResultSelector)resultSelector;
+
+@end
+
 /// 7
 
 @interface RxZip7<R> : RxZipArray<R>

@@ -121,6 +121,41 @@
 
 @end
 
+@implementation RxZip5
+
+- (nonnull instancetype)initWithSource1:(nonnull RxObservable<id> *)source1
+                                    and:(nonnull RxObservable<id> *)source2
+                                    and:(nonnull RxObservable<id> *)source3
+                                    and:(nonnull RxObservable<id> *)source4
+                                    and:(nonnull RxObservable<id> *)source5
+                         resultSelector:(RxZip5ResultSelector)resultSelector {
+    self = [super initWithSources:@[source1, source2, source3, source4, source5] resultSelector:^id(RxTuple *tuple) {
+        RxTupleUnpack(id o1, id o2, id o3, id o4, id o5) = tuple;
+        return resultSelector(o1, o2, o3, o4, o5);
+    }];
+    return self;
+}
+
+@end
+
+@implementation RxZip6
+
+- (nonnull instancetype)initWithSource1:(nonnull RxObservable<id> *)source1
+                                    and:(nonnull RxObservable<id> *)source2
+                                    and:(nonnull RxObservable<id> *)source3
+                                    and:(nonnull RxObservable<id> *)source4
+                                    and:(nonnull RxObservable<id> *)source5
+                                    and:(nonnull RxObservable<id> *)source6
+                         resultSelector:(RxZip6ResultSelector)resultSelector {
+    self = [super initWithSources:@[source1, source2, source3, source4, source5, source6] resultSelector:^id(RxTuple *tuple) {
+        RxTupleUnpack(id o1, id o2, id o3, id o4, id o5, id o6) = tuple;
+        return resultSelector(o1, o2, o3, o4, o5, o6);
+    }];
+    return self;
+}
+
+@end
+
 @implementation RxZip7
 
 - (nonnull instancetype)initWithSource1:(nonnull RxObservable *)source1 and:(nonnull RxObservable *)source2 and:(nonnull RxObservable *)source3 and:(nonnull RxObservable *)source4 and:(nonnull RxObservable *)source5 and:(nonnull RxObservable *)source6 and:(nonnull RxObservable *)source7 resultSelector:(RxZip7ResultSelector)resultSelector {

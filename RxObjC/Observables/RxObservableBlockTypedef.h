@@ -89,12 +89,22 @@ typedef id <RxObservableConvertibleType> __nonnull (^RxFlatMapSelector)(id __non
 typedef id <RxObservableConvertibleType> __nonnull (^RxFlatMapWithIndexSelector)(id __nonnull element, NSUInteger index);
 
 /// combine latest collection type
-typedef id (^RxCombineLatestResultSelector)(NSArray *__nonnull elements);
+typedef id __nonnull (^RxCombineLatestResultSelector)(NSArray *__nonnull elements);
 
 /// zip collection type
-typedef id (^RxZipCollectionTypeResultSelector)(NSArray *__nonnull elements);
+typedef id __nonnull (^RxZipCollectionTypeResultSelector)(NSArray *__nonnull elements);
 
 /// single async
 typedef BOOL (^RxSingleAsyncPredicate)(id __nonnull element);
+
+/// combine latest
+typedef id __nonnull (^RxCombineLatest2ResultSelector)(id __nullable o1, id __nullable o2);
+typedef id __nonnull (^RxCombineLatest3ResultSelector)(id __nullable o1, id __nullable o2, id __nullable o3);
+typedef id __nonnull (^RxCombineLatest4ResultSelector)(id __nullable o1, id __nullable o2, id __nullable o3, id __nullable o4);
+typedef id __nonnull (^RxCombineLatest5ResultSelector)(id __nullable o1, id __nullable o2, id __nullable o3, id __nullable o4, id __nullable o5);
+typedef id __nonnull (^RxCombineLatest6ResultSelector)(id __nullable o1, id __nullable o2, id __nullable o3, id __nullable o4, id __nullable o5, id __nullable o6);
+typedef id __nonnull (^RxCombineLatest7ResultSelector)(id __nullable o1, id __nullable o2, id __nullable o3, id __nullable o4, id __nullable o5, id __nullable o6, id __nullable o7);
+typedef id __nonnull (^RxCombineLatest8ResultSelector)(id __nullable o1, id __nullable o2, id __nullable o3, id __nullable o4, id __nullable o5, id __nullable o6, id __nullable o7, id __nullable o8);
+typedef id __nonnull (^RxCombineLatestTupleResultSelector)(RxTuple *__nonnull);
 
 #endif /* RxObservableBlockTypedef_h */

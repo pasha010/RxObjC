@@ -43,7 +43,7 @@ Schedules an action to be executed immediatelly.
  - parameter action: Action to be executed.
  - returns: The disposable object used to cancel the scheduled action (best effort).
  */
-- (nonnull id <RxDisposable>)scheduleRelative:(nonnull id)state
+- (nonnull id <RxDisposable>)scheduleRelative:(nullable id)state
                                       dueTime:(RxTimeInterval)dueTime
                                        action:(id <RxDisposable>(^)(id))action;
 

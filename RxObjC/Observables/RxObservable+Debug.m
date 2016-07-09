@@ -7,6 +7,7 @@
 //
 
 #import "RxObservable+Debug.h"
+#import "RxDebugProducer.h"
 
 
 @implementation NSObject (RxDebug)
@@ -24,8 +25,11 @@
 }
 
 - (nonnull RxObservable *)debug:(NSString *)identifier file:(NSString *)file line:(NSUInteger)line function:(NSString *)function {
-    // TODO implement
-    return nil;
+    return [[RxDebugProducer alloc] initWithSource:[self asObservable]
+                                        identifier:identifier
+                                              file:file
+                                              line:@(line).stringValue
+                                          function:function];
 }
 
 

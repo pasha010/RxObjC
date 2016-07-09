@@ -76,7 +76,7 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
     return cancel;
 }
 
-- (nonnull id <RxDisposable>)scheduleRelative:(nonnull id)state dueTime:(RxTimeInterval)dueTime action:(id <RxDisposable>(^)(id))action {
+- (nonnull id <RxDisposable>)scheduleRelative:(nullable id)state dueTime:(RxTimeInterval)dueTime action:(id <RxDisposable>(^)(id))action {
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _serialQueue);
     
     dispatch_time_t dispatchInterval = [RxMainScheduler convertTimeIntervalToDispatchTime:dueTime];
