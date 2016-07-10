@@ -12,7 +12,7 @@
 
 #define TRACE_RESOURCES 1
 
-static int32_t rx_resourceCount = 0;
+FOUNDATION_EXTERN int32_t rx_resourceCount;
 
 //! Project version number for RxObjC.
 FOUNDATION_EXPORT double RxObjCVersionNumber;

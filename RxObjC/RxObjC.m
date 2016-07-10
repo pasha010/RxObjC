@@ -1,4 +1,4 @@
- //
+//
 //  RxObjC.m
 //  RxObjC
 //
@@ -7,6 +7,8 @@
 //
 #import "RxObjC.h"
 #import "RxError.h"
+
+int32_t rx_resourceCount = 0;
 
 id rx_abstractMethod() {
     rx_fatalError(@"Abstract method");
@@ -26,7 +28,7 @@ NSInteger rx_incrementChecked(NSInteger *i) {
     return result;
 }
 
- NSInteger rx_decrementChecked(NSInteger *i) {
+NSInteger rx_decrementChecked(NSInteger *i) {
     if (*i == NSIntegerMin) {
         @throw [RxError overflow];
     }
