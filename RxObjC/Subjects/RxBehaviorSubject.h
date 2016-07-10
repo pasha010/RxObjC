@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RxSubjectType.h"
 #import "RxObservable.h"
 #import "RxSynchronizedUnsubscribeType.h"
 
