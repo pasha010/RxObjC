@@ -136,6 +136,7 @@
 
 - (void)testMulticast_Cold_Zip {
     RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
     RxTestableObservable<NSNumber *> *xs = [scheduler createHotObservable:@[
             [self next:40 element:@0],
             [self next:90 element:@1],
@@ -171,7 +172,7 @@
     XCTAssertTrue([xs.subscriptions isEqualToArray:@[[[RxSubscription alloc] initWithSubscribe:200 unsubscribe:390]]]);
 }
 
-- (void)testMulticast_SubjectSelectorThrowsError {
+- (void)testMulticast_SubjectSelectorThrows {
     RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
     RxTestableObservable *xs = [scheduler createHotObservable:@[
             [self next:210 element:@1],
@@ -193,7 +194,7 @@
     XCTAssertTrue(xs.subscriptions.count == 0);
 }
 
-- (void)testMulticast_SubjectSelectorThrowsException {
+- (void)testMulticast_SelectorThrows {
     RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
     RxTestableObservable *xs = [scheduler createHotObservable:@[
             [self next:210 element:@1],
@@ -203,17 +204,14 @@
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [xs multicast:^id <RxSubjectType> {
-            id error = [[NSObject alloc] init];
-            [error objectAtIndex:0];
             return [RxPublishSubject create];
         } selector:^RxObservable *(RxObservable *observable) {
+            @throw [RxTestError testError];
             return observable;
         }];
     }];
 
-    XCTAssertTrue(res.events.count == 1);
-    RxRecorded<RxEvent *> *type = res.events[0];
-    XCTAssertTrue(type.value.error.code == 105);
+    XCTAssertTrue([res.events isEqualToArray:@[[self error:200 testError:[RxTestError testError]]]], @"");
     XCTAssertTrue(xs.subscriptions.count == 0);
 }
 

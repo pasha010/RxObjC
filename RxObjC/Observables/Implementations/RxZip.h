@@ -18,9 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol RxZipSinkProtocol <NSObject>
 - (void)next:(NSUInteger)index;
-
 - (void)fail:(nonnull NSError *)error;
-
 - (void)done:(NSUInteger)index;
 @end
 

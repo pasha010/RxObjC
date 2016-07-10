@@ -11,18 +11,7 @@
 #import "RxObjC.h"
 #import "RxRecorded.h"
 
-#if TRACE_RESOURCES
-static int64_t const RxTestsTotalNumberOfAllocations = 0;
-static int64_t const RxTestsTotalNumberOfAllocatedBytes = 0;
-#endif
-
-@interface RxTest : XCTestCase {
-    int32_t _startResourceCount;
-#if TRACE_RESOURCES
-    int64_t _startNumberOfAllocations;
-    int64_t _startNumberOfAllocatedBytes;
-#endif
-}
+@interface RxTest : XCTestCase
 
 - (BOOL)accumulateStatistics;
 - (void)sleep:(NSTimeInterval)interval;

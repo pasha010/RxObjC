@@ -51,7 +51,7 @@
     @weakify(self);
     for (NSUInteger i = 0; i < count; i++) {
         RxSingleAssignmentDisposable *subscription = [[RxSingleAssignmentDisposable alloc] init];
-        RxZipObserver *observer = [[RxZipObserver alloc] initWithLock:self.lock 
+        RxZipObserver *observer = [[RxZipObserver alloc] initWithLock:_lock
                                                                parent:self 
                                                                 index:i 
                                                          setNextValue:^(id o) {
