@@ -43,6 +43,8 @@ Initializes a new instance of the subject that caches its last value and starts 
 */
 - (nonnull instancetype)initWithValue:(nonnull Element)value;
 
++ (nonnull instancetype)create:(nonnull Element)value;
+
 /**
 Notifies all subscribed observers about next event.
 
