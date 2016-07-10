@@ -91,7 +91,7 @@ Starts the virtual time scheduler.
 /**
 Advances the scheduler's clock by the specified relative time.
 */
-- (void)sleep:(nonnull RxVirtualTimeIntervalUnit)virtualInterval;
+- (void)sleep:(RxVirtualTimeIntervalUnit)virtualInterval;
 
 /**
 Stops the virtual time scheduler.

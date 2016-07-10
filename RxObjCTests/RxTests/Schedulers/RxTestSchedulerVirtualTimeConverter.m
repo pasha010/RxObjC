@@ -26,16 +26,16 @@
     return @(time.timeIntervalSince1970 / _resolution + 0.5);
 }
 
-- (RxTimeInterval)convertFromVirtualTimeInterval:(nonnull NSNumber *)virtualTimeInterval {
-    return virtualTimeInterval.doubleValue * _resolution;
+- (RxTimeInterval)convertFromVirtualTimeInterval:(RxTimeInterval)virtualTimeInterval {
+    return virtualTimeInterval * _resolution;
 }
 
-- (nonnull NSNumber *)convertToVirtualTimeInterval:(RxTimeInterval)timeInterval {
-    return @(timeInterval / _resolution + 0.5);
+- (RxTimeInterval)convertToVirtualTimeInterval:(RxTimeInterval)timeInterval {
+    return timeInterval / _resolution + 0.5;
 }
 
-- (nonnull NSNumber *)offsetVirtualTime:(nonnull NSNumber *)time offset:(nonnull NSNumber *)offset {
-    return @(time.doubleValue + offset.doubleValue);
+- (nonnull NSNumber *)offsetVirtualTime:(nonnull NSNumber *)time offset:(RxTimeInterval)offset {
+    return @(time.doubleValue + offset);
 }
 
 - (nonnull RxVirtualTimeComparison *)compareVirtualTime:(nonnull NSNumber *)_lhs with:(nonnull NSNumber *)_rhs {

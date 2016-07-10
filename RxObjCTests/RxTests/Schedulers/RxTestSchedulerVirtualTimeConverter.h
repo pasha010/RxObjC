@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  - parameter virtualTimeInterval: Virtual time interval to convert to `NSTimeInterval`.
  - returns: `NSTimeInterval` corresponding to virtual time interval.
  */
-- (RxTimeInterval)convertFromVirtualTimeInterval:(nonnull NSNumber *)virtualTimeInterval;
+- (RxTimeInterval)convertFromVirtualTimeInterval:(RxTimeInterval)virtualTimeInterval;
 
 /**
  Converts from virtual time interval to `NSTimeInterval`.
@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  - parameter timeInterval: `NSTimeInterval` to convert to virtual time interval.
  - returns: Virtual time interval corresponding to time interval.
  */
-- (nonnull NSNumber *)convertToVirtualTimeInterval:(RxTimeInterval)timeInterval;
+- (RxTimeInterval)convertToVirtualTimeInterval:(RxTimeInterval)timeInterval;
 
 /**
  Adds virtual time and virtual time interval.
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  - parameter offset: Virtual time interval.
  - returns: Time corresponding to time offsetted by virtual time interval.
  */
-- (nonnull NSNumber *)offsetVirtualTime:(nonnull NSNumber *)time offset:(nonnull NSNumber *)offset;
+- (nonnull NSNumber *)offsetVirtualTime:(nonnull NSNumber *)time offset:(RxTimeInterval)offset;
 
 /**
  Compares virtual times.

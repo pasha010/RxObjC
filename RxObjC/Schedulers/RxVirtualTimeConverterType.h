@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class RxVirtualTimeComparison;
 
 typedef id RxVirtualTimeUnit;
-typedef id RxVirtualTimeIntervalUnit;
+typedef RxTimeInterval RxVirtualTimeIntervalUnit;
 
 /**
 Parametrization for virtual time used by `VirtualTimeScheduler`s.
@@ -40,7 +40,7 @@ Parametrization for virtual time used by `VirtualTimeScheduler`s.
  - parameter virtualTimeInterval: Virtual time interval to convert to `NSTimeInterval`.
  - returns: `NSTimeInterval` corresponding to virtual time interval.
 */
-- (RxTimeInterval)convertFromVirtualTimeInterval:(nonnull RxVirtualTimeIntervalUnit)virtualTimeInterval;
+- (RxTimeInterval)convertFromVirtualTimeInterval:(RxVirtualTimeIntervalUnit)virtualTimeInterval;
 
 /**
  Converts from virtual time interval to `NSTimeInterval`.
@@ -48,7 +48,7 @@ Parametrization for virtual time used by `VirtualTimeScheduler`s.
  - parameter timeInterval: `NSTimeInterval` to convert to virtual time interval.
  - returns: Virtual time interval corresponding to time interval.
 */
-- (nonnull RxVirtualTimeIntervalUnit)convertToVirtualTimeInterval:(RxTimeInterval)timeInterval;
+- (RxVirtualTimeIntervalUnit)convertToVirtualTimeInterval:(RxTimeInterval)timeInterval;
 
 /**
  Offsets virtual time by virtual time interval.
@@ -57,7 +57,7 @@ Parametrization for virtual time used by `VirtualTimeScheduler`s.
  - parameter offset: Virtual time interval.
  - returns: Time corresponding to time offsetted by virtual time interval.
 */
-- (nonnull RxVirtualTimeUnit)offsetVirtualTime:(nonnull RxVirtualTimeUnit)time offset:(nonnull RxVirtualTimeIntervalUnit)offset;
+- (nonnull RxVirtualTimeUnit)offsetVirtualTime:(nonnull RxVirtualTimeUnit)time offset:(RxVirtualTimeIntervalUnit)offset;
 
 /**
  This is aditional abstraction because `NSDate` is unfortunately not comparable.

@@ -20,7 +20,7 @@
     __block NSUInteger i = self.subscriptions.count - 1;
 
     for (RxRecorded<RxEvent<id> *> * recordedEvent in self.recordedEvents) {
-        [self.testScheduler scheduleRelativeVirtual:nil dueTime:@(recordedEvent.time) action:^id <RxDisposable>(id o) {
+        [self.testScheduler scheduleRelativeVirtual:nil dueTime:recordedEvent.time action:^id <RxDisposable>(id o) {
             [observer on:recordedEvent.value];
             return [RxNopDisposable sharedInstance];
         }];

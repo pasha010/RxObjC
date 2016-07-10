@@ -203,7 +203,7 @@
     _running = NO;
 }
 
-- (void)sleep:(nonnull RxVirtualTimeIntervalUnit)virtualInterval {
+- (void)sleep:(RxVirtualTimeIntervalUnit)virtualInterval {
     [RxMainScheduler ensureExecutingOnScheduler];
 
     RxVirtualTimeUnit sleepTo = [_converter offsetVirtualTime:self.clock offset:virtualInterval];
