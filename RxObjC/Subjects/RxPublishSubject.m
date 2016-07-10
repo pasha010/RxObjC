@@ -101,9 +101,14 @@
     [_observers removeKey:disposeKey];
 }
 
-- (instancetype)asObserver {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverriding-method-mismatch"
+
+- (nonnull instancetype)asObserver {
     return self;
 }
+
+#pragma clang diagnostic pop
 
 - (void)dispose {
     [_lock performLock:^{

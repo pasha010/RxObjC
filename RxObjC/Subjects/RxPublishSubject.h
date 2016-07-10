@@ -57,7 +57,7 @@ Subscribes an observer to the subject.
 /**
 Returns observer interface for subject.
 */
-- (instancetype)asObserver;
+- (nonnull instancetype)asObserver;
 
 /**
 Unsubscribe all observers and release resources.
