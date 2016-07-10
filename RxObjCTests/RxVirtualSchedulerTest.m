@@ -217,6 +217,7 @@
         [times addObject:@(random)];
 
         [scheduler scheduleRelative:nil dueTime:10 * random action:^id <RxDisposable>(id o) {
+            @strongify(scheduler);
             [ticks addObject:[scheduler clock]];
             return [RxNopDisposable sharedInstance];
         }];
