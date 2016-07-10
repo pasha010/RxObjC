@@ -104,7 +104,7 @@ RxCurrentThreadSchedulerQueueKey *rx_getCurrentThreadSchedulerQueueKeyInstance()
     [NSThread rx_setThreadLocalStorageValue:value forKey:rx_getCurrentThreadSchedulerKeyInstance()];
 }
 
-- (nonnull id <RxDisposable>)schedule:(nonnull RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action {
+- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action {
     if (self.isScheduleRequired) {
         self.isScheduleRequired = NO;
 

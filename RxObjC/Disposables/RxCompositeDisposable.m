@@ -80,7 +80,7 @@
 }
 
 - (void)removeDisposable:(nonnull RxBagKey *)key {
-    [self _removeDisposable:key];
+    [[self _removeDisposable:key] dispose];
 }
 
 - (nullable id <RxDisposable>)_removeDisposable:(nonnull RxBagKey *)key {

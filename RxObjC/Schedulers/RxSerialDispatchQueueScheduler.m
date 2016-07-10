@@ -61,7 +61,7 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
     return dispatch_time(DISPATCH_TIME_NOW, [self convertTimeIntervalToDispatchInterval:timeInterval]);
 }
 
-- (nonnull id <RxDisposable>)schedule:(nonnull RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action {
+- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action {
     return [self scheduleInternal:state action:action];
 }
 

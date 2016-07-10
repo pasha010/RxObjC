@@ -73,7 +73,7 @@ Schedules an action to be executed immediatelly.
 - parameter action: Action to be executed.
 - returns: The disposable object used to cancel the scheduled action (best effort).
 */
-- (nonnull id <RxDisposable>)schedule:(nonnull RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action;
+- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action;
 
 - (nonnull id <RxDisposable>)scheduleInternal:(nonnull RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action;
 

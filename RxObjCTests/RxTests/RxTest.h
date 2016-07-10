@@ -10,6 +10,9 @@
 #import <UIKit/UIKit.h>
 #import "RxObjC.h"
 #import "RxRecorded.h"
+#import "RxTestScheduler.h"
+#import "RxTestableObservable.h"
+#import "RxTestableObserver.h"
 
 @interface RxTest : XCTestCase
 
