@@ -111,6 +111,8 @@ RxCurrentThreadSchedulerQueueKey *rx_getCurrentThreadSchedulerQueueKeyInstance()
         id <RxDisposable> disposable = action(state);
         
         if (self.queue == nil) {
+            self.isScheduleRequired = YES;
+            self.queue = nil;
             return disposable;
         }
         id <RxScheduledItemType> latest = [self.queue.value dequeue];
