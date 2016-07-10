@@ -35,6 +35,8 @@ Initializes variable with initial value.
 */
 - (nonnull instancetype)initWithValue:(nonnull Element)value;
 
++ (nonnull instancetype)create:(nonnull Element)value;
+
 /**
 - returns: Canonical interface for push style sequence
 */

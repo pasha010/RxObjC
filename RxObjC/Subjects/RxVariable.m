@@ -19,6 +19,10 @@
     id __nonnull _value;
 }
 
++ (nonnull instancetype)create:(nonnull id)value {
+    return [[self alloc] initWithValue:value];
+}
+
 - (nonnull instancetype)initWithValue:(nonnull id)value {
     self = [super init];
     if (self) {

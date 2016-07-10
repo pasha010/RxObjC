@@ -69,6 +69,11 @@
     return [self subscribeOnNext:onNext onError:onError onCompleted:nil];
 }
 
+- (nonnull id<RxDisposable>)subscribeOnNext:(nonnull void(^)(id __nonnull))onNext
+                                onCompleted:(nullable void(^)())onCompleted {
+    return [self subscribeOnNext:onNext onError:nil onCompleted:onCompleted];
+}
+
 - (nonnull id <RxDisposable>)subscribeOnNext:(nonnull void (^)(id __nonnull))onNext
                                      onError:(nullable void (^)(NSError *__nonnull))onError
                                  onCompleted:(nullable void (^)())onCompleted {
