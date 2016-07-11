@@ -15,7 +15,6 @@
 #elif TARGET_OS_MAC
 #import <Cocoa/Cocoa.h>
 #endif
-#import <libkern/OSAtomic.h>
 #import "RxObjCCommon.h"
 
 //! Project version number for RxObjC.

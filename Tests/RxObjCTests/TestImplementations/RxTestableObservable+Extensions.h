@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxTestableObservable.h"
-#import "RxObservable.h"
+#import <RxTests/RxTestableObservable.h>
+#import <RxObjC/RxObservable.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

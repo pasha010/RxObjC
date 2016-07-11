@@ -7,6 +7,7 @@
 //
 
 #import "RxObjCExt.h"
+#import <libkern/OSAtomic.h>
 
 #define TRACE_RESOURCES 1
 

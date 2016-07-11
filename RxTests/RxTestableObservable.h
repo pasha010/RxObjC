@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxObservableType.h"
-#import "RxRecorded.h"
+#import <RxObjC/RxObservableType.h>
+#import <RxTests/RxRecorded.h>
 
 @class RxSubscription;
 @class RxTestScheduler;
