@@ -6,7 +6,11 @@
 //  Copyright © 2016 Pavel Malkov. All rights reserved.
 //
 #import <Foundation/Foundation.h>
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+#elif TARGET_OS_MAC
+#import <Cocoa/Cocoa.h>
+#endif
 #import <libkern/OSAtomic.h>
 #import <libextobjc/extobjc.h>
 

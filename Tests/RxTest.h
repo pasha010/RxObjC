@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <UIKit/UIKit.h>
+
 #import "RxObjC.h"
 #import "RxRecorded.h"
 #import "RxTestScheduler.h"
