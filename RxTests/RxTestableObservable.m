@@ -8,7 +8,7 @@
 
 #import "RxTestableObservable.h"
 #import "RxTestScheduler.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 
 @implementation RxTestableObservable
 
@@ -24,7 +24,8 @@
 }
 
 - (nonnull id <RxDisposable>)subscribe:(nonnull id <RxObserverType>)observer {
-    return rx_abstractMethod();
+    // 
+    return nil;
 }
 
 

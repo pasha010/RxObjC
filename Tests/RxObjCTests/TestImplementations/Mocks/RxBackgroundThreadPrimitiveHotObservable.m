@@ -12,7 +12,7 @@
 @implementation RxBackgroundThreadPrimitiveHotObservable
 
 - (nonnull id <RxDisposable>)subscribe:(nonnull id <RxObserverType>)observer {
-    XCTAssertTrue(![NSThread currentThread].isMainThread);
+    XCTAssertTrue([NSThread currentThread].isMainThread == NO);
     return [super subscribe:observer];
 }
 

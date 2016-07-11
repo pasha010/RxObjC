@@ -42,6 +42,7 @@ Send `event` to this observer.
 }
 
 @end
+
 #pragma clang diagnostic pop
 
 #pragma clang diagnostic push

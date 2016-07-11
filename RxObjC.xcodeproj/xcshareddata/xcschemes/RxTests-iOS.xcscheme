@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "365F3A9E1D33AC580096A86C"
-               BuildableName = "RxTests-iOS.framework"
+               BuildableName = "RxTests.framework"
                BlueprintName = "RxTests-iOS"
                ReferencedContainer = "container:RxObjC.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "365F3A9E1D33AC580096A86C"
-            BuildableName = "RxTests-iOS.framework"
+            BuildableName = "RxTests.framework"
             BlueprintName = "RxTests-iOS"
             ReferencedContainer = "container:RxObjC.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "365F3A9E1D33AC580096A86C"
-            BuildableName = "RxTests-iOS.framework"
+            BuildableName = "RxTests.framework"
             BlueprintName = "RxTests-iOS"
             ReferencedContainer = "container:RxObjC.xcodeproj">
          </BuildableReference>

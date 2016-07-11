@@ -4,7 +4,7 @@
 //
 
 #import "RxConnectableObservable.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 #import "RxSubjectType.h"
 
 @interface RxConnection<__covariant S : id <RxSubjectType>> : NSObject <RxDisposable>

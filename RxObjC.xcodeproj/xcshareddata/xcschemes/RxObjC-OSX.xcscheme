@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "365F35D51D33A8C20096A86C"
-               BuildableName = "RxObjC-OSX.framework"
+               BuildableName = "RxObjC.framework"
                BlueprintName = "RxObjC-OSX"
                ReferencedContainer = "container:RxObjC.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "365F35D51D33A8C20096A86C"
-            BuildableName = "RxObjC-OSX.framework"
+            BuildableName = "RxObjC.framework"
             BlueprintName = "RxObjC-OSX"
             ReferencedContainer = "container:RxObjC.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "365F35D51D33A8C20096A86C"
-            BuildableName = "RxObjC-OSX.framework"
+            BuildableName = "RxObjC.framework"
             BlueprintName = "RxObjC-OSX"
             ReferencedContainer = "container:RxObjC.xcodeproj">
          </BuildableReference>

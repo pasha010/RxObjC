@@ -4,7 +4,7 @@
 //
 
 #import "RxProducer.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 #import "RxCurrentThreadScheduler.h"
 
 

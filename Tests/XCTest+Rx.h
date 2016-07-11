@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <XCTest/XCTest.h>
+@import XCTest;
 #import "RxTests.h"
 #import "RxRecorded.h"
 

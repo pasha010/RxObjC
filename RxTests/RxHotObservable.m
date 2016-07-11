@@ -12,7 +12,6 @@
 #import "RxAnyObserver.h"
 #import "RxSubscription.h"
 #import "RxAnonymousDisposable.h"
-#import <libextobjc/extobjc.h>
 
 @implementation RxHotObservable {
     /**

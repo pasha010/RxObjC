@@ -4,7 +4,7 @@
 //
 
 #import "RxScheduledDisposable.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 #import "RxNopDisposable.h"
 
 @interface RxScheduledDisposable ()

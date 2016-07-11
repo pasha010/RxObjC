@@ -189,7 +189,7 @@
 - (id)initWithCoder:(NSCoder *)coder {
     self = [self init];
     if (self) {
-        _backingArray = [coder decodeObjectForKey:@keypath(self.backingArray)];
+        _backingArray = [coder decodeObjectForKey:@"backingArray"];
     }
 
     return self;
@@ -197,7 +197,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     if (self.backingArray) {
-        [coder encodeObject:self.backingArray forKey:@keypath(self.backingArray)];
+        [coder encodeObject:self.backingArray forKey:@"backingArray"];
     }
 }
 
