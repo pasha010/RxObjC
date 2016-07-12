@@ -6,7 +6,6 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "RxTest.h"
 #import "RxPublishSubject.h"
 #import "RxTestError.h"

@@ -29,7 +29,7 @@
 }
 
 - (nonnull id<RxDisposable>)run {
-    NSObject<RxConnectableObservableType> *source = _parent->_source;
+    NSObject<RxConnectableObservableType> *source = (NSObject<RxConnectableObservableType> *)_parent->_source;
     __block id <RxDisposable> subscription = [source subscribeSafe:self];
 
     [_parent->_lock performLock:^{

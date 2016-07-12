@@ -6,7 +6,6 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "RxTest.h"
 #import "RxObservable+Creation.h"
 
@@ -111,7 +110,7 @@ RxObservable<NSNumber *> *rx_returnSomethingInt() {
     NSMutableArray<NSNumber *> *b = [a mutableCopy];
     
     NSUInteger count = 0;
-    for (NSNumber *_ in b) {
+    for (NSNumber *__unused _ in b) {
         [a removeAllObjects];
         count++;
     }

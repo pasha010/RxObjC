@@ -86,7 +86,7 @@
     return [_converter convertFromVirtualTime:self.clock];
 }
 
-- (nonnull id <RxDisposable>)schedule:(nonnull RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action {
+- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action {
     return [self scheduleRelative:state dueTime:0.0 action:^id <RxDisposable>(id a) {
         return action(a);
     }];

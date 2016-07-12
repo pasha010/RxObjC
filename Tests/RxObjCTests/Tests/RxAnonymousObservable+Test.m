@@ -6,9 +6,8 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "RxTest.h"
-#import <RxObjC/RxAnyObserver.h>
+#import "RxAnyObserver.h"
 #import "RxObservable+Creation.h"
 #import "RxNopDisposable.h"
 #import "RxTestError.h"

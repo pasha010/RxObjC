@@ -6,7 +6,6 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "RxTest.h"
 #import "RxPublishSubject.h"
 #import "RxTuple.h"
@@ -54,8 +53,8 @@
 
     __block int state = 0;
 
-    id <RxDisposable> _ = [observable subscribeNext:^(NSNumber *__nonnull n) {
-        if (n.unsignedIntegerValue < 0) {
+    [observable subscribeNext:^(NSNumber *__nonnull n) {
+        if (n.integerValue < 0) {
             return;
         }
         if (state == 0) {
@@ -106,7 +105,7 @@
     __block BOOL ranAll = NO;
 
     [observable subscribeOnNext:^(NSNumber *n) {
-        if (n.unsignedIntegerValue < 0) {
+        if (n.integerValue < 0) {
             return;
         }
 
@@ -140,7 +139,7 @@
     __block BOOL ranAll = NO;
 
     [observable subscribeOnNext:^(NSNumber *n) {
-        if (n.unsignedIntegerValue < 0) {
+        if (n.integerValue < 0) {
             return;
         }
 

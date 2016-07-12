@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxTests.h"
+#import "RxTestsDefTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

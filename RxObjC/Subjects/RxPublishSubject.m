@@ -85,7 +85,7 @@
         return [RxNopDisposable sharedInstance];
     }
 
-    NSObject *observerObject = observer;
+    NSObject<RxObserverType> *observerObject = (NSObject<RxObserverType> *) observer;
 
     RxBagKey *key = [_observers insert:[observerObject asObserver]];
     return [[RxSubscriptionDisposable alloc] initWithOwner:self andKey:key];

@@ -9,6 +9,9 @@
 #import "RxConnectableObservable.h"
 #import "RxObservableBlockTypedef.h"
 
+@class RxPublishSubject;
+@class RxReplaySubject;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (RxMulticast) <RxObservableType>
@@ -55,7 +58,7 @@ This operator is a specialization of `multicast` using a `PublishSubject`.
 
 - returns: A connectable observable sequence that shares a single subscription to the underlying sequence.
 */
-- (nonnull RxConnectableObservable<id> *)publish;
+- (nonnull RxConnectableObservable<RxPublishSubject *> *)publish;
 
 @end
 
@@ -70,7 +73,7 @@ This operator is a specialization of `multicast` using a `ReplaySubject`.
 - parameter bufferSize: Maximum element count of the replay buffer.
 - returns: A connectable observable sequence that shares a single subscription to the underlying sequence.
 */
-- (nonnull RxConnectableObservable<id> *)replay:(NSUInteger)bufferSize;
+- (nonnull RxConnectableObservable<RxReplaySubject *> *)replay:(NSUInteger)bufferSize;
 
 /**
 Returns a connectable observable sequence that shares a single subscription to the underlying sequence replaying all elements.
@@ -81,7 +84,7 @@ This operator is a specialization of `multicast` using a `ReplaySubject`.
 
 - returns: A connectable observable sequence that shares a single subscription to the underlying sequence.
 */
-- (nonnull RxConnectableObservable<id> *)replayAll;
+- (nonnull RxConnectableObservable<RxReplaySubject *> *)replayAll;
 @end
 
 @interface NSObject (RxRefcount) <RxConnectableObservableType>

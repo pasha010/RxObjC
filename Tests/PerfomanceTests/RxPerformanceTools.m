@@ -43,10 +43,10 @@ void rx_registerMallocHooks() {
 
     for (NSUInteger index = 0; index < count; index++) {
         malloc_zone_t *zoneArray = (malloc_zone_t *)_zones[index];
-        char const *name = malloc_get_zone_name(zoneArray);
+        char const *__unused name = malloc_get_zone_name(zoneArray);
 //        zoneArray->malloc = proxies[index];
 
-        vm_size_t protectSize = ((vm_size_t) sizeof(malloc_zone_t)) * ((vm_size_t) count);
+        vm_size_t __unused protectSize = ((vm_size_t) sizeof(malloc_zone_t)) * ((vm_size_t) count);
 
 //        vm_protect(mach_task_self(), zoneArray->malloc, protectSize, 0, VM_PROT_READ | VM_PROT_WRITE);
 

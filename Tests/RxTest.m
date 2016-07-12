@@ -10,8 +10,8 @@
 #import "RxPerformanceTools.h"
 
 #if TRACE_RESOURCES
-static int64_t RxTestsTotalNumberOfAllocations = 0;
-static int64_t RxTestsTotalNumberOfAllocatedBytes = 0;
+static int64_t __unused RxTestsTotalNumberOfAllocations = 0;
+static int64_t __unused RxTestsTotalNumberOfAllocatedBytes = 0;
 #endif
 
 @implementation RxTest {

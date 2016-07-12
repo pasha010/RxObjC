@@ -6,13 +6,13 @@
 //  Copyright © 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "RxTest.h"
 
-@interface RxObservable_TimeTest : XCTestCase
+@interface RxObservableTimeTest : RxTest
 
 @end
 
-@implementation RxObservable_TimeTest
+@implementation RxObservableTimeTest
 
 
 @end

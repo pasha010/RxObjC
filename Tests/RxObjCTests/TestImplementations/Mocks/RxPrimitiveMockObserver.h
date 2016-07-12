@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <RxObjC/RxObserverType.h>
-#import <RxTests/RxRecorded.h>
-#import <RxObjC/RxEvent.h>
+#import "RxObserverType.h"
+#import "RxRecorded.h"
+#import "RxEvent.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

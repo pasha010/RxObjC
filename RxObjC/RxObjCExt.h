@@ -12,6 +12,9 @@
 #ifndef EXTC_METAMACROS_H
 #define EXTC_METAMACROS_H
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnullability-completeness"
+
 /**
  * Executes one or more expressions (which may have a void type, such as a call
  * to a function that returns no value) and always returns true.
@@ -746,6 +749,9 @@ metamacro_if_eq(0, 1)(true)(false)
     metamacro_foreach(ext_strongify_,, __VA_ARGS__) \
     _Pragma("clang diagnostic pop")
 
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnullability-completeness"
 /*** implementation details follow ***/
 typedef void (^ext_cleanupBlock_t)();
 
@@ -1144,6 +1150,8 @@ void ext_replaceMethods (Class aClass, Method *methods, unsigned count);
  * dstClass must not be metaclasses.
  */
 void ext_replaceMethodsFromClass (Class srcClass, Class dstClass);
+
+#pragma clang diagnostic pop
 
 NS_ASSUME_NONNULL_BEGIN
 

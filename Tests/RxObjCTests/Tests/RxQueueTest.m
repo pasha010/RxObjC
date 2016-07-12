@@ -6,9 +6,8 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import "RxQueue.h"
 #import "RxTest.h"
+#import "RxQueue.h"
 
 @interface RxQueueTest : RxTest
 

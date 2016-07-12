@@ -148,7 +148,7 @@
         return [RxNopDisposable sharedInstance];
     }
 
-    NSObject *obj = observer;
+    NSObject<RxObserverType> *obj = (NSObject<RxObserverType> *) observer;
 
     RxAnyObserver *anyObserver = [obj asObserver];
 

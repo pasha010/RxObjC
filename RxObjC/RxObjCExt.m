@@ -16,6 +16,10 @@
 #import <stdlib.h>
 #import <string.h>
 
+void ext_executeCleanupBlock (__strong ext_cleanupBlock_t *block) {
+    (*block)();
+}
+
 typedef NSMethodSignature *(*methodSignatureForSelectorIMP)(id, SEL, SEL);
 typedef void (^ext_specialProtocolInjectionBlock)(Class);
 

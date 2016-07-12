@@ -9,9 +9,14 @@
 #ifndef RxTests_h
 #define RxTests_h
 
-#import <Foundation/Foundation.h>
-
-typedef NSUInteger RxTestTime;
-
+#import "RxRecorded.h"
+#import "RxSubscription.h"
+#import "RxAny.h"
+#import "RxTestScheduler.h"
+#import "RxTestSchedulerVirtualTimeConverter.h"
+#import "RxTestableObserver.h"
+#import "RxColdObservable.h"
+#import "RxHotObservable.h"
+#import "RxTestableObservable.h"
 
 #endif /* RxTests_h */

@@ -49,7 +49,7 @@ The element's index is used in the logic of the predicate function.
 
 @end
 
-@interface NSObject (RxTake) <RxObservableType>
+@interface NSObject (RxTakeSequence) <RxObservableType>
 /**
 Returns a specified number of contiguous elements from the start of an observable sequence.
 
@@ -77,7 +77,7 @@ Returns a specified number of contiguous elements from the end of an observable 
 
 @end
 
-@interface NSObject (RxSkip) <RxObservableType>
+@interface NSObject (RxSkipSequence) <RxObservableType>
 /**
 Bypasses a specified number of elements in an observable sequence and then returns the remaining elements.
 

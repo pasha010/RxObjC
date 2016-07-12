@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nonnull instancetype)initWithDueTime:(RxTimeInterval)aDueTime
                                  period:(RxTimeInterval)aPeriod
-                              scheduler:(nonnull id <RxSchedulerType>)aScheduler NS_DESIGNATED_INITIALIZER;
+                              scheduler:(nonnull id <RxSchedulerType>)aScheduler;
 
 
 @end

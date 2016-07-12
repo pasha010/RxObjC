@@ -18,7 +18,7 @@
 
 - (nonnull RxObservable *)observeOn:(nonnull id <RxImmediateSchedulerType>)scheduler {
     if ([scheduler isKindOfClass:[RxSerialDispatchQueueScheduler class]]) {
-        RxSerialDispatchQueueScheduler *queueScheduler = scheduler;
+        RxSerialDispatchQueueScheduler *queueScheduler = (RxSerialDispatchQueueScheduler *) scheduler;
         return [[RxObserveOnSerialDispatchQueue alloc] initWithSource:[self asObservable] scheduler:queueScheduler];
     }
     return [[RxObserveOn alloc] initWithSource:[self asObservable] scheduler:scheduler];

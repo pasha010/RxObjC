@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "RxTest.h"
 #import "RxTestableObservable.h"
 #import "RxTestableObserver.h"
 #import "RxTestScheduler.h"
@@ -14,7 +14,7 @@
 #import "RxBehaviorSubject.h"
 #import "RxTestError.h"
 
-@interface RxBehaviorSubjectTest : XCTestCase
+@interface RxBehaviorSubjectTest : RxTest
 
 @end
 

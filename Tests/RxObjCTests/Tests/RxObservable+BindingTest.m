@@ -6,9 +6,8 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import "RxObservable+Binding.h"
 #import "RxTest.h"
+#import "RxObservable+Binding.h"
 #import "RxTestScheduler.h"
 #import "XCTest+Rx.h"
 #import "RxTestableObservable.h"

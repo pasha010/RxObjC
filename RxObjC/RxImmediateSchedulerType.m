@@ -9,9 +9,10 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
+#pragma GCC diagnostic ignored "-Wprotocol"
 @implementation NSObject (RxImmediateSchedulerType)
 
-- (nonnull id <RxDisposable>)scheduleRecursive:(nonnull id)state action:(RxRecursiveImmediateAction)action {
+- (nonnull id <RxDisposable>)scheduleRecursive:(nullable id)state action:(RxRecursiveImmediateAction)action {
     RxRecursiveImmediateScheduler *recursiveScheduler = [[RxRecursiveImmediateScheduler alloc] initWithActon:action andScheduler:self];
 
     [recursiveScheduler schedule:state];

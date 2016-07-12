@@ -6,9 +6,9 @@
 //  Copyright © 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "RxTest.h"
 
-@interface RxObservable_MultipleTest_CombineLatest : XCTestCase
+@interface RxObservable_MultipleTest_CombineLatest : RxTest
 
 @end
 

@@ -7,12 +7,12 @@
 //
 
 #import "RxBackgroundThreadPrimitiveHotObservable.h"
-#import <XCTest/XCTest.h>
+#import "RxObjC.h"
 
 @implementation RxBackgroundThreadPrimitiveHotObservable
 
 - (nonnull id <RxDisposable>)subscribe:(nonnull id <RxObserverType>)observer {
-    XCTAssertTrue([NSThread currentThread].isMainThread == NO);
+    NSAssert([NSThread currentThread].isMainThread == NO, @"its background thread, not main");
     return [super subscribe:observer];
 }
 

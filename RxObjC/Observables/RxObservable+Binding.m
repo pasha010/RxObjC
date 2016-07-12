@@ -16,6 +16,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
+#pragma GCC diagnostic ignored "-Wprotocol"
 
 @implementation NSObject (RxMulticast)
 
@@ -31,20 +32,23 @@
 
 @implementation NSObject (RxPublish)
 
-- (nonnull RxConnectableObservable<id> *)publish {
-    return [self multicast:[RxPublishSubject create]];
+- (nonnull RxConnectableObservable<RxPublishSubject *> *)publish {
+    RxConnectableObservable<RxPublishSubject *> *r = (RxConnectableObservable<RxPublishSubject *> *) [self multicast:[RxPublishSubject create]];
+    return r;
 }
 
 @end
 
 @implementation NSObject (RxReplay)
 
-- (nonnull RxConnectableObservable<id> *)replay:(NSUInteger)bufferSize {
-    return [self multicast:[RxReplaySubject createWithBufferSize:bufferSize]];
+- (nonnull RxConnectableObservable<RxReplaySubject *> *)replay:(NSUInteger)bufferSize {
+    RxConnectableObservable<RxReplaySubject *> *r = (RxConnectableObservable<RxReplaySubject *> *) [self multicast:[RxReplaySubject createWithBufferSize:bufferSize]];
+    return r;
 }
 
-- (nonnull RxConnectableObservable<id> *)replayAll {
-    return [self multicast:[RxReplaySubject createUnbounded]];
+- (nonnull RxConnectableObservable<RxReplaySubject *> *)replayAll {
+    RxConnectableObservable<RxReplaySubject *> *r = (RxConnectableObservable<RxReplaySubject *> *) [self multicast:[RxReplaySubject createUnbounded]];
+    return r;
 }
 
 @end

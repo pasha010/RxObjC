@@ -10,13 +10,6 @@
 
 @implementation RxProducer
 
-- (nonnull instancetype)init {
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
-
 - (id <RxDisposable>)subscribe:(id <RxObserverType>)observer {
     if (![RxCurrentThreadScheduler sharedInstance].isScheduleRequired) {
         return [self run:observer];

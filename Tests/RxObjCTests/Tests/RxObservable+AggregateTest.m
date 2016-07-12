@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "RxTest.h"
 #import "RxObservable+Aggregate.h"
 #import "RxTestScheduler.h"
 #import "XCTest+Rx.h"
@@ -17,7 +17,7 @@
 #import "RxObservable+StandardSequenceOperators.h"
 #import "RxEquatableArray.h"
 
-@interface RxObservableAggregateTest : XCTestCase
+@interface RxObservableAggregateTest : RxTest
 @end
 
 @implementation RxObservableAggregateTest

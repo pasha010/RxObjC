@@ -6,7 +6,6 @@
 //  Copyright © 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "RxTest.h"
 #import "RxAnyObserver.h"
 #import "RxObservable+Creation.h"

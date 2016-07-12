@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source;
 
-- (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source predicate:(RxSingleAsyncPredicate)predicate;
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source predicate:(nullable RxSingleAsyncPredicate)predicate;
 
 
 @end

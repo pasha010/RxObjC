@@ -19,7 +19,7 @@
 }
 
 - (NSString *)debugDescription {
-    return [NSString stringWithFormat:@"%@ @ %d", _value, _time];
+    return [NSString stringWithFormat:@"%@ @ %lu", _value, _time];
 }
 
 - (BOOL)isEqual:(id)other {

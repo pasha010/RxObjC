@@ -76,7 +76,7 @@
     return [self initWithSource:source predicate:nil];
 }
 
-- (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source predicate:(RxSingleAsyncPredicate)predicate {
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source predicate:(nullable RxSingleAsyncPredicate)predicate {
     self = [super init];
     if (self) {
         _source = source;

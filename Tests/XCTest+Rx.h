@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-@import XCTest;
+#import <XCTest/XCTest.h>
 #import "RxTests.h"
-#import "RxRecorded.h"
 
 @class RxEvent;
 

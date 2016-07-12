@@ -30,7 +30,7 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    __block RxNopDisposable *disposable = [RxNopDisposable sharedInstance];
+    __block id <RxDisposable> disposable = [RxNopDisposable sharedInstance];
 
     __block id <RxDisposable> res = nil;
 

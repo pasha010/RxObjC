@@ -8,7 +8,7 @@
 #import "RxTestSchedulerVirtualTimeConverter.h"
 #import "RxEvent.h"
 #import "RxRecorded.h"
-#import "RxTests.h"
+#import "RxTestsDefTypes.h"
 
 @class RxTestableObserver;
 @class RxTestableObservable;
