@@ -6,46 +6,46 @@ before_install:
   - brew outdated xctool || brew upgrade xctool
 
 matrix:
-  - include:
-    - os: osx
-      env: TS=AllTests-OSX -sdk macosx
-    - os: osx
-      env: TS=AllTests-tvOS -sdk appletvos9.2
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 4s"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 5s"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 4s"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 5s"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s Plus"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad 2"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Air"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Pro"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 4s"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 5s"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s Plus"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad 2"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Air"
-    - os: osx
-      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Pro"
+  include:
+    - osx_image: xcode7.3
+      env: TS="AllTests-OSX -sdk macosx"
+    - osx_image: xcode7.3
+      env: TS="AllTests-tvOS -sdk appletvos9.2"
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 4s""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 5s""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 4s""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 5s""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s Plus""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad 2""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Air""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Pro""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 4s""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 5s""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s Plus""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad 2""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Air""
+    - osx_image: xcode7.3
+      env: TS="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Pro""
 
 script:
-  - xctool -workspace RxObjc.xcworkspace -scheme "$TS" -configuration DEBUG test
+  - xctool -workspace RxObjc.xcworkspace -scheme $TS -configuration DEBUG test
   # # osx
   # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-OSX -sdk macosx -configuration DEBUG test
   

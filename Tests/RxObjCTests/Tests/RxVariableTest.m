@@ -49,23 +49,41 @@
 }
 
 - (void)testVariable_sendsCompletedOnDealloc {
-    RxVariable<NSNumber *> *a = [RxVariable create:@1];
+#if (__LP64__)  ||  (__ARM_ARCH_7K__ >= 2)
+#define ENABLE_AUTORELEASE_FOR_COMPLETED_ON_DEALLOC 0
+#else
+#define ENABLE_AUTORELEASE_FOR_COMPLETED_ON_DEALLOC 1
+    NSLog(@"it's 32 bit arch");
+#endif
 
+#if ENABLE_AUTORELEASE_FOR_COMPLETED_ON_DEALLOC
     __block NSNumber *latest = @0;
     __block BOOL completed = NO;
+    @autoreleasepool {
+#endif
+        RxVariable<NSNumber *> *a = [RxVariable create:@1];
 
-    [[a asObservable] subscribeOnNext:^(NSNumber *n) {
-        latest = n;
-    } onCompleted:^{
-       completed = YES;
-    }];
+#if !ENABLE_AUTORELEASE_FOR_COMPLETED_ON_DEALLOC
+        __block NSNumber *latest = @0;
+        __block BOOL completed = NO;
+#endif
 
-    XCTAssertTrue(latest.integerValue == 1);
-    XCTAssertFalse(completed);
+        [[a asObservable] subscribeOnNext:^(NSNumber *n) {
+            latest = n;
+        } onCompleted:^{
+            completed = YES;
+        }];
 
-    a = [RxVariable create:@2];
+        XCTAssertTrue(latest.integerValue == 1);
+        XCTAssertFalse(completed);
 
-    XCTAssertTrue(latest.integerValue == 1);
+        a = [RxVariable create:@2];
+
+        XCTAssertTrue(latest.integerValue == 1);
+#if ENABLE_AUTORELEASE_FOR_COMPLETED_ON_DEALLOC
+    }
+#endif
+
     XCTAssertTrue(completed);
 }
 
