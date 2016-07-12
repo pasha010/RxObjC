@@ -45,7 +45,7 @@ matrix:
       env: TS="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Pro""
 
 script:
-  - xctool -workspace RxObjc.xcworkspace -scheme $TS -configuration DEBUG test
+  - xctool -workspace RxObjc.xcworkspace -scheme "$TS" -configuration DEBUG test
   # # osx
   # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-OSX -sdk macosx -configuration DEBUG test
   
