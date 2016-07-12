@@ -8,72 +8,45 @@ before_install:
 matrix:
   include:
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-OSX -sdk macosx"
+      env: SDK=appletvos9.2 OS=tvOS
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-tvOS -sdk appletvos9.2"
+      env: SDK=macosx OS=OSX
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 4s""
+      env: SDK=iphonesimulator8.4 OS=iOS NAME="iPhone 4s"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 5s""
+      env: SDK=iphonesimulator8.4 OS=iOS NAME="iPhone 5s"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 4s""
+      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPhone 4s"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 5s""
+      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPhone 5s"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s""
+      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPhone 6s"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s Plus""
+      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPhone 6s Plus"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad 2""
+      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPad 2"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Air""
+      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPad Pro"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Pro""
+      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPad Air"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 4s""
+      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPhone 4s"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 5s""
+      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPhone 5s"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s""
+      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPhone 6s"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s Plus""
+      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPhone 6s Plus"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad 2""
+      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPad 2"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Air""
+      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPad Pro"
     - osx_image: xcode7.3
-      env: TEST_SUITE="AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Pro""
+      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPad Air"
 
 script:
- echo "$TEST_SUITE"
- echo "${TEST_SUITE}"
-#xctool -workspace RxObjc.xcworkspace -scheme $TEST_SUITE -configuration DEBUG test
-  # # osx
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-OSX -sdk macosx -configuration DEBUG test
-  
-  # # tvOS
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-tvOS -sdk appletvos9.2 -configuration DEBUG test
-  
-  # # iOS 8.4 
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 4s" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 5s" -configuration DEBUG test
-  
-  # # iOS 9.0
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 4s" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 5s" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s Plus" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad 2" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Air" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Pro" -configuration DEBUG test
-  
-  # # iOS 9.3
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 4s" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 5s" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s Plus" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad 2" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Air" -configuration DEBUG test
-  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Pro" -configuration DEBUG test
-
-
+  - if [ "$OS" == "iOS" ]; then
+      xctool -workspace RxObjc.xcworkspace -scheme AllTests-$OS -sdk $SDK -destination name=$NAME -configuration DEBUG test
+    else
+      xctool -workspace RxObjc.xcworkspace -scheme AllTests-$OS -sdk $SDK -configuration DEBUG test
+    fi
