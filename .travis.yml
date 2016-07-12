@@ -5,33 +5,73 @@ before_install:
   - brew update
   - brew outdated xctool || brew upgrade xctool
 
+matrix:
+  - include:
+    - os: osx
+      env: TS=AllTests-OSX -sdk macosx
+    - os: osx
+      env: TS=AllTests-tvOS -sdk appletvos9.2
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 4s"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 5s"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 4s"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 5s"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s Plus"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad 2"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Air"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Pro"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 4s"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 5s"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s Plus"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad 2"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Air"
+    - os: osx
+      env: TS=AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Pro"
+
 script:
-  # osx
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-OSX -sdk macosx -configuration DEBUG test
+  - xctool -workspace RxObjc.xcworkspace -scheme "$TS" -configuration DEBUG test
+  # # osx
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-OSX -sdk macosx -configuration DEBUG test
   
-  # tvOS
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-tvOS -sdk appletvos9.2 -configuration DEBUG test
+  # # tvOS
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-tvOS -sdk appletvos9.2 -configuration DEBUG test
   
-  # iOS 8.4 
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 4s" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 5s" -configuration DEBUG test
+  # # iOS 8.4 
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 4s" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 5s" -configuration DEBUG test
   
-  # iOS 9.0
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 4s" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 5s" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s Plus" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad 2" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Air" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Pro" -configuration DEBUG test
+  # # iOS 9.0
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 4s" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 5s" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 6s Plus" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad 2" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Air" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Pro" -configuration DEBUG test
   
-  # iOS 9.3
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 4s" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 5s" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s Plus" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad 2" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Air" -configuration DEBUG test
-  - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Pro" -configuration DEBUG test
+  # # iOS 9.3
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 4s" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 5s" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 6s Plus" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad 2" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Air" -configuration DEBUG test
+  # - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPad Pro" -configuration DEBUG test
 
 
