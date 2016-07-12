@@ -2,6 +2,6 @@ language: objective-c
 
 osx_image: xcode7.3
 
-xcode_workspace: RxObjC.xcodeproj
+xcode_project: RxObjC.xcodeproj
 
 xcode_scheme: AllTests-OSX
