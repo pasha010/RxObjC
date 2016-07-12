@@ -1,0 +1,19 @@
+language: objective-c
+
+xcode_project: RxObjC.xcodeproj
+
+before_install:
+  - brew update
+  - brew outdated xctool || brew upgrade xctool
+  
+matrix: 
+  include:
+    - os: osx
+      osx_image: xcode7.3
+      xcode_scheme: AllTests-OSX
+    - os: ios
+      osx_image: xcode7.3
+      xcode_scheme: AllTests-iOS
+    - os: tvOS
+      osx_image: xcode7.3
+      xcode_scheme: AllTests-tvOS
