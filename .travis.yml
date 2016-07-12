@@ -2,6 +2,10 @@ language: objective-c
 
 xcode_project: RxObjC.xcodeproj
 
+before_install:
+  - brew update
+  - brew outdated xctool || brew upgrade xctool
+  
 matrix: 
   include:
     - os: osx
