@@ -37,6 +37,11 @@
                BlueprintName = "AllTests-OSX"
                ReferencedContainer = "container:RxObjC.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RxTest">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <AdditionalOptions>
