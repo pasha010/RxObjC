@@ -4,4 +4,12 @@ osx_image: xcode7.3
 
 xcode_project: RxObjC.xcodeproj
 
-xcode_scheme: AllTests-OSX
+matrix: 
+  include:
+    - os: osx
+      xcode_scheme: AllTests-OSX
+    - os: ios
+      xcode_scheme: AllTests-iOS
+    - os: tvOS
+      xcode_scheme: AllTests-tvOS
+      
