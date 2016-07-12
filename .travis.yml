@@ -8,11 +8,14 @@ before_install:
 script:
   # osx
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-OSX -sdk macosx -configuration DEBUG test
+  
   # tvOS
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-tvOS -sdk appletvos9.2 -configuration DEBUG test
+  
   # iOS 8.4 
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 4s" -configuration DEBUG test
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator8.4 -destination name="iPhone 5s" -configuration DEBUG test
+  
   # iOS 9.0
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 4s" -configuration DEBUG test
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPhone 5s" -configuration DEBUG test
@@ -21,6 +24,7 @@ script:
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad 2" -configuration DEBUG test
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Air" -configuration DEBUG test
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.0 -destination name="iPad Pro" -configuration DEBUG test
+  
   # iOS 9.3
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 4s" -configuration DEBUG test
   - xctool -workspace RxObjc.xcworkspace -scheme AllTests-iOS -sdk iphonesimulator9.3 -destination name="iPhone 5s" -configuration DEBUG test
