@@ -23,6 +23,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
+#pragma GCC diagnostic ignored "-Wprotocol"
 
 @implementation NSObject (RxFilter)
 
@@ -44,7 +45,7 @@
 
 @end
 
-@implementation NSObject (RxTake)
+@implementation NSObject (RxTakeSequence)
 
 - (nonnull RxObservable *)take:(NSUInteger)count {
     if (count == 0) {
@@ -63,7 +64,7 @@
 
 @end
 
-@implementation NSObject (RxSkip)
+@implementation NSObject (RxSkipSequence)
 
 - (nonnull RxObservable *)skip:(NSInteger)count {
     return [[RxSkipCount alloc] initWithSource:[self asObservable] count:count];

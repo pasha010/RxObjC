@@ -15,7 +15,7 @@
 
 @implementation RxConcatSink
 
-- (void)on:(nonnull RxEvent<id <RxObservableConvertibleType>> *)event {
+- (void)on:(nonnull RxEvent *)event {
     switch (event.type) {
         case RxEventTypeNext:
             [self forwardOn:event];

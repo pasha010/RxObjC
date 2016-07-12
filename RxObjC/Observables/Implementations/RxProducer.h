@@ -10,8 +10,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RxProducer<Element> : RxObservable<Element>
 
-- (nonnull instancetype)init;
-
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer;
 
 @end

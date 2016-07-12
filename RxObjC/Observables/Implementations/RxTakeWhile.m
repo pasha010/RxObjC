@@ -77,7 +77,7 @@
         }
         rx_tryCatch(self, ^{
             _running = _parent->_indexPredicate(event.element, _index);
-            rx_incrementChecked(&_index);
+            rx_incrementCheckedUnsigned(&_index);
             if (_running) {
                 [self forwardOn:[RxEvent next:event.element]];
             } else {

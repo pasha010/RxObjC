@@ -29,7 +29,7 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    NSObject <RxImmediateSchedulerType> *scheduler = _parent->_scheduler;
+    NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _parent->_scheduler;
     @weakify(self);
     return [scheduler scheduleRecursive:@(YES) action:^(NSNumber *isFirstNumber, void (^recurse)(id)) {
         @strongify(self);

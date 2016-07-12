@@ -10,7 +10,7 @@
 #import "RxSink.h"
 #import "RxTuple.h"
 #import "RxInvocableType.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 
 @protocol RxObservableConvertibleType;
 @class RxObservable;

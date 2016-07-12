@@ -13,9 +13,9 @@
 
 @class RxAnyRecursiveScheduler;
 
-typedef void (^RxRecursiveImmediateAction)(id, void(^recurse)(id));
+typedef void (^RxRecursiveImmediateAction)(id __nullable state, void(^__nonnull recurse)(id __nullable));
 
-typedef void (^RxAnyRecursiveSchedulerAction)(id state, RxAnyRecursiveScheduler *scheduler);
+typedef void (^RxAnyRecursiveSchedulerAction)(id __nullable state, RxAnyRecursiveScheduler * __nonnull scheduler);
 
 
 #endif /* RxSchedulers_h */

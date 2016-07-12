@@ -7,7 +7,7 @@
 //
 
 #import "RxMap.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 #import "RxSink.h"
 
 static int rx_numberOfMapOperators = 0;

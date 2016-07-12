@@ -4,7 +4,7 @@
 //
 
 #import "RxObservable.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 #import "RxAnonymousObserver.h"
 #import "RxAnonymousDisposable.h"
 #import "RxNopDisposable.h"

@@ -4,7 +4,7 @@
 //
 
 #import "RxMainScheduler.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 #import "RxSingleAssignmentDisposable.h"
 
 @implementation RxMainScheduler {

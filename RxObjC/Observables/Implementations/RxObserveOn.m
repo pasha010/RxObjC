@@ -64,7 +64,7 @@ typedef NS_ENUM(NSUInteger, RxObserveOnState) {
     }]).boolValue;
 
     if (shouldStart) {
-        NSObject <RxImmediateSchedulerType> *scheduler = _scheduler;
+        NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _scheduler;
         @weakify(self);
         _scheduleDisposable.disposable = [scheduler scheduleRecursive:nil action:^(id o, void (^recurse)(id)) {
             @strongify(self);

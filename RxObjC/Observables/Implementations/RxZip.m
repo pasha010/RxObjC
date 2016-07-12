@@ -7,7 +7,7 @@
 //
 
 #import "RxZip.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 
 @implementation RxZipSink {
     NSUInteger _arity;

@@ -5,7 +5,7 @@
 
 #import "RxSchedulerServices+Emulation.h"
 #import "RxSchedulerType.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 #import "RxRecursiveScheduler.h"
 
 @implementation RxSchedulePeriodicRecursive {

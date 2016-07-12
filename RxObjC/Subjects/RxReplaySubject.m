@@ -10,7 +10,7 @@
 #import "RxLock.h"
 #import "RxBag.h"
 #import "RxAnyObserver.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 #import "RxSynchronizedUnsubscribeType.h"
 #import "RxSynchronizedOnType.h"
 #import "RxSynchronizedSubscribeType.h"
@@ -148,7 +148,7 @@
         return [RxNopDisposable sharedInstance];
     }
 
-    NSObject *obj = observer;
+    NSObject<RxObserverType> *obj = (NSObject<RxObserverType> *) observer;
 
     RxAnyObserver *anyObserver = [obj asObserver];
 

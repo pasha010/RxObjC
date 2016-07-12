@@ -42,10 +42,12 @@ Send `event` to this observer.
 }
 
 @end
+
 #pragma clang diagnostic pop
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
+#pragma GCC diagnostic ignored "-Wprotocol"
 @implementation NSObject (RxAnyObserver)
 
 - (nonnull RxAnyObserver<id> *)asObserver {

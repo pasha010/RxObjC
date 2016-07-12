@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RxObserverBase.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

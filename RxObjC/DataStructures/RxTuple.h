@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define RxTuplePack(...) \
     RxTuplePack_(__VA_ARGS__)
 
-/// Declares new object variables and unpacks a RACTuple into them.
+/// Declares new object variables and unpacks a RxTuple into them.
 ///
 /// This macro should be used on the left side of an assignment, with the
 /// tuple on the right side. Nothing else should appear on the same line, and the
@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Examples
 ///
-///   RACTupleUnpack(NSString *string, NSNumber *num) = [RACTuple tupleWithObjects:@"foo", @5, nil];
+///   RxTupleUnpack(NSString *string, NSNumber *num) = [RxTuple tupleWithObjects:@"foo", @5, nil];
 ///   NSLog(@"string: %@", string);
 ///   NSLog(@"num: %@", num);
 ///
 ///   /* The above is equivalent to: */
-///   RACTuple *t = [RACTuple tupleWithObjects:@"foo", @5, nil];
+///   RxTuple *t = [RxTuple tupleWithObjects:@"foo", @5, nil];
 ///   NSString *string = t[0];
 ///   NSNumber *num = t[1];
 ///   NSLog(@"string: %@", string);

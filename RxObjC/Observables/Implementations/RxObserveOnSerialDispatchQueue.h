@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 
 @class RxSerialDispatchQueueScheduler;
 

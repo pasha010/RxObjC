@@ -4,7 +4,7 @@
 //
 
 #import "RxQueue.h"
-#import <libextobjc/extobjc.h>
+#import "RxObjCExt.h"
 
 @implementation RxQueue {
     NSMutableArray *__nonnull _storage;

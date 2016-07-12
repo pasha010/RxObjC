@@ -9,7 +9,7 @@
 @implementation RxNopDisposable
 
 + (instancetype)sharedInstance {
-    static dispatch_once_t token = nil;
+    static dispatch_once_t token;
     static RxNopDisposable *nopDisposable = nil;
     dispatch_once(&token, ^{
         nopDisposable = [[RxNopDisposable alloc] init];

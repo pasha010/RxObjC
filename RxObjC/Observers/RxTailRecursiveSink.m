@@ -107,7 +107,7 @@
             [_generators addObject:[RxTuple2 tupleWithArray:@[e, [EXTNil null]]]];
         }
 
-        RxTuple2<NSEnumerator *, NSNumber *> *nextGenerator = [self extract:nextCandidate];
+        RxTuple2<NSEnumerator<id <RxObservableConvertibleType>> *, NSNumber *> *nextGenerator = [self extract:nextCandidate];
         
         if (nextGenerator) {
             [_generators addObject:nextGenerator];

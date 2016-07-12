@@ -9,6 +9,9 @@
 #import "RxObservable+Debug.h"
 #import "RxDebugProducer.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+#pragma GCC diagnostic ignored "-Wprotocol"
 
 @implementation NSObject (RxDebug)
 
@@ -32,5 +35,6 @@
                                           function:function];
 }
 
-
 @end
+
+#pragma clang diagnostic pop

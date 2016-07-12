@@ -13,6 +13,9 @@
 #import "RxBinaryDisposable.h"
 #import "RxObservable.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+#pragma GCC diagnostic ignored "-Wprotocol"
 
 @implementation NSObject (RxObservableTypeExtension)
 
@@ -112,3 +115,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop

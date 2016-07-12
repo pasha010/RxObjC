@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxObjC.h"
+#import "RxObjCCommon.h"
 #import "RxDisposable.h"
 #import "RxObserverType.h"
 

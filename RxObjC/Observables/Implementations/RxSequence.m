@@ -27,7 +27,7 @@
 }
 
 - (nonnull id<RxDisposable>)run {
-    NSObject <RxImmediateSchedulerType> *scheduler = _parent->_scheduler;
+    NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _parent->_scheduler;
     return [scheduler scheduleRecursive:@[@0, _parent->_elements.allObjects] action:^(NSArray *state, void (^recurse)(id)) {
         NSNumber *number = state[0];
         NSArray *array = (NSArray *) state[1];
