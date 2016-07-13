@@ -9,5 +9,9 @@
 #ifndef RxBlocking_h
 #define RxBlocking_h
 
+#import "RxBlockingObservable.h"
+#import "RxBlockingObservable+Operators.h"
+#import "RxObservableConvertibleType+Blocking.h"
+#import "RxRunLoopLock.h"
 
 #endif /* RxBlocking_h */

@@ -7,8 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-
-#import "RxObjC.h"
+#import <RxObjC/RxObjC.h>
+#import <RxBlocking/RxBlocking.h>
 #import "RxRecorded.h"
 #import "RxTestScheduler.h"
 #import "RxTestableObservable.h"

@@ -7,6 +7,7 @@
 //
 
 #import "RxTest.h"
+#import <RxBlocking/RxBlockingObservable+Operators.h>
 #import "XCTest+Rx.h"
 
 @interface RxObservableCreationTest : RxTest
@@ -56,6 +57,31 @@
     }];
 
     XCTAssert([res.events isEqualToArray:@[]]);
+}
+
+- (void)testJust_DisposeAfterNext {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+    RxSingleAssignmentDisposable *d = [[RxSingleAssignmentDisposable alloc] init];
+
+    RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
+
+    [scheduler scheduleAt:100 action:^{
+        d.disposable = [[RxObservable just:@42 scheduler:scheduler] subscribeWith:^(RxEvent<NSNumber *> *event) {
+            [res on:event];
+            if (event.type == RxEventTypeNext) {
+                [d dispose];
+            }
+        }];
+    }];
+
+    [scheduler start];
+
+    XCTAssert([res.events isEqualToArray:@[[self next:101 element:@42]]]);
+}
+
+- (void)testJust_DefaultScheduler {
+    NSArray<NSNumber *> *res = [[[RxObservable just:@42 scheduler:[RxMainScheduler sharedInstance]] toBlocking] blocking_toArray];
+    XCTAssert([res isEqualToArray:@[@42]]);
 }
 
 @end
