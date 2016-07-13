@@ -30,7 +30,7 @@ Records information about subscriptions to and unsubscriptions from observable s
 
  - parameter subscribe: Virtual time at which the subscription occurred.
 */
-- (nonnull instancetype)initWithSubsribe:(NSUInteger)subscribe;
+- (nonnull instancetype)initWithSubscribe:(NSUInteger)subscribe;
 
 /**
  Creates a new subscription object with the given virtual subscription and unsubscription time.
@@ -39,6 +39,8 @@ Records information about subscriptions to and unsubscriptions from observable s
  - parameter unsubscribe: Virtual time at which the unsubscription occurred.
 */
 - (nonnull instancetype)initWithSubscribe:(NSUInteger)subscribe unsubscribe:(NSUInteger)unsubscribe;
+
++ (nonnull instancetype)createWithSubscribe:(NSUInteger)subscribe unsubscribe:(NSUInteger)unsubscribe;;
 
 
 @end

@@ -25,6 +25,8 @@ Constructs a new disposable with the given action used for disposal.
 */
 - (nonnull instancetype)initWithDisposeAction:(nullable RxDisposeAction)disposeAction;
 
++ (nonnull instancetype)create:(nullable RxDisposeAction)disposeAction;
+
 @end
 
 NS_ASSUME_NONNULL_END

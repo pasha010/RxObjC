@@ -16,7 +16,7 @@ RxSubscription *RxSubscribedToHotObservable() {
     static RxSubscription *instance = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
-       instance = [[RxSubscription alloc] initWithSubsribe:0];
+       instance = [[RxSubscription alloc] initWithSubscribe:0];
     });
     return instance;
 }

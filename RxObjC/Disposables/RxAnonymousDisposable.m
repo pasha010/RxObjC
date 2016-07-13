@@ -11,6 +11,9 @@
     int32_t _disposed;
 }
 
++ (nonnull instancetype)create:(nullable RxDisposeAction)disposeAction {
+    return [[self alloc] initWithDisposeAction:disposeAction];
+}
 
 - (nonnull instancetype)initWithDisposeAction:(nullable RxDisposeAction)disposeAction {
     self = [super init];

@@ -11,7 +11,11 @@
 
 @implementation RxSubscription
 
-- (nonnull instancetype)initWithSubsribe:(NSUInteger)subscribe {
++ (nonnull instancetype)createWithSubscribe:(NSUInteger)subscribe unsubscribe:(NSUInteger)unsubscribe {
+    return [[self alloc] initWithSubscribe:subscribe unsubscribe:unsubscribe];
+}
+
+- (nonnull instancetype)initWithSubscribe:(NSUInteger)subscribe {
     return [self initWithSubscribe:subscribe unsubscribe:NSUIntegerMax];
 }
 

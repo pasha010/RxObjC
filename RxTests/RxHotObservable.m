@@ -38,7 +38,7 @@
 - (nonnull id <RxDisposable>)subscribe:(nonnull id <RxObserverType>)observer {
     __block RxBagKey *key = [_observers insert:[[RxAnyObserver alloc] initWithObserver:observer]];
 
-    [self.subscriptions addObject:[[RxSubscription alloc] initWithSubsribe:((NSNumber *) self.testScheduler.clock).unsignedIntegerValue]];
+    [self.subscriptions addObject:[[RxSubscription alloc] initWithSubscribe:((NSNumber *) self.testScheduler.clock).unsignedIntegerValue]];
 
     __block NSUInteger i = self.subscriptions.count - 1;
     @weakify(self);
