@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Identifies one of the global concurrent dispatch queues with specified quality of service class.
@@ -42,3 +43,5 @@
 + (nonnull instancetype)background;
 
 @end
+
+NS_ASSUME_NONNULL_END

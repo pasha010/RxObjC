@@ -8,6 +8,7 @@
 
 #import "RxTest.h"
 #import "RxObservable+Creation.h"
+#import <mach/mach.h>
 
 @interface RxAnything : NSObject 
 - (void)justCallIt:(void(^)(void))action;
@@ -119,16 +120,32 @@ RxObservable<NSNumber *> *rx_returnSomethingInt() {
 
 - (void)testResourceLeaksDetectionIsTurnedOn {
 #if TRACE_RESOURCES
+
+#if (__LP64__)  ||  (__ARM_ARCH_7K__ >= 2)
+#define ENABLE_AUTORELEASE_FOR_DETECTION_IS_TURNED_ON 0
+#else
+#define ENABLE_AUTORELEASE_FOR_DETECTION_IS_TURNED_ON 1
+    NSLog(@"it's 32 bit arch");
+#endif
+
     int32_t startResourceCount = rx_resourceCount;
 
-    RxObservable<NSNumber *> *observable = [RxObservable just:@1];
+#if ENABLE_AUTORELEASE_FOR_DETECTION_IS_TURNED_ON
+    @autoreleasepool {
+#endif
 
-    XCTAssertTrue(observable != nil);
-    XCTAssertTrue(rx_resourceCount == startResourceCount + 1);
+        RxObservable<NSNumber *> *observable = [RxObservable just:@1];
 
-    observable = nil;
+        XCTAssertTrue(observable != nil);
+        XCTAssertTrue(rx_resourceCount == startResourceCount + 1);
 
-    XCTAssertTrue(rx_resourceCount == startResourceCount);
+        observable = nil;
+#if ENABLE_AUTORELEASE_FOR_DETECTION_IS_TURNED_ON
+    }
+#endif
+
+    XCTAssertTrue(rx_resourceCount == startResourceCount, @"rx_resourceCount == %d, startResourceCount = %d", rx_resourceCount, startResourceCount);
+
 #elif RELEASE
     XCTAssert(NO, @"Can't run unit tests in without tracing");
 #endif

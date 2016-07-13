@@ -62,5 +62,4 @@ fastlane/test_output
 
 .idea/*
 Pods/
-RxObjC.xcworkspace
 /.idea/RxObjC.iml
