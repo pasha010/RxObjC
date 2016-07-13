@@ -7,21 +7,10 @@
 //
 
 #import "RxTest.h"
-#import "RxObjC.h"
-#import "RxObservable+Binding.h"
-#import "RxTestScheduler.h"
 #import "XCTest+Rx.h"
-#import "RxTestableObservable.h"
-#import "RxPublishSubject.h"
-#import "RxTestableObserver.h"
-#import "RxSubscription.h"
 #import "RxTestError.h"
-#import "RxObservable+Zip.h"
-#import "RxObservable+Creation.h"
-#import "RxObservable+Multiple.h"
 #import "RxMySubject.h"
 #import "RxTestConnectableObservable.h"
-#import "RxAnonymousDisposable.h"
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCDFAInspection"

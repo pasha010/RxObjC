@@ -13,5 +13,5 @@
 @end
 
 @implementation RxObservableBlockingTest
-
+// зависимость от RxBlocking
 @end

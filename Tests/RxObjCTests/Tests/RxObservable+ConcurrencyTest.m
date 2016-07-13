@@ -8,12 +8,12 @@
 
 #import "RxTest.h"
 
-@interface RxObservable_ConcurrencyTest : RxTest
+@interface RxObservableConcurrencyTest : RxTest
 
 @end
 
-@implementation RxObservable_ConcurrencyTest
+@implementation RxObservableConcurrencyTest
 
-
+// зависимость от RxBlocking
 
 @end
