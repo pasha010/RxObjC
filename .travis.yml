@@ -8,40 +8,42 @@ before_install:
 matrix:
   include:
     - osx_image: xcode7.3
-      env: SDK=appletvos9.2 OS=tvOS
+      env: R_SDK=appletvos9.2 R_OS=tvOS
 #    - osx_image: xcode7.3
-#      env: SDK=macosx OS=OSX
+#      env: R_SDK=macosx R_OS=OSX
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator8.4 OS=iOS NAME="iPhone 4s"
+#      env: R_SDK=iphonesimulator8.4 R_OS=iOS R_NAME="iPhone 4s"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator8.4 OS=iOS NAME="iPhone 5s"
+#      env: R_SDK=iphonesimulator8.4 R_OS=iOS R_NAME="iPhone 5s"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPhone 4s"
+#      env: R_SDK=iphonesimulator9.0 R_OS=iOS R_NAME="iPhone 4s"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPhone 5s"
+#      env: R_SDK=iphonesimulator9.0 R_OS=iOS R_NAME="iPhone 5s"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPhone 6s"
+#      env: R_SDK=iphonesimulator9.0 R_OS=iOS R_NAME="iPhone 6s"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPhone 6s Plus"
+#      env: R_SDK=iphonesimulator9.0 R_OS=iOS R_NAME="iPhone 6s Plus"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPad 2"
+#      env: R_SDK=iphonesimulator9.0 R_OS=iOS R_NAME="iPad 2"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPad Pro"
+#      env: R_SDK=iphonesimulator9.0 R_OS=iOS R_NAME="iPad Pro"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.0 OS=iOS NAME="iPad Air"
+#      env: R_SDK=iphonesimulator9.0 R_OS=iOS R_NAME="iPad Air"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPhone 4s"
+#      env: R_SDK=iphonesimulator9.3 R_OS=iOS R_NAME="iPhone 4s"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPhone 5s"
+#      env: R_SDK=iphonesimulator9.3 R_OS=iOS R_NAME="iPhone 5s"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPhone 6s"
+#      env: R_SDK=iphonesimulator9.3 R_OS=iOS R_NAME="iPhone 6s"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPhone 6s Plus"
+#      env: R_SDK=iphonesimulator9.3 R_OS=iOS R_NAME="iPhone 6s Plus"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPad 2"
+#      env: R_SDK=iphonesimulator9.3 R_OS=iOS R_NAME="iPad 2"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPad Pro"
+#      env: R_SDK=iphonesimulator9.3 R_OS=iOS R_NAME="iPad Pro"
 #    - osx_image: xcode7.3
-#      env: SDK=iphonesimulator9.3 OS=iOS NAME="iPad Air"
+#      env: R_SDK=iphonesimulator9.3 R_OS=iOS R_NAME="iPad Air"
 
-script: ./scripts/common.sh $OS $SDK $NAME
+script:
+ - set -o pipefail
+ - ./scripts/common.sh $R_OS $R_SDK $R_NAME
