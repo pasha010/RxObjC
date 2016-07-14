@@ -16,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxObservable (Create)
+@interface RxObservable<E> (Create)
 /**
 Creates an observable sequence from a specified subscribe method implementation.
 
@@ -25,11 +25,11 @@ Creates an observable sequence from a specified subscribe method implementation.
 - parameter subscribe: Implementation of the resulting observable sequence's `subscribe` method.
 - returns: The observable sequence with the specified implementation for the `subscribe` method.
 */
-+ (nonnull RxObservable *)create:(RxAnonymousSubscribeHandler)subscribe;
++ (nonnull RxObservable<E> *)create:(RxAnonymousSubscribeHandler)subscribe;
 
 @end
 
-@interface RxObservable (Empty)
+@interface RxObservable<E> (Empty)
 /**
 Returns an empty observable sequence, using the specified scheduler to send out the single `Completed` message.
 
@@ -37,11 +37,11 @@ Returns an empty observable sequence, using the specified scheduler to send out 
 
 - returns: An observable sequence with no elements.
 */
-+ (nonnull RxObservable *)empty;
++ (nonnull RxObservable<E> *)empty;
 
 @end
 
-@interface RxObservable (Never)
+@interface RxObservable<E> (Never)
 
 /**
 Returns a non-terminating observable sequence, which can be used to denote an infinite duration.
@@ -50,11 +50,11 @@ Returns a non-terminating observable sequence, which can be used to denote an in
 
 - returns: An observable sequence whose observers will never get called.
 */
-+ (nonnull RxObservable *)never;
++ (nonnull RxObservable<E> *)never;
 
 @end
 
-@interface RxObservable (Just)
+@interface RxObservable <E> (Just)
 /**
 Returns an observable sequence that contains a single element.
 
@@ -63,7 +63,7 @@ Returns an observable sequence that contains a single element.
 - parameter element: Single element in the resulting observable sequence.
 - returns: An observable sequence containing the single specified element.
 */
-+ (nonnull RxObservable *)just:(nonnull id)element;
++ (nonnull RxObservable<E> *)just:(nonnull E)element;
 
 /**
 Returns an observable sequence that contains a single element.
@@ -74,7 +74,7 @@ Returns an observable sequence that contains a single element.
 - parameter: Scheduler to send the single element on.
 - returns: An observable sequence containing the single specified element.
 */
-+ (nonnull RxObservable *)just:(nonnull id)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
++ (nonnull RxObservable<E> *)just:(nonnull E)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
 @end
 
@@ -89,7 +89,7 @@ Returns an observable sequence that terminates with an `error`.
 + (nonnull RxObservable *)error:(nonnull NSError *)error;
 @end
 
-@interface RxObservable (Of)
+@interface RxObservable<E> (Of)
 /**
 This method creates a new Observable instance with a variable number of elements.
 
@@ -99,13 +99,13 @@ This method creates a new Observable instance with a variable number of elements
 - parameter scheduler: Scheduler to send elements on. If `nil`, elements are sent immediatelly on subscription.
 - returns: The observable sequence whose elements are pulled from the given arguments.
 */
-+ (nonnull RxObservable *)of:(nonnull NSArray *)elements;
++ (nonnull RxObservable<E> *)of:(nonnull NSArray<E> *)elements;
 
-+ (nonnull RxObservable *)of:(nonnull NSArray *)elements scheduler:(nullable id <RxImmediateSchedulerType>)scheduler;
++ (nonnull RxObservable<E> *)of:(nonnull NSArray<E> *)elements scheduler:(nullable id <RxImmediateSchedulerType>)scheduler;
 
 @end
 
-@interface RxObservable (Defer)
+@interface RxObservable<E> (Defer)
 /**
 Returns an observable sequence that invokes the specified factory function whenever a new observer subscribes.
 
@@ -114,7 +114,7 @@ Returns an observable sequence that invokes the specified factory function whene
 - parameter observableFactory: Observable factory function to invoke for each observer that subscribes to the resulting sequence.
 - returns: An observable sequence whose observers trigger an invocation of the given observable factory function.
 */
-+ (nonnull RxObservable *)deferred:(RxObservableFactory)observableFactory;
++ (nonnull RxObservable<E> *)deferred:(RxObservableFactory)observableFactory;
 
 /**
 Generates an observable sequence by running a state-driven loop producing the sequence's elements, using the specified scheduler
@@ -128,14 +128,14 @@ to run the loop send out observer messages.
 - parameter scheduler: Scheduler on which to run the generator loop.
 - returns: The generated sequence.
 */
-+ (nonnull RxObservable *)generate:(nonnull id)initialState
-                         condition:(BOOL(^)(id))condition
-                         scheduler:(id <RxImmediateSchedulerType>)scheduler
-                           iterate:(id(^)(id))iterate;
++ (nonnull RxObservable<E> *)generate:(nonnull E)initialState
+                            condition:(BOOL(^)(E))condition
+                            scheduler:(id <RxImmediateSchedulerType>)scheduler
+                              iterate:(E(^)(E))iterate;
 
-+ (nonnull RxObservable *)generate:(nonnull id)initialState
-                         condition:(BOOL(^)(id))condition
-                           iterate:(id(^)(id))iterate;
++ (nonnull RxObservable<E> *)generate:(nonnull E)initialState
+                            condition:(BOOL(^)(E))condition
+                              iterate:(E(^)(E))iterate;
 
 /**
 Generates an observable sequence that repeats the given element infinitely, using the specified scheduler to send out observer messages.
@@ -146,10 +146,10 @@ Generates an observable sequence that repeats the given element infinitely, usin
 - parameter scheduler: Scheduler to run the producer loop on.
 - returns: An observable sequence that repeats the given element infinitely.
 */
-+ (nonnull RxObservable *)repeatElement:(nonnull id)element
-                              scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
++ (nonnull RxObservable<E> *)repeatElement:(nonnull E)element
+                                 scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
-+ (nonnull RxObservable *)repeatElement:(nonnull id)element;
++ (nonnull RxObservable<E> *)repeatElement:(nonnull E)element;
 
 /**
 Constructs an observable sequence that depends on a resource object, whose lifetime is tied to the resulting observable sequence's lifetime.
@@ -160,8 +160,8 @@ Constructs an observable sequence that depends on a resource object, whose lifet
 - parameter observableFactory: Factory function to obtain an observable sequence that depends on the obtained resource.
 - returns: An observable sequence whose lifetime controls the lifetime of the dependent resource object.
 */
-+ (nonnull RxObservable *)using:(id <RxDisposable>(^)())resourceFactory
-              observableFactory:(RxObservable *(^)(id <RxDisposable>))observableFactory;
++ (nonnull RxObservable<E> *)using:(id <RxDisposable>(^)())resourceFactory
+                 observableFactory:(RxObservable<E> *(^)(id <RxDisposable>))observableFactory;
 
 @end
 
@@ -176,16 +176,16 @@ Generates an observable sequence of integral numbers within a specified range, u
 - parameter scheduler: Scheduler to run the generator loop on.
 - returns: An observable sequence that contains a range of sequential integral numbers.
 */
-+ (nonnull RxObservable *)range:(nonnull NSNumber *)start
-                          count:(NSUInteger)count
-                      scheduler:(nonnull id<RxImmediateSchedulerType>)scheduler;
++ (nonnull RxObservable<NSNumber *> *)range:(nonnull NSNumber *)start
+                                      count:(NSUInteger)count
+                                  scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
-+ (nonnull RxObservable *)range:(nonnull NSNumber *)start
-                          count:(NSUInteger)count;
++ (nonnull RxObservable<NSNumber *> *)range:(nonnull NSNumber *)start
+                                      count:(NSUInteger)count;
 
 @end
 
-@interface NSArray (RxToObservable)
+@interface NSArray<E> (RxToObservable)
 /**
 Converts a sequence to an observable sequence.
 
@@ -193,19 +193,22 @@ Converts a sequence to an observable sequence.
 
 - returns: The observable sequence whose elements are pulled from the given enumerable sequence.
 */
-- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
-- (nonnull RxObservable *)toObservable;
+- (nonnull RxObservable<E> *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
+
+- (nonnull RxObservable<E> *)toObservable;
 
 @end
 
-@interface NSSet (RxToObservable)
-- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
-- (nonnull RxObservable *)toObservable;
+@interface NSSet<E> (RxToObservable)
+- (nonnull RxObservable<E> *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
+
+- (nonnull RxObservable<E> *)toObservable;
 @end
 
-@interface NSEnumerator (RxToObservable)
-- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
-- (nonnull RxObservable *)toObservable;
+@interface NSEnumerator<E> (RxToObservable)
+- (nonnull RxObservable<E> *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
+
+- (nonnull RxObservable<E> *)toObservable;
 @end
 
 NS_ASSUME_NONNULL_END

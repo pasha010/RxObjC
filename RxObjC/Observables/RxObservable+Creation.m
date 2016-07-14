@@ -49,11 +49,11 @@
 
 @implementation RxObservable (Just)
 
-+ (nonnull RxObservable *)just:(nonnull id)element {
++ (nonnull RxObservable<id> *)just:(nonnull id)element {
     return [[RxJust alloc] initWithElement:element];
 }
 
-+ (nonnull RxObservable *)just:(nonnull id)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
++ (nonnull RxObservable<id> *)just:(nonnull id)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
     return [[RxJustScheduled alloc] initWithElement:element scheduler:scheduler];
 }
 
@@ -111,8 +111,8 @@
     return [self repeatElement:element scheduler:[RxCurrentThreadScheduler sharedInstance]];
 }
 
-+ (nonnull RxObservable *)using:(id <RxDisposable>(^)())resourceFactory
-              observableFactory:(RxObservable *(^)(id <RxDisposable>))observableFactory {
++ (nonnull RxObservable<id> *)using:(id <RxDisposable>(^)())resourceFactory
+                  observableFactory:(RxObservable<id> *(^)(id <RxDisposable>))observableFactory {
     return [[RxUsing alloc] initWithResourceFactory:resourceFactory observableFactory:observableFactory];
 }
 

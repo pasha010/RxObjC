@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSArray (RxCombineLatest) <RxObservableType>
+@interface NSArray<E> (RxCombineLatest) <RxObservableType>
 /**
 Merges the specified observable sequences into one observable sequence by using the selector function whenever any of the observable sequences produces an element.
 
@@ -21,11 +21,11 @@ Merges the specified observable sequences into one observable sequence by using 
 - parameter resultSelector: Function to invoke whenever any of the sources produces an element.
 - returns: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
 */
-- (nonnull RxObservable *)combineLatest:(nonnull id(^)(NSArray *__nonnull))resultSelector;
+- (nonnull RxObservable<E> *)combineLatest:(nonnull id(^)(NSArray<E> *__nonnull))resultSelector;
 
 @end
 
-@interface NSArray (RxZip) <RxObservableType>
+@interface NSArray<E> (RxZip) <RxObservableType>
 /**
 Merges the specified observable sequences into one observable sequence by using the selector function whenever all of the observable sequences have produced an element at a corresponding index.
 
@@ -34,7 +34,7 @@ Merges the specified observable sequences into one observable sequence by using 
 - parameter resultSelector: Function to invoke for each series of elements at corresponding indexes in the sources.
 - returns: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
 */
-- (nonnull RxObservable *)zip:(nonnull id(^)(NSArray *__nonnull))resultSelector;
+- (nonnull RxObservable<E> *)zip:(nonnull id(^)(NSArray<E> *__nonnull))resultSelector;
 
 @end
 
@@ -54,7 +54,7 @@ previous inner observable sequence.
 
 @end
 
-@interface RxObservable (Concat)
+@interface NSObject (RxConcatWith) <RxObservableType>
 /**
 Concatenates the second observable sequence to `self` upon successful termination of `self`.
 
@@ -67,7 +67,7 @@ Concatenates the second observable sequence to `self` upon successful terminatio
 
 @end
 
-@interface NSArray (RxConcat)
+@interface NSArray<E> (RxConcat)
 /**
 Concatenates all observable sequences in the given sequence, as long as the previous observable sequence terminated successfully.
 
@@ -82,16 +82,16 @@ Optimizations will be performed in cases equivalent to following:
 
 - returns: An observable sequence that contains the elements of each given sequence, in sequential order.
 */
-- (nonnull RxObservable *)concat;
+- (nonnull RxObservable<E> *)concat;
 
 @end
 
-@interface NSSet (RxConcat)
-- (nonnull RxObservable *)concat;
+@interface NSSet<E> (RxConcat)
+- (nonnull RxObservable<E> *)concat;
 @end
 
-@interface NSEnumerator (RxConcat)
-- (nonnull RxObservable *)concat;
+@interface NSEnumerator<E> (RxConcat)
+- (nonnull RxObservable<E> *)concat;
 @end
 
 @interface NSObject (RxConcat) <RxObservableType>
@@ -151,7 +151,7 @@ Continues an observable sequence that is terminated by an error with a single el
 
 @end
 
-@interface NSArray (RxCatch)
+@interface NSArray<E> (RxCatch)
 /**
 Continues an observable sequence that is terminated by an error with the next observable sequence.
 
@@ -159,16 +159,16 @@ Continues an observable sequence that is terminated by an error with the next ob
 
 - returns: An observable sequence containing elements from consecutive source sequences until a source sequence terminates successfully.
 */
-- (nonnull RxObservable *)catchError;
+- (nonnull RxObservable<E> *)catchError;
 
 @end
 
-@interface NSSet (RxCatch)
-- (nonnull RxObservable *)catchError;
+@interface NSSet<E> (RxCatch)
+- (nonnull RxObservable<E> *)catchError;
 @end
 
-@interface NSEnumerator (RxCatch)
-- (nonnull RxObservable *)catchError;
+@interface NSEnumerator<E> (RxCatch)
+- (nonnull RxObservable<E> *)catchError;
 @end
 
 @interface NSObject (RxTakeUntil) <RxObservableType>
@@ -210,7 +210,7 @@ Propagates the observable sequence that reacts first.
 
 @end
 
-@interface NSArray (RxAmb)
+@interface NSArray<E> (RxAmb)
 /**
 Propagates the observable sequence that reacts first.
 
@@ -218,16 +218,16 @@ Propagates the observable sequence that reacts first.
 
 - returns: An observable sequence that surfaces any of the given sequences, whichever reacted first.
 */
-- (nonnull RxObservable *)amb;
+- (nonnull RxObservable<E> *)amb;
 
 @end
 
-@interface NSSet (RxAmb)
-- (nonnull RxObservable *)amb;
+@interface NSSet<E> (RxAmb)
+- (nonnull RxObservable<E> *)amb;
 @end
 
-@interface NSEnumerator (RxAmb)
-- (nonnull RxObservable *)amb;
+@interface NSEnumerator<E> (RxAmb)
+- (nonnull RxObservable<E> *)amb;
 @end
 
 @interface NSObject (RxWithLatestFrom) <RxObservableType>

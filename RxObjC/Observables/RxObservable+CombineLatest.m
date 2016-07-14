@@ -12,17 +12,17 @@
 
 @implementation RxObservable (CombineLatest2)
 
-+ (nonnull RxObservable *)combineLatest:(nonnull RxObservable *)source1
-                                    and:(nonnull RxObservable *)source2
++ (nonnull RxObservable *)combineLatest:(nonnull id <RxObservableType>)source1
+                                    and:(nonnull id <RxObservableType>)source2
                          resultSelector:(RxCombineLatest2ResultSelector)resultSelector {
     return [[RxCombineLatest2 alloc] initWithSource1:[source1 asObservable] source2:[source2 asObservable] resultSelector:resultSelector];
 }
 @end
 
 @implementation RxObservable (CombineLatest3)
-+ (nonnull RxObservable *)combineLatest:(nonnull RxObservable *)source1
-                                    and:(nonnull RxObservable *)source2
-                                    and:(nonnull RxObservable *)source3
++ (nonnull RxObservable *)combineLatest:(nonnull id <RxObservableType>)source1
+                                    and:(nonnull id <RxObservableType>)source2
+                                    and:(nonnull id <RxObservableType>)source3
                          resultSelector:(RxCombineLatest3ResultSelector)resultSelector {
     return [[RxCombineLatest3 alloc] initWithSource1:[source1 asObservable]
                                              source2:[source2 asObservable]
@@ -32,10 +32,10 @@
 @end
 
 @implementation RxObservable (CombineLatest4)
-+ (nonnull RxObservable *)combineLatest:(nonnull RxObservable *)source1
-                                    and:(nonnull RxObservable *)source2
-                                    and:(nonnull RxObservable *)source3
-                                    and:(nonnull RxObservable *)source4
++ (nonnull RxObservable *)combineLatest:(nonnull id <RxObservableType>)source1
+                                    and:(nonnull id <RxObservableType>)source2
+                                    and:(nonnull id <RxObservableType>)source3
+                                    and:(nonnull id <RxObservableType>)source4
                          resultSelector:(RxCombineLatest4ResultSelector)resultSelector {
     return [[RxCombineLatest4 alloc] initWithSource1:[source1 asObservable]
                                              source2:[source2 asObservable]
@@ -46,11 +46,11 @@
 @end
 
 @implementation RxObservable (CombineLatest5)
-+ (nonnull RxObservable *)combineLatest:(nonnull RxObservable *)source1
-                                    and:(nonnull RxObservable *)source2
-                                    and:(nonnull RxObservable *)source3
-                                    and:(nonnull RxObservable *)source4
-                                    and:(nonnull RxObservable *)source5
++ (nonnull RxObservable *)combineLatest:(nonnull id <RxObservableType>)source1
+                                    and:(nonnull id <RxObservableType>)source2
+                                    and:(nonnull id <RxObservableType>)source3
+                                    and:(nonnull id <RxObservableType>)source4
+                                    and:(nonnull id <RxObservableType>)source5
                          resultSelector:(RxCombineLatest5ResultSelector)resultSelector {
     return [[RxCombineLatest5 alloc] initWithSource1:[source1 asObservable]
                                              source2:[source2 asObservable]
@@ -62,12 +62,12 @@
 @end
 
 @implementation RxObservable (CombineLatest6)
-+ (nonnull RxObservable *)combineLatest:(nonnull RxObservable *)source1
-                                    and:(nonnull RxObservable *)source2
-                                    and:(nonnull RxObservable *)source3
-                                    and:(nonnull RxObservable *)source4
-                                    and:(nonnull RxObservable *)source5
-                                    and:(nonnull RxObservable *)source6
++ (nonnull RxObservable *)combineLatest:(nonnull id <RxObservableType>)source1
+                                    and:(nonnull id <RxObservableType>)source2
+                                    and:(nonnull id <RxObservableType>)source3
+                                    and:(nonnull id <RxObservableType>)source4
+                                    and:(nonnull id <RxObservableType>)source5
+                                    and:(nonnull id <RxObservableType>)source6
                          resultSelector:(RxCombineLatest6ResultSelector)resultSelector {
     return [[RxCombineLatest6 alloc] initWithSource1:[source1 asObservable]
                                              source2:[source2 asObservable]
@@ -80,13 +80,13 @@
 @end
 
 @implementation RxObservable (CombineLatest7)
-+ (nonnull RxObservable *)combineLatest:(nonnull RxObservable *)source1
-                                    and:(nonnull RxObservable *)source2
-                                    and:(nonnull RxObservable *)source3
-                                    and:(nonnull RxObservable *)source4
-                                    and:(nonnull RxObservable *)source5
-                                    and:(nonnull RxObservable *)source6
-                                    and:(nonnull RxObservable *)source7
++ (nonnull RxObservable *)combineLatest:(nonnull id <RxObservableType>)source1
+                                    and:(nonnull id <RxObservableType>)source2
+                                    and:(nonnull id <RxObservableType>)source3
+                                    and:(nonnull id <RxObservableType>)source4
+                                    and:(nonnull id <RxObservableType>)source5
+                                    and:(nonnull id <RxObservableType>)source6
+                                    and:(nonnull id <RxObservableType>)source7
                          resultSelector:(RxCombineLatest7ResultSelector)resultSelector {
     return [[RxCombineLatest7 alloc] initWithSource1:[source1 asObservable]
                                              source2:[source2 asObservable]
@@ -100,14 +100,14 @@
 @end
 
 @implementation RxObservable (CombineLatest8)
-+ (nonnull RxObservable *)combineLatest:(nonnull RxObservable *)source1
-                                    and:(nonnull RxObservable *)source2
-                                    and:(nonnull RxObservable *)source3
-                                    and:(nonnull RxObservable *)source4
-                                    and:(nonnull RxObservable *)source5
-                                    and:(nonnull RxObservable *)source6
-                                    and:(nonnull RxObservable *)source7
-                                    and:(nonnull RxObservable *)source8
++ (nonnull RxObservable *)combineLatest:(nonnull id <RxObservableType>)source1
+                                    and:(nonnull id <RxObservableType>)source2
+                                    and:(nonnull id <RxObservableType>)source3
+                                    and:(nonnull id <RxObservableType>)source4
+                                    and:(nonnull id <RxObservableType>)source5
+                                    and:(nonnull id <RxObservableType>)source6
+                                    and:(nonnull id <RxObservableType>)source7
+                                    and:(nonnull id <RxObservableType>)source8
                          resultSelector:(RxCombineLatest8ResultSelector)resultSelector {
     return [[RxCombineLatest8 alloc] initWithSource1:[source1 asObservable]
                                              source2:[source2 asObservable]
@@ -123,9 +123,13 @@
 
 @implementation RxObservable (CombineLatestArray)
 
-+ (nonnull RxObservable *)combineLatest:(nonnull NSArray<RxObservable *> *)sources
++ (nonnull RxObservable *)combineLatest:(nonnull NSArray<id <RxObservableType>> *)sources
                          resultSelector:(RxCombineLatestTupleResultSelector)resultSelector {
-    return [[RxCombineLatestArray alloc] initWithSources:sources resultSelector:resultSelector];
+    NSMutableArray<RxObservable *> *observables = [NSMutableArray arrayWithCapacity:sources.count];
+    for (id <RxObservableType> o in sources) {
+        [observables addObject:[o asObservable]];
+    }
+    return [[RxCombineLatestArray alloc] initWithSources:observables resultSelector:resultSelector];
 }
 
 @end

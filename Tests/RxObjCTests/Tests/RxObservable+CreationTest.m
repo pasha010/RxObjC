@@ -360,7 +360,7 @@
             disposeInvoked++;
             disposable = [[RxMockDisposable alloc] initWithScheduler:scheduler];
             return disposable;
-        } observableFactory:^RxObservable *(id <RxDisposable> d) {
+        } observableFactory:^RxObservable *(RxMockDisposable *d) {
             _d = d;
             createInvoked++;
             xs = [scheduler createColdObservable:@[
@@ -402,7 +402,7 @@
             disposeInvoked++;
             disposable = [[RxMockDisposable alloc] initWithScheduler:scheduler];
             return disposable;
-        } observableFactory:^RxObservable *(id <RxDisposable> d) {
+        } observableFactory:^RxObservable *(RxMockDisposable *d) {
             _d = d;
             createInvoked++;
             xs = [scheduler createColdObservable:@[
@@ -445,7 +445,7 @@
             disposeInvoked++;
             disposable = [[RxMockDisposable alloc] initWithScheduler:scheduler];
             return disposable;
-        } observableFactory:^RxObservable *(id <RxDisposable> d) {
+        } observableFactory:^RxObservable *(RxMockDisposable *d) {
             _d = d;
             createInvoked++;
             xs = [scheduler createColdObservable:@[
