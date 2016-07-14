@@ -6,6 +6,31 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		3685A40D1D37A3EA00DD1C61 /* OCLint-OSX */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 3685A4101D37A3EA00DD1C61 /* Build configuration list for PBXAggregateTarget "OCLint-OSX" */;
+			buildPhases = (
+				3685A4111D37A3F900DD1C61 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "OCLint-OSX";
+			productName = OCLint;
+		};
+		3685A4121D37A4E900DD1C61 /* OCLint-iOS */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 3685A4131D37A4E900DD1C61 /* Build configuration list for PBXAggregateTarget "OCLint-iOS" */;
+			buildPhases = (
+				3685A4161D37A4F600DD1C61 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "OCLint-iOS";
+			productName = "OCLint-iOS";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		17EEC01997736E1C58356A47 /* RxObservable+StandardSequenceOperators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC13A02519E4BF5CFAF0C /* RxObservable+StandardSequenceOperators.m */; };
 		17EEC01D13F593AA752F91BA /* RxBinaryDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC0D09BEEE61DD3CF8B84 /* RxBinaryDisposable.m */; };
@@ -3757,6 +3782,12 @@
 					365044021D155DDF008CBABA = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
+					3685A40D1D37A3EA00DD1C61 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					3685A4121D37A4E900DD1C61 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 				};
 			};
 			buildConfigurationList = 365043F31D155DDE008CBABA /* Build configuration list for PBXProject "RxObjC" */;
@@ -3790,6 +3821,8 @@
 				365044021D155DDF008CBABA /* AllTests-iOS */,
 				365F3B6E1D33BD1C0096A86C /* AllTests-OSX */,
 				365F3B831D33BDA70096A86C /* AllTests-tvOS */,
+				3685A40D1D37A3EA00DD1C61 /* OCLint-OSX */,
+				3685A4121D37A4E900DD1C61 /* OCLint-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -3929,6 +3962,35 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3685A4111D37A3F900DD1C61 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ~/.bash_profile\n\n\nhash oclint &> /dev/null\nif [ $? -eq 1 ]; then\necho >&2 \"oclint not found, analyzing stopped\"\nexit 1\nfi\n\ncd ${TARGET_TEMP_DIR}\n\nif [ ! -f compile_commands.json ]; then\necho \"[*] compile_commands.json not found, possibly clean was performed\"\necho \"[*] starting xcodebuild to rebuild the project..\"\n# clean previous output\nif [ -f xcodebuild.log ]; then\nrm xcodebuild.log\nfi\n\ncd ${SRCROOT}\n\nxcodebuild clean\n\n#build xcodebuild.log\nxcodebuild | tee ${TARGET_TEMP_DIR}/xcodebuild.log\n\necho \"[*] transforming xcodebuild.log into compile_commands.json...\"\ncd ${TARGET_TEMP_DIR}\n#transform it into compile_commands.json\noclint-xcodebuild\n\nfi\n\n#if [-d report.html]; then\n#rm report.html\n#fi\n\n\n#run static analyzer\n#oclint-json-compilation-database -- -o=./report.html -html\n\necho \"[*] starting analyzing\"\ncd ${TARGET_TEMP_DIR}\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'\n";
+		};
+		3685A4161D37A4F600DD1C61 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ~/.bash_profile\ncd ${SRCROOT}\nxctool -reporter json-compilation-database:compile_commands.json clean\nxctool -reporter json-compilation-database:compile_commands.json build\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		365043F41D155DDE008CBABA /* Sources */ = {
@@ -5800,6 +5862,38 @@
 			};
 			name = Release;
 		};
+		3685A40E1D37A3EA00DD1C61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3685A40F1D37A3EA00DD1C61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3685A4141D37A4E900DD1C61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = Debug;
+		};
+		3685A4151D37A4E900DD1C61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5982,6 +6076,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		3685A4101D37A3EA00DD1C61 /* Build configuration list for PBXAggregateTarget "OCLint-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3685A40E1D37A3EA00DD1C61 /* Debug */,
+				3685A40F1D37A3EA00DD1C61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3685A4131D37A4E900DD1C61 /* Build configuration list for PBXAggregateTarget "OCLint-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3685A4141D37A4E900DD1C61 /* Debug */,
+				3685A4151D37A4E900DD1C61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

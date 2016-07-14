@@ -110,7 +110,7 @@ Starts the test scheduler and uses the specified virtual times to invoke the fac
  - parameter disposed: Virtual time at which to dispose the subscription.
  - returns: Observer with timestamped recordings of events that were received during the virtual time window when the subscription to the source sequence was active.
  */
-- (nonnull RxTestableObserver *)start:(RxTestTime)disposed create:(RxObservable *(^)())create;
+- (nonnull RxTestableObserver *)startWhenDisposed:(RxTestTime)disposed create:(RxObservable *(^)())create;
 
 /**
  Starts the test scheduler and uses the specified virtual times to invoke the factory function, subscribe to the resulting sequence, and dispose the subscription.

@@ -82,12 +82,12 @@
     return observer;
 }
 
-- (nonnull RxTestableObserver *)start:(RxTestTime)disposed create:(RxObservable *(^)())create {
+- (nonnull RxTestableObserver *)startWhenDisposed:(RxTestTime)disposed create:(RxObservable *(^)())create {
     return [self start:RxTestSchedulerDefaultCreated subscribed:RxTestSchedulerDefaultSubscribed disposed:disposed create:create];
 }
 
 - (nonnull RxTestableObserver *)start:(RxObservable *(^)())create {
-    return [self start:RxTestSchedulerDefaultDisposed create:create];
+    return [self startWhenDisposed:RxTestSchedulerDefaultDisposed create:create];
 }
 
 @end
