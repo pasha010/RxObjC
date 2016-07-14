@@ -49,9 +49,9 @@
     }];
 }
 
-- (nonnull RxVirtualTimeUnit)adjustScheduledTime:(nonnull RxVirtualTimeUnit)time {
-    NSUInteger clock = ((NSNumber *) self.clock).unsignedIntegerValue;
-    return ((NSNumber *) time).unsignedIntegerValue <= clock ? @(clock + (_simulateProcessingDelay ? 1 : 0)) : time;
+- (nonnull NSNumber *)adjustScheduledTime:(nonnull NSNumber *)time {
+    NSUInteger clock = self.clock.unsignedIntegerValue;
+    return time.unsignedIntegerValue <= clock ? @(clock + (_simulateProcessingDelay ? 1 : 0)) : time;
 }
 
 - (nonnull RxTestableObserver *)start:(RxTestTime)created

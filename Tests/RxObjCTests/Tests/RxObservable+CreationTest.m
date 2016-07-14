@@ -383,6 +383,92 @@
     XCTAssertEqual(1, disposeInvoked);
 
     XCTAssert([xs.subscriptions isEqualToArray:@[[RxSubscription createWithSubscribe:200 unsubscribe:400]]]);
+    NSArray *ticks = @[@200, @400];
+    XCTAssert([disposable.ticks isEqualToArray:ticks]);
 }
 
+- (void)testUsing_Error {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    __block NSInteger disposeInvoked = 0;
+    __block NSInteger createInvoked = 0;
+
+    __block RxTestableObservable<NSNumber *> *xs = nil;
+    __block RxMockDisposable *disposable = nil;
+    __block RxMockDisposable *_d = nil;
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable using:^RxMockDisposable * {
+            disposeInvoked++;
+            disposable = [[RxMockDisposable alloc] initWithScheduler:scheduler];
+            return disposable;
+        } observableFactory:^RxObservable *(id <RxDisposable> d) {
+            _d = d;
+            createInvoked++;
+            xs = [scheduler createColdObservable:@[
+                    [self next:100 element:scheduler.clock],
+                    [self error:200 testError:[RxTestError testError]]
+            ]];
+            return [xs asObservable];
+        }];
+    }];
+
+    XCTAssert(disposable == _d);
+
+    NSArray *array = @[
+            [self next:300 element:@200],
+            [self error:400 testError:[RxTestError testError]]
+    ];
+    XCTAssert([res.events isEqualToArray:array]);
+
+    XCTAssertEqual(1, createInvoked);
+    XCTAssertEqual(1, disposeInvoked);
+
+    XCTAssert([xs.subscriptions isEqualToArray:@[[RxSubscription createWithSubscribe:200 unsubscribe:400]]]);
+
+    NSArray *ticks = @[@200, @400];
+    XCTAssert([disposable.ticks isEqualToArray:ticks]);
+}
+
+- (void)testUsing_Dispose {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    __block NSInteger disposeInvoked = 0;
+    __block NSInteger createInvoked = 0;
+
+    __block RxTestableObservable<NSNumber *> *xs = nil;
+    __block RxMockDisposable *disposable = nil;
+    __block RxMockDisposable *_d = nil;
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable using:^RxMockDisposable * {
+            disposeInvoked++;
+            disposable = [[RxMockDisposable alloc] initWithScheduler:scheduler];
+            return disposable;
+        } observableFactory:^RxObservable *(id <RxDisposable> d) {
+            _d = d;
+            createInvoked++;
+            xs = [scheduler createColdObservable:@[
+                    [self next:100 element:scheduler.clock],
+                    [self next:1000 element:@(scheduler.clock.integerValue + 1)],
+            ]];
+            return [xs asObservable];
+        }];
+    }];
+
+    XCTAssert(disposable == _d);
+
+    NSArray *array = @[
+            [self next:300 element:@200],
+    ];
+    XCTAssert([res.events isEqualToArray:array]);
+
+    XCTAssertEqual(1, createInvoked);
+    XCTAssertEqual(1, disposeInvoked);
+
+    XCTAssert([xs.subscriptions isEqualToArray:@[[RxSubscription createWithSubscribe:200 unsubscribe:1000]]]);
+
+    NSArray *ticks = @[@200, @1000];
+    XCTAssert([disposable.ticks isEqualToArray:ticks]);
+}
 @end

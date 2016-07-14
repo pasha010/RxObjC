@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
   Provides a virtual time scheduler that uses `NSDate` for absolute time and `NSTimeInterval` for relative time.
 */
-@interface RxHistoricalScheduler : RxVirtualTimeScheduler<RxHistoricalSchedulerTimeConverter *>
+@interface RxHistoricalScheduler : RxVirtualTimeScheduler<RxTime *, RxHistoricalSchedulerTimeConverter *>
 
 - (nonnull instancetype)init;
 

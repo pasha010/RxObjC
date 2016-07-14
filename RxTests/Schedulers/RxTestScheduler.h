@@ -34,7 +34,7 @@ static NSUInteger const RxTestSchedulerDefaultDisposed = 1000;
 /**
 Virtual time scheduler used for testing applications and libraries built using RxSwift.
 */
-@interface RxTestScheduler : RxVirtualTimeScheduler<RxTestSchedulerVirtualTimeConverter *>
+@interface RxTestScheduler : RxVirtualTimeScheduler<NSNumber *, RxTestSchedulerVirtualTimeConverter *>
 
 - (nonnull instancetype)initWithInitialClock:(RxTestTime)initialClock;
 
@@ -83,7 +83,7 @@ Creates an observer that records received events and timestamps those.
 /**
 Adjusts time of scheduling before adding item to schedule queue. If scheduled time is `<= clock`, then it is scheduled at `clock + 1`
 */
-- (nonnull RxVirtualTimeUnit)adjustScheduledTime:(nonnull RxVirtualTimeUnit)time;
+- (nonnull NSNumber *)adjustScheduledTime:(nonnull NSNumber *)time;
 
 /**
 Starts the test scheduler and uses the specified virtual times to invoke the factory function, subscribe to the resulting sequence, and dispose the subscription.

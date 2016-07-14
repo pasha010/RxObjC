@@ -11,19 +11,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxVirtualTimeScheduler<__covariant Converter : id <RxVirtualTimeConverterType>> : NSObject <RxSchedulerType>
+@interface RxVirtualTimeScheduler<VirtualTimeUnit, __covariant Converter : id <RxVirtualTimeConverterType>> : NSObject <RxSchedulerType>
 
 /**
 - returns: Scheduler's absolute time clock value.
 */
-@property (nonnull, strong, readonly) RxVirtualTimeUnit clock;
+@property (nonnull, strong, readonly) VirtualTimeUnit clock;
 
 /**
  Creates a new virtual time scheduler.
 
  - parameter initialClock: Initial value for the clock.
 */
-- (nonnull instancetype)initWithInitialClock:(nonnull RxVirtualTimeUnit)initialClock
+- (nonnull instancetype)initWithInitialClock:(nonnull VirtualTimeUnit)initialClock
                                 andConverter:(nonnull id <RxVirtualTimeConverterType>)converter;
 
 /**
@@ -68,13 +68,13 @@ Schedules an action to be executed immediatelly.
  - returns: The disposable object used to cancel the scheduled action (best effort).
  */
 - (nonnull id <RxDisposable>)scheduleAbsoluteVirtual:(nullable id)state
-                                                time:(nonnull RxVirtualTimeUnit)time
+                                                time:(nonnull VirtualTimeUnit)time
                                               action:(id <RxDisposable>(^)(id __nullable))action;
 
 /**
 Adjusts time of scheduling before adding item to schedule queue.
 */
-- (nonnull RxVirtualTimeUnit)adjustScheduledTime:(nonnull RxVirtualTimeUnit)time;
+- (nonnull VirtualTimeUnit)adjustScheduledTime:(nonnull VirtualTimeUnit)time;
 
 /**
 Starts the virtual time scheduler.
@@ -86,7 +86,7 @@ Starts the virtual time scheduler.
 
  - parameter virtualTime: Absolute time to advance the scheduler's clock to.
 */
-- (void)advanceTo:(nonnull RxVirtualTimeUnit)virtualTime;
+- (void)advanceTo:(nonnull VirtualTimeUnit)virtualTime;
 
 /**
 Advances the scheduler's clock by the specified relative time.
