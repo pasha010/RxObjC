@@ -471,4 +471,66 @@
     NSArray *ticks = @[@200, @1000];
     XCTAssert([disposable.ticks isEqualToArray:ticks]);
 }
+
+- (void)testUsing_ThrowResourceSelector {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    __block NSInteger disposeInvoked = 0;
+    __block NSInteger createInvoked = 0;
+
+    __block RxMockDisposable *disposable = nil;
+    __block RxMockDisposable *_d = nil;
+
+    RxTestableObserver<NSNumber *> *res = [scheduler start:^RxObservable * {
+        return [RxObservable using:^RxMockDisposable * {
+            disposeInvoked++;
+            @throw [RxTestError testError];
+        } observableFactory:^RxObservable *(id <RxDisposable> d) {
+            createInvoked++;
+            return [RxObservable never];
+        }];
+    }];
+
+    XCTAssert(disposable == _d);
+
+    NSArray *array = @[
+            [self error:200 testError:[RxTestError testError]],
+    ];
+    XCTAssert([res.events isEqualToArray:array]);
+
+    XCTAssertEqual(0, createInvoked);
+    XCTAssertEqual(1, disposeInvoked);
+}
+
+- (void)testUsing_ThrowResourceUsage {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    __block NSInteger disposeInvoked = 0;
+    __block NSInteger createInvoked = 0;
+
+    __block RxMockDisposable *disposable = nil;
+
+    RxTestableObserver<NSNumber *> *res = [scheduler start:^RxObservable * {
+        return [RxObservable using:^RxMockDisposable * {
+            disposeInvoked++;
+            disposable = [[RxMockDisposable alloc] initWithScheduler:scheduler];
+            return disposable;
+        } observableFactory:^RxObservable *(id <RxDisposable> d) {
+            createInvoked++;
+            @throw [RxTestError testError];
+        }];
+    }];
+
+    NSArray *array = @[
+            [self error:200 testError:[RxTestError testError]],
+    ];
+    XCTAssert([res.events isEqualToArray:array]);
+
+    XCTAssertEqual(1, createInvoked);
+    XCTAssertEqual(1, disposeInvoked);
+
+    NSArray *ticks = @[@200, @200];
+    XCTAssert([disposable.ticks isEqualToArray:ticks]);
+}
+
 @end
