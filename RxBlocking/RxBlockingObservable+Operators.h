@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxBlockingObservable (ToArray)
+@interface RxBlockingObservable<E> (ToArray)
 /**
  Blocks current thread until sequence terminates.
 
@@ -19,11 +19,23 @@ NS_ASSUME_NONNULL_BEGIN
 
  - returns: All elements of sequence.
  */
-- (nonnull NSArray *)blocking_toArray;
+- (nonnull NSArray<E> *)blocking_toArray;
 
 @end
 
-@interface RxBlockingObservable (Last)
+@interface RxBlockingObservable<E> (First)
+/**
+ Blocks current thread until sequence produces first element.
+
+ If sequence terminates with error before producing first element, terminating error will be thrown.
+
+ - returns: First element of sequence. If sequence is empty `nil` is returned.
+ */
+- (nullable E)blocking_first;
+
+@end
+
+@interface RxBlockingObservable<E> (Last)
 /**
  Blocks current thread until sequence terminates.
 
@@ -31,11 +43,11 @@ NS_ASSUME_NONNULL_BEGIN
 
  - returns: Last element in the sequence. If sequence is empty `nil` is returned.
  */
-- (nullable id)blocking_last;
+- (nullable E)blocking_last;
 
 @end
 
-@interface RxBlockingObservable (Single)
+@interface RxBlockingObservable<E> (Single)
 /**
  Blocks current thread until sequence terminates.
 
@@ -43,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  - returns: Returns the only element of an sequence, and reports an error if there is not exactly one element in the observable sequence.
  */
-- (nullable id)blocking_single;
+- (nullable E)blocking_single;
 
 /**
  Blocks current thread until sequence terminates.
@@ -53,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
  - parameter predicate: A function to test each source element for a condition.
  - returns: Returns the only element of an sequence that satisfies the condition in the predicate, and reports an error if there is not exactly one element in the sequence.
  */
-- (nullable id)blocking_single:(nonnull BOOL(^)(id __nullable))predicate;
+- (nullable E)blocking_single:(nonnull BOOL(^)(E __nullable))predicate;
 @end
 
 NS_ASSUME_NONNULL_END

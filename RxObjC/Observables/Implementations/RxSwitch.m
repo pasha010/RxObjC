@@ -66,7 +66,7 @@
 - (void)_synchronized_on:(nonnull RxEvent *)event {
     switch (event.type) {
         case RxEventTypeNext: {
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 RxObservable *observable = [[self performMap:event.element] asObservable];
                 _hasLatest = YES;
                 _latest++;

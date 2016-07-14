@@ -47,7 +47,7 @@
     }
 
     if (hasValueAll) {
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             id result = [self getResult];
             [self forwardOn:[RxEvent next:result]];
         }, ^(NSError *error) {

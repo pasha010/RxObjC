@@ -28,7 +28,7 @@
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             id key = _parent->_selector(event.element);
             BOOL areEqual = NO;
             if (_currentKey) {

@@ -29,7 +29,7 @@ static int rx_numberOfMapOperators = 0;
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             id mappedElement = _selector(event.element);
             [self forwardOn:[RxEvent next:mappedElement]];
         }, ^(NSError *error) {
@@ -111,7 +111,7 @@ static int rx_numberOfMapOperators = 0;
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             id mappedElement = _selector(event.element, rx_incrementChecked(&_index));
             [self forwardOn:[RxEvent next:mappedElement]];
         }, ^(NSError *error) {

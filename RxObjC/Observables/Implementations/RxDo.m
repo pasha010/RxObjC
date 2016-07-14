@@ -25,7 +25,7 @@
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    rx_tryCatch(self, ^{
+    rx_tryCatch(^{
         _parent->_eventHandler(event);
         [self forwardOn:event];
         if (event.isStopEvent) {

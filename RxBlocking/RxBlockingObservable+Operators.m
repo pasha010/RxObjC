@@ -60,6 +60,59 @@
 
 @end
 
+@implementation RxBlockingObservable (First)
+
+- (nullable id)blocking_first {
+    __block id element = nil;
+    __block NSError *error = nil;
+
+    RxSingleAssignmentDisposable *d = [[RxSingleAssignmentDisposable alloc] init];
+
+    RxRunLoopLock *lock = [[RxRunLoopLock alloc] init];
+
+    @weakify(self);
+    [lock dispatch:^{
+        @strongify(self);
+        d.disposable = [self.source subscribeWith:^(RxEvent *__nonnull event) {
+            if ([d disposed]) {
+                return;
+            }
+
+            switch (event.type) {
+                case RxEventTypeNext: {
+                    if (!element) {
+                        element = event.element;
+                    }
+                    break;
+                }
+                case RxEventTypeError: {
+                    error = event.error;
+                    [d dispose];
+                    [lock stop];
+                    break;
+                }
+                case RxEventTypeCompleted: {
+                    [d dispose];
+                    [lock stop];
+                    break;
+                }
+            }
+        }];
+    }];
+
+    [lock run];
+
+    [d dispose];
+
+    if (error) {
+        @throw error;
+    }
+
+    return element;
+}
+
+@end
+
 @implementation RxBlockingObservable (Last)
 
 - (nullable id)blocking_last {
@@ -137,7 +190,7 @@
 
             switch (event.type) {
                 case RxEventTypeNext: {
-                    rx_tryCatch(self, ^{
+                    rx_tryCatch(^{
                         if (!predicate(event.element)) {
                             return;
                         }

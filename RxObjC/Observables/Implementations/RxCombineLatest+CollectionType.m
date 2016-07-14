@@ -79,7 +79,7 @@
                 return;
             }
             
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 id result = _parent->_resultSelector(_values);
                 [self forwardOn:[RxEvent next:result]];
             }, ^(NSError *error) {

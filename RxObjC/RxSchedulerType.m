@@ -14,10 +14,10 @@
 #pragma GCC diagnostic ignored "-Wprotocol"
 @implementation NSObject (RxSchedulerType)
 
-- (nonnull id <RxDisposable>)schedulePeriodic:(nonnull id)state
+- (nonnull id <RxDisposable>)schedulePeriodic:(nullable id)state
                                    startAfter:(RxTimeInterval)startAfter
                                        period:(RxTimeInterval)period
-                                       action:(id(^)(id))action {
+                                       action:(id(^)(id __nullable))action {
     RxSchedulePeriodicRecursive *schedule = [[RxSchedulePeriodicRecursive alloc] initWithScheduler:self
                                                                                         startAfter:startAfter
                                                                                             period:period

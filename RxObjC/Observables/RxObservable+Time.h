@@ -67,7 +67,7 @@ Returns an observable sequence that produces a value after each period, using th
 - parameter scheduler: Scheduler to run the timer on.
 - returns: An observable sequence that produces a value after each period.
 */
-- (nonnull RxObservable<NSNumber *> *)interval:(RxTimeInterval)period
++ (nonnull RxObservable<NSNumber *> *)interval:(RxTimeInterval)period
                                      scheduler:(nonnull id <RxSchedulerType>)scheduler;
 @end
 

@@ -32,7 +32,7 @@
 
     __block id <RxDisposable> res = nil;
 
-    rx_tryCatch(self, ^{
+    rx_tryCatch(^{
         id <RxDisposable> resource = _parent->_resourceFactory();
         disposable = resource;
 

@@ -60,7 +60,7 @@ callback.
  - parameter internalSerialQueueName: Custom name for internal serial dispatch queue proxy.
  */
 - (nonnull instancetype)initWithglobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS
-                              andInternalSerialQueueName:(nullable  NSString *)internalSerialQueueName NS_AVAILABLE(10.10, 8.0);
+                              andInternalSerialQueueName:(nullable  NSString *)internalSerialQueueName NS_AVAILABLE(10_10, 8_0);
 
 + (int64_t)convertTimeIntervalToDispatchInterval:(NSTimeInterval)timeInterval;
 

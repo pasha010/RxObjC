@@ -27,7 +27,7 @@
 
 - (nonnull id <RxDisposable>)run {
     __block id <RxDisposable> res = nil;
-    rx_tryCatch(self, ^{
+    rx_tryCatch(^{
         RxObservable *result = _observableFactory();
         res = [result subscribe:self];
     }, ^(NSError *error) {

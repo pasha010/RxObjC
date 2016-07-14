@@ -28,7 +28,7 @@
 
 - (nonnull id <RxDisposable>)run {
     __block id <RxDisposable> res;
-    rx_tryCatch(self, ^{
+    rx_tryCatch(^{
         id <RxSubjectType> subject = _parent->_subjectSelector();
         RxConnectableObservableAdapter *connectable = [[RxConnectableObservableAdapter alloc] initWithSource:_parent->_source andSubject:subject];
 

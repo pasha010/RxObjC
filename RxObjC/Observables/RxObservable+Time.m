@@ -47,7 +47,7 @@
 
 @implementation RxObservable (Interval)
 
-- (nonnull RxObservable<NSNumber *> *)interval:(RxTimeInterval)period
++ (nonnull RxObservable<NSNumber *> *)interval:(RxTimeInterval)period
                                      scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxTimer alloc] initWithDueTime:period period:period scheduler:scheduler];
 }

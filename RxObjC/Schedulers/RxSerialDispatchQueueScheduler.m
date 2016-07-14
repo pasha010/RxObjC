@@ -109,10 +109,10 @@ Schedules a periodic piece of work.
 - parameter action: Action to be executed.
 - returns: The disposable object used to cancel the scheduled action (best effort).
 */
-- (nonnull id <RxDisposable>)schedulePeriodic:(nonnull id)state
+- (nonnull id <RxDisposable>)schedulePeriodic:(nullable id)state
                                    startAfter:(RxTimeInterval)startAfter
                                        period:(RxTimeInterval)period
-                                       action:(id(^)(id))action {
+                                       action:(id(^)(id __nullable))action {
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _serialQueue);
     
     dispatch_time_t initial = [RxMainScheduler convertTimeIntervalToDispatchTime:startAfter];

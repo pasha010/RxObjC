@@ -49,10 +49,10 @@ Schedules a periodic piece of work.
 - parameter action: Action to be executed.
 - returns: The disposable object used to cancel the scheduled action (best effort).
 */
-- (nonnull id <RxDisposable>)schedulePeriodic:(id)state
+- (nonnull id <RxDisposable>)schedulePeriodic:(nullable id)state
                                    startAfter:(RxTimeInterval)startAfter
                                        period:(RxTimeInterval)period
-                                       action:(id(^)(id))action;
+                                       action:(nonnull id(^)(id __nullable))action;
 
 @end
 
@@ -66,10 +66,10 @@ Periodic task will be emulated using recursive scheduling.
 - parameter period: Period for running the work periodically.
 - returns: The disposable object used to cancel the scheduled recurring action (best effort).
 */
-- (nonnull id <RxDisposable>)schedulePeriodic:(nonnull id)state
+- (nonnull id <RxDisposable>)schedulePeriodic:(nullable id)state
                                    startAfter:(RxTimeInterval)startAfter
                                        period:(RxTimeInterval)period
-                                       action:(id(^)(id))action;
+                                       action:(id(^)(id __nullable ))action;
 
 - (nonnull id <RxDisposable>)scheduleRecursive:(nonnull id)state
                                        dueTime:(RxTimeInterval)dueTime

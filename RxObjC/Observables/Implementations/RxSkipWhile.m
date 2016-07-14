@@ -29,7 +29,7 @@
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
         if (!_running) {
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 _running = _parent->_predicate(event.element);
 
                 if (_running) {
@@ -70,7 +70,7 @@
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
         if (!_running) {
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                _running = _parent->_indexPredicate(event.element, _index);
                 rx_incrementCheckedUnsigned(&_index);
 

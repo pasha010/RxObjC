@@ -31,22 +31,6 @@
 
 @end
 
-void __rx_tryCatch__(id self, void (^tryBlock)(), void (^catchBlock)(NSError *)) {
-    @try {
-        tryBlock();
-    }
-    @catch (id e) {
-        NSError *error = e;
-        if ([e isKindOfClass:[NSException class]]) {
-            NSException *exception = e;
-            error = [NSError errorWithDomain:[NSString stringWithFormat:@"%@ + %@", NSStringFromClass([self class]), exception.name]
-                                        code:[self hash]
-                                    userInfo:exception.userInfo];
-        }
-        catchBlock(error);
-    }
-}
-
 @implementation RxSink
 
 - (nonnull instancetype)initWithObserver:(nonnull id <RxObserverType>)observer {

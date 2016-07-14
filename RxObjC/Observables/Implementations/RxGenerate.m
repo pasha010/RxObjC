@@ -33,7 +33,7 @@
     @weakify(self);
     return [scheduler scheduleRecursive:@(YES) action:^(NSNumber *isFirstNumber, void (^recurse)(id)) {
         @strongify(self);
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             BOOL isFirst = isFirstNumber.boolValue;
             if (!isFirst) {
                 self->_state = self->_parent->_iterate(self->_state);

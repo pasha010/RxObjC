@@ -28,7 +28,7 @@
 - (void)on:(nonnull RxEvent *)event {
     switch (event.type) {
         case RxEventTypeNext: {
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 _accumulate = _parent->_accumulator(_accumulate, event.element);
                 [self forwardOn:[RxEvent next:_accumulate]];
             }, ^(NSError *error) {

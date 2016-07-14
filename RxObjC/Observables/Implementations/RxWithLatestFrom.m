@@ -96,7 +96,7 @@
                 return;
             }
 
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 id res = _parent->_resultSelector(event.element, _latest);
 
                 [self forwardOn:[RxEvent next:res]];

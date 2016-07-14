@@ -56,4 +56,18 @@ NSUInteger rx_decrementCheckedUnsigned(NSUInteger *i) {
     return result;
 }
 
-
+void __rx_tryCatch__(id self, void (^tryBlock)(), void (^catchBlock)(NSError *)) {
+    @try {
+        tryBlock();
+    }
+    @catch (id e) {
+        NSError *error = e;
+        if ([e isKindOfClass:[NSException class]]) {
+            NSException *exception = e;
+            error = [NSError errorWithDomain:[NSString stringWithFormat:@"%@ + %@", NSStringFromClass([self class]), exception.name]
+                                        code:[self hash]
+                                    userInfo:exception.userInfo];
+        }
+        catchBlock(error);
+    }
+}

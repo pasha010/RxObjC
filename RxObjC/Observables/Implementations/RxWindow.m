@@ -74,7 +74,7 @@
         case RxEventTypeNext: {
             [_subject on:[RxEvent next:event.element]];
 
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 rx_incrementCheckedUnsigned(&_count);
             }, ^(NSError *error) {
                 [_subject on:[RxEvent error:error]];

@@ -27,7 +27,7 @@
 
 @implementation NSArray (RxCombineLatest)
 
-- (nonnull RxObservable *)combineLatest:(nonnull id(^)(NSArray *__nonnull))resultSelector {
+- (nonnull RxObservable<id> *)combineLatest:(nonnull id(^)(NSArray<id> *__nonnull))resultSelector {
     return [[RxCombineLatestCollectionType alloc] initWithSources:self resultSelector:resultSelector];
 }
 
@@ -35,7 +35,7 @@
 
 @implementation NSArray (RxZip)
 
-- (nonnull RxObservable *)zip:(nonnull id(^)(NSArray *__nonnull))resultSelector {
+- (nonnull RxObservable<id> *)zip:(nonnull id(^)(NSArray<id> *__nonnull))resultSelector {
     return [[RxZipCollectionType alloc] initWithSources:self resultSelector:resultSelector];
 }
 

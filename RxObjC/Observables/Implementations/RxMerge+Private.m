@@ -85,7 +85,7 @@
             if (!self.subscribeNext) {
                 return;
             }
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 id <RxObservableConvertibleType> value = [self performMap:event.element];
                 [self subscribeInner:[value asObservable]];
             }, ^(NSError *error) {
