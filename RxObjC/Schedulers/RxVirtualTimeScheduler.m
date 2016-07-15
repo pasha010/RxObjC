@@ -12,7 +12,7 @@
 
 @interface RxVirtualSchedulerItem : NSObject <RxDisposable>
 @property (nonnull, strong, readonly) RxVirtualTimeUnit time;
-@property (assign, readonly) NSInteger id;
+@property (assign, readonly) NSUInteger id;
 @end
 
 @implementation RxVirtualSchedulerItem {
@@ -20,7 +20,7 @@
     RxSingleAssignmentDisposable *__nonnull _disposable;
 }
 
-- (nonnull instancetype)initWithAction:(id <RxDisposable>(^)())action time:(nonnull RxVirtualTimeUnit)time id:(NSInteger)id {
+- (nonnull instancetype)initWithAction:(id <RxDisposable>(^)())action time:(nonnull RxVirtualTimeUnit)time id:(NSUInteger)id {
     self = [super init];
     if (self) {
         _disposable = [[RxSingleAssignmentDisposable alloc] init];
@@ -53,7 +53,7 @@
     BOOL _running;
     RxPriorityQueue<RxVirtualSchedulerItem *> *__nonnull _schedulerQueue;
     id <RxVirtualTimeConverterType> _converter;
-    NSInteger _nextId;
+    NSUInteger _nextId;
 }
 
 - (nonnull instancetype)initWithInitialClock:(nonnull RxVirtualTimeUnit)initialClock 
@@ -70,7 +70,7 @@
                 return YES;
             }
             if (comparison.equal) {
-                return [obj1 id] < [obj2 id];
+                return obj1.id < obj2.id;
             } else {
                 return NO;
             }

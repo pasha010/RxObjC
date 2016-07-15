@@ -51,7 +51,7 @@
 
 - (nonnull NSNumber *)adjustScheduledTime:(nonnull NSNumber *)time {
     NSUInteger clock = self.clock.unsignedIntegerValue;
-    return time.unsignedIntegerValue <= clock ? @(clock + (_simulateProcessingDelay ? 1 : 0)) : time;
+    return time.integerValue <= clock ? @(clock + (_simulateProcessingDelay ? 1 : 0)) : time;
 }
 
 - (nonnull RxTestableObserver *)start:(RxTestTime)created

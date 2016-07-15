@@ -15,7 +15,7 @@
 @implementation RxColdObservable
 
 - (nonnull id <RxDisposable>)subscribe:(nonnull id <RxObserverType>)observer {
-    [self.subscriptions addObject:[[RxSubscription alloc] initWithSubscribe:((NSNumber *) self.testScheduler.clock).unsignedIntegerValue]];
+    [self.subscriptions addObject:[[RxSubscription alloc] initWithSubscribe:self.testScheduler.clock.unsignedIntegerValue]];
 
     __block NSUInteger i = self.subscriptions.count - 1;
 
@@ -29,7 +29,7 @@
     return [[RxAnonymousDisposable alloc] initWithDisposeAction:^{
         RxSubscription *existing = self.subscriptions[i];
         self.subscriptions[i] = [[RxSubscription alloc] initWithSubscribe:existing.subscribe
-                                                              unsubscribe:((NSNumber *) self.testScheduler.clock).unsignedIntegerValue];
+                                                              unsubscribe:self.testScheduler.clock.unsignedIntegerValue];
     }];
 }
 
