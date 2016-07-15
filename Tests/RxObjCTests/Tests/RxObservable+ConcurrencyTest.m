@@ -189,4 +189,102 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     ]];
 }
 
+- (void)testObserveOnDispatchQueue_Empty {
+    RxPrimitiveHotObservable *xs = [[RxPrimitiveHotObservable alloc] init];
+    RxPrimitiveMockObserver *observer = [[RxPrimitiveMockObserver alloc] init];
+    
+    [self runDispatchQueueSchedulerMultiplexedTests:@[
+            ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
+                id <RxDisposable> subscription = [[xs observeOn:scheduler] subscribe:observer];
+                XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
+                [xs onCompleted];
+                return subscription;
+            },
+            ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
+                XCTAssert([observer.events isEqualToArray:@[[self completed]]]);
+                XCTAssert([xs.subscriptions isEqualToArray:@[RxUnsunscribedFromHotObservable()]]);
+                return [RxNopDisposable sharedInstance];
+            }
+    ]];
+}
+
+- (void)testObserveOnDispatchQueue_Error {
+    RxPrimitiveHotObservable *xs = [[RxPrimitiveHotObservable alloc] init];
+    RxPrimitiveMockObserver *observer = [[RxPrimitiveMockObserver alloc] init];
+
+    [self runDispatchQueueSchedulerMultiplexedTests:@[
+            ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
+                id <RxDisposable> subscription = [[xs observeOn:scheduler] subscribe:observer];
+                XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
+                [xs onNext:@0];
+                return subscription;
+            },
+            ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
+                BOOL b = [observer.events isEqualToArray:@[[self next:@0]]];
+                XCTAssert(b);
+                [xs onNext:@1];
+                [xs onNext:@2];
+                return [RxNopDisposable sharedInstance];
+            },
+            ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
+                BOOL b = [observer.events isEqualToArray:@[
+                        [self next:@0],
+                        [self next:@1],
+                        [self next:@2]]];
+                XCTAssert(b);
+                XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
+                [xs onError:[RxTestError testError]];
+                return [RxNopDisposable sharedInstance];
+            },
+            ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
+                BOOL b = [observer.events isEqualToArray:@[
+                        [self next:@0],
+                        [self next:@1],
+                        [self next:@2],
+                        [self error:[RxTestError testError]]]];
+                XCTAssert(b);
+                XCTAssert([xs.subscriptions isEqualToArray:@[RxUnsunscribedFromHotObservable()]]);
+                return [RxNopDisposable sharedInstance];
+            }
+    ]];
+}
+
+- (void)testObserveOnDispatchQueue_Dispose {
+    RxPrimitiveHotObservable *xs = [[RxPrimitiveHotObservable alloc] init];
+    RxPrimitiveMockObserver *observer = [[RxPrimitiveMockObserver alloc] init];
+    __block id <RxDisposable> subscription = nil;
+
+    [self runDispatchQueueSchedulerMultiplexedTests:@[
+            ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
+                subscription = [[xs observeOn:scheduler] subscribe:observer];
+                XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
+                [xs onNext:@0];
+                return subscription;
+            },
+            ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
+                BOOL b = [observer.events isEqualToArray:@[[self next:@0]]];
+                XCTAssert(b);
+                XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
+                [subscription dispose];
+                XCTAssert([xs.subscriptions isEqualToArray:@[RxUnsunscribedFromHotObservable()]]);
+
+                [xs onError:[RxTestError testError]];
+
+                return [RxNopDisposable sharedInstance];
+            },
+            ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
+                BOOL b = [observer.events isEqualToArray:@[[self next:@0]]];
+                XCTAssert(b);
+                XCTAssert([xs.subscriptions isEqualToArray:@[RxUnsunscribedFromHotObservable()]]);
+                return [RxNopDisposable sharedInstance];
+            }
+    ]];
+}
+
+@end
+
+@interface RxObservableConcurrentSchedulerConcurrencyTest : RxObservableConcurrencyTestBase
+@end
+
+@implementation RxObservableConcurrentSchedulerConcurrencyTest
 @end
