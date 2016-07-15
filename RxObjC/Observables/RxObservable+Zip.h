@@ -13,15 +13,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RxObservable<E> (Zip)
-
 /**
-Merges the specified observable sequences into one observable sequence by using the selector function whenever all of the observable sequences have produced an element at a corresponding index.
-
-- seealso: [zip operator on reactivex.io](http://reactivex.io/documentation/operators/zip.html)
-
-- parameter resultSelector: Function to invoke for each series of elements at corresponding indexes in the sources.
-- returns: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
-*/
+ * Merges the specified observable sequences into one observable sequence by using the selector function whenever all of the observable sequences have produced an element at a corresponding index.
+ * @see [zip operator on reactivex.io](http://reactivex.io/documentation/operators/zip.html)
+ * @param source1: first observable
+ * @param source2: second observable
+ * @param resultSelector: Function to invoke for each series of elements at corresponding indexes in the sources.
+ * @return: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
+ */
 + (nonnull RxObservable<E> *)zip:(nonnull id <RxObservableType>)source1
                              and:(nonnull id <RxObservableType>)source2
                   resultSelector:(RxZip2ResultSelector)resultSelector;

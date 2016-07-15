@@ -8,11 +8,11 @@
 
 #import "RxTest.h"
 
-@interface RxObservable_MultipleTest_CombineLatest : RxTest
+@interface RxObservableMultipleTestCombineLatest : RxTest
 
 @end
 
-@implementation RxObservable_MultipleTest_CombineLatest
+@implementation RxObservableMultipleTestCombineLatest
 
 
 @end

@@ -85,17 +85,23 @@ typedef NS_ENUM(NSUInteger, RxVirtualTimeComparisonType) {
 @property (assign, nonatomic, readonly) BOOL equal;
 
 /**
+ * @code
  * lhs < rhs.
-*/
+ * @endcode
+ * */
 + (nonnull instancetype)lessThan;
 
 /**
+ * @code
  * lhs == rhs.
+ * @endcode
 */
 + (nonnull instancetype)equal;
 
 /**
+ * @code
  * lhs > rhs.
+ * @endcode
 */
 + (nonnull instancetype)greaterThan;
 

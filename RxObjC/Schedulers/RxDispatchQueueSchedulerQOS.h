@@ -17,29 +17,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, readonly) qos_class_t QOSClass;
 
-/**
- * Identifies global dispatch queue with `QOS_CLASS_USER_INTERACTIVE`
- */
+/** Identifies global dispatch queue with `QOS_CLASS_USER_INTERACTIVE` */
 + (nonnull instancetype)userInteractive;
 
-/**
- * Identifies global dispatch queue with `QOS_CLASS_USER_INITIATED`
- */
+/** Identifies global dispatch queue with `QOS_CLASS_USER_INITIATED` */
 + (nonnull instancetype)userInitiated;
 
-/**
- * Identifies global dispatch queue with `QOS_CLASS_DEFAULT`
- */
+/** Identifies global dispatch queue with `QOS_CLASS_DEFAULT` */
 + (nonnull instancetype)default;
 
-/**
- * Identifies global dispatch queue with `QOS_CLASS_UTILITY`
- */
+/** Identifies global dispatch queue with `QOS_CLASS_UTILITY` */
 + (nonnull instancetype)utility;
 
-/**
- * Identifies global dispatch queue with `QOS_CLASS_BACKGROUND`
- */
+/** Identifies global dispatch queue with `QOS_CLASS_BACKGROUND` */
 + (nonnull instancetype)background;
 
 @end

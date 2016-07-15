@@ -27,9 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, strong) RxMutableBox<RxQueue<id <RxScheduledItemType>> *> *queue;
 
-/**
- * Gets a value that indicates whether the caller must call a `schedule` method.
- */
+/** Gets a value that indicates whether the caller must call a `schedule` method. */
 @property (assign, readonly) BOOL isScheduleRequired;
 
 + (nonnull instancetype)sharedInstance;

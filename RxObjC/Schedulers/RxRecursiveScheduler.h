@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)schedule:(nonnull State)state;
 
 - (void)dispose;
+
 @end
 
 NS_ASSUME_NONNULL_END
