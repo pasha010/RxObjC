@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxObservable<E> (ObserveOn)
+@interface NSObject (RxObserveOn) <RxObservableType>
 /**
 Wraps the source sequence in order to run its observer callbacks on the specified scheduler.
 
@@ -25,10 +25,10 @@ actions have side-effects that require to be run on a scheduler, use `subscribeO
 - parameter scheduler: Scheduler to notify observers on.
 - returns: The source sequence whose observations happen on the specified scheduler.
 */
-- (nonnull RxObservable<E> *)observeOn:(nonnull id <RxImmediateSchedulerType>)scheduler;
+- (nonnull RxObservable *)observeOn:(nonnull id <RxImmediateSchedulerType>)scheduler;
 @end
 
-@interface RxObservable<E> (SubscribeOn)
+@interface NSObject (RxSubscribeOn)
 /**
 Wraps the source sequence in order to run its subscription and unsubscription logic on the specified
 scheduler.
@@ -44,7 +44,7 @@ In order to invoke observer callbacks on a `scheduler`, use `observeOn`.
 - parameter scheduler: Scheduler to perform subscription and unsubscription actions on.
 - returns: The source sequence whose subscriptions and unsubscriptions happen on the specified scheduler.
 */
-- (nonnull RxObservable<E> *)subscribeOn:(nonnull id <RxImmediateSchedulerType>)scheduler;
+- (nonnull RxObservable *)subscribeOn:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
 @end
 

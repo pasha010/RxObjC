@@ -46,7 +46,7 @@
     }
 }
 
-- (nonnull id <RxDisposable>)scheduleInternal:(nonnull RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action {
+- (nonnull id <RxDisposable>)scheduleInternal:(nonnull RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action {
     int32_t currentNumberEnqueued = OSAtomicIncrement32(&_numberEnqueued);
     
     if ([NSThread currentThread].isMainThread && currentNumberEnqueued == 1) {

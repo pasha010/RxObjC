@@ -49,7 +49,7 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxStableCompositeDisposable.h"
 #import "RxSubscriptionDisposable.h"
 
-#pragma mark - Obserbables operations
+#pragma mark - Observables operations
 #import "RxObservable+Aggregate.h"
 #import "RxObservable+Binding.h"
 #import "RxObservable+CombineLatest.h"

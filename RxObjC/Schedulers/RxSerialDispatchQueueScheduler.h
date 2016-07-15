@@ -31,7 +31,7 @@ callback.
 
 @property (nonnull, strong, readonly) NSDate *now;
 
-- (nonnull instancetype)initWithSerialQueue:(nonnull dispatch_queue_t)serialQueue;
+- (nonnull instancetype)initWithSerialQueue:(nonnull dispatch_queue_t)serialQueue NS_DESIGNATED_INITIALIZER;
 
 /**
  Constructs new `SerialDispatchQueueScheduler` with internal serial queue named `internalSerialQueueName`.
@@ -42,7 +42,9 @@ callback.
  - parameter serialQueueConfiguration: Additional configuration of internal serial dispatch queue.
  */
 - (nonnull instancetype)initWithInternalSerialQueueName:(nonnull NSString *)internalSerialQueueName
-                               andserialQueueConfiguration:(void(^)(dispatch_queue_t))serialQueueConfiguration;
+                               andSerialQueueConfiguration:(nullable void(^)(dispatch_queue_t))serialQueueConfiguration;
+
+- (nonnull instancetype)initWithInternalSerialQueueName:(nonnull NSString *)internalSerialQueueName;
 
 /**
  Constructs new `SerialDispatchQueueScheduler` named `internalSerialQueueName` that wraps `queue`.
@@ -73,9 +75,9 @@ Schedules an action to be executed immediatelly.
 - parameter action: Action to be executed.
 - returns: The disposable object used to cancel the scheduled action (best effort).
 */
-- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action;
+- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action;
 
-- (nonnull id <RxDisposable>)scheduleInternal:(nonnull RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action;
+- (nonnull id <RxDisposable>)scheduleInternal:(nonnull RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action;
 
 /**
 Schedules an action to be executed.

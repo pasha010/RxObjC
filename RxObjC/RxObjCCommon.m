@@ -71,3 +71,5 @@ void __rx_tryCatch__(id self, void (^tryBlock)(), void (^catchBlock)(NSError *))
         catchBlock(error);
     }
 }
+
+int32_t rx_numberOfSerialDispatchQueueObservables = 0;
