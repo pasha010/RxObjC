@@ -61,9 +61,6 @@
 
 - (void)on:(nonnull RxEvent *)event atIndex:(NSUInteger)atIndex {
     [_lock lock];
-    @onExit {
-        [_lock unlock];
-    };
 
     switch (event.type) {
         case RxEventTypeNext: {
@@ -80,11 +77,12 @@
                     [self dispose];
                 }
 
+                [_lock unlock];
                 return;
             }
             
             rx_tryCatch(^{
-                id result = _parent->_resultSelector(_values);
+                id result = _parent->_resultSelector([NSArray arrayWithArray:_values]);
                 [self forwardOn:[RxEvent next:result]];
             }, ^(NSError *error) {
                 [self forwardOn:[RxEvent error:error]];
@@ -99,7 +97,8 @@
             break;
         }
         case RxEventTypeCompleted: {
-            if (_isDone[atIndex]) {
+            if (_isDone[atIndex].boolValue) {
+                [_lock unlock];
                 return;
             }
 
@@ -115,6 +114,7 @@
             break;
         }
     }
+    [_lock unlock];
 }
 
 @end

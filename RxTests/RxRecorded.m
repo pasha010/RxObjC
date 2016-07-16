@@ -19,11 +19,11 @@
 }
 
 - (NSString *)debugDescription {
-    return [NSString stringWithFormat:@"%@ @ %u", _value, _time];
+    return self.description;
 }
 
 - (NSString *)description {
-    return [self debugDescription];
+    return [NSString stringWithFormat:@"%@ @ %u", _value, _time];
 }
 
 - (BOOL)isEqual:(id)other {

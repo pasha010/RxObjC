@@ -10,15 +10,19 @@
 
 
 @implementation RxEquatableArray {
-    NSArray *__nonnull _elements;
+    NSArray<id> *__nonnull _elements;
 }
 
-- (nonnull instancetype)initWithElements:(nonnull NSArray *)elements {
+- (nonnull instancetype)initWithElements:(nonnull NSArray<id> *)elements {
     self = [super init];
     if (self) {
         _elements = elements;
     }
     return self;
+}
+
+RxEquatableArray *EquatableArray(NSArray<id> *elements) {
+    return [[RxEquatableArray alloc] initWithElements:elements];
 }
 
 - (BOOL)isEqual:(id)other {
@@ -30,7 +34,7 @@
     return [self isEqualToArray:other];
 }
 
-- (BOOL)isEqualToArray:(RxEquatableArray *)array {
+- (BOOL)isEqualToArray:(RxEquatableArray<id> *)array {
     if (self == array) {
         return YES;
     }
@@ -46,5 +50,14 @@
 - (NSUInteger)hash {
     return [_elements hash];
 }
+
+- (NSString *)description {
+    return _elements.description;
+}
+
+- (NSString *)debugDescription {
+    return [self description];
+}
+
 
 @end

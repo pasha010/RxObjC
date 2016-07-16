@@ -10,7 +10,25 @@
 
 NSEnumeratorCombinePlus NSCombinePlus() {
     return ^NSNumber *(NSNumber *initial, NSNumber *element) {
-        return @(initial.integerValue + element.integerValue);
+        return @(initial.doubleValue + element.doubleValue);
+    };
+}
+
+NSEnumeratorCombinePlus NSCombineDiff() {
+    return ^NSNumber *(NSNumber *initial, NSNumber *element) {
+        return @(initial.doubleValue - element.doubleValue);
+    };
+}
+
+NSEnumeratorCombinePlus NSCombineMult() {
+    return ^NSNumber *(NSNumber *initial, NSNumber *element) {
+        return @(initial.doubleValue * element.doubleValue);
+    };
+}
+
+NSEnumeratorCombinePlus NSCombineDiv() {
+    return ^NSNumber *(NSNumber *initial, NSNumber *element) {
+        return @(initial.doubleValue / element.doubleValue);
     };
 }
 

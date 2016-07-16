@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSNumber *__nonnull(^NSEnumeratorCombinePlus)(NSNumber *__nonnull initial, NSNumber *__nonnull element);
 
 FOUNDATION_EXTERN NSEnumeratorCombinePlus NSCombinePlus();
+FOUNDATION_EXTERN NSEnumeratorCombinePlus NSCombineDiff();
+FOUNDATION_EXTERN NSEnumeratorCombinePlus NSCombineMult();
+FOUNDATION_EXTERN NSEnumeratorCombinePlus NSCombineDiv();
 
 @interface NSEnumerator<E> (Combine)
 
