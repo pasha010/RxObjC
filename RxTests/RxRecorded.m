@@ -22,6 +22,10 @@
     return [NSString stringWithFormat:@"%@ @ %u", _value, _time];
 }
 
+- (NSString *)description {
+    return [self debugDescription];
+}
+
 - (BOOL)isEqual:(id)other {
     if (other == self) {
         return YES;

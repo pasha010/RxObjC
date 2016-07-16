@@ -7,6 +7,7 @@
 //
 
 #import "RxTest.h"
+#import "RxLazyEnumerator.h"
 
 @interface RxObservableMultipleTest : RxTest
 
@@ -377,6 +378,438 @@
 @end
 
 @implementation RxObservableMultipleTest (Switch)
+
+- (void)testSwitch_Data {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *ys1 = [scheduler createColdObservable:@[
+            [self next:10 element:@101],
+            [self next:20 element:@102],
+            [self next:110 element:@103],
+            [self next:120 element:@104],
+            [self next:210 element:@105],
+            [self next:220 element:@106],
+            [self completed:230]
+    ]];
+    
+    RxTestableObservable *ys2 = [scheduler createColdObservable:@[
+            [self next:10 element:@201],
+            [self next:20 element:@202],
+            [self next:30 element:@203],
+            [self next:40 element:@204],
+            [self completed:50]
+    ]];
+    
+    RxTestableObservable *ys3 = [scheduler createColdObservable:@[
+            [self next:10 element:@301],
+            [self next:20 element:@302],
+            [self next:30 element:@303],
+            [self next:40 element:@304],
+            [self completed:150]
+    ]];
+
+    NSArray *xSequence = @[
+            [self next:300 element:ys1],
+            [self next:400 element:ys2],
+            [self next:500 element:ys3],
+            [self completed:600]
+    ];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [xs switchLatest];
+    }];
+
+    NSArray *correct = @[
+            [self next:310 element:@101],
+            [self next:320 element:@102],
+            [self next:410 element:@201],
+            [self next:420 element:@202],
+            [self next:430 element:@203],
+            [self next:440 element:@204],
+            [self next:510 element:@301],
+            [self next:520 element:@302],
+            [self next:530 element:@303],
+            [self next:540 element:@304],   
+            [self completed:650]
+    ];
+
+    XCTAssertEqualObjects(res.events, correct);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:600]]);
+
+    XCTAssertEqualObjects(ys1.subscriptions, @[[RxSubscription createWithSubscribe:300 unsubscribe:400]]);
+
+    XCTAssertEqualObjects(ys2.subscriptions, @[[RxSubscription createWithSubscribe:400 unsubscribe:450]]);
+
+    XCTAssertEqualObjects(ys3.subscriptions, @[[RxSubscription createWithSubscribe:500 unsubscribe:650]]);
+}
+
+- (void)testSwitch_InnerThrows {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *ys1 = [scheduler createColdObservable:@[
+            [self next:10 element:@101],
+            [self next:20 element:@102],
+            [self next:110 element:@103],
+            [self next:120 element:@104],
+            [self next:210 element:@105],
+            [self next:220 element:@106],
+            [self completed:230],
+    ]];
+    RxTestableObservable *ys2 = [scheduler createColdObservable:@[
+            [self next:10 element:@201],
+            [self next:20 element:@202],
+            [self next:30 element:@203],
+            [self next:40 element:@204],
+            [self error:50 testError:[RxTestError testError]],
+    ]];
+    RxTestableObservable *ys3 = [scheduler createColdObservable:@[
+            [self next:10 element:@301],
+            [self next:20 element:@302],
+            [self next:30 element:@303],
+            [self next:40 element:@304],
+            [self completed:150],
+    ]];
+
+    NSArray *xSequence = @[
+            [self next:300 element:ys1],
+            [self next:400 element:ys2],
+            [self next:500 element:ys3],
+            [self completed:600],
+    ];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [xs switchLatest];
+    }];
+
+    NSArray *correct = @[
+            [self next:310 element:@101],
+            [self next:320 element:@102],
+            [self next:410 element:@201],
+            [self next:420 element:@202],
+            [self next:430 element:@203],
+            [self next:440 element:@204],
+            [self error:450 testError:[RxTestError testError]],
+    ];
+    XCTAssertEqualObjects(res.events, correct);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:450]]);
+
+    XCTAssertEqualObjects(ys1.subscriptions, @[[RxSubscription createWithSubscribe:300 unsubscribe:400]]);
+
+    XCTAssertEqualObjects(ys2.subscriptions, @[[RxSubscription createWithSubscribe:400 unsubscribe:450]]);
+
+    XCTAssertEqualObjects(ys3.subscriptions, @[]);
+}
+
+- (void)testSwitch_OuterThrows {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *ys1 = [scheduler createColdObservable:@[
+            [self next:10 element:@101],
+            [self next:20 element:@102],
+            [self next:110 element:@103],
+            [self next:120 element:@104],
+            [self next:210 element:@105],
+            [self next:220 element:@106],
+            [self completed:230],
+    ]];
+    RxTestableObservable *ys2 = [scheduler createColdObservable:@[
+            [self next:10 element:@201],
+            [self next:20 element:@202],
+            [self next:30 element:@203],
+            [self next:40 element:@204],
+            [self completed:50],
+    ]];
+
+    NSArray *xSequence = @[
+            [self next:300 element:ys1],
+            [self next:400 element:ys2],
+            [self error:500 testError:[RxTestError testError]],
+    ];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [xs switchLatest];
+    }];
+
+    NSArray *correct = @[
+            [self next:310 element:@101],
+            [self next:320 element:@102],
+            [self next:410 element:@201],
+            [self next:420 element:@202],
+            [self next:430 element:@203],
+            [self next:440 element:@204],
+            [self error:500 testError:[RxTestError testError]],
+    ];
+    XCTAssertEqualObjects(res.events, correct);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:500]]);
+
+    XCTAssertEqualObjects(ys1.subscriptions, @[[RxSubscription createWithSubscribe:300 unsubscribe:400]]);
+
+    XCTAssertEqualObjects(ys2.subscriptions, @[[RxSubscription createWithSubscribe:400 unsubscribe:450]]);
+}
+
+@end
+
+@implementation RxObservableMultipleTest (FlatMapLatest)
+
+- (void)testFlatMapLatest_Data {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *ys1 = [scheduler createColdObservable:@[
+            [self next:10 element:@101],
+            [self next:20 element:@102],
+            [self next:110 element:@103],
+            [self next:120 element:@104],
+            [self next:210 element:@105],
+            [self next:220 element:@106],
+            [self completed:230],
+    ]]; 
+    
+    RxTestableObservable *ys2 = [scheduler createColdObservable:@[
+            [self next:10 element:@201],
+            [self next:20 element:@202],
+            [self next:30 element:@203],
+            [self next:40 element:@204],
+            [self completed:50],
+    ]];
+    
+    RxTestableObservable *ys3 = [scheduler createColdObservable:@[
+            [self next:10 element:@301],
+            [self next:20 element:@302],
+            [self next:30 element:@303],
+            [self next:40 element:@304],
+            [self completed:150],
+    ]];
+
+    NSArray<RxTestableObservable *> *observables = @[ys1, ys2, ys3];
+
+    NSArray *xSequence = @[
+            [self next:300 element:@0],
+            [self next:400 element:@1],
+            [self next:500 element:@2],
+            [self completed:600]
+    ];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+            return observables[index.unsignedIntegerValue];
+        }];
+    }];
+
+    NSArray *correct = @[
+            [self next:310 element:@101],
+            [self next:320 element:@102],
+            [self next:410 element:@201],
+            [self next:420 element:@202],
+            [self next:430 element:@203],
+            [self next:440 element:@204],
+            [self next:510 element:@301],
+            [self next:520 element:@302],
+            [self next:530 element:@303],
+            [self next:540 element:@304],
+            [self completed:650],
+    ];
+
+    XCTAssertEqualObjects(res.events, correct);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:600]]);
+
+    XCTAssertEqualObjects(ys1.subscriptions, @[[RxSubscription createWithSubscribe:300 unsubscribe:400]]);
+
+    XCTAssertEqualObjects(ys2.subscriptions, @[[RxSubscription createWithSubscribe:400 unsubscribe:450]]);
+
+    XCTAssertEqualObjects(ys3.subscriptions, @[[RxSubscription createWithSubscribe:500 unsubscribe:650]]);
+
+}
+
+- (void)testFlatMapLatest_InnerThrows {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *ys1 = [scheduler createColdObservable:@[
+            [self next:10 element:@101],
+            [self next:20 element:@102],
+            [self next:110 element:@103],
+            [self next:120 element:@104],
+            [self next:210 element:@105],
+            [self next:220 element:@106],
+            [self completed:230],
+    ]];
+
+    RxTestableObservable *ys2 = [scheduler createColdObservable:@[
+            [self next:10 element:@201],
+            [self next:20 element:@202],
+            [self next:30 element:@203],
+            [self next:40 element:@204],
+            [self error:50 testError:[RxTestError testError]]
+    ]];
+
+    RxTestableObservable *ys3 = [scheduler createColdObservable:@[
+            [self next:10 element:@301],
+            [self next:20 element:@302],
+            [self next:30 element:@303],
+            [self next:40 element:@304],
+            [self completed:150],
+    ]];
+
+    NSArray<RxTestableObservable *> *observables = @[ys1, ys2, ys3];
+
+    NSArray *xSequence = @[
+            [self next:300 element:@0],
+            [self next:400 element:@1],
+            [self next:500 element:@2],
+            [self completed:600]
+    ];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+            return observables[index.unsignedIntegerValue];
+        }];
+    }];
+
+    NSArray *correct = @[
+            [self next:310 element:@101],
+            [self next:320 element:@102],
+            [self next:410 element:@201],
+            [self next:420 element:@202],
+            [self next:430 element:@203],
+            [self next:440 element:@204],
+            [self error:450 testError:[RxTestError testError]]
+    ];
+
+    XCTAssertEqualObjects(res.events, correct);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:450]]);
+
+    XCTAssertEqualObjects(ys1.subscriptions, @[[RxSubscription createWithSubscribe:300 unsubscribe:400]]);
+
+    XCTAssertEqualObjects(ys2.subscriptions, @[[RxSubscription createWithSubscribe:400 unsubscribe:450]]);
+
+    XCTAssertEqualObjects(ys3.subscriptions, @[]);
+}
+
+- (void)testFlatMapLatest_OuterThrows {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *ys1 = [scheduler createColdObservable:@[
+            [self next:10 element:@101],
+            [self next:20 element:@102],
+            [self next:110 element:@103],
+            [self next:120 element:@104],
+            [self next:210 element:@105],
+            [self next:220 element:@106],
+            [self completed:230],
+    ]];
+
+    RxTestableObservable *ys2 = [scheduler createColdObservable:@[
+            [self next:10 element:@201],
+            [self next:20 element:@202],
+            [self next:30 element:@203],
+            [self next:40 element:@204],
+            [self completed:50]
+    ]];
+
+    NSArray<RxTestableObservable *> *observables = @[ys1, ys2];
+
+    NSArray *xSequence = @[
+            [self next:300 element:@0],
+            [self next:400 element:@1],
+            [self error:500 testError:[RxTestError testError]]
+    ];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+            return observables[index.unsignedIntegerValue];
+        }];
+    }];
+
+    NSArray *correct = @[
+            [self next:310 element:@101],
+            [self next:320 element:@102],
+            [self next:410 element:@201],
+            [self next:420 element:@202],
+            [self next:430 element:@203],
+            [self next:440 element:@204],
+            [self error:500 testError:[RxTestError testError]]
+    ];
+
+    XCTAssertEqualObjects(res.events, correct);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:500]]);
+
+    XCTAssertEqualObjects(ys1.subscriptions, @[[RxSubscription createWithSubscribe:300 unsubscribe:400]]);
+
+    XCTAssertEqualObjects(ys2.subscriptions, @[[RxSubscription createWithSubscribe:400 unsubscribe:450]]);
+}
+
+- (void)testFlatMapLatest_SelectorThrows {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *ys1 = [scheduler createColdObservable:@[
+            [self next:10 element:@101],
+            [self next:20 element:@102],
+            [self next:110 element:@103],
+            [self next:120 element:@104],
+            [self next:210 element:@105],
+            [self next:220 element:@106],
+            [self completed:230],
+    ]];
+
+    RxTestableObservable *ys2 = [scheduler createColdObservable:@[
+            [self next:10 element:@201],
+            [self next:20 element:@202],
+            [self next:30 element:@203],
+            [self next:40 element:@204],
+            [self completed:50]
+    ]];
+
+    NSArray<RxTestableObservable *> *observables = @[ys1, ys2];
+
+    NSArray *xSequence = @[
+            [self next:300 element:@0],
+            [self next:400 element:@1],
+    ];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+            if (index.integerValue < 1) {
+                return observables[index.unsignedIntegerValue];
+            } else {
+                @throw [RxTestError testError];
+            }
+        }];
+    }];
+
+    NSArray *correct = @[
+            [self next:310 element:@101],
+            [self next:320 element:@102],
+            [self error:400 testError:[RxTestError testError]]
+    ];
+
+    XCTAssertEqualObjects(res.events, correct);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:400]]);
+
+    XCTAssertEqualObjects(ys1.subscriptions, @[[RxSubscription createWithSubscribe:300 unsubscribe:400]]);
+
+    XCTAssertEqualObjects(ys2.subscriptions, @[]);
+}
+
 @end
 
 @implementation RxObservableMultipleTest (Concat)
@@ -387,7 +820,7 @@
         sum += e.intValue;
     }];
 
-    XCTAssertTrue(sum == 6, @"sum = %d", sum);
+    XCTAssertEqual(sum, 6);
 }
 
 - (void)testConcat_IEofIO {
@@ -455,11 +888,453 @@
         return @[xs1, xs2].concat;
     }];
 
-    XCTAssertTrue([res.events isEqualToArray:@[[self completed:250]]]);
-    XCTAssertTrue([xs1.subscriptions isEqualToArray:@[[[RxSubscription alloc] initWithSubscribe:200 unsubscribe:230]]]);
-    XCTAssertTrue([xs2.subscriptions isEqualToArray:@[[[RxSubscription alloc] initWithSubscribe:230 unsubscribe:250]]]);
+    XCTAssertEqualObjects(res.events, @[[self completed:250]]);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[[RxSubscription alloc] initWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[[[RxSubscription alloc] initWithSubscribe:230 unsubscribe:250]]);
 }
 
-// TODO complete this
+- (void)testConcat_EmptyNever {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
 
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self completed:230]
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[[RxSubscription createWithSubscribe:230 unsubscribe:1000]]);
+}
+
+- (void)testConcat_NeverNever {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:1000]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[]);
+}
+
+- (void)testConcat_EmptyThrow {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self completed:230]
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self error:250 testError:[RxTestError testError]]
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            [self error:250 testError:[RxTestError testError]]
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[[RxSubscription createWithSubscribe:230 unsubscribe:250]]);
+}
+
+- (void)testConcat_ThrowEmpty {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self error:230 testError:[RxTestError testError]]
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self completed:250]
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            [self error:230 testError:[RxTestError testError]]
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[]);
+}
+
+- (void)testConcat_ThrowThrow {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self error:230 testError:[RxTestError testError1]]
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self error:250 testError:[RxTestError testError2]]
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            [self error:230 testError:[RxTestError testError1]]
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[]);
+}
+
+- (void)testConcat_ReturnEmpty {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self next:210 element:@2],
+            [self completed:230],
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self completed:250]
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            [self next:210 element:@2],
+            [self completed:250]
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[[RxSubscription createWithSubscribe:230 unsubscribe:250]]);
+}
+
+- (void)testConcat_EmptyReturn {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self completed:230],
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self next:240 element:@2],
+            [self completed:250]
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            [self next:240 element:@2],
+            [self completed:250]
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[[RxSubscription createWithSubscribe:230 unsubscribe:250]]);
+}
+
+- (void)testConcat_ReturnNever {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self next:210 element:@2],
+            [self completed:230],
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            [self next:210 element:@2],
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[[RxSubscription createWithSubscribe:230 unsubscribe:1000]]);
+}
+
+- (void)testConcat_NeverReturn {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self next:210 element:@2],
+            [self completed:230],
+
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:1000]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[]);
+}
+
+- (void)testConcat_ReturnReturn {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self next:220 element:@2],
+            [self completed:230]
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            [self next:150 element:@1],
+            [self next:240 element:@3],
+            [self completed:250],
+
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            next(220, @2),
+            next(240, @3),
+            completed(250)
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[[RxSubscription createWithSubscribe:230 unsubscribe:250]]);
+}
+
+- (void)testConcat_ThrowReturn {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(230, [RxTestError testError1])
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(240, @2),
+            completed(250)
+
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            error(230, [RxTestError testError1])
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[]);
+}
+
+- (void)testConcat_ReturnThrow {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(220, @2),
+            completed(230),
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(250, testError2())
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            next(220, @2),
+            error(250, testError2())
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[[RxSubscription createWithSubscribe:230 unsubscribe:250]]);
+}
+
+- (void)testConcat_SomeDataSomeData {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @2),
+            next(220, @3),
+            completed(225),
+    ]];
+
+    RxTestableObservable *xs2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(230, @4),
+            next(240, @5),
+            completed(250)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1, xs2].concat;
+    }];
+
+    NSArray<RxRecorded <RxEvent<NSNumber *> *> *> *messages = @[
+            next(210, @2),
+            next(220, @3),
+            next(230, @4),
+            next(240, @5),
+            completed(250)
+    ];
+
+    XCTAssertEqualObjects(res.events, messages);
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:225]]);
+    XCTAssertEqualObjects(xs2.subscriptions, @[[RxSubscription createWithSubscribe:225 unsubscribe:250]]);
+}
+
+- (void)testConcat_EnumerableTiming {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @2),
+            next(220, @3),
+            completed(230)
+    ]];
+    
+    RxTestableObservable *xs2 = [scheduler createColdObservable:@[
+            next(50, @4),
+            next(60, @5),
+            next(70, @6),
+            completed(80)
+    ]];
+    
+    RxTestableObservable *xs3 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(200, @2),
+            next(210, @3),
+            next(220, @4),
+            next(230, @5),
+            next(270, @6),
+            next(320, @7),
+            next(330, @8),
+            completed(340)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return @[xs1.asObservable, xs2.asObservable, xs3.asObservable, xs2.asObservable].concat;
+    }];
+
+    NSArray *messages = @[
+            next(210, @2),
+            next(220, @3),
+            next(280, @4),
+            next(290, @5),
+            next(300, @6),
+            next(320, @7),
+            next(330, @8),
+            next(390, @4),
+            next(400, @5),
+            next(410, @6),
+            completed(420)   
+    ];
+    
+    XCTAssertEqualObjects(res.events, messages);
+    
+    XCTAssertEqualObjects(xs1.subscriptions, @[[RxSubscription createWithSubscribe:200 unsubscribe:230]]);
+
+    NSArray *xs2sub = @[
+            [RxSubscription createWithSubscribe:230 unsubscribe:310],
+            [RxSubscription createWithSubscribe:340 unsubscribe:420],
+    ];
+    XCTAssertEqualObjects(xs2.subscriptions, xs2sub);
+
+    XCTAssertEqualObjects(xs3.subscriptions, @[[RxSubscription createWithSubscribe:310 unsubscribe:340]]);
+}
+
+#ifdef TRACE_RESOURCES
+
+RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generator)(NSUInteger)) {
+    NSMutableArray *all = [NSMutableArray array];
+    for (NSUInteger j = 0; j < 2; j++) {
+        [all addObject:^id {
+            RxObservable *observable = j == 0 ? generator(startIndex) : generateCollection(startIndex + 1, generator);
+            return observable;
+        }];
+    }
+    return [[[RxLazyEnumerator alloc] initWithObjects:all] concat:all.count];
+}
+
+
+- (void)testConcat_TailRecursionCollection {
+    rx_maxTailRecursiveSinkStackSize = 0;
+    NSArray *elements = [[[generateCollection(0, ^RxObservable *(NSUInteger i) {
+        return [RxObservable just:@(i) scheduler:[RxCurrentThreadScheduler sharedInstance]];
+    }) take:10000] toBlocking] blocking_toArray];
+
+    NSMutableArray<NSNumber *> *array = [NSMutableArray arrayWithCapacity:10000];
+    for (NSUInteger i = 0; i < 10000; i++) {
+        [array addObject:@(i)];
+    }
+    XCTAssertEqualObjects(elements, array);
+    XCTAssertEqual(rx_maxTailRecursiveSinkStackSize, 1);
+}
+#endif
+
+@end
+
+@implementation RxObservableMultipleTest (Merge)
 @end

@@ -234,9 +234,8 @@
 
     __block int nEvents = 0;
 
-    RxTestConnectableObservable *observable = 
-            [[RxTestConnectableObservable alloc] initWithObservable:[@[[RxObservable of:@[@0, @1, @2]], [RxObservable error:[RxTestError testError]]] concat]
-                                                            subject:subject];
+    RxTestConnectableObservable *observable = [[RxTestConnectableObservable alloc] initWithObservable:[@[[RxObservable of:@[@0, @1, @2]], [RxObservable error:testError()]] concat]
+                                                                                              subject:subject];
 
     id <RxDisposable> d = [observable subscribeError:^(NSError *error) {
         nEvents++;
@@ -244,7 +243,7 @@
 
     [[observable connect] dispose];
 
-    XCTAssertTrue(nEvents == 1);
+    XCTAssertEqual(nEvents, 1);
 
     [d dispose];
 }
@@ -1223,8 +1222,8 @@
             _error = error;
         }];
 
-        XCTAssertTrue(eEvents == 1);
-        XCTAssertTrue(_error == [RxTestError testError]);
+        XCTAssertEqual(eEvents, 1);
+        XCTAssertEqualObjects(_error, [RxTestError testError]);
     }];
 }
 
@@ -1528,7 +1527,7 @@
     [observable subscribeError:^(NSError *error) {
         nEvents++;
     }];
-    XCTAssertTrue(nEvents == 1);
+    XCTAssertEqual(nEvents, 1);
 }
 
 - (void)testShareReplayLatestWhileConnected_Basic {

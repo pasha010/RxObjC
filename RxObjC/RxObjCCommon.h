@@ -32,3 +32,7 @@ Purposed for unit tests.
 #if TRACE_RESOURCES
 FOUNDATION_EXTERN int32_t rx_numberOfSerialDispatchQueueObservables;
 #endif
+
+#if DEBUG || (defined(TRACE_RESOURCES) && TRACE_RESOURCES)
+FOUNDATION_EXTERN NSUInteger rx_maxTailRecursiveSinkStackSize;
+#endif

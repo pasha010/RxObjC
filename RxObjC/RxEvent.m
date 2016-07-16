@@ -80,6 +80,9 @@
     return [super debugDescription];
 }
 
+- (NSString *)description {
+    return [self debugDescription];
+}
 @end
 
 @implementation RxEvent (Properties)

@@ -60,7 +60,7 @@
 @implementation NSArray (RxConcat)
 
 - (nonnull RxObservable *)concat {
-    return [[self objectEnumerator] concat];
+    return [[self objectEnumerator] concat:self.count];
 }
 
 @end
@@ -68,15 +68,15 @@
 @implementation NSSet (RxConcat)
 
 - (nonnull RxObservable *)concat {
-    return [[self objectEnumerator] concat];
+    return [[self objectEnumerator] concat:self.count];
 }
 
 @end
 
 @implementation NSEnumerator (RxConcat)
 
-- (nonnull RxObservable *)concat {
-    return [[RxConcat alloc] initWithSources:self];
+- (nonnull RxObservable *)concat:(NSUInteger)count {
+    return [[RxConcat alloc] initWithSources:self count:count];
 }
 
 @end

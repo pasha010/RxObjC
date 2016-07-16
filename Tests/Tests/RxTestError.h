@@ -13,8 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RxTestError : NSError
 
 + (nonnull instancetype)testError;
+FOUNDATION_EXTERN RxTestError *testError();
+
 + (nonnull instancetype)testError1;
+FOUNDATION_EXTERN RxTestError *testError1();
+
 + (nonnull instancetype)testError2;
+FOUNDATION_EXTERN RxTestError *testError2();
 
 @end
 

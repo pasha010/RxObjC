@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface NSEnumerator<E> (RxConcat)
-- (nonnull RxObservable<E> *)concat;
+- (nonnull RxObservable<E> *)concat:(NSUInteger)count;
 @end
 
 @interface NSObject (RxConcat) <RxObservableType>

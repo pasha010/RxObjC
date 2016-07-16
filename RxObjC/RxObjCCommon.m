@@ -73,3 +73,4 @@ void __rx_tryCatch__(id self, void (^tryBlock)(), void (^catchBlock)(NSError *))
 }
 
 int32_t rx_numberOfSerialDispatchQueueObservables = 0;
+NSUInteger rx_maxTailRecursiveSinkStackSize = 0;
