@@ -512,9 +512,7 @@
         default:
             create = ^RxObservable * {
                 return [RxObservable combineLatest:e resultSelector:^id(RxTuple *tuple) {
-                    return [[tuple.array objectEnumerator] reduce:@0 combine:^id(NSNumber *initial, NSNumber *element) {
-                        return @(initial.integerValue + element.integerValue);
-                    }];
+                    return [[tuple.array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
                 }];
             };
             break;
