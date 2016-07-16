@@ -43,8 +43,12 @@
     [_disposable dispose];
 }
 
-- (NSString *)debugDescription {
+- (NSString *)description {
     return [NSString stringWithFormat:@"%@", _time];
+}
+
+- (NSString *)debugDescription {
+    return self.description;
 }
 
 @end

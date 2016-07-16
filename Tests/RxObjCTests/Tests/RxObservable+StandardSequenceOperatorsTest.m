@@ -8,11 +8,11 @@
 
 #import "RxTest.h"
 
-@interface RxObservable_StandardSequenceOperatorsTest : RxTest
+@interface RxObservableStandardSequenceOperatorsTest : RxTest
 
 @end
 
-@implementation RxObservable_StandardSequenceOperatorsTest
+@implementation RxObservableStandardSequenceOperatorsTest
 
 
 @end

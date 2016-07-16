@@ -160,10 +160,14 @@ BOOL rx_compareBagKeys(RxBagKey *lhs, RxBagKey *rhs) {
 #pragma clang diagnostic pop
 
 /**
-A textual representation of `self`, suitable for debugging.
-*/
+ * A textual representation of `self`, suitable for debugging.
+ */
 - (NSString *)debugDescription {
     return [NSString stringWithFormat:@"%zd elements in Bag", [self count]];
+}
+
+- (NSString *)description {
+    return self.debugDescription;
 }
 
 @end

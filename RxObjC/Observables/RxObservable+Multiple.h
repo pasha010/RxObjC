@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param resultSelector: Function to invoke whenever any of the sources produces an element.
  * @return: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
  */
-- (nonnull RxObservable<E> *)combineLatest:(nonnull id(^)(NSArray<E> *__nonnull))resultSelector;
+- (nonnull RxObservable<E> *)combineLatest:(nonnull E(^)(NSArray<E> *__nonnull))resultSelector;
 
 @end
 
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param resultSelector: Function to invoke for each series of elements at corresponding indexes in the sources.
  * @return: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
  */
-- (nonnull RxObservable<E> *)zip:(nonnull id(^)(NSArray<E> *__nonnull))resultSelector;
+- (nonnull RxObservable<E> *)zip:(nonnull E(^)(NSArray<E> *__nonnull))resultSelector;
 
 @end
 
@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param maxConcurrent: Maximum number of inner observable sequences being subscribed to concurrently.
  * @return: The observable sequence that merges the elements of the inner sequences.
  */
-- (nonnull RxObservable *)merge:(NSUInteger)maxConcurrent;
+- (nonnull RxObservable *)mergeWithMaxConcurrent:(NSUInteger)maxConcurrent;
 
 @end
 

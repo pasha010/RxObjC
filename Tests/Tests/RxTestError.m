@@ -33,7 +33,7 @@ RxTestError *testError() {
     return instance;
 }
 
-RxTestError *testErro1() {
+RxTestError *testError1() {
     return [RxTestError testError1];
 }
 

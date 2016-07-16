@@ -150,6 +150,10 @@
     }
 }
 
+- (nonnull NSRecursiveLock *)lock {
+    return _lock;
+}
+
 - (void)on:(nonnull RxEvent *)event {
     [self synchronizedOn:event];
 }
@@ -157,7 +161,7 @@
 - (void)_synchronized_on:(nonnull RxEvent<id <RxObservableConvertibleType>> *)event {
     switch (event.type) {
         case RxEventTypeNext: {
-            BOOL subscribe = NO;
+            BOOL subscribe;
             if (_activeCount < _maxConcurrent) {
                 _activeCount++;
                 subscribe = YES;

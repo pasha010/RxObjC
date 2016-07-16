@@ -19,6 +19,7 @@
 #import "RxCombineLatest+CollectionType.h"
 #import "RxZip+CollectionType.h"
 #import "RxSwitch.h"
+#import "NSEnumerator+Operators.h"
 
 
 #pragma clang diagnostic push
@@ -84,7 +85,7 @@
 @implementation NSObject (RxConcat)
 
 + (nonnull RxObservable *)concat {
-    return [self merge:1];
+    return [self mergeWithMaxConcurrent:1];
 }
 
 @end
@@ -95,7 +96,7 @@
     return [[RxMerge alloc] initWithSource:[self asObservable]];
 }
 
-- (nonnull RxObservable *)merge:(NSUInteger)maxConcurrent {
+- (nonnull RxObservable *)mergeWithMaxConcurrent:(NSUInteger)maxConcurrent {
     return [[RxMergeLimited alloc] initWithSource:[self asObservable] maxConcurrent:maxConcurrent];
 }
 
@@ -181,14 +182,6 @@
 @end
 
 @implementation NSEnumerator (RxAmb)
-
-- (nonnull id)reduce:(nonnull id)start combine:(id(^)(id __nonnull initial, id __nonnull element))combine {
-    id res = start;
-    for (id o in self) {
-        res = combine(res, o);
-    }
-    return res;
-}
 
 - (nonnull RxObservable *)amb {
     return [self reduce:[RxObservable never] combine:^RxObservable *(RxObservable *initial, RxObservable *element) {

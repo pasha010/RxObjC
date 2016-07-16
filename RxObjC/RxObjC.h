@@ -111,4 +111,7 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxSubjectType.h"
 #import "RxVariable.h"
 
+#pragma mark - Extensions
+#import "NSEnumerator+Operators.h"
+
 #endif // RxObjC_H

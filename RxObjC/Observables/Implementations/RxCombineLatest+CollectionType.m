@@ -11,7 +11,7 @@
 #import "RxAnyObserver.h"
 #import "RxCompositeDisposable.h"
 
-@interface RxCombineLatestCollectionTypeSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxCombineLatestCollectionTypeSink<O : id <RxObserverType>> : RxSink<O>
 @end
 
 @implementation RxCombineLatestCollectionTypeSink {
@@ -61,6 +61,9 @@
 
 - (void)on:(nonnull RxEvent *)event atIndex:(NSUInteger)atIndex {
     [_lock lock];
+    @onExit {
+        [_lock unlock];
+    };
 
     switch (event.type) {
         case RxEventTypeNext: {
@@ -76,6 +79,7 @@
                     [self forwardOn:[RxEvent completed]];
                     [self dispose];
                 }
+
                 return;
             }
             
@@ -111,8 +115,6 @@
             break;
         }
     }
-        
-    [_lock unlock];
 }
 
 @end

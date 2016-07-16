@@ -15,6 +15,8 @@ Records information about subscriptions to and unsubscriptions from observable s
 */
 @interface RxSubscription : NSObject
 
+FOUNDATION_EXPORT RxSubscription *Subscription(NSUInteger subscribe, NSUInteger unsubscribe);
+
 /**
  Subscription virtual time.
 */
