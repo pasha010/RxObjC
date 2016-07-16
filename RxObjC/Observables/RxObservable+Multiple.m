@@ -194,7 +194,7 @@
 @implementation NSObject (RxWithLatestFrom)
 
 - (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second
-                          resultSelector:(id __nonnull(^)(id __nonnull, id __nonnull))resultSelector {
+                          resultSelector:(id __nonnull(^)(id __nonnull x, id __nonnull y))resultSelector {
 
     return [[RxWithLatestFrom alloc] initWithFirst:[self asObservable]
                                             second:[second asObservable]

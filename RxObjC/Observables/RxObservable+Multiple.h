@@ -210,7 +210,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return: An observable sequence containing the result of combining each element of the self  with the latest element from the second source, if any, using the specified result selector function.
  */
 - (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second
-                          resultSelector:(id __nonnull(^)(id __nonnull, id __nonnull))resultSelector;
+                          resultSelector:(id __nonnull(^)(id __nonnull x, id __nonnull y))resultSelector;
 
 /**
  * Merges two observable sequences into one observable sequence by using latest element from the second sequence every time when `self` emitts an element.

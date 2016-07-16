@@ -60,6 +60,7 @@
                     [self forwardOn:[RxEvent completed]];
                     [self dispose];
                 }
+                [_lock unlock];
                 return;
             }
             
@@ -90,6 +91,7 @@
         }
         case RxEventTypeCompleted: {
             if (_isDone[index].boolValue) {
+                [_lock unlock];
                 return;
             }
 
