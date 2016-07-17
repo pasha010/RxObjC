@@ -2913,7 +2913,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1, e2] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -2943,7 +2943,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -2970,7 +2970,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -2999,7 +2999,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3030,7 +3030,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3060,7 +3060,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3090,7 +3090,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3119,7 +3119,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3147,7 +3147,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3177,7 +3177,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3207,7 +3207,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3242,7 +3242,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3280,7 +3280,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3315,7 +3315,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3348,7 +3348,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 
@@ -3458,7 +3458,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
         return [@[e0, e1, e2] combineLatest:^NSNumber *(NSArray<NSNumber *> *array) {
-            return [[array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+            return [[array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
         }];
     }];
 

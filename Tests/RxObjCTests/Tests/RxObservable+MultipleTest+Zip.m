@@ -70,7 +70,7 @@
         }
         default:
             observable = [RxObservable zip:v resultSelector:^id(RxTuple *tuple) {
-                return [[tuple.array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+                return [[tuple.array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
             }];
             break;
     }
@@ -295,7 +295,7 @@
         }
         default:
             observable = [RxObservable zip:v resultSelector:^id(RxTuple *tuple) {
-                return [[tuple.array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+                return [[tuple.array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
             }];
             break;
     }
@@ -379,7 +379,7 @@
         }
         default:
             observable = [RxObservable zip:v resultSelector:^id(RxTuple *tuple) {
-                return [[tuple.array objectEnumerator] reduce:@0 combine:NSCombinePlus()];
+                return [[tuple.array objectEnumerator] reduce:@0 combine:RxCombinePlus()];
             }];
             break;
     }
@@ -418,7 +418,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+        return [RxObservable zip:n and:e resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[];
@@ -447,7 +447,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+        return [RxObservable zip:n and:e resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[];
@@ -477,7 +477,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+        return [RxObservable zip:n and:e resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -510,7 +510,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+        return [RxObservable zip:n and:e resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -541,7 +541,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+        return [RxObservable zip:n and:e resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -572,7 +572,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+        return [RxObservable zip:n and:e resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -605,7 +605,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o1 and:o2 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -637,7 +637,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o1 and:o2 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -669,7 +669,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o1 and:o2 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -699,7 +699,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o1 and:o2 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -729,7 +729,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o1 and:o2 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -760,7 +760,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o1 and:o2 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -792,7 +792,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o1 and:o2 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -824,7 +824,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o1 and:o2 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -857,7 +857,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o1 and:o2 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[
@@ -891,7 +891,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable zip:o2 and:o1 resultSelector:NSCombinePlus()];
+        return [RxObservable zip:o2 and:o1 resultSelector:RxCombinePlus()];
     }];
 
     NSArray *events = @[

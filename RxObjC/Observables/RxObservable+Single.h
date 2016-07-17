@@ -128,7 +128,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @param notificationHandler: A handler that is passed an observable sequence of errors raised by the source observable and returns and observable that either continues, completes or errors. This behavior is then applied to the source observable.
  * @return: An observable sequence producing the elements of the given sequence repeatedly until it terminates successfully or is notified to error or complete.
  */
-- (nonnull RxObservable *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<NSError *> *))notificationHandler;
+- (nonnull RxObservable *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler;
+
+- (nonnull RxObservable *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler
+                   customErrorClass:(nullable Class)errorClass;
 
 @end
 
@@ -142,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param accumulator: An accumulator function to be invoked on each element.
  * @return: An observable sequence containing the accumulated values.
  */
-- (nonnull RxObservable *)scan:(nonnull id)seed accumulator:(nonnull id __nonnull(^)(id __nonnull, id __nonnull))accumulator;
+- (nonnull RxObservable *)scan:(nonnull id)seed accumulator:(nonnull id __nonnull(^)(id __nonnull accumulate, id __nonnull element))accumulator;
 
 @end
 

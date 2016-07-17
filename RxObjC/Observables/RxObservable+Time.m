@@ -56,13 +56,13 @@
 
 @implementation RxObservable (Timer)
 
-- (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
++ (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
                                      period:(RxTimeInterval)period
                                   scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxTimer alloc] initWithDueTime:dueTime period:period scheduler:scheduler];
 }
 
-- (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
++ (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
                                   scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [self timer:dueTime period:-1 scheduler:scheduler];
 }

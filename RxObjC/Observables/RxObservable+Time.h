@@ -82,11 +82,11 @@ Returns an observable sequence that periodically produces a value after the spec
 - parameter scheduler: Scheduler to run timers on.
 - returns: An observable sequence that produces a value after due time has elapsed and then each period.
 */
-- (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
++ (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
                                      period:(RxTimeInterval)period
                                   scheduler:(nonnull id <RxSchedulerType>)scheduler;
 
-- (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
++ (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
                                   scheduler:(nonnull id <RxSchedulerType>)scheduler;
 @end
 

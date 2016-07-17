@@ -31,6 +31,8 @@ typedef NS_ENUM(NSUInteger, RxTailRecursiveSinkCommand) {
 
 - (void)schedule:(RxTailRecursiveSinkCommand)command;
 
+- (void)done;
+
 - (nullable RxTuple2<NSEnumerator<id <RxObservableConvertibleType>> *, NSNumber *> *)extract:(nonnull RxObservable *)observable;
 
 - (nonnull id <RxDisposable>)subscribeToNext:(nonnull RxObservable *)next;

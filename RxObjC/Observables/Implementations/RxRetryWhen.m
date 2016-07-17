@@ -18,6 +18,7 @@
 @property (nonnull, readonly) RxPublishSubject<NSError *> *errorSubject;
 @property (nonnull, readonly) RxObservable *handler;
 @property (nonnull, readonly) RxPublishSubject<id> *notifier;
+@property (nullable, readonly) Class errorClass;
 
 @end
 
@@ -84,7 +85,8 @@
         case RxEventTypeError: {
             NSError *error = event.error;
             _parent.lastError = error;
-            if (error) {
+
+            if (!_parent.errorClass || [error.class isEqual:_parent.errorClass]) {
                 [super dispose];
 
                 id <RxDisposable> errorHandlerSubscription = [_parent.notifier subscribe:[[RxRetryTriggerSink alloc] initWithParent:self]];
@@ -123,6 +125,7 @@
         _handler = [parent->_notificationHandler(_errorSubject) asObservable];
         _notifier = [RxPublishSubject create];
         _parent = parent;
+        _errorClass = _parent->_errorClass;
     }
     return self;
 }
@@ -163,11 +166,13 @@
 }
 
 - (nonnull instancetype)initWithSources:(NSEnumerator *)sequence 
-                    notificationHandler:(id <RxObservableType> (^)(RxObservable<NSError *> *))handler {
+                    notificationHandler:(id <RxObservableType> (^)(RxObservable<NSError *> *))handler
+                       customErrorClass:(nullable Class)errorClass {
     self = [super init];
     if (self) {
         _sources = sequence;
         _notificationHandler = handler;
+        _errorClass = errorClass;
     }
     return self;
 }

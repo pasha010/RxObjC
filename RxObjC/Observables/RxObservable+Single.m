@@ -114,16 +114,22 @@
     return [[RxCatchSequence alloc] initWithSources:[array objectEnumerator]];
 }
 
-- (nonnull RxObservable *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<NSError *> *))notificationHandler {
+- (nonnull RxObservable *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler {
+    return [self retryWhen:notificationHandler customErrorClass:nil];
+}
+
+- (nonnull RxObservable *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler
+                    customErrorClass:(nullable Class)errorClass {
     return [[RxRetryWhenSequence alloc] initWithSources:[[RxInfiniteSequence alloc] initWithRepeatedValue:[self asObservable]]
-                                    notificationHandler:notificationHandler];
+                                    notificationHandler:notificationHandler
+                                       customErrorClass:errorClass];
 }
 
 @end
 
 @implementation NSObject (RxScan)
 
-- (nonnull RxObservable *)scan:(nonnull id)seed accumulator:(id __nonnull(^)(id __nonnull, id __nonnull))accumulator {
+- (nonnull RxObservable *)scan:(nonnull id)seed accumulator:(id __nonnull(^)(id __nonnull accumulate, id __nonnull element))accumulator {
     return [[RxScan alloc] initWithSource:[self asObservable] seed:seed accumulator:accumulator];
 }
 

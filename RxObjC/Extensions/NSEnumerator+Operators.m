@@ -8,28 +8,48 @@
 
 #import "NSEnumerator+Operators.h"
 
-NSEnumeratorCombinePlus NSCombinePlus() {
-    return ^NSNumber *(NSNumber *initial, NSNumber *element) {
-        return @(initial.doubleValue + element.doubleValue);
-    };
+NSEnumeratorCombinePlus RxCombinePlus() {
+    static dispatch_once_t token;
+    static NSEnumeratorCombinePlus combine = nil;
+    dispatch_once(&token, ^{
+        combine = ^NSNumber *(NSNumber *initial, NSNumber *element) {
+            return @(initial.doubleValue + element.doubleValue);
+        };
+    });
+    return [combine copy];
 }
 
-NSEnumeratorCombinePlus NSCombineDiff() {
-    return ^NSNumber *(NSNumber *initial, NSNumber *element) {
-        return @(initial.doubleValue - element.doubleValue);
-    };
+NSEnumeratorCombinePlus RxCombineDiff() {
+    static dispatch_once_t token;
+    static NSEnumeratorCombinePlus combine = nil;
+    dispatch_once(&token, ^{
+        combine = ^NSNumber *(NSNumber *initial, NSNumber *element) {
+            return @(initial.doubleValue - element.doubleValue);
+        };
+    });
+    return [combine copy];
 }
 
-NSEnumeratorCombinePlus NSCombineMult() {
-    return ^NSNumber *(NSNumber *initial, NSNumber *element) {
-        return @(initial.doubleValue * element.doubleValue);
-    };
+NSEnumeratorCombinePlus RxCombineMult() {
+    static dispatch_once_t token;
+    static NSEnumeratorCombinePlus combine = nil;
+    dispatch_once(&token, ^{
+        combine = ^NSNumber *(NSNumber *initial, NSNumber *element) {
+            return @(initial.doubleValue * element.doubleValue);
+        };
+    });
+    return [combine copy];
 }
 
-NSEnumeratorCombinePlus NSCombineDiv() {
-    return ^NSNumber *(NSNumber *initial, NSNumber *element) {
-        return @(initial.doubleValue / element.doubleValue);
-    };
+NSEnumeratorCombinePlus RxCombineDiv() {
+    static dispatch_once_t token;
+    static NSEnumeratorCombinePlus combine = nil;
+    dispatch_once(&token, ^{
+        combine = ^NSNumber *(NSNumber *initial, NSNumber *element) {
+            return @(initial.doubleValue / element.doubleValue);
+        };
+    });
+    return [combine copy];
 }
 
 @implementation NSEnumerator (Combine)
