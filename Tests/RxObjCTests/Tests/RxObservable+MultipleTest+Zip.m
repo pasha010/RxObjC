@@ -403,6 +403,580 @@
     XCTAssertEqualObjects(v.lastObject.subscriptions, @[Subscription(200, 220 + 10 * (n - 2))]);
 }
 
+#pragma mark - common
+
+- (void)testZip_NeverEmpty {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *n = [scheduler createHotObservable:@[
+            next(150, @1)
+    ]];
+    
+    RxTestableObservable *e = [scheduler createHotObservable:@[
+            next(150, @1),
+            completed(210)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(n.subscriptions, @[
+            Subscription(200, 1000)
+    ]);
+
+    XCTAssertEqualObjects(e.subscriptions, @[
+            Subscription(200, 210)
+    ]);
+}
+
+- (void)testZip_EmptyNever {
+    // in rxswift not correct test method
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *n = [scheduler createHotObservable:@[
+            next(150, @1),
+            completed(210)
+    ]];
+
+    RxTestableObservable *e = [scheduler createHotObservable:@[
+            next(150, @1),
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(n.subscriptions, @[
+            Subscription(200, 210)
+    ]);
+
+    XCTAssertEqualObjects(e.subscriptions, @[
+            Subscription(200, 1000)
+    ]);
+}
+
+- (void)testZip_EmptyNonEmpty {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *n = [scheduler createHotObservable:@[
+            next(150, @1),
+            completed(210)
+    ]];
+
+    RxTestableObservable *e = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(215, @2),
+            completed(220)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            completed(215)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(n.subscriptions, @[
+            Subscription(200, 210)
+    ]);
+
+    XCTAssertEqualObjects(e.subscriptions, @[
+            Subscription(200, 215)
+    ]);
+}
+
+- (void)testZip_NonEmptyEmpty {
+    // in rxswift not correct test method
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *n = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(215, @2),
+            completed(220)
+    ]];
+
+    RxTestableObservable *e = [scheduler createHotObservable:@[
+            next(150, @1),
+            completed(210)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            completed(215)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(n.subscriptions, @[
+            Subscription(200, 215)
+    ]);
+
+    XCTAssertEqualObjects(e.subscriptions, @[
+            Subscription(200, 210)
+    ]);
+}
+
+- (void)testZip_NeverNonEmpty {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *n = [scheduler createHotObservable:@[
+            next(150, @1),
+    ]];
+
+    RxTestableObservable *e = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(215, @2),
+            completed(220)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(n.subscriptions, @[
+            Subscription(200, 1000)
+    ]);
+
+    XCTAssertEqualObjects(e.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_NonEmptyNever {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *n = [scheduler createHotObservable:@[
+            next(150, @1),
+    ]];
+
+    RxTestableObservable *e = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(215, @2),
+            completed(220)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:n and:e resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(n.subscriptions, @[
+            Subscription(200, 1000)
+    ]);
+
+    XCTAssertEqualObjects(e.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_NonEmptyNonEmpty {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(215, @2),
+            completed(230)
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(220, @3),
+            completed(240)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            next(220, @(2 + 3)),
+            completed(240)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 230)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 240)
+    ]);
+}
+
+- (void)testZip_EmptyError {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            completed(230)
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(220, testError())
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            error(220, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_ErrorEmpty {
+    // error in rx swift test
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(220, testError())
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            completed(230)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            error(220, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_NeverError {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(220, testError())
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            error(220, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_ErrorNever {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(220, testError())
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            error(220, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_ErrorError {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(230, testError1())
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(220, testError2())
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            error(220, testError2())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_SomeError {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(215, @2),
+            completed(230)
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(220, testError1())
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            error(220, testError1())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_ErrorSome {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(220, testError1())
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(215, @2),
+            completed(230)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            error(220, testError1())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_LeftCompletesFirst {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @2),
+            completed(220)
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(215, @4),
+            completed(225)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            next(215, @(2 + 4)),
+            completed(225)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 225)
+    ]);
+}
+
+- (void)testZip_RightCompletesFirst {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @2),
+            completed(220)
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(215, @4),
+            completed(225)
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o2 and:o1 resultSelector:NSCombinePlus()];
+    }];
+
+    NSArray *events = @[
+            next(215, @(2 + 4)),
+            completed(225)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 225)
+    ]);
+}
+
+- (void)testZip_LeftTriggersSelectorError {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(220, @2),
+            completed(220)
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @4),
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o1 and:o2 resultSelector:^id(id _o1, id _o2) {
+            @throw testError();
+        }];
+    }];
+
+    NSArray *events = @[
+            error(220, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testZip_RightTriggersSelectorError {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *o1 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(220, @2),
+            completed(220)
+    ]];
+
+    RxTestableObservable *o2 = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @4),
+    ]];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [RxObservable zip:o2 and:o1 resultSelector:^id(id _o1, id _o2) {
+            @throw testError();
+        }];
+    }];
+
+    NSArray *events = @[
+            error(220, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(o1.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+
+    XCTAssertEqualObjects(o2.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
 @end
 
 @implementation RxObservableMultipleTestZip (With2)
