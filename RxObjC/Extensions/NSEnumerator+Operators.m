@@ -8,9 +8,9 @@
 
 #import "NSEnumerator+Operators.h"
 
-NSEnumeratorCombinePlus RxCombinePlus() {
+RxEnumeratorCombineOperator RxCombinePlus() {
     static dispatch_once_t token;
-    static NSEnumeratorCombinePlus combine = nil;
+    static RxEnumeratorCombineOperator combine = nil;
     dispatch_once(&token, ^{
         combine = ^NSNumber *(NSNumber *initial, NSNumber *element) {
             return @(initial.doubleValue + element.doubleValue);
@@ -19,9 +19,9 @@ NSEnumeratorCombinePlus RxCombinePlus() {
     return [combine copy];
 }
 
-NSEnumeratorCombinePlus RxCombineDiff() {
+RxEnumeratorCombineOperator RxCombineDiff() {
     static dispatch_once_t token;
-    static NSEnumeratorCombinePlus combine = nil;
+    static RxEnumeratorCombineOperator combine = nil;
     dispatch_once(&token, ^{
         combine = ^NSNumber *(NSNumber *initial, NSNumber *element) {
             return @(initial.doubleValue - element.doubleValue);
@@ -30,9 +30,9 @@ NSEnumeratorCombinePlus RxCombineDiff() {
     return [combine copy];
 }
 
-NSEnumeratorCombinePlus RxCombineMult() {
+RxEnumeratorCombineOperator RxCombineMult() {
     static dispatch_once_t token;
-    static NSEnumeratorCombinePlus combine = nil;
+    static RxEnumeratorCombineOperator combine = nil;
     dispatch_once(&token, ^{
         combine = ^NSNumber *(NSNumber *initial, NSNumber *element) {
             return @(initial.doubleValue * element.doubleValue);
@@ -41,15 +41,21 @@ NSEnumeratorCombinePlus RxCombineMult() {
     return [combine copy];
 }
 
-NSEnumeratorCombinePlus RxCombineDiv() {
+RxEnumeratorCombineOperator RxCombineDiv() {
     static dispatch_once_t token;
-    static NSEnumeratorCombinePlus combine = nil;
+    static RxEnumeratorCombineOperator combine = nil;
     dispatch_once(&token, ^{
         combine = ^NSNumber *(NSNumber *initial, NSNumber *element) {
             return @(initial.doubleValue / element.doubleValue);
         };
     });
     return [combine copy];
+}
+
+RxMapSelector RxReturnSelf() {
+    return ^id(id e) {
+        return e;
+    };
 }
 
 @implementation NSEnumerator (Combine)

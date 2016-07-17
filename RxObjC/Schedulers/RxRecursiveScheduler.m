@@ -18,6 +18,8 @@
 - (nonnull instancetype)initWithScheduler:(nonnull id <RxSchedulerType>)scheduler andAction:(RxAnyRecursiveSchedulerAction)action {
     self = [super init];
     if (self) {
+        _lock = [[NSRecursiveLock alloc] init];
+        _group = [[RxCompositeDisposable alloc] init];
         _action = action;
         _scheduler = scheduler;
     }
@@ -39,9 +41,7 @@
 
         RxAnyRecursiveSchedulerAction action = [self->_lock calculateLocked:(id (^)()) ^RxAnyRecursiveSchedulerAction {
             if (isAdded) {
-                if (removeKey) {
-                    [self->_group removeDisposable:removeKey];
-                }
+                [self->_group removeDisposable:removeKey];
             } else {
                 isDone = YES;
             }

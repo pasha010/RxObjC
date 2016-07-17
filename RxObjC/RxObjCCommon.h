@@ -29,6 +29,7 @@ Purposed for unit tests.
 */
 #if TRACE_RESOURCES
 FOUNDATION_EXTERN int32_t rx_numberOfSerialDispatchQueueObservables;
+FOUNDATION_EXTERN int32_t rx_numberOfMapOperators;
 #endif
 
 #if DEBUG || (defined(TRACE_RESOURCES) && TRACE_RESOURCES)

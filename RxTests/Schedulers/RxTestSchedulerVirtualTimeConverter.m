@@ -23,7 +23,7 @@
 }
 
 - (nonnull NSNumber *)convertToVirtualTime:(nonnull RxTime *)time {
-    return @(((NSInteger) time.timeIntervalSince1970 / _resolution + 0.5));
+    return @((((NSInteger) time.timeIntervalSince1970 / _resolution + 0.5)));
 }
 
 - (RxTimeInterval)convertFromVirtualTimeInterval:(RxTimeInterval)virtualTimeInterval {

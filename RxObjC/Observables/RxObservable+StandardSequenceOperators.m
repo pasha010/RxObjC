@@ -39,7 +39,7 @@
     return [[RxTakeWhile alloc] initWithSource:[self asObservable] predicate:predicate];
 }
 
-- (nonnull RxObservable *)takeWhileWithIndex:(nonnull BOOL (^)(id, NSUInteger))predicate {
+- (nonnull RxObservable *)takeWhileWithIndex:(nonnull BOOL (^)(id element, NSUInteger index))predicate {
     return [[RxTakeWhile alloc] initWithSource:[self asObservable] indexPredicate:predicate];
 }
 

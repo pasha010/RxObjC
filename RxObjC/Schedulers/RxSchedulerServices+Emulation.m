@@ -35,10 +35,9 @@
 }
 
 - (nonnull id <RxDisposable>)start {
-    @weakify(self);
-    NSObject *_s = _scheduler;
+    /// without @weakify and @strongify beacase self_weak will be nil when it need
+    NSObject<RxSchedulerType> *_s = _scheduler;
     return [_s scheduleRecursive:@(RxSchedulePeriodicRecursiveCommandTick) dueTime:_startAfter action:^(id state, RxAnyRecursiveScheduler *scheduler) {
-        @strongify(self);
         [self tick:state scheduler:scheduler];
     }];
 }

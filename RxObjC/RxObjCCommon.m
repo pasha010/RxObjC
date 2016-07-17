@@ -72,5 +72,11 @@ void rx_tryCatch(void (^tryBlock)(), void (^catchBlock)(NSError *)) {
     }
 }
 
+#if TRACE_RESOURCES
 int32_t rx_numberOfSerialDispatchQueueObservables = 0;
+int32_t rx_numberOfMapOperators = 0;
+#endif
+
+#if DEBUG || (defined(TRACE_RESOURCES) && TRACE_RESOURCES)
 NSUInteger rx_maxTailRecursiveSinkStackSize = 0;
+#endif

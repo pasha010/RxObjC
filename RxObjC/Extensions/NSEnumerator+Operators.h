@@ -7,15 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RxObservableBlockTypedef.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSNumber *__nonnull(^NSEnumeratorCombinePlus)(NSNumber *__nonnull initial, NSNumber *__nonnull element);
+typedef NSNumber *__nonnull(^RxEnumeratorCombineOperator)(NSNumber *__nonnull initial, NSNumber *__nonnull element);
 
-FOUNDATION_EXTERN NSEnumeratorCombinePlus RxCombinePlus();
-FOUNDATION_EXTERN NSEnumeratorCombinePlus RxCombineDiff();
-FOUNDATION_EXTERN NSEnumeratorCombinePlus RxCombineMult();
-FOUNDATION_EXTERN NSEnumeratorCombinePlus RxCombineDiv();
+FOUNDATION_EXTERN RxEnumeratorCombineOperator RxCombinePlus();
+FOUNDATION_EXTERN RxEnumeratorCombineOperator RxCombineDiff();
+FOUNDATION_EXTERN RxEnumeratorCombineOperator RxCombineMult();
+FOUNDATION_EXTERN RxEnumeratorCombineOperator RxCombineDiv();
+
+FOUNDATION_EXTERN RxMapSelector RxReturnSelf();
 
 @interface NSEnumerator<E> (Combine)
 
