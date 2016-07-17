@@ -10,12 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxElementIndexPair : NSObject
+@interface RxElementIndexPair<E> : NSObject
 
-@property (readonly) NSUInteger element;
+@property (readonly) E element;
 @property (readonly) NSUInteger index;
 
-- (nonnull instancetype)initWithElement:(NSUInteger)element
+- (nonnull instancetype)initWithElement:(E)element
                                   index:(NSUInteger)index;
 
 - (BOOL)isEqual:(id)other;
