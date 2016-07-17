@@ -125,6 +125,8 @@ Starts the test scheduler and uses the specified virtual times to invoke the fac
  */
 - (nonnull RxTestableObserver *)start:(RxObservable *(^)())create;
 
+- (nonnull RxTestableObserver *)startWithObservable:(nonnull RxObservable *)observable;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,9 +20,7 @@ FOUNDATION_EXTERN NSInteger rx_decrementChecked(NSInteger *i);
 FOUNDATION_EXTERN NSUInteger rx_incrementCheckedUnsigned(NSUInteger *i);
 FOUNDATION_EXTERN NSUInteger rx_decrementCheckedUnsigned(NSUInteger *i);
 
-FOUNDATION_EXTERN void __rx_tryCatch__(id self, void (^tryBlock)(), void (^catchBlock)(NSError *));
-
-#define rx_tryCatch(tryBlock, catchBlock) __rx_tryCatch__(self, tryBlock, catchBlock)
+FOUNDATION_EXTERN void rx_tryCatch(void (^tryBlock)(), void (^catchBlock)(NSError *));
 
 /**
 Counts number of `SerialDispatchQueueObservables`.

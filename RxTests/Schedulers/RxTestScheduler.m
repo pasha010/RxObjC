@@ -90,4 +90,10 @@
     return [self startWhenDisposed:RxTestSchedulerDefaultDisposed create:create];
 }
 
+- (nonnull RxTestableObserver *)startWithObservable:(nonnull RxObservable *)observable {
+    return [self start:^RxObservable * {
+        return observable;
+    }];
+}
+
 @end
