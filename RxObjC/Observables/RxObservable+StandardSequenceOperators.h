@@ -86,7 +86,7 @@ Bypasses a specified number of elements in an observable sequence and then retur
 - parameter count: The number of elements to skip before returning the remaining elements.
 - returns: An observable sequence that contains the elements that occur after the specified index in the input sequence.
 */
-- (nonnull RxObservable *)skip:(NSInteger)count;
+- (nonnull RxObservable *)skip:(NSUInteger)count;
 
 @end
 

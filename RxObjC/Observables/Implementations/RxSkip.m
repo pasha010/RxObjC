@@ -16,7 +16,7 @@
 
 @implementation RxSkipCountSink {
     RxSkipCount *__nonnull _parent;
-    NSInteger _remaining;
+    NSUInteger _remaining;
 }
 
 - (nonnull instancetype)initWithParent:(nonnull RxSkipCount *)parent observer:(nonnull id <RxObserverType>)observer {
@@ -30,7 +30,7 @@
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
-        if (_remaining <= 0) {
+        if (_remaining == 0) {
             [self forwardOn:[RxEvent next:event.element]];
         } else {
             _remaining--;
@@ -45,7 +45,7 @@
 
 @implementation RxSkipCount
 
-- (nonnull instancetype)initWithSource:(nonnull RxObservable *)source count:(NSInteger)count {
+- (nonnull instancetype)initWithSource:(nonnull RxObservable *)source count:(NSUInteger)count {
     self = [super init];
     if (self) {
         _source = source;

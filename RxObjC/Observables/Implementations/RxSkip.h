@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RxSkipCount<Element> : RxProducer<Element> {
 @package
     RxObservable *__nonnull _source;
-    NSInteger _count;
+    NSUInteger _count;
 }
 
-- (nonnull instancetype)initWithSource:(nonnull RxObservable *)source count:(NSInteger)count;
+- (nonnull instancetype)initWithSource:(nonnull RxObservable *)source count:(NSUInteger)count;
 
 @end
 

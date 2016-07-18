@@ -66,7 +66,7 @@
 
 @implementation NSObject (RxSkipSequence)
 
-- (nonnull RxObservable *)skip:(NSInteger)count {
+- (nonnull RxObservable *)skip:(NSUInteger)count {
     return [[RxSkipCount alloc] initWithSource:[self asObservable] count:count];
 }
 

@@ -20,17 +20,17 @@
 - (nonnull instancetype)initWithParent:(nonnull RxSkipWhile *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _running = YES;
+        _running = NO;
         _parent = parent;
     }
     return self;
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    if (event.type == RxEventTypeNext) {
+    if (event.isNext) {
         if (!_running) {
             rx_tryCatch(^{
-                _running = _parent->_predicate(event.element);
+                _running = !(_parent->_predicate(event.element));
 
                 if (_running) {
                     [self forwardOn:[RxEvent next:event.element]];
@@ -60,7 +60,7 @@
 - (nonnull instancetype)initWithParent:(nonnull RxSkipWhile *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _running = YES;
+        _running = NO;
         _index = 0;
         _parent = parent;
     }
@@ -71,7 +71,7 @@
     if (event.type == RxEventTypeNext) {
         if (!_running) {
             rx_tryCatch(^{
-               _running = _parent->_indexPredicate(event.element, _index);
+               _running = !(_parent->_indexPredicate(event.element, _index));
                 rx_incrementCheckedUnsigned(&_index);
 
                 if (_running) {
