@@ -294,21 +294,21 @@
     RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [RxObservable range:@(NSUIntegerMax) count:1 scheduler:scheduler];
+        return [RxObservable range:NSIntegerMax count:1 scheduler:scheduler];
     }];
 
     NSArray *array = @[
-            [self next:201 element:@(NSUIntegerMax)],
+            [self next:201 element:@(NSIntegerMax)],
             [self completed:202]
     ];
-    XCTAssert([res.events isEqualToArray:array]);
+    XCTAssertEqualObjects(res.events, array);
 }
 
 - (void)testRange_Dispose {
     RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:204 create:^RxObservable * {
-        return [RxObservable range:@(-10) count:5 scheduler:scheduler];
+        return [RxObservable range:-10 count:5 scheduler:scheduler];
     }];
 
     NSArray *array = @[

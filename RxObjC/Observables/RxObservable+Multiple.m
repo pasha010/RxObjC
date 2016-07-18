@@ -52,7 +52,7 @@
 
 @implementation NSObject (RxConcatWith)
 
-+ (nonnull RxObservable *)concatWith:(nonnull RxObservable *)second {
+- (nonnull RxObservable *)concatWith:(nonnull RxObservable *)second {
     return [@[[self asObservable], [second asObservable]] concat];
 }
 

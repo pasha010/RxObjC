@@ -161,11 +161,11 @@ This method creates a new Observable instance with a variable number of elements
  * @param scheduler: Scheduler to run the generator loop on.
  * @return: An observable sequence that contains a range of sequential integral numbers.
  */
-+ (nonnull RxObservable<NSNumber *> *)range:(nonnull NSNumber *)start
++ (nonnull RxObservable<NSNumber *> *)range:(NSInteger)start
                                       count:(NSUInteger)count
                                   scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
-+ (nonnull RxObservable<NSNumber *> *)range:(nonnull NSNumber *)start
++ (nonnull RxObservable<NSNumber *> *)range:(NSInteger)start
                                       count:(NSUInteger)count;
 
 @end

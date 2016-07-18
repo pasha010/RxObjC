@@ -22,10 +22,17 @@
     NSLock *__nullable _lock;
 }
 
+- (void)setUp {
+    [super setUp];
+    _lock = [[NSLock alloc] init];
+}
+
+- (void)tearDown {
+    [super tearDown];
+    _lock = nil;
+}
+
 - (void)performLocked:(dispatch_block_t)action {
-    if (!_lock) {
-        _lock = [[NSLock alloc] init];
-    }
     [_lock lock];
     action();
     [_lock unlock];
@@ -320,6 +327,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
         [self performLocked:^{
             [events addObject:@"Started"];
         }];
+
         [condition lock];
         writtenStarted++;
         [condition signal];
@@ -327,7 +335,6 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
         while (writtenStarted < 2) {
             [condition wait];
         }
-
         [condition unlock];
 
         [self performLocked:^{
@@ -335,14 +342,11 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
         }];
 
         [condition lock];
-        
         writtenEnded++;
         [condition signal];
-        
         while (writtenEnded < 2) {
             [condition wait];
         }
-
         [condition unlock];
 
         [stop onCompleted];
@@ -351,12 +355,13 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     };
 
     [scheduler schedule:nil action:concurrent];
+
     [scheduler schedule:nil action:concurrent];
 
     [[stop toBlocking] blocking_last];
 
-    BOOL b = [events isEqualToArray:@[@"Started", @"Started", @"Ended", @"Ended"]];
-    XCTAssert(b);
+    NSArray *array = @[@"Started", @"Started", @"Ended", @"Ended"];
+    XCTAssertEqualObjects(events, array);
 }
 
 - (void)testObserveOn_Never {

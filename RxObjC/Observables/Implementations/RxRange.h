@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RxRangeProducer : RxProducer<NSNumber *> {
 @package
-    NSNumber *__nonnull _start;
-    NSNumber *__nonnull _count;
+    NSInteger _start;
+    NSUInteger _count;
     id <RxImmediateSchedulerType> __nonnull _scheduler;
 }
 
-- (nonnull instancetype)initWithStart:(nonnull NSNumber *)start
+- (nonnull instancetype)initWithStart:(NSInteger)start
                                 count:(NSUInteger)count
                             scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 

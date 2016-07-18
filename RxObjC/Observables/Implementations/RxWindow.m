@@ -62,6 +62,10 @@
     [self forwardOn:[RxEvent next:value]];
 }
 
+- (nonnull RxSpinLock *)lock {
+    return _lock;
+}
+
 - (void)on:(nonnull RxEvent *)event {
     [self synchronizedOn:event];
 }

@@ -120,13 +120,13 @@
 
 @implementation RxObservable (Range)
 
-+ (nonnull RxObservable *)range:(nonnull NSNumber *)start
++ (nonnull RxObservable *)range:(NSInteger)start
                           count:(NSUInteger)count
                       scheduler:(nonnull id<RxImmediateSchedulerType>)scheduler {
     return [[RxRangeProducer alloc] initWithStart:start count:count scheduler:scheduler];
 }
 
-+ (nonnull RxObservable *)range:(nonnull NSNumber *)start
++ (nonnull RxObservable *)range:(NSInteger)start
                           count:(NSUInteger)count {
     return [self range:start count:count scheduler:[RxCurrentThreadScheduler sharedInstance]];
 }

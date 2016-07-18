@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param second: Second observable sequence.
  * @return: An observable sequence that contains the elements of `self`, followed by those of the second sequence.
  */
-+ (nonnull RxObservable *)concatWith:(nonnull RxObservable *)second;
+- (nonnull RxObservable *)concatWith:(nonnull RxObservable *)second;
 
 @end
 

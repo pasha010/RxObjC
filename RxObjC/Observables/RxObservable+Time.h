@@ -186,7 +186,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (RxTimeout) <RxObservableType>
 /**
- * Applies a timeout policy for each element in the observable sequence. If the next element isn't received within the specified timeout duration starting from its predecessor, a TimeoutError is propagated to the observer.
+ * Applies a timeout policy for each element in the observable sequence.
+ * If the next element isn't received within the specified timeout duration starting from its predecessor, a TimeoutError is propagated to the observer.
  * @see [timeout operator on reactivex.io](http://reactivex.io/documentation/operators/timeout.html)
  * @param dueTime: Maximum duration between values before a timeout occurs.
  * @param scheduler: Scheduler to run the timeout timer on.
@@ -195,7 +196,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nonnull RxObservable *)timeout:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler;
 
 /**
- * Applies a timeout policy for each element in the observable sequence, using the specified scheduler to run timeout timers. If the next element isn't received within the specified timeout duration starting from its predecessor, the other observable sequence is used to produce future messages from that point on.
+ * Applies a timeout policy for each element in the observable sequence, using the specified scheduler to run timeout timers.
+ * If the next element isn't received within the specified timeout duration starting from its predecessor, the other observable sequence is used to produce future messages from that point on.
  * @see [timeout operator on reactivex.io](http://reactivex.io/documentation/operators/timeout.html)
  * @param dueTime: Maximum duration between values before a timeout occurs.
  * @param other: Sequence to return in case of a timeout.
