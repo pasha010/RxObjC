@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @see [concat operator on reactivex.io](http://reactivex.io/documentation/operators/concat.html)
  * @return: An observable sequence that contains the elements of each observed inner sequence, in sequential order.
  */
-+ (nonnull RxObservable *)concat;
+- (nonnull RxObservable *)concat;
 
 @end
 

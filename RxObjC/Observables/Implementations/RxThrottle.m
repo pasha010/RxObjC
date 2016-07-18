@@ -40,6 +40,10 @@
     return [RxStableCompositeDisposable createDisposable1:subscription disposable2:_cancellable];
 }
 
+- (nonnull RxSpinLock *)lock {
+    return _lock;
+}
+
 - (void)on:(nonnull RxEvent *)event {
     [self synchronizedOn:event];
 }
@@ -89,7 +93,7 @@
 
     id originalValue = _value;
 
-    if (_id == currentId) {
+    if (originalValue && _id == currentId) {
         _value = nil;
         [self forwardOn:[RxEvent next:originalValue]];
     }

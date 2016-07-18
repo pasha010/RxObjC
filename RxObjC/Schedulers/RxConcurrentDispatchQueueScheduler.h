@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(nonnull RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS NS_AVAILABLE(10_10, 8_0);
 
-+ (uint64_t)convertTimeIntervalToDispatchInterval:(NSTimeInterval)timeInterval;
++ (int64_t)convertTimeIntervalToDispatchInterval:(NSTimeInterval)timeInterval;
 
 + (dispatch_time_t)convertTimeIntervalToDispatchTime:(NSTimeInterval)timeInterval;
 

@@ -84,7 +84,7 @@
 
 @implementation NSObject (RxConcat)
 
-+ (nonnull RxObservable *)concat {
+- (nonnull RxObservable *)concat {
     return [self mergeWithMaxConcurrent:1];
 }
 

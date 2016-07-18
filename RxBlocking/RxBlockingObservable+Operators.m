@@ -87,16 +87,14 @@
                 }
                 case RxEventTypeError: {
                     error = event.error;
-                    [d dispose];
-                    [lock stop];
                     break;
                 }
                 case RxEventTypeCompleted: {
-                    [d dispose];
-                    [lock stop];
                     break;
                 }
             }
+            [d dispose];
+            [lock stop];
         }];
     }];
 

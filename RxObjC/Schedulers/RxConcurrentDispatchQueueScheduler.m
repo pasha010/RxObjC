@@ -37,8 +37,8 @@
     return [NSDate date];
 }
 
-+ (uint64_t)convertTimeIntervalToDispatchInterval:(NSTimeInterval)timeInterval {
-    return (uint64_t) (timeInterval * ((double) NSEC_PER_SEC));
++ (int64_t)convertTimeIntervalToDispatchInterval:(NSTimeInterval)timeInterval {
+    return (int64_t) (timeInterval * ((double) NSEC_PER_SEC));
 }
 
 + (dispatch_time_t)convertTimeIntervalToDispatchTime:(NSTimeInterval)timeInterval {
@@ -65,7 +65,7 @@
 - (nonnull id <RxDisposable>)scheduleRelative:(nullable id)state dueTime:(RxTimeInterval)dueTime action:(id <RxDisposable>(^)(id))action {
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
 
-    uint64_t dispatchInterval = [RxMainScheduler convertTimeIntervalToDispatchInterval:dueTime];
+    dispatch_time_t dispatchInterval = [RxMainScheduler convertTimeIntervalToDispatchTime:dueTime];
 
     RxCompositeDisposable *compositeDisposable = [[RxCompositeDisposable alloc] init];
 
