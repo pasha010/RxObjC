@@ -12,13 +12,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
-`BlockingObservable` is a variety of `Observable` that provides blocking operators.
-
-It can be useful for testing and demo purposes, but is generally inappropriate for production applications.
-
-If you think you need to use a `BlockingObservable` this is usually a sign that you should rethink your
-design.
-*/
+ * `BlockingObservable` is a variety of `Observable` that provides blocking operators.
+ * It can be useful for testing and demo purposes, but is generally inappropriate for production applications.
+ * If you think you need to use a `BlockingObservable` this is usually a sign that you should rethink your
+ * design.
+ */
 @interface RxBlockingObservable<E> : NSObject
 
 @property (nonnull, nonatomic) RxObservable<E> *source;

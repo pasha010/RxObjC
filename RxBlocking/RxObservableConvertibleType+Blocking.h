@@ -15,10 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (RxBlocking)/* <RxObservableConvertibleType>*/
 /**
-Converts an Observable into a `BlockingObservable` (an Observable with blocking operators).
-
-- returns: `BlockingObservable` version of `self`
-*/
+ * Converts an Observable into a `BlockingObservable` (an Observable with blocking operators).
+ * @return: `BlockingObservable` version of `self`
+ */
 - (nonnull RxBlockingObservable *)toBlocking;
 
 @end
