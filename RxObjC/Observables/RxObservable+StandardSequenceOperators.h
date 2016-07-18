@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param predicate: A function to test each source element for a condition.
  * @return: An observable sequence that contains elements from the input sequence that satisfy the condition.
  */
-- (nonnull RxObservable *)filter:(nonnull BOOL(^)(id __nonnull))predicate;
+- (nonnull RxObservable *)filter:(nonnull BOOL(^)(id __nonnull element))predicate;
 
 @end
 
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param predicate: A function to test each element for a condition.
  * @return: An observable sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.
  */
-- (nonnull RxObservable *)takeWhile:(nonnull BOOL(^)(id __nonnull))predicate;
+- (nonnull RxObservable *)takeWhile:(nonnull BOOL(^)(id __nonnull element))predicate;
 
 /**
  * Returns elements from an observable sequence as long as a specified condition is true.

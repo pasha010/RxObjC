@@ -53,11 +53,15 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
     return [self initWithSerialQueue:serialQueue];
 }
 
-- (nonnull instancetype)initWithglobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS
                               andInternalSerialQueueName:(nullable NSString *)internalSerialQueueName {
     NSString *queueName = internalSerialQueueName ?: RxGlobalDispatchQueueName;
     qos_class_t priority = globalConcurrentQueueQOS.QOSClass;
     return [self initWithQueue:dispatch_get_global_queue(priority, 0) andInternalSerialQueueName:queueName];
+}
+
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS {
+    return [self initWithGlobalConcurrentQueueQOS:globalConcurrentQueueQOS andInternalSerialQueueName:nil];
 }
 
 - (nonnull NSDate *)now {

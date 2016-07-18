@@ -35,7 +35,7 @@
 
 @implementation NSObject (RxTakeWhile)
 
-- (nonnull RxObservable *)takeWhile:(nonnull BOOL (^)(id))predicate {
+- (nonnull RxObservable *)takeWhile:(nonnull BOOL (^)(id element))predicate {
     return [[RxTakeWhile alloc] initWithSource:[self asObservable] predicate:predicate];
 }
 

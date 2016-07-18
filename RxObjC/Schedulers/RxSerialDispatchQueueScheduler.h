@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return: RxSerialDispatchQueueScheduler instance
  */
 - (nonnull instancetype)initWithInternalSerialQueueName:(nonnull NSString *)internalSerialQueueName
-                               andSerialQueueConfiguration:(nullable void(^)(dispatch_queue_t))serialQueueConfiguration;
+                               andSerialQueueConfiguration:(nullable void(^)(dispatch_queue_t queue))serialQueueConfiguration;
 
 - (nonnull instancetype)initWithInternalSerialQueueName:(nonnull NSString *)internalSerialQueueName;
 
@@ -62,8 +62,16 @@ NS_ASSUME_NONNULL_BEGIN
  * @param internalSerialQueueName: Custom name for internal serial dispatch queue proxy.
  * @return: RxSerialDispatchQueueScheduler instance
  */
-- (nonnull instancetype)initWithglobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS
                               andInternalSerialQueueName:(nullable  NSString *)internalSerialQueueName NS_AVAILABLE(10_10, 8_0);
+
+/**
+ * Constructs new `SerialDispatchQueueScheduler` that wraps on of the global concurrent dispatch queues.
+ *
+ * @param globalConcurrentQueueQOS: Identifier for global dispatch queue with specified quality of service class.
+ * @return: RxSerialDispatchQueueScheduler instance
+ */
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS NS_AVAILABLE(10_10, 8_0);
 
 + (int64_t)convertTimeIntervalToDispatchInterval:(NSTimeInterval)timeInterval;
 
@@ -76,9 +84,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param action: Action to be executed.
  * @return: The disposable object used to cancel the scheduled action (best effort).
 */
-- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action;
+- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable _state))action;
 
-- (nonnull id <RxDisposable>)scheduleInternal:(nonnull RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action;
+- (nonnull id <RxDisposable>)scheduleInternal:(nonnull RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable _state))action;
 
 /**
  * Schedules an action to be executed.
@@ -88,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param action: Action to be executed.
  * @return: The disposable object used to cancel the scheduled action (best effort).
 */
-- (nonnull id <RxDisposable>)scheduleRelative:(nullable id)state dueTime:(RxTimeInterval)dueTime action:(id <RxDisposable>(^)(id))action;
+- (nonnull id <RxDisposable>)scheduleRelative:(nullable id)state dueTime:(RxTimeInterval)dueTime action:(id <RxDisposable>(^)(RxStateType __nullable _state))action;
 
 @end
 

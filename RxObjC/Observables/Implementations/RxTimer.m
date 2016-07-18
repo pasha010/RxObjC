@@ -81,7 +81,7 @@
 }
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
-    if (_period > 0) {
+    if (_period >= 0) {
         RxTimerSink *sink = [[RxTimerSink alloc] initWithParent:self observer:observer];
         sink.disposable = [sink run];
         return sink;
