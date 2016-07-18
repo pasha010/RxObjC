@@ -4934,4 +4934,236 @@ BOOL isPrime(NSNumber *n) {
 
 @end
 
+@implementation RxObservableStandardSequenceOperatorsTest (Single)
+
+- (void)testSingle_Empty {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(150, @1),
+            completed(250)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs single]];
+
+    NSArray *events = @[
+            error(250, RxError.noElements)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 250)
+    ]);
+}
+
+- (void)testSingle_One {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @2),
+            completed(250)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs single]];
+
+    NSArray *events = @[
+            next(210, @2),
+            completed(250)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 250)
+    ]);
+}
+
+- (void)testSingle_Many {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @2),
+            next(220, @3),
+            completed(250)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs single]];
+
+    NSArray *events = @[
+            next(210, @2),
+            error(220, RxError.moreThanOneElement),
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 220)
+    ]);
+}
+
+- (void)testSingle_Error {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(210, testError())
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs single]];
+
+    NSArray *events = @[
+            error(210, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 210)
+    ]);
+}
+
+- (void)testSingle_DecrementCountsFirst {
+    RxBehaviorSubject *k = [RxBehaviorSubject create:@NO];
+    [[k single] subscribeNext:^(NSNumber *n) {
+        [k onNext:@(!n.boolValue)];
+    }];
+}
+
+- (void)testSinglePredicate_Empty {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(150, @1),
+            completed(250)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+        return element.integerValue % 2 == 1;
+    }]];
+
+    NSArray *events = @[
+            error(250, RxError.noElements)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 250)
+    ]);
+}
+
+- (void)testSinglePredicate_One {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @2),
+            next(220, @3),
+            next(230, @4),
+            next(240, @5),
+            completed(250)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+        return element.integerValue == 4;
+    }]];
+
+    NSArray *events = @[
+            next(230, @4),
+            completed(250)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 250)
+    ]);
+}
+
+- (void)testSinglePredicate_Many {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @2),
+            next(220, @3),
+            next(230, @4),
+            next(240, @5),
+            completed(250)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+        return element.integerValue % 2 == 1;
+    }]];
+
+    NSArray *events = @[
+            next(220, @3),
+            error(240, RxError.moreThanOneElement)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 240)
+    ]);
+}
+
+- (void)testSinglePredicate_Error {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(150, @1),
+            error(210, testError())
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+        return element.integerValue % 2 == 1;
+    }]];
+
+    NSArray *events = @[
+            error(210, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 210)
+    ]);
+}
+
+- (void)testSinglePredicate_Throws {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(150, @1),
+            next(210, @2),
+            next(220, @3),
+            next(230, @4),
+            next(240, @5),
+            completed(250)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+        if (element.integerValue < 4) {
+            return NO;
+        }
+        @throw testError();
+    }]];
+
+    NSArray *events = @[
+            error(230, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 230)
+    ]);
+}
+
+- (void)testSinglePredicate_DecrementCountsFirst {
+    RxBehaviorSubject *k = [RxBehaviorSubject create:@NO];
+    [[k single:^BOOL(id o) {
+        return YES;
+    }] subscribeNext:^(NSNumber *n) {
+        [k onNext:@(!n.boolValue)];
+    }];
+}
+
+@end
+
 #pragma clang diagnostic pop

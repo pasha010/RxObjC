@@ -138,7 +138,7 @@
     return [[RxSingleAsync alloc] initWithSource:[self asObservable]];
 }
 
-- (nonnull RxObservable *)single:(nonnull BOOL(^)(id __nonnull))predicate {
+- (nonnull RxObservable *)single:(nonnull BOOL(^)(id __nonnull element))predicate {
     return [[RxSingleAsync alloc] initWithSource:[self asObservable] predicate:predicate];
 }
 
