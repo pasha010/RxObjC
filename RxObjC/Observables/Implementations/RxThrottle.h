@@ -24,4 +24,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface RxThrottleFirst<Element> : RxProducer<Element> {
+@package
+    RxObservable<Element> *__nonnull _source;
+    RxTimeInterval _dueTime;
+    id <RxSchedulerType> __nonnull _scheduler;
+}
+
+- (nonnull instancetype)initWithSource:(nonnull RxObservable<Element> *)source dueTime:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler;
+
+
+@end
+
 NS_ASSUME_NONNULL_END

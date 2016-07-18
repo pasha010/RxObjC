@@ -19,6 +19,7 @@
 #import "RxObservable+Creation.h"
 #import "RxError.h"
 #import "RxTimeout.h"
+#import "RxCurrentThreadScheduler.h"
 
 
 #pragma clang diagnostic push
@@ -31,8 +32,20 @@
     return [self debounce:dueTime scheduler:scheduler];
 }
 
+- (nonnull RxObservable *)throttle:(RxTimeInterval)dueTime {
+    return [self throttle:dueTime scheduler:[RxCurrentThreadScheduler sharedInstance]];
+}
+
 - (nonnull RxObservable *)debounce:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxThrottle alloc] initWithSource:[self asObservable] dueTime:dueTime scheduler:scheduler];
+}
+
+- (nonnull RxObservable *)throttleFirst:(RxTimeInterval)dueTime {
+    return [self throttleFirst:dueTime scheduler:[RxCurrentThreadScheduler sharedInstance]];
+}
+
+- (nonnull RxObservable *)throttleFirst:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler {
+    return [[RxThrottleFirst alloc] initWithSource:[self asObservable] dueTime:dueTime scheduler:scheduler];
 }
 
 @end

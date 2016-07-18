@@ -103,6 +103,10 @@
     return [RxStableCompositeDisposable createDisposable1:_sourceSubscription disposable2:samplerSubscription];
 }
 
+- (nonnull NSRecursiveLock *)lock {
+    return _lock;
+}
+
 - (void)on:(nonnull RxEvent *)event {
     [self synchronizedOn:event];
 }

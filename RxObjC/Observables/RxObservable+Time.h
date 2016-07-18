@@ -24,6 +24,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (nonnull RxObservable *)throttle:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler;
 
 /**
+ * Ignores elements from an observable sequence which are followed by another element within a specified relative time duration, using the current thread scheduler to run throttling timers.
+ * `throttle` and `debounce` are synonyms.
+ * @see [debounce operator on reactivex.io](http://reactivex.io/documentation/operators/debounce.html)
+ * @param dueTime: Throttling duration for each element.
+ * @return: The throttled sequence.
+ */
+- (nonnull RxObservable *)throttle:(RxTimeInterval)dueTime;
+
+/**
  * Ignores elements from an observable sequence which are followed by another element within a specified relative time duration, using the specified scheduler to run throttling timers.
  * `throttle` and `debounce` are synonyms.
  * @see [debounce operator on reactivex.io](http://reactivex.io/documentation/operators/debounce.html)
@@ -32,6 +41,27 @@ NS_ASSUME_NONNULL_BEGIN
  * @return: The throttled sequence.
  */
 - (nonnull RxObservable *)debounce:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler;
+
+/**
+ * Returns an Observable that emits the most recently emitted item (if any) emitted by the source Observable
+ * within periodic time intervals, where the intervals are defined on a particular Scheduler.
+ * It's like sample but with time interval.
+ * @see [sample operator on reactivex.io](http://reactivex.io/documentation/operators/sample.html)
+ * @param dueTime: the sampling rate
+ * @param scheduler: Scheduler to run the throttle timers and send events on.
+ * @return: The throttled sequence.
+ */
+- (nonnull RxObservable *)throttleFirst:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler;
+
+/**
+ * Returns an Observable that emits the most recently emitted item (if any) emitted by the source Observable
+ * within periodic time intervals, where the intervals are defined on a current thread scheduler.
+ * It's like sample but with time interval.
+ * @see [sample operator on reactivex.io](http://reactivex.io/documentation/operators/sample.html)
+ * @param dueTime: the sampling rate
+ * @return: The throttled sequence.
+ */
+- (nonnull RxObservable *)throttleFirst:(RxTimeInterval)dueTime;
 
 @end
 
