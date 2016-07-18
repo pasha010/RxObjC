@@ -17,11 +17,14 @@
 }
 
 /**
-- returns: Box description.
+ * @return: Box description.
 */
 - (NSString *)debugDescription {
     return [NSString stringWithFormat:@"MutatingBox(%@)", self.value];
 }
 
+- (NSString *)description {
+    return self.debugDescription;
+}
 
 @end

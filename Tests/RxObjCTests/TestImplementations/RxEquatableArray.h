@@ -10,13 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxEquatableArray : NSObject
+@interface RxEquatableArray<E> : NSObject
 
-- (instancetype)initWithElements:(NSArray *)elements;
+- (instancetype)initWithElements:(NSArray<E> *)elements;
+
+FOUNDATION_EXTERN RxEquatableArray *EquatableArray(NSArray<E> *elements);
 
 - (BOOL)isEqual:(id)other;
 
-- (BOOL)isEqualToArray:(RxEquatableArray *)array;
+- (BOOL)isEqualToArray:(RxEquatableArray<E> *)array;
 
 - (NSUInteger)hash;
 

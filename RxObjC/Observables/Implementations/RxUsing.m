@@ -7,14 +7,12 @@
 //
 
 #import "RxUsing.h"
-
-
 #import "RxSink.h"
 #import "RxNopDisposable.h"
 #import "RxStableCompositeDisposable.h"
 #import "RxObservable+Creation.h"
 
-@interface RxUsingSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxUsingSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxUsingSink {
@@ -34,7 +32,7 @@
 
     __block id <RxDisposable> res = nil;
 
-    rx_tryCatch(self, ^{
+    rx_tryCatch(^{
         id <RxDisposable> resource = _parent->_resourceFactory();
         disposable = resource;
 
@@ -47,6 +45,13 @@
     });
 
     return res;
+}
+
+- (void)on:(nonnull RxEvent *)event {
+    [self forwardOn:event];
+    if (event.type != RxEventTypeNext) {
+        [self dispose];
+    }
 }
 
 @end

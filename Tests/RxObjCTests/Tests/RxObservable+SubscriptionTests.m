@@ -10,13 +10,15 @@
 #import "RxPublishSubject.h"
 #import "RxTestError.h"
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCDFAInspection"
+
 @interface RxObservableSubscriptionTests : RxTest
 
 @end
 
 @implementation RxObservableSubscriptionTests
 
-// TODO закончить!
 - (void)testSubscribeOnNext {
     RxPublishSubject<NSNumber *> *publishSubject = [RxPublishSubject create];
     
@@ -214,3 +216,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop

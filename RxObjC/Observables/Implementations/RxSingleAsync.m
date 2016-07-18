@@ -30,7 +30,7 @@
 - (void)on:(nonnull RxEvent *)event {
     switch (event.type) {
         case RxEventTypeNext: {
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 BOOL forward = _parent->_predicate != nil ? _parent->_predicate(event.element) : YES;
 
                 if (!forward) {

@@ -11,7 +11,7 @@
 #import "RxAnyObserver.h"
 #import "RxCompositeDisposable.h"
 
-@interface RxCombineLatestCollectionTypeSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxCombineLatestCollectionTypeSink<O : id <RxObserverType>> : RxSink<O>
 @end
 
 @implementation RxCombineLatestCollectionTypeSink {
@@ -76,11 +76,13 @@
                     [self forwardOn:[RxEvent completed]];
                     [self dispose];
                 }
+
+                [_lock unlock];
                 return;
             }
             
-            rx_tryCatch(self, ^{
-                id result = _parent->_resultSelector(_values);
+            rx_tryCatch(^{
+                id result = _parent->_resultSelector([NSArray arrayWithArray:_values]);
                 [self forwardOn:[RxEvent next:result]];
             }, ^(NSError *error) {
                 [self forwardOn:[RxEvent error:error]];
@@ -95,7 +97,8 @@
             break;
         }
         case RxEventTypeCompleted: {
-            if (_isDone[atIndex]) {
+            if (_isDone[atIndex].boolValue) {
+                [_lock unlock];
                 return;
             }
 
@@ -111,7 +114,6 @@
             break;
         }
     }
-        
     [_lock unlock];
 }
 

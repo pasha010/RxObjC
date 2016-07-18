@@ -35,11 +35,11 @@
 
 @implementation NSObject (RxTakeWhile)
 
-- (nonnull RxObservable *)takeWhile:(nonnull BOOL (^)(id))predicate {
+- (nonnull RxObservable *)takeWhile:(nonnull BOOL (^)(id element))predicate {
     return [[RxTakeWhile alloc] initWithSource:[self asObservable] predicate:predicate];
 }
 
-- (nonnull RxObservable *)takeWhileWithIndex:(nonnull BOOL (^)(id, NSUInteger))predicate {
+- (nonnull RxObservable *)takeWhileWithIndex:(nonnull BOOL (^)(id element, NSUInteger index))predicate {
     return [[RxTakeWhile alloc] initWithSource:[self asObservable] indexPredicate:predicate];
 }
 
@@ -66,7 +66,7 @@
 
 @implementation NSObject (RxSkipSequence)
 
-- (nonnull RxObservable *)skip:(NSInteger)count {
+- (nonnull RxObservable *)skip:(NSUInteger)count {
     return [[RxSkipCount alloc] initWithSource:[self asObservable] count:count];
 }
 
@@ -74,11 +74,11 @@
 
 @implementation NSObject (RxSkipWhile)
 
-- (nonnull RxObservable *)skipWhile:(nonnull BOOL(^)(id __nonnull))predicate {
+- (nonnull RxObservable *)skipWhile:(nonnull BOOL(^)(id __nonnull element))predicate {
     return [[RxSkipWhile alloc] initWithSource:[self asObservable] predicate:predicate];
 }
 
-- (nonnull RxObservable *)skipWhileWithIndex:(nonnull BOOL(^)(id __nonnull, NSUInteger))predicate {
+- (nonnull RxObservable *)skipWhileWithIndex:(nonnull BOOL(^)(id __nonnull element, NSUInteger index))predicate {
     return [[RxSkipWhile alloc] initWithSource:[self asObservable] indexPredicate:predicate];
 }
 
@@ -138,7 +138,7 @@
     return [[RxSingleAsync alloc] initWithSource:[self asObservable]];
 }
 
-- (nonnull RxObservable *)single:(nonnull BOOL(^)(id __nonnull))predicate {
+- (nonnull RxObservable *)single:(nonnull BOOL(^)(id __nonnull element))predicate {
     return [[RxSingleAsync alloc] initWithSource:[self asObservable] predicate:predicate];
 }
 

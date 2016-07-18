@@ -31,8 +31,8 @@
     @weakify(self);
     return [scheduler scheduleRecursive:@0.0 action:^(NSNumber *i, void (^recurse)(id)) {
         @strongify(self);
-        if ([i compare:self->_parent->_count] == NSOrderedAscending) {
-            [self forwardOn:[RxEvent next:@(self->_parent->_start.doubleValue + i.doubleValue)]];
+        if (i.integerValue < self->_parent->_count) {
+            [self forwardOn:[RxEvent next:@(self->_parent->_start + i.integerValue)]];
             recurse(@(i.doubleValue + 1));
         } else {
             [self forwardOn:[RxEvent completed]];
@@ -45,13 +45,13 @@
 
 @implementation RxRangeProducer
 
-- (nonnull instancetype)initWithStart:(nonnull NSNumber *)start
+- (nonnull instancetype)initWithStart:(NSInteger)start
                                 count:(NSUInteger)count 
                             scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
     self = [super init];
     if (self) {
         _start = start;
-        _count = @(count);
+        _count = count;
         _scheduler = scheduler;
     }
     return self;

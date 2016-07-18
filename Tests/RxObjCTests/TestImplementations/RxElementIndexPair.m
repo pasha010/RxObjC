@@ -11,7 +11,7 @@
 
 @implementation RxElementIndexPair
 
-- (nonnull instancetype)initWithElement:(NSUInteger)element index:(NSUInteger)index {
+- (nonnull instancetype)initWithElement:(id)element index:(NSUInteger)index {
     self = [super init];
     if (self) {
         _element = element;
@@ -45,7 +45,7 @@
 }
 
 - (NSUInteger)hash {
-    NSUInteger hash = self.element;
+    NSUInteger hash = [self.element hash];
     hash = hash * 31u + self.index;
     return hash;
 }

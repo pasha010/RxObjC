@@ -52,7 +52,7 @@
             [self completed:600]
     ]];
 
-    RxTestableObserver *res = [scheduler start:400 create:^RxObservable * {
+    RxTestableObserver *res = [scheduler startWhenDisposed:400 create:^RxObservable * {
         return [xs asObservable];
     }];
 

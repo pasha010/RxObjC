@@ -63,6 +63,18 @@
     return NO;
 }
 
+- (BOOL)isNext {
+    return _type == RxEventTypeNext;
+}
+
+- (BOOL)isError {
+    return _type == RxEventTypeError;
+}
+
+- (BOOL)isCompleted {
+    return _type == RxEventTypeCompleted;
+}
+
 
 @end
 
@@ -80,6 +92,9 @@
     return [super debugDescription];
 }
 
+- (NSString *)description {
+    return [self debugDescription];
+}
 @end
 
 @implementation RxEvent (Properties)

@@ -19,6 +19,7 @@
 #import "RxCombineLatest+CollectionType.h"
 #import "RxZip+CollectionType.h"
 #import "RxSwitch.h"
+#import "NSEnumerator+Operators.h"
 
 
 #pragma clang diagnostic push
@@ -27,7 +28,7 @@
 
 @implementation NSArray (RxCombineLatest)
 
-- (nonnull RxObservable *)combineLatest:(nonnull id(^)(NSArray *__nonnull))resultSelector {
+- (nonnull RxObservable<id> *)combineLatest:(nonnull id(^)(NSArray<id> *__nonnull))resultSelector {
     return [[RxCombineLatestCollectionType alloc] initWithSources:self resultSelector:resultSelector];
 }
 
@@ -35,7 +36,7 @@
 
 @implementation NSArray (RxZip)
 
-- (nonnull RxObservable *)zip:(nonnull id(^)(NSArray *__nonnull))resultSelector {
+- (nonnull RxObservable<id> *)zip:(nonnull id(^)(NSArray<id> *__nonnull))resultSelector {
     return [[RxZipCollectionType alloc] initWithSources:self resultSelector:resultSelector];
 }
 
@@ -49,9 +50,9 @@
 
 @end
 
-@implementation RxObservable (Concat)
+@implementation NSObject (RxConcatWith)
 
-+ (nonnull RxObservable *)concatWith:(nonnull RxObservable *)second {
+- (nonnull RxObservable *)concatWith:(nonnull RxObservable *)second {
     return [@[[self asObservable], [second asObservable]] concat];
 }
 
@@ -60,7 +61,7 @@
 @implementation NSArray (RxConcat)
 
 - (nonnull RxObservable *)concat {
-    return [[self objectEnumerator] concat];
+    return [[self objectEnumerator] concat:self.count];
 }
 
 @end
@@ -68,23 +69,23 @@
 @implementation NSSet (RxConcat)
 
 - (nonnull RxObservable *)concat {
-    return [[self objectEnumerator] concat];
+    return [[self objectEnumerator] concat:self.count];
 }
 
 @end
 
 @implementation NSEnumerator (RxConcat)
 
-- (nonnull RxObservable *)concat {
-    return [[RxConcat alloc] initWithSources:self];
+- (nonnull RxObservable *)concat:(NSUInteger)count {
+    return [[RxConcat alloc] initWithSources:self count:count];
 }
 
 @end
 
 @implementation NSObject (RxConcat)
 
-+ (nonnull RxObservable *)concat {
-    return [self merge:1];
+- (nonnull RxObservable *)concat {
+    return [self mergeWithMaxConcurrent:1];
 }
 
 @end
@@ -95,7 +96,7 @@
     return [[RxMerge alloc] initWithSource:[self asObservable]];
 }
 
-- (nonnull RxObservable *)merge:(NSUInteger)maxConcurrent {
+- (nonnull RxObservable *)mergeWithMaxConcurrent:(NSUInteger)maxConcurrent {
     return [[RxMergeLimited alloc] initWithSource:[self asObservable] maxConcurrent:maxConcurrent];
 }
 
@@ -182,14 +183,6 @@
 
 @implementation NSEnumerator (RxAmb)
 
-- (nonnull id)reduce:(nonnull id)start combine:(id(^)(id __nonnull initial, id __nonnull element))combine {
-    id res = start;
-    for (id o in self) {
-        res = combine(res, o);
-    }
-    return res;
-}
-
 - (nonnull RxObservable *)amb {
     return [self reduce:[RxObservable never] combine:^RxObservable *(RxObservable *initial, RxObservable *element) {
         return [initial amb:[element asObservable]];
@@ -201,7 +194,7 @@
 @implementation NSObject (RxWithLatestFrom)
 
 - (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second
-                          resultSelector:(id __nonnull(^)(id __nonnull, id __nonnull))resultSelector {
+                          resultSelector:(id __nonnull(^)(id __nonnull x, id __nonnull y))resultSelector {
 
     return [[RxWithLatestFrom alloc] initWithFirst:[self asObservable]
                                             second:[second asObservable]

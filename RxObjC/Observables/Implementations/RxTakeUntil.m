@@ -85,6 +85,10 @@
     return self;
 }
 
+- (NSRecursiveLock *)lock {
+    return _lock;
+}
+
 - (void)on:(nonnull RxEvent *)event {
     [self synchronizedOn:event];
 }

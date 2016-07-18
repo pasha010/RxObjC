@@ -20,25 +20,29 @@
 - (nonnull instancetype)initWithParent:(nonnull RxSkipWhile *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _running = YES;
+        _running = NO;
         _parent = parent;
     }
     return self;
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    if (event.type == RxEventTypeNext) {
+    if (event.isNext) {
+        __block BOOL disposed = NO;
         if (!_running) {
-            rx_tryCatch(self, ^{
-                _running = _parent->_predicate(event.element);
-
-                if (_running) {
-                    [self forwardOn:[RxEvent next:event.element]];
-                }
+            rx_tryCatch(^{
+                _running = !(_parent->_predicate(event.element));
             }, ^(NSError *error) {
                 [self forwardOn:[RxEvent error:error]];
                 [self dispose];
+                disposed = YES;
             });
+        }
+        if (disposed) {
+            return;
+        }
+        if (_running) {
+            [self forwardOn:[RxEvent next:event.element]];
         }
     } else {
         [self forwardOn:event];
@@ -60,7 +64,7 @@
 - (nonnull instancetype)initWithParent:(nonnull RxSkipWhile *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _running = YES;
+        _running = NO;
         _index = 0;
         _parent = parent;
     }
@@ -69,19 +73,23 @@
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
+        __block BOOL disposed = NO;
         if (!_running) {
-            rx_tryCatch(self, ^{
-               _running = _parent->_indexPredicate(event.element, _index);
+            rx_tryCatch(^{
+               _running = !(_parent->_indexPredicate(event.element, _index));
                 rx_incrementCheckedUnsigned(&_index);
-
-                if (_running) {
-                    [self forwardOn:[RxEvent next:event.element]];
-                }
 
             }, ^(NSError *error) {
                 [self forwardOn:[RxEvent error:error]];
                 [self dispose];
+                disposed = YES;
             });
+        }
+        if (disposed) {
+            return;
+        }
+        if (_running) {
+            [self forwardOn:[RxEvent next:event.element]];
         }
     } else {
         [self forwardOn:event];

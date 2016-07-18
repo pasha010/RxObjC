@@ -123,4 +123,9 @@
 }
 
 
+- (NSString *)description {
+    return self.description;
+}
+
+
 @end

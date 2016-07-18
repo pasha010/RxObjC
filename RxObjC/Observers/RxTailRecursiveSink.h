@@ -22,10 +22,6 @@ typedef NS_ENUM(NSUInteger, RxTailRecursiveSinkCommand) {
     RxTailRecursiveSinkCommandDispose,
 };
 
-#if DEBUG || (defined(TRACE_RESOURCES) && TRACE_RESOURCES)
-static NSUInteger rx_maxTailRecursiveSinkStackSize = 0;
-#endif
-
 /// This class is usually used with `Generator` version of the operators.
 @interface RxTailRecursiveSink : RxSink<id <RxObserverType>> <RxInvocableWithValueType>
 
@@ -34,6 +30,8 @@ static NSUInteger rx_maxTailRecursiveSinkStackSize = 0;
 - (nonnull id <RxDisposable>)run:(nonnull RxTuple2<NSEnumerator<id <RxObservableConvertibleType>> *, NSNumber *> *)source;
 
 - (void)schedule:(RxTailRecursiveSinkCommand)command;
+
+- (void)done;
 
 - (nullable RxTuple2<NSEnumerator<id <RxObservableConvertibleType>> *, NSNumber *> *)extract:(nonnull RxObservable *)observable;
 

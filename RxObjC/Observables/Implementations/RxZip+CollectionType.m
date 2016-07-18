@@ -60,10 +60,11 @@
                     [self forwardOn:[RxEvent completed]];
                     [self dispose];
                 }
+                [_lock unlock];
                 return;
             }
             
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 NSMutableArray *arguments = [NSMutableArray arrayWithCapacity:_parent->_count];
                 
                 _numberOfValues = 0;
@@ -90,6 +91,7 @@
         }
         case RxEventTypeCompleted: {
             if (_isDone[index].boolValue) {
+                [_lock unlock];
                 return;
             }
 

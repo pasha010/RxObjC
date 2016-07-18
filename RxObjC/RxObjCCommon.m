@@ -56,4 +56,27 @@ NSUInteger rx_decrementCheckedUnsigned(NSUInteger *i) {
     return result;
 }
 
+void rx_tryCatch(void (^tryBlock)(), void (^catchBlock)(NSError *)) {
+    @try {
+        tryBlock();
+    }
+    @catch (id e) {
+        NSError *error = e;
+        if ([e isKindOfClass:[NSException class]]) {
+            NSException *exception = e;
+            error = [NSError errorWithDomain:exception.name
+                                        code:[exception.name hash]
+                                    userInfo:exception.userInfo];
+        }
+        catchBlock(error);
+    }
+}
 
+#if TRACE_RESOURCES
+int32_t rx_numberOfSerialDispatchQueueObservables = 0;
+int32_t rx_numberOfMapOperators = 0;
+#endif
+
+#if DEBUG || (defined(TRACE_RESOURCES) && TRACE_RESOURCES)
+NSUInteger rx_maxTailRecursiveSinkStackSize = 0;
+#endif

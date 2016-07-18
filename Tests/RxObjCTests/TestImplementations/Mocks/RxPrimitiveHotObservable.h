@@ -16,6 +16,10 @@ extern RxSubscription *RxSubscribedToHotObservable();
 extern RxSubscription *RxUnsunscribedFromHotObservable();
 
 @interface RxPrimitiveHotObservable : NSObject <RxObservableType>
+
+@property (nonnull, nonatomic, strong, readonly) NSArray<RxSubscription *> *subscriptions;
+@property (nonnull, nonatomic, strong, readonly) RxBag<RxAnyObserver *> *observers;
+
 - (nonnull instancetype)init;
 
 @end

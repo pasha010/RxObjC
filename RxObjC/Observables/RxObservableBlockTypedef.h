@@ -47,8 +47,8 @@ typedef id __nonnull (^RxZipTupleResultSelector)(RxTuple *__nonnull);
 typedef void (^RxZipObserverValueSetter)(id __nonnull);
 
 /// map
-typedef id __nonnull (^RxMapSelector)(id __nonnull);
-typedef id __nonnull (^RxMapWithIndexSelector)(id __nonnull, NSInteger);
+typedef id __nonnull (^RxMapSelector)(id __nonnull element);
+typedef id __nonnull (^RxMapWithIndexSelector)(id __nonnull element, NSInteger index);
 
 /// defer
 typedef RxObservable *__nonnull (^RxObservableFactory)();

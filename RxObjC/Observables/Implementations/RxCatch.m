@@ -68,7 +68,7 @@
             break;
         }
         case RxEventTypeError: {
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 RxObservable *catchSequence = _parent->_handler(event.error);
 
                 RxCatchSinkProxy *observer = [[RxCatchSinkProxy alloc] initWithParent:self];

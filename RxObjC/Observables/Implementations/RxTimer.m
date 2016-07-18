@@ -28,7 +28,7 @@
 
 - (nonnull id <RxDisposable>)run {
     @weakify(self);
-    return [_parent->_scheduler schedulePeriodic:@0 startAfter:_parent->_dueTime period:_parent->_dueTime action:^NSNumber *(NSNumber *__nonnull state) {
+    return [_parent->_scheduler schedulePeriodic:@0 startAfter:_parent->_dueTime period:_parent->_period action:^NSNumber *(NSNumber *__nonnull state) {
         @strongify(self);
         [self forwardOn:[RxEvent next:state]];
         return @(state.intValue + 1);
@@ -81,7 +81,7 @@
 }
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
-    if (_period > 0) {
+    if (_period >= 0) {
         RxTimerSink *sink = [[RxTimerSink alloc] initWithParent:self observer:observer];
         sink.disposable = [sink run];
         return sink;

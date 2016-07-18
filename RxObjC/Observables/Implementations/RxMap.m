@@ -10,8 +10,6 @@
 #import "RxObjCCommon.h"
 #import "RxSink.h"
 
-static int rx_numberOfMapOperators = 0;
-
 @interface RxMapSink<SourceType, O : id <RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
@@ -28,22 +26,27 @@ static int rx_numberOfMapOperators = 0;
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    if (event.type == RxEventTypeNext) {
-        rx_tryCatch(self, ^{
-            id mappedElement = _selector(event.element);
-            [self forwardOn:[RxEvent next:mappedElement]];
-        }, ^(NSError *error) {
-            [self forwardOn:[RxEvent error:error]];
+    switch (event.type) {
+        case RxEventTypeNext: {
+            rx_tryCatch(^{
+                id mappedElement = _selector(event.element);
+                [self forwardOn:[RxEvent next:mappedElement]];
+            }, ^(NSError *error) {
+                [self forwardOn:[RxEvent error:error]];
+                [self dispose];
+            });
+            break;
+        }
+        case RxEventTypeError: {
+            [self forwardOn:[RxEvent error:event.error]];
             [self dispose];
-        });
-    }
-    if (event.type == RxEventTypeError) {
-        [self forwardOn:[RxEvent error:event.error]];
-        [self dispose];
-    }
-    if (event.type == RxEventTypeCompleted) {
-        [self forwardOn:[RxEvent completed]];
-        [self dispose];
+            break;
+        }
+        case RxEventTypeCompleted: {
+            [self forwardOn:[RxEvent completed]];
+            [self dispose];
+            break;
+        }
     }
 }
 
@@ -68,13 +71,8 @@ static int rx_numberOfMapOperators = 0;
 - (RxObservable *)_composeMap:(RxMapSelector)selector {
     RxMapSelector originalSelector = _selector;
     return [[RxMap alloc] initWithSource:_source selector:^id(id o) {
-        @try {
-            id r = originalSelector(o);
-            return selector(r);
-        }
-        @catch (id e) {
-            return nil;
-        }
+        id r = originalSelector(o);
+        return selector(r);
     }];
 }
 
@@ -111,7 +109,7 @@ static int rx_numberOfMapOperators = 0;
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             id mappedElement = _selector(event.element, rx_incrementChecked(&_index));
             [self forwardOn:[RxEvent next:mappedElement]];
         }, ^(NSError *error) {

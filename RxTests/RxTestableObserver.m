@@ -26,7 +26,7 @@
 }
 
 - (void)on:(nonnull RxEvent<id> *)event {
-    [_events addObject:[[RxRecorded alloc] initWithTime:((NSNumber *) _testScheduler.clock).unsignedIntegerValue
+    [_events addObject:[[RxRecorded alloc] initWithTime:_testScheduler.clock.unsignedIntegerValue
                                                   value:event]];
 }
 

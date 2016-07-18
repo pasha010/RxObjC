@@ -14,15 +14,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
-Counts number of `SerialDispatchQueueObservables`.
-
-Purposed for unit tests.
-*/
-#if TRACE_RESOURCES
-static int32_t rx_numberOfSerialDispatchQueueObservables = 0;
-#endif
-
 @interface RxObserveOnSerialDispatchQueue<Element> : RxProducer<Element> {
 @package
     RxObservable *__nonnull _source;

@@ -49,9 +49,9 @@
     }];
 }
 
-- (nonnull RxVirtualTimeUnit)adjustScheduledTime:(nonnull RxVirtualTimeUnit)time {
-    NSUInteger clock = ((NSNumber *) self.clock).unsignedIntegerValue;
-    return ((NSNumber *) time).unsignedIntegerValue <= clock ? @(clock + (_simulateProcessingDelay ? 1 : 0)) : time;
+- (nonnull NSNumber *)adjustScheduledTime:(nonnull NSNumber *)time {
+    NSUInteger clock = self.clock.unsignedIntegerValue;
+    return time.integerValue <= clock ? @(clock + (_simulateProcessingDelay ? 1 : 0)) : time;
 }
 
 - (nonnull RxTestableObserver *)start:(RxTestTime)created
@@ -82,12 +82,18 @@
     return observer;
 }
 
-- (nonnull RxTestableObserver *)start:(RxTestTime)disposed create:(RxObservable *(^)())create {
+- (nonnull RxTestableObserver *)startWhenDisposed:(RxTestTime)disposed create:(RxObservable *(^)())create {
     return [self start:RxTestSchedulerDefaultCreated subscribed:RxTestSchedulerDefaultSubscribed disposed:disposed create:create];
 }
 
 - (nonnull RxTestableObserver *)start:(RxObservable *(^)())create {
-    return [self start:RxTestSchedulerDefaultDisposed create:create];
+    return [self startWhenDisposed:RxTestSchedulerDefaultDisposed create:create];
+}
+
+- (nonnull RxTestableObserver *)startWithObservable:(nonnull RxObservable *)observable {
+    return [self start:^RxObservable * {
+        return observable;
+    }];
 }
 
 @end

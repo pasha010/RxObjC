@@ -31,7 +31,7 @@
         if (!_running) {
             return;
         }
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             _running = _parent->_predicate(event.element);
             if (_running) {
                 [self forwardOn:[RxEvent next:event.element]];
@@ -75,7 +75,7 @@
         if (!_running) {
             return;
         }
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             _running = _parent->_indexPredicate(event.element, _index);
             rx_incrementCheckedUnsigned(&_index);
             if (_running) {

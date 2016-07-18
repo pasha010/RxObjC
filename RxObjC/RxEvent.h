@@ -21,7 +21,10 @@ typedef NS_ENUM(NSUInteger, RxEventType) {
 */
 @interface RxEvent<__covariant Element> : NSObject
 
-@property (assign, atomic) RxEventType type;
+@property (nonatomic, readonly) RxEventType type;
+@property (nonatomic, readonly) BOOL isNext;
+@property (nonatomic, readonly) BOOL isError;
+@property (nonatomic, readonly) BOOL isCompleted;
 
 /// Next element is produced.
 + (nonnull instancetype)next:(nullable Element)value;

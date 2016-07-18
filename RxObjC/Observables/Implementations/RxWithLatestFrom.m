@@ -85,6 +85,10 @@
     return [RxStableCompositeDisposable createDisposable1:fstSubscription disposable2:sndSubscription];
 }
 
+- (nonnull RxSpinLock *)lock {
+    return _lock;
+}
+
 - (void)on:(nonnull RxEvent *)event {
     [self synchronizedOn:event];
 }
@@ -96,7 +100,7 @@
                 return;
             }
 
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 id res = _parent->_resultSelector(event.element, _latest);
 
                 [self forwardOn:[RxEvent next:res]];

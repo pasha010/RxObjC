@@ -11,6 +11,9 @@
     int32_t _disposed;
 }
 
++ (nonnull instancetype)create:(nullable RxDisposeAction)disposeAction {
+    return [[self alloc] initWithDisposeAction:disposeAction];
+}
 
 - (nonnull instancetype)initWithDisposeAction:(nullable RxDisposeAction)disposeAction {
     self = [super init];
@@ -34,9 +37,10 @@ After invoking disposal action, disposal action will be dereferenced.
     if (OSAtomicCompareAndSwap32(0, 1, &_disposed)) {
         NSAssert(_disposed == 1, @"_disposed should be equal to 1");
 
-        if (_disposeAction) {
-            _disposeAction();
+        RxDisposeAction action = _disposeAction;
+        if (action) {
             _disposeAction = nil;
+            action();
         }
     }
 }

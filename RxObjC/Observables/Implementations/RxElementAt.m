@@ -37,7 +37,7 @@
                 [self dispose];
             }
 
-            rx_tryCatch(self, ^{
+            rx_tryCatch(^{
                 rx_decrementCheckedUnsigned(&_i);
             }, ^(NSError *error) {
                 [self forwardOn:[RxEvent error:error]];

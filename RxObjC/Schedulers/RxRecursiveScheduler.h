@@ -14,25 +14,23 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol RxSchedulerType;
 
 /**
-Type erased recursive scheduler.
-*/
+ * Type erased recursive scheduler.
+ */
 @interface RxAnyRecursiveScheduler<__covariant State> : NSObject
 
 - (nonnull instancetype)initWithScheduler:(nonnull id <RxSchedulerType>)scheduler andAction:(RxAnyRecursiveSchedulerAction)action;
 
 /**
-Schedules an action to be executed recursively.
-
-- parameter state: State passed to the action to be executed.
-- parameter dueTime: Relative time after which to execute the recursive action.
-*/
+ * Schedules an action to be executed recursively.
+ * @param state: State passed to the action to be executed.
+ * @param dueTime: Relative time after which to execute the recursive action.
+ */
 - (void)schedule:(nonnull State)state dueTime:(RxTimeInterval)dueTime;
 
 /**
-Schedules an action to be executed recursively.
-
-- parameter state: State passed to the action to be executed.
-*/
+ * Schedules an action to be executed recursively.
+ * @param state: State passed to the action to be executed.
+ */
 - (void)schedule:(nonnull State)state;
 
 - (void)dispose;
@@ -40,20 +38,20 @@ Schedules an action to be executed recursively.
 @end
 
 /**
-Type erased recursive scheduler.
-*/
+ * Type erased recursive scheduler.
+ */
 @interface RxRecursiveImmediateScheduler<__covariant State> : NSObject
 
 - (nonnull instancetype)initWithActon:(RxRecursiveImmediateAction)action andScheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
 /**
-Schedules an action to be executed recursively.
-
-- parameter state: State passed to the action to be executed.
-*/
+ * Schedules an action to be executed recursively.
+ * @param state: State passed to the action to be executed.
+ */
 - (void)schedule:(nonnull State)state;
 
 - (void)dispose;
+
 @end
 
 NS_ASSUME_NONNULL_END

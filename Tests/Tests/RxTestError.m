@@ -20,6 +20,10 @@
     return instance;
 }
 
+RxTestError *testError() {
+    return [RxTestError testError];
+}
+
 + (nonnull instancetype)testError1 {
     static dispatch_once_t token;
     static RxTestError *instance;
@@ -29,6 +33,10 @@
     return instance;
 }
 
+RxTestError *testError1() {
+    return [RxTestError testError1];
+}
+
 + (nonnull instancetype)testError2 {
     static dispatch_once_t token;
     static RxTestError *instance;
@@ -36,6 +44,10 @@
         instance = [RxTestError errorWithDomain:@"dummyError2" code:-234 userInfo:nil];
     });
     return instance;
+}
+
+RxTestError *testError2() {
+    return [RxTestError testError2];
 }
 
 - (BOOL)isEqual:(id)other {

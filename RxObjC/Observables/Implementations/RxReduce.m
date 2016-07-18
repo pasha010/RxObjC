@@ -25,7 +25,7 @@
 
 - (void)on:(RxEvent<id> *)event {
     if (event.type == RxEventTypeNext) {
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             _accumulation = _parent->_accumulator(_accumulation, [event element]);
         }, ^(NSError *error) {
             [self forwardOn:[RxEvent error:error]];
@@ -35,7 +35,7 @@
         [self forwardOn:[RxEvent error:event.error]];
         [self dispose];
     } else if (event.type == RxEventTypeCompleted) {
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             RxResultType result = _parent->_mapResult(_accumulation);
             [self forwardOn:[RxEvent next:result]];
             [self forwardOn:[RxEvent completed]];

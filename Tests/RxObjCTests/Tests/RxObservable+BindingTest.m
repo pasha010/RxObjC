@@ -7,17 +7,10 @@
 //
 
 #import "RxTest.h"
-#import "RxObservable+Binding.h"
-#import "RxTestScheduler.h"
 #import "XCTest+Rx.h"
-#import "RxTestableObservable.h"
-#import "RxPublishSubject.h"
-#import "RxTestableObserver.h"
-#import "RxSubscription.h"
 #import "RxTestError.h"
-#import "RxObservable+Zip.h"
-#import "RxObservable+Creation.h"
-#import "RxObservable+Multiple.h"
+#import "RxMySubject.h"
+#import "RxTestConnectableObservable.h"
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCDFAInspection"
@@ -218,30 +211,157 @@
 
 @implementation RxObservableBindingTest (RefCount)
 
-// TODO implement test mock objects
-
 - (void)testRefCount_DeadlockSimple {
+    RxMySubject<NSNumber *> *subject = [RxMySubject create];
     
+    __block int nEvents = 0;
+
+    RxTestConnectableObservable<RxMySubject<NSNumber *> *> *observable = [[RxTestConnectableObservable alloc] initWithObservable:[RxObservable of:@[@0, @1, @2]] subject:subject];
+
+    id <RxDisposable> d = [observable subscribeNext:^(NSNumber *n) {
+        nEvents++;
+    }];
+
+    [[observable connect] dispose];
+    
+    XCTAssertTrue(nEvents == 3);
+    
+    [d dispose];
 }
 
 - (void)testRefCount_DeadlockErrorAfterN {
-    
+    RxMySubject<NSNumber *> *subject = [RxMySubject create];
+
+    __block int nEvents = 0;
+
+    RxTestConnectableObservable *observable = [[RxTestConnectableObservable alloc] initWithObservable:[@[[RxObservable of:@[@0, @1, @2]], [RxObservable error:testError()]] concat]
+                                                                                              subject:subject];
+
+    id <RxDisposable> d = [observable subscribeError:^(NSError *error) {
+        nEvents++;
+    }];
+
+    [[observable connect] dispose];
+
+    XCTAssertEqual(nEvents, 1);
+
+    [d dispose];
 }
 
 - (void)testRefCount_DeadlockErrorImmediatelly {
-    
+    RxMySubject<NSNumber *> *subject = [RxMySubject create];
+
+    __block int nEvents = 0;
+
+    RxTestConnectableObservable *observable =
+            [[RxTestConnectableObservable alloc] initWithObservable:[RxObservable error:[RxTestError testError]]
+                                                            subject:subject];
+
+    id <RxDisposable> d = [observable subscribeError:^(NSError *error) {
+        nEvents++;
+    }];
+
+    [[observable connect] dispose];
+
+    XCTAssertTrue(nEvents == 1);
+
+    [d dispose];
 }
 
 - (void)testRefCount_DeadlockEmpty {
-    
+    RxMySubject<NSNumber *> *subject = [RxMySubject create];
+
+    __block int nEvents = 0;
+
+    RxTestConnectableObservable *observable = [[RxTestConnectableObservable alloc] initWithObservable:[RxObservable empty]
+                                                                                              subject:subject];
+
+    id <RxDisposable> d = [observable subscribeCompleted:^{
+        nEvents++;
+    }];
+
+    [[observable connect] dispose];
+
+    XCTAssertTrue(nEvents == 1);
+
+    [d dispose];
 }
 
 - (void)testRefCount_ConnectsOnFirst {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            [self next:210 element:@1],
+            [self next:220 element:@2],
+            [self next:230 element:@3],
+            [self next:240 element:@4],
+            [self completed:250]
+    ]];
+
+    RxMySubject<NSNumber *> *subject = [RxMySubject create];
+
+    RxTestConnectableObservable *conn = [[RxTestConnectableObservable alloc] initWithObservable:[xs asObservable] subject:subject];
+
+    RxTestableObserver *res = [scheduler start:^RxObservable * {
+        return [conn refCount];
+    }];
+
+    NSArray *array = @[
+            [self next:210 element:@1],
+            [self next:220 element:@2],
+            [self next:230 element:@3],
+            [self next:240 element:@4],
+            [self completed:250]
+    ];
     
+    XCTAssertTrue([res.events isEqualToArray:array]);
+    
+    XCTAssertTrue([subject disposed]);
 }
 
 - (void)testRefCount_NotConnected {
+    RxTestScheduler *__unused _ = [[RxTestScheduler alloc] initWithInitialClock:0];
     
+    __block BOOL disconnected = NO;
+    __block int count = 0;
+
+    RxObservable<NSNumber *> *xs = [RxObservable deferred:^RxObservable * {
+        count++;
+        return [RxObservable create:^id <RxDisposable>(RxAnyObserver *obs) {
+            return [RxAnonymousDisposable create:^{
+                disconnected = YES;
+            }];
+        }];
+    }];
+
+    RxMySubject<NSNumber *> *subject = [RxMySubject create];
+
+    RxTestConnectableObservable *conn = [[RxTestConnectableObservable alloc] initWithObservable:xs subject:subject];
+    RxObservable *refd = [conn refCount];
+
+    id <RxDisposable> dis1 = [refd subscribeWith:^(RxEvent *__unused event){}];
+    XCTAssertEqual(count, 1);
+    XCTAssertEqual(subject.subscribeCount, 1);
+    XCTAssertFalse(disconnected);
+
+    id <RxDisposable> dis2 = [refd subscribeWith:^(RxEvent *__unused event){}];
+    XCTAssertEqual(count, 1);
+    XCTAssertEqual(subject.subscribeCount, 2);
+    XCTAssertFalse(disconnected);
+
+    [dis1 dispose];
+    XCTAssertFalse(disconnected);
+    [dis2 dispose];
+    XCTAssertTrue(disconnected);
+    disconnected = NO;
+
+    id <RxDisposable> dis3 = [refd subscribeWith:^(RxEvent *__unused event){}];
+    XCTAssertEqual(count, 2);
+    XCTAssertEqual(subject.subscribeCount, 3);
+    XCTAssertFalse(disconnected);
+
+    [dis3 dispose];
+    XCTAssertTrue(disconnected);
 }
 
 - (void)testRefCount_Error {
@@ -1102,8 +1222,8 @@
             _error = error;
         }];
 
-        XCTAssertTrue(eEvents == 1);
-        XCTAssertTrue(_error == [RxTestError testError]);
+        XCTAssertEqual(eEvents, 1);
+        XCTAssertEqualObjects(_error, [RxTestError testError]);
     }];
 }
 
@@ -1178,7 +1298,198 @@
         XCTAssertTrue([xs.subscriptions isEqualToArray:array1]);
     }];
 }
-// TODO complete ShareReplay1 tests
+
+- (void)testShareReplay1_Error {
+    [self _testIdenticalBehaviorOfShareReplayOptimizedAndComposed:^(RxObservable<NSNumber *> *(^transform)(RxObservable<NSNumber *> *)) {
+        RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+        RxTestableObservable *xs = [scheduler createHotObservable:@[
+                    [self next:110 element:@7],
+                    [self next:220 element:@3],
+                    [self next:280 element:@4],
+                    [self next:290 element:@1],
+                    [self next:340 element:@8],
+                    [self next:360 element:@5],
+                    [self error:365 testError:[RxTestError testError]],
+                    [self next:370 element:@6],
+                    [self next:390 element:@7],
+                    [self next:410 element:@13],
+                    [self next:430 element:@2],
+                    [self next:450 element:@9],
+                    [self next:520 element:@11],
+                    [self next:560 element:@20],
+            ]];
+
+        __block RxObservable<NSNumber *> *ys = nil;
+        __block id<RxDisposable> subscription1 = nil;
+        __block id<RxDisposable> subscription2 = nil;
+
+        __block RxTestableObserver<NSNumber *> *res1 = [scheduler createObserver];
+        __block RxTestableObserver<NSNumber *> *res2 = [scheduler createObserver];
+
+        [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = transform([xs asObservable]); }];
+
+        [scheduler scheduleAt:335 action:^{ subscription1 = [ys subscribe:res1]; }];
+        [scheduler scheduleAt:400 action:^{ [subscription1 dispose]; }];
+
+        [scheduler scheduleAt:355 action:^{ subscription2 = [ys subscribe:res2]; }];
+        [scheduler scheduleAt:415 action:^{ [subscription2 dispose]; }];
+
+        [scheduler scheduleAt:440 action:^{ subscription1 = [ys subscribe:res1]; }];
+        [scheduler scheduleAt:455 action:^{ [subscription1 dispose]; }];
+
+        [scheduler start];
+
+        NSArray *array = @[
+                    // 1rt batch
+                    [self next:340 element:@8],
+                    [self next:360 element:@5],
+                    [self error:365 testError:[RxTestError testError]],
+                    
+                    // 2nd batch
+                    [self next:440 element:@5],
+                    [self error:440 testError:[RxTestError testError]]
+            ];
+        XCTAssert([res1.events isEqualToArray:array]);
+
+        NSArray *array1 = @[
+                    [self next:355 element:@8],
+                    [self next:360 element:@5],
+                    [self error:365 testError:[RxTestError testError]]
+            ];
+
+        XCTAssert([res2.events isEqualToArray:array1]);
+
+        // unoptimized version of replay subject will make a subscription and kill it immediatelly
+        XCTAssert([xs.subscriptions.firstObject isEqual:[RxSubscription createWithSubscribe:335 unsubscribe:365]]);
+        XCTAssert(xs.subscriptions.count <= 2);
+        XCTAssert(xs.subscriptions.count == 1 || [xs.subscriptions[1] isEqual:[RxSubscription createWithSubscribe:440 unsubscribe:440]]);
+    }];
+}
+
+- (void)testShareReplay1_Completed {
+    [self _testIdenticalBehaviorOfShareReplayOptimizedAndComposed:^(RxObservable<NSNumber *> *(^transform)(RxObservable<NSNumber *> *)) {
+        RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+        RxTestableObservable *xs = [scheduler createHotObservable:@[
+                [self next:110 element:@7],
+                [self next:220 element:@3],
+                [self next:280 element:@4],
+                [self next:290 element:@1],
+                [self next:340 element:@8],
+                [self next:360 element:@5],
+                [self completed:365],
+                [self next:370 element:@6],
+                [self next:390 element:@7],
+                [self next:410 element:@13],
+                [self next:430 element:@2],
+                [self next:450 element:@9],
+                [self next:520 element:@11],
+                [self next:560 element:@20],
+        ]];
+
+        __block RxObservable<NSNumber *> *ys = nil;
+        __block id<RxDisposable> subscription1 = nil;
+        __block id<RxDisposable> subscription2 = nil;
+
+        __block RxTestableObserver<NSNumber *> *res1 = [scheduler createObserver];
+        __block RxTestableObserver<NSNumber *> *res2 = [scheduler createObserver];
+
+        [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = transform([xs asObservable]); }];
+
+        [scheduler scheduleAt:335 action:^{ subscription1 = [ys subscribe:res1]; }];
+        [scheduler scheduleAt:400 action:^{ [subscription1 dispose]; }];
+
+        [scheduler scheduleAt:355 action:^{ subscription2 = [ys subscribe:res2]; }];
+        [scheduler scheduleAt:415 action:^{ [subscription2 dispose]; }];
+
+        [scheduler scheduleAt:440 action:^{ subscription1 = [ys subscribe:res1]; }];
+        [scheduler scheduleAt:455 action:^{ [subscription1 dispose]; }];
+
+        [scheduler start];
+
+        NSArray *array = @[
+                // 1rt batch
+                [self next:340 element:@8],
+                [self next:360 element:@5],
+                [self completed:365],
+
+                // 2nd batch
+                [self next:440 element:@5],
+                [self completed:440]
+        ];
+        XCTAssert([res1.events isEqualToArray:array]);
+
+        NSArray *array1 = @[
+                [self next:355 element:@8],
+                [self next:360 element:@5],
+                [self completed:365]
+        ];
+        XCTAssert([res2.events isEqualToArray:array1]);
+
+        // unoptimized version of replay subject will make a subscription and kill it immediatelly
+        XCTAssert([xs.subscriptions.firstObject isEqual:[RxSubscription createWithSubscribe:335 unsubscribe:365]]);
+        XCTAssert(xs.subscriptions.count <= 2);
+        XCTAssert(xs.subscriptions.count == 1 || [xs.subscriptions[1] isEqual:[RxSubscription createWithSubscribe:440 unsubscribe:440]]);
+    }];
+}
+
+- (void)testShareReplay1_Canceled {
+    [self _testIdenticalBehaviorOfShareReplayOptimizedAndComposed:^(RxObservable<NSNumber *> *(^transform)(RxObservable<NSNumber *> *)) {
+        RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+        RxTestableObservable *xs = [scheduler createHotObservable:@[
+                [self completed:365],
+                [self next:370 element:@6],
+                [self next:390 element:@7],
+                [self next:410 element:@13],
+                [self next:430 element:@2],
+                [self next:450 element:@9],
+                [self next:520 element:@11],
+                [self next:560 element:@20],
+        ]];
+
+        __block RxObservable<NSNumber *> *ys = nil;
+        __block id<RxDisposable> subscription1 = nil;
+        __block id<RxDisposable> subscription2 = nil;
+
+        __block RxTestableObserver<NSNumber *> *res1 = [scheduler createObserver];
+        __block RxTestableObserver<NSNumber *> *res2 = [scheduler createObserver];
+
+        [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = transform([xs asObservable]); }];
+
+        [scheduler scheduleAt:335 action:^{ subscription1 = [ys subscribe:res1]; }];
+        [scheduler scheduleAt:400 action:^{ [subscription1 dispose]; }];
+
+        [scheduler scheduleAt:355 action:^{ subscription2 = [ys subscribe:res2]; }];
+        [scheduler scheduleAt:415 action:^{ [subscription2 dispose]; }];
+
+        [scheduler scheduleAt:440 action:^{ subscription1 = [ys subscribe:res1]; }];
+        [scheduler scheduleAt:455 action:^{ [subscription1 dispose]; }];
+
+        [scheduler start];
+
+        NSArray *array = @[
+                // 1rt batch
+                [self completed:365],
+
+                // 2nd batch
+                [self completed:440]
+        ];
+        XCTAssert([res1.events isEqualToArray:array]);
+
+        NSArray *array1 = @[
+                [self completed:365]
+        ];
+        XCTAssert([res2.events isEqualToArray:array1]);
+
+        // unoptimized version of replay subject will make a subscription and kill it immediatelly
+        XCTAssert([xs.subscriptions.firstObject isEqual:[RxSubscription createWithSubscribe:335 unsubscribe:365]]);
+        XCTAssert(xs.subscriptions.count <= 2);
+        XCTAssert(xs.subscriptions.count == 1 || [xs.subscriptions[1] isEqual:[RxSubscription createWithSubscribe:440 unsubscribe:440]]);
+    }];
+}
+
 @end
 
 @implementation RxObservableBindingTest (ShareReplayLatestWhileConnected)
@@ -1190,7 +1501,234 @@
         nEvents++;
     }];
     XCTAssertTrue(nEvents == 3);
-    // TODO complete ShareReplayLatestWhileConnected tests
+}
+
+- (void)testShareReplayLatestWhileConnected_DeadlockEmpty {
+    __block int nEvents = 0;
+    RxObservable *observable = [[RxObservable empty] shareReplayLatestWhileConnected];
+    [observable subscribeCompleted:^ {
+        nEvents++;
+    }];
+    XCTAssertTrue(nEvents == 1);
+}
+
+- (void)testShareReplayLatestWhileConnected_DeadlockError {
+    __block int nEvents = 0;
+    RxObservable *observable = [[RxObservable error:[RxTestError testError]] shareReplayLatestWhileConnected];
+    [observable subscribeError:^(NSError *error) {
+        nEvents++;
+    }];
+    XCTAssertTrue(nEvents == 1);
+}
+
+- (void)testShareReplayLatestWhileConnected_DeadlockErrorAfterN {
+    __block int nEvents = 0;
+    RxObservable *observable = [[@[[RxObservable of:@[@0, @1, @2]], [RxObservable error:[RxTestError testError]]] concat] shareReplayLatestWhileConnected];
+    [observable subscribeError:^(NSError *error) {
+        nEvents++;
+    }];
+    XCTAssertEqual(nEvents, 1);
+}
+
+- (void)testShareReplayLatestWhileConnected_Basic {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            [self next:110 element:@7],
+            [self next:220 element:@3],
+            [self next:280 element:@4],
+            [self next:290 element:@1],
+            [self next:340 element:@8],
+            [self next:360 element:@5],
+            [self next:370 element:@6],
+            [self next:390 element:@7],
+            [self next:410 element:@13],
+            [self next:430 element:@2],
+            [self next:450 element:@9],
+            [self next:520 element:@11],
+            [self next:560 element:@20],
+            [self error:600 testError:[RxTestError testError]]
+    ]];
+
+    __block RxObservable<NSNumber *> *ys = nil;
+    __block id<RxDisposable> subscription1 = nil;
+    __block id<RxDisposable> subscription2 = nil;
+
+    __block RxTestableObserver<NSNumber *> *res1 = [scheduler createObserver];
+    __block RxTestableObserver<NSNumber *> *res2 = [scheduler createObserver];
+
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs shareReplayLatestWhileConnected]; }];
+
+    [scheduler scheduleAt:335 action:^{ subscription1 = [ys subscribe:res1]; }];
+    [scheduler scheduleAt:400 action:^{ [subscription1 dispose]; }];
+
+    [scheduler scheduleAt:355 action:^{ subscription2 = [ys subscribe:res2]; }];
+    [scheduler scheduleAt:415 action:^{ [subscription2 dispose]; }];
+
+    [scheduler scheduleAt:440 action:^{ subscription1 = [ys subscribe:res1]; }];
+    [scheduler scheduleAt:455 action:^{ [subscription1 dispose]; }];
+
+    [scheduler start];
+
+    NSArray *array = @[
+            // 1rt batch
+            [self next:340 element:@8],
+            [self next:360 element:@5],
+            [self next:370 element:@6],
+            [self next:390 element:@7],
+
+            // 2nd batch
+            [self next:450 element:@9],
+    ];
+    XCTAssert([res1.events isEqualToArray:array]);
+
+    NSArray *array1 = @[
+            [self next:355 element:@8],
+            [self next:360 element:@5],
+            [self next:370 element:@6],
+            [self next:390 element:@7],
+            [self next:410 element:@13],
+    ];
+
+    XCTAssert([res2.events isEqualToArray:array1]);
+
+    NSArray *sub = @[
+            [RxSubscription createWithSubscribe:335 unsubscribe:415],
+            [RxSubscription createWithSubscribe:440 unsubscribe:455],
+    ];
+    XCTAssert([xs.subscriptions isEqualToArray:sub]);
+}
+
+- (void)testShareReplayLatestWhileConnected_Error {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            [self next:110 element:@7],
+            [self next:220 element:@3],
+            [self next:280 element:@4],
+            [self next:290 element:@1],
+            [self next:340 element:@8],
+            [self next:360 element:@5],
+            [self error:365 testError:[RxTestError testError]],
+            [self next:370 element:@6],
+            [self next:390 element:@7],
+            [self next:410 element:@13],
+            [self next:430 element:@2],
+            [self next:450 element:@9],
+            [self next:520 element:@11],
+            [self next:560 element:@20],
+    ]];
+
+    __block RxObservable<NSNumber *> *ys = nil;
+    __block id<RxDisposable> subscription1 = nil;
+    __block id<RxDisposable> subscription2 = nil;
+
+    __block RxTestableObserver<NSNumber *> *res1 = [scheduler createObserver];
+    __block RxTestableObserver<NSNumber *> *res2 = [scheduler createObserver];
+
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs shareReplayLatestWhileConnected]; }];
+
+    [scheduler scheduleAt:335 action:^{ subscription1 = [ys subscribe:res1]; }];
+    [scheduler scheduleAt:400 action:^{ [subscription1 dispose]; }];
+
+    [scheduler scheduleAt:355 action:^{ subscription2 = [ys subscribe:res2]; }];
+    [scheduler scheduleAt:415 action:^{ [subscription2 dispose]; }];
+
+    [scheduler scheduleAt:440 action:^{ subscription1 = [ys subscribe:res1]; }];
+    [scheduler scheduleAt:455 action:^{ [subscription1 dispose]; }];
+
+    [scheduler start];
+
+    NSArray *array = @[
+            // 1rt batch
+            [self next:340 element:@8],
+            [self next:360 element:@5],
+            [self error:365 testError:[RxTestError testError]],
+
+            // 2nd batch
+            [self next:450 element:@9],
+    ];
+    XCTAssert([res1.events isEqualToArray:array]);
+
+    NSArray *array1 = @[
+            [self next:355 element:@8],
+            [self next:360 element:@5],
+            [self error:365 testError:[RxTestError testError]],
+    ];
+
+    XCTAssert([res2.events isEqualToArray:array1]);
+
+    NSArray *sub = @[
+            [RxSubscription createWithSubscribe:335 unsubscribe:365],
+            [RxSubscription createWithSubscribe:440 unsubscribe:455],
+    ];
+    XCTAssert([xs.subscriptions isEqualToArray:sub]);
+}
+
+- (void)testShareReplayLatestWhileConnected_Completed {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            [self next:110 element:@7],
+            [self next:220 element:@3],
+            [self next:280 element:@4],
+            [self next:290 element:@1],
+            [self next:340 element:@8],
+            [self next:360 element:@5],
+            [self completed:365],
+            [self next:370 element:@6],
+            [self next:390 element:@7],
+            [self next:410 element:@13],
+            [self next:430 element:@2],
+            [self next:450 element:@9],
+            [self next:520 element:@11],
+            [self next:560 element:@20],
+    ]];
+
+    __block RxObservable<NSNumber *> *ys = nil;
+    __block id<RxDisposable> subscription1 = nil;
+    __block id<RxDisposable> subscription2 = nil;
+
+    __block RxTestableObserver<NSNumber *> *res1 = [scheduler createObserver];
+    __block RxTestableObserver<NSNumber *> *res2 = [scheduler createObserver];
+
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs shareReplayLatestWhileConnected]; }];
+
+    [scheduler scheduleAt:335 action:^{ subscription1 = [ys subscribe:res1]; }];
+    [scheduler scheduleAt:400 action:^{ [subscription1 dispose]; }];
+
+    [scheduler scheduleAt:355 action:^{ subscription2 = [ys subscribe:res2]; }];
+    [scheduler scheduleAt:415 action:^{ [subscription2 dispose]; }];
+
+    [scheduler scheduleAt:440 action:^{ subscription1 = [ys subscribe:res1]; }];
+    [scheduler scheduleAt:455 action:^{ [subscription1 dispose]; }];
+
+    [scheduler start];
+
+    NSArray *array = @[
+            // 1rt batch
+            [self next:340 element:@8],
+            [self next:360 element:@5],
+            [self completed:365],
+
+            // 2nd batch
+            [self next:450 element:@9],
+    ];
+    XCTAssert([res1.events isEqualToArray:array]);
+
+    NSArray *array1 = @[
+            [self next:355 element:@8],
+            [self next:360 element:@5],
+            [self completed:365],
+    ];
+
+    XCTAssert([res2.events isEqualToArray:array1]);
+
+    NSArray *sub = @[
+            [RxSubscription createWithSubscribe:335 unsubscribe:365],
+            [RxSubscription createWithSubscribe:440 unsubscribe:455],
+    ];
+    XCTAssert([xs.subscriptions isEqualToArray:sub]);
 }
 
 @end

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property (nonnull, strong, readonly) NSMutableArray<RxSubscription *> *subscriptions;
 
-@property (nonnull, strong, readonly) RxTestScheduler *testScheduler;
+@property (weak, readonly) RxTestScheduler *testScheduler;
 
 /**
  List of events to replay for all subscribers.

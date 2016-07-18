@@ -24,8 +24,8 @@
 - (nonnull instancetype)initWithParent:(nonnull RxTakeCount *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
-        _remaining = _parent->_count;
         _parent = parent;
+        _remaining = _parent->_count;
     }
     return self;
 }
@@ -81,6 +81,10 @@
         _parent = parent;
     }
     return self;
+}
+
+- (nonnull RxSpinLock *)lock {
+    return _lock;
 }
 
 - (void)on:(nonnull RxEvent *)event {

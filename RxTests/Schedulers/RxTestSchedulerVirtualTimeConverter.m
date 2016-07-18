@@ -19,15 +19,15 @@
 }
 
 - (nonnull NSDate *)convertFromVirtualTime:(nonnull NSNumber *)virtualTime {
-    return [NSDate dateWithTimeIntervalSince1970:virtualTime.doubleValue * _resolution];
+    return [NSDate dateWithTimeIntervalSince1970:virtualTime.integerValue * _resolution];
 }
 
 - (nonnull NSNumber *)convertToVirtualTime:(nonnull RxTime *)time {
-    return @(time.timeIntervalSince1970 / _resolution + 0.5);
+    return @((((NSInteger) time.timeIntervalSince1970 / _resolution + 0.5)));
 }
 
 - (RxTimeInterval)convertFromVirtualTimeInterval:(RxTimeInterval)virtualTimeInterval {
-    return virtualTimeInterval * _resolution;
+    return ((NSInteger) virtualTimeInterval) * _resolution;
 }
 
 - (RxTimeInterval)convertToVirtualTimeInterval:(RxTimeInterval)timeInterval {
@@ -35,7 +35,7 @@
 }
 
 - (nonnull NSNumber *)offsetVirtualTime:(nonnull NSNumber *)time offset:(RxTimeInterval)offset {
-    return @(time.doubleValue + offset);
+    return @(time.integerValue + offset);
 }
 
 - (nonnull RxVirtualTimeComparison *)compareVirtualTime:(nonnull NSNumber *)_lhs with:(nonnull NSNumber *)_rhs {

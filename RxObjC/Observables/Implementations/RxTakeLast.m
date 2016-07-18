@@ -42,7 +42,7 @@
             break;
         }
         case RxEventTypeCompleted: {
-            for (id element in _elements) {
+            for (id element in _elements.array) {
                 [self forwardOn:[RxEvent next:element]];
             }
             [self forwardOn:[RxEvent completed]];

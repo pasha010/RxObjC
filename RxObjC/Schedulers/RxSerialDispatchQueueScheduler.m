@@ -19,7 +19,12 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
     int64_t _leeway;
 }
 
-- (nonnull instancetype)initWithSerialQueue:(dispatch_queue_t)serialQueue {
+- (nonnull instancetype)init {
+    self = [self initWithSerialQueue:dispatch_get_main_queue()];
+    return self;
+}
+
+- (nonnull instancetype)initWithSerialQueue:(nonnull dispatch_queue_t)serialQueue {
     self = [super init];
     if (self) {
         _leeway = 0;
@@ -29,10 +34,16 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
 }
 
 - (nonnull instancetype)initWithInternalSerialQueueName:(nonnull NSString *)internalSerialQueueName
-                            andserialQueueConfiguration:(void(^)(dispatch_queue_t))serialQueueConfiguration {
+                            andSerialQueueConfiguration:(nullable void(^)(dispatch_queue_t))serialQueueConfiguration {
     dispatch_queue_t queue = dispatch_queue_create([internalSerialQueueName cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_SERIAL);
-    serialQueueConfiguration(queue);
+    if (serialQueueConfiguration) {
+        serialQueueConfiguration(queue);
+    }
     return [self initWithSerialQueue:queue];
+}
+
+- (nonnull instancetype)initWithInternalSerialQueueName:(nonnull NSString *)internalSerialQueueName {
+    return [self initWithInternalSerialQueueName:internalSerialQueueName andSerialQueueConfiguration:nil];
 }
 
 - (nonnull instancetype)initWithQueue:(nonnull dispatch_queue_t)queue
@@ -42,11 +53,15 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
     return [self initWithSerialQueue:serialQueue];
 }
 
-- (nonnull instancetype)initWithglobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS
                               andInternalSerialQueueName:(nullable NSString *)internalSerialQueueName {
     NSString *queueName = internalSerialQueueName ?: RxGlobalDispatchQueueName;
     qos_class_t priority = globalConcurrentQueueQOS.QOSClass;
     return [self initWithQueue:dispatch_get_global_queue(priority, 0) andInternalSerialQueueName:queueName];
+}
+
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS {
+    return [self initWithGlobalConcurrentQueueQOS:globalConcurrentQueueQOS andInternalSerialQueueName:nil];
 }
 
 - (nonnull NSDate *)now {
@@ -61,11 +76,11 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
     return dispatch_time(DISPATCH_TIME_NOW, [self convertTimeIntervalToDispatchInterval:timeInterval]);
 }
 
-- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action {
+- (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action {
     return [self scheduleInternal:state action:action];
 }
 
-- (nonnull id <RxDisposable>)scheduleInternal:(nonnull RxStateType)state action:(id <RxDisposable> (^)(RxStateType))action {
+- (nonnull id <RxDisposable>)scheduleInternal:(nonnull RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action {
     __block RxSingleAssignmentDisposable *cancel = [[RxSingleAssignmentDisposable alloc] init];
     dispatch_async(_serialQueue, ^{
         if ([cancel disposed]) {
@@ -109,10 +124,10 @@ Schedules a periodic piece of work.
 - parameter action: Action to be executed.
 - returns: The disposable object used to cancel the scheduled action (best effort).
 */
-- (nonnull id <RxDisposable>)schedulePeriodic:(nonnull id)state
+- (nonnull id <RxDisposable>)schedulePeriodic:(nullable id)state
                                    startAfter:(RxTimeInterval)startAfter
                                        period:(RxTimeInterval)period
-                                       action:(id(^)(id))action {
+                                       action:(id(^)(id __nullable))action {
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _serialQueue);
     
     dispatch_time_t initial = [RxMainScheduler convertTimeIntervalToDispatchTime:startAfter];

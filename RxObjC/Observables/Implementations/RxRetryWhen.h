@@ -14,10 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RxRetryWhenSequence<__covariant S : NSEnumerator *> : RxProducer<id> {
 @package
     id <RxObservableType> (^_notificationHandler)(RxObservable<NSError *> *);
+    Class __nullable _errorClass;
 }
 
 - (nonnull instancetype)initWithSources:(S)sequence
-                    notificationHandler:(id <RxObservableType> (^)(RxObservable<NSError *> *))handler;
+                    notificationHandler:(id <RxObservableType> (^)(RxObservable<NSError *> *))handler
+                       customErrorClass:(nullable Class)errorClass;
 
 @end
 

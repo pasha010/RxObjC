@@ -28,11 +28,12 @@
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             id key = _parent->_selector(event.element);
             BOOL areEqual = NO;
             if (_currentKey) {
-                areEqual = _parent->_comparer(_currentKey, key);
+                id currentKey = _currentKey;
+                areEqual = _parent->_comparer(currentKey, key);
             }
 
             if (areEqual) {

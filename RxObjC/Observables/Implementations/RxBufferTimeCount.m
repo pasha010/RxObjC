@@ -52,6 +52,10 @@
     [self createTimer:windowID];
 }
 
+- (nonnull RxSpinLock *)lock {
+    return _lock;
+}
+
 - (void)on:(nonnull RxEvent *)event {
     [self synchronizedOn:event];
 }

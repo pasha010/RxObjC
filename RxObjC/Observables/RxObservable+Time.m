@@ -19,6 +19,7 @@
 #import "RxObservable+Creation.h"
 #import "RxError.h"
 #import "RxTimeout.h"
+#import "RxCurrentThreadScheduler.h"
 
 
 #pragma clang diagnostic push
@@ -31,8 +32,20 @@
     return [self debounce:dueTime scheduler:scheduler];
 }
 
+- (nonnull RxObservable *)throttle:(RxTimeInterval)dueTime {
+    return [self throttle:dueTime scheduler:[RxCurrentThreadScheduler sharedInstance]];
+}
+
 - (nonnull RxObservable *)debounce:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxThrottle alloc] initWithSource:[self asObservable] dueTime:dueTime scheduler:scheduler];
+}
+
+- (nonnull RxObservable *)throttleFirst:(RxTimeInterval)dueTime {
+    return [self throttleFirst:dueTime scheduler:[RxCurrentThreadScheduler sharedInstance]];
+}
+
+- (nonnull RxObservable *)throttleFirst:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler {
+    return [[RxThrottleFirst alloc] initWithSource:[self asObservable] dueTime:dueTime scheduler:scheduler];
 }
 
 @end
@@ -47,7 +60,7 @@
 
 @implementation RxObservable (Interval)
 
-- (nonnull RxObservable<NSNumber *> *)interval:(RxTimeInterval)period
++ (nonnull RxObservable<NSNumber *> *)interval:(RxTimeInterval)period
                                      scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxTimer alloc] initWithDueTime:period period:period scheduler:scheduler];
 }
@@ -56,13 +69,13 @@
 
 @implementation RxObservable (Timer)
 
-- (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
++ (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
                                      period:(RxTimeInterval)period
                                   scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxTimer alloc] initWithDueTime:dueTime period:period scheduler:scheduler];
 }
 
-- (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
++ (nonnull RxObservable<NSNumber *> *)timer:(RxTimeInterval)dueTime
                                   scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [self timer:dueTime period:-1 scheduler:scheduler];
 }

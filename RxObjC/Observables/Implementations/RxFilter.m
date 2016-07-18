@@ -26,7 +26,7 @@
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
-        rx_tryCatch(self, ^{
+        rx_tryCatch(^{
             BOOL satisfies = _predicate(event.element);
             if (satisfies) {
                 [self forwardOn:[RxEvent next:event.element]];

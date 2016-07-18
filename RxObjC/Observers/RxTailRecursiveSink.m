@@ -99,7 +99,7 @@
         
         if (tuple.second != [EXTNil null]) {
             // `- 1` because generator.next() has just been called
-            NSUInteger left = tuple.second.unsignedIntegerValue;
+            NSInteger left = tuple.second.integerValue;
             if (left - 1 >= 1) {
                 [_generators addObject:[RxTuple2 tupleWithArray:@[e, @(left - 1)]]];
             }

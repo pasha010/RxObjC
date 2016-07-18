@@ -20,7 +20,7 @@ One virtual unit is equal to 10 seconds.
 /**
 Scheduler that tests virtual scheduler
 */
-@interface RxTestVirtualScheduler : RxVirtualTimeScheduler<RxTestVirtualSchedulerVirtualTimeConverter *>
+@interface RxTestVirtualScheduler : RxVirtualTimeScheduler<NSNumber *, RxTestVirtualSchedulerVirtualTimeConverter *>
 
 - (nonnull instancetype)initWithInitialClock:(NSUInteger)initialClock NS_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init;
