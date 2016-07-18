@@ -770,3 +770,178 @@
 }
 
 @end
+
+@implementation RxObservableTimeTest (Take)
+
+- (void)testTake_TakeZero {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(210, @1),
+            next(220, @2),
+            completed(230)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:
+            [xs take:0 scheduler:scheduler]];
+
+    NSArray *events = @[
+            completed(201)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 201)
+    ]);
+}
+
+- (void)testTake_Some {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(210, @1),
+            next(220, @2),
+            next(230, @3),
+            completed(240)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:
+            [xs take:25 scheduler:scheduler]];
+
+    NSArray *events = @[
+            next(210, @1),
+            next(220, @2),
+            completed(225)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 225)
+    ]);
+}
+
+- (void)testTake_TakeLate {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(210, @1),
+            next(220, @2),
+            completed(230),
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:
+            [xs take:50 scheduler:scheduler]];
+
+    NSArray *events = @[
+            next(210, @1),
+            next(220, @2),
+            completed(230)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 230)
+    ]);
+}
+
+- (void)testTake_TakeError {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(0, @0),
+            error(210, testError())
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:
+            [xs take:50 scheduler:scheduler]];
+
+    NSArray *events = @[
+            error(210, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 210)
+    ]);
+}
+
+- (void)testTake_TakeNever {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(0, @0),
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:
+            [xs take:50 scheduler:scheduler]];
+
+    NSArray *events = @[
+            completed(250)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 250)
+    ]);
+}
+
+- (void)testTake_TakeTwice1 {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(210, @1),
+            next(220, @2),
+            next(230, @3),
+            next(240, @4),
+            next(250, @5),
+            next(260, @6),
+            completed(270)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:
+            [[xs take:55 scheduler:scheduler] take:35 scheduler:scheduler]
+    ];
+
+    NSArray *events = @[
+            next(210, @1),
+            next(220, @2),
+            next(230, @3),
+            completed(235)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 235)
+    ]);
+}
+
+- (void)testTake_TakeDefault {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(210, @1),
+            next(220, @2),
+            next(230, @3),
+            next(240, @4),
+            next(250, @5),
+            next(260, @6),
+            completed(270)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:
+            [xs take:35 scheduler:scheduler]];
+
+    NSArray *events = @[
+            next(210, @1),
+            next(220, @2),
+            next(230, @3),
+            completed(235)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 235)
+    ]);
+}
+
+@end
