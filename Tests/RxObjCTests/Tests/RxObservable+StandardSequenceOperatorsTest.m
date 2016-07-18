@@ -4299,6 +4299,395 @@ BOOL isPrime(NSNumber *n) {
     XCTAssertEqual(invoked, 4);
 }
 
+- (void)testSkipWhile_Complete_After {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            completed(600)
+    ]];
+
+    __block NSInteger invoked = 0;
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+        invoked++;
+        return isPrime(x);
+    }]];
+
+    NSArray *events = @[
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            completed(600)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 600)
+    ]);
+
+    XCTAssertEqual(invoked, 6);
+}
+
+- (void)testSkipWhile_Error_Before {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(210, @2),
+            next(260, @5),
+            error(270, testError()),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+    ]];
+
+    __block NSInteger invoked = 0;
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+        invoked++;
+        return isPrime(x);
+    }]];
+
+    NSArray *events = @[
+            error(270, testError()),
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 270)
+    ]);
+
+    XCTAssertEqual(invoked, 2);
+}
+
+- (void)testSkipWhile_Error_After {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            error(600, testError()),
+    ]];
+
+    __block NSInteger invoked = 0;
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+        invoked++;
+        return isPrime(x);
+    }]];
+
+    NSArray *events = @[
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            error(600, testError()),
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 600)
+    ]);
+
+    XCTAssertEqual(invoked, 6);
+}
+
+- (void)testSkipWhile_Dispose_Before {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            completed(600)
+    ]];
+
+    __block NSInteger invoked = 0;
+
+    RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
+        return [xs skipWhile:^BOOL(NSNumber *x) {
+            invoked++;
+            return isPrime(x);
+        }];
+    }];
+
+    NSArray *events = @[
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 300)
+    ]);
+
+    XCTAssertEqual(invoked, 3);
+}
+
+- (void)testSkipWhile_Dispose_After {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            completed(600)
+    ]];
+
+    __block NSInteger invoked = 0;
+
+    RxTestableObserver *res = [scheduler startWhenDisposed:470 create:^RxObservable * {
+        return [xs skipWhile:^BOOL(NSNumber *x) {
+            invoked++;
+            return isPrime(x);
+        }];
+    }];
+
+    NSArray *events = @[
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 470)
+    ]);
+
+    XCTAssertEqual(invoked, 6);
+}
+
+- (void)testSkipWhile_Zero {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(205, @100),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            completed(600)
+    ]];
+
+    __block NSInteger invoked = 0;
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+        invoked++;
+        return isPrime(x);
+    }]];
+
+    NSArray *events = @[
+            next(205, @100),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            completed(600)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 600)
+    ]);
+
+    XCTAssertEqual(invoked, 1);
+}
+
+- (void)testSkipWhile_Throw {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            completed(600)
+    ]];
+
+    __block NSInteger invoked = 0;
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+        invoked++;
+        if (invoked == 3) {
+            @throw testError();
+        }
+        return isPrime(x);
+    }]];
+
+    NSArray *events = @[
+            error(290, testError()),
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 290)
+    ]);
+
+    XCTAssertEqual(invoked, 3);
+}
+
+- (void)testSkipWhile_Index {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(205, @100),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            completed(600)
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhileWithIndex:^BOOL(NSNumber *x, NSUInteger index) {
+        return index < 5;
+    }]];
+
+    NSArray *events = @[
+            next(350, @7),
+            next(390, @4),
+            next(410, @17),
+            next(450, @8),
+            next(500, @23),
+            completed(600)
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 600)
+    ]);
+}
+
+- (void)testSkipWhile_Index_Throw {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(205, @100),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            error(400, testError()),
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhileWithIndex:^BOOL(NSNumber *x, NSUInteger index) {
+        return index < 5;
+    }]];
+
+    NSArray *events = @[
+            next(350, @7),
+            next(390, @4),
+            error(400, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 400)
+    ]);
+}
+
+- (void)testSkipWhile_Index_SelectorThrows {
+    RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
+
+    RxTestableObservable *xs = [scheduler createHotObservable:@[
+            next(90,  @(-1)),
+            next(110, @(-1)),
+            next(205, @100),
+            next(210, @2),
+            next(260, @5),
+            next(290, @13),
+            next(320, @3),
+            next(350, @7),
+            next(390, @4),
+            completed(400),
+    ]];
+
+    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhileWithIndex:^BOOL(NSNumber *x, NSUInteger index) {
+        if (index < 5) {
+            return YES;
+        }
+        @throw testError();
+    }]];
+
+    NSArray *events = @[
+            error(350, testError())
+    ];
+    XCTAssertEqualObjects(res.events, events);
+
+    XCTAssertEqualObjects(xs.subscriptions, @[
+            Subscription(200, 350)
+    ]);
+}
+
 @end
 
 #pragma clang diagnostic pop

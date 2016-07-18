@@ -28,17 +28,21 @@
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.isNext) {
+        __block BOOL disposed = NO;
         if (!_running) {
             rx_tryCatch(^{
                 _running = !(_parent->_predicate(event.element));
-
-                if (_running) {
-                    [self forwardOn:[RxEvent next:event.element]];
-                }
             }, ^(NSError *error) {
                 [self forwardOn:[RxEvent error:error]];
                 [self dispose];
+                disposed = YES;
             });
+        }
+        if (disposed) {
+            return;
+        }
+        if (_running) {
+            [self forwardOn:[RxEvent next:event.element]];
         }
     } else {
         [self forwardOn:event];
@@ -69,19 +73,23 @@
 
 - (void)on:(nonnull RxEvent *)event {
     if (event.type == RxEventTypeNext) {
+        __block BOOL disposed = NO;
         if (!_running) {
             rx_tryCatch(^{
                _running = !(_parent->_indexPredicate(event.element, _index));
                 rx_incrementCheckedUnsigned(&_index);
 
-                if (_running) {
-                    [self forwardOn:[RxEvent next:event.element]];
-                }
-
             }, ^(NSError *error) {
                 [self forwardOn:[RxEvent error:error]];
                 [self dispose];
+                disposed = YES;
             });
+        }
+        if (disposed) {
+            return;
+        }
+        if (_running) {
+            [self forwardOn:[RxEvent next:event.element]];
         }
     } else {
         [self forwardOn:event];

@@ -74,11 +74,11 @@
 
 @implementation NSObject (RxSkipWhile)
 
-- (nonnull RxObservable *)skipWhile:(nonnull BOOL(^)(id __nonnull))predicate {
+- (nonnull RxObservable *)skipWhile:(nonnull BOOL(^)(id __nonnull element))predicate {
     return [[RxSkipWhile alloc] initWithSource:[self asObservable] predicate:predicate];
 }
 
-- (nonnull RxObservable *)skipWhileWithIndex:(nonnull BOOL(^)(id __nonnull, NSUInteger))predicate {
+- (nonnull RxObservable *)skipWhileWithIndex:(nonnull BOOL(^)(id __nonnull element, NSUInteger index))predicate {
     return [[RxSkipWhile alloc] initWithSource:[self asObservable] indexPredicate:predicate];
 }
 
