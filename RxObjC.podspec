@@ -56,7 +56,7 @@ This library contains everything you needed to write unit tests in the following
   rx_spec.homepage = "https://github.com/pasha010/RxObjC"
   rx_spec.license = 'MIT'
   rx_spec.author = { "Pavel Malkov" => "mpa026@gmail.com" }
-  rx_spec.source = { :git => "git@github.com:pasha010/RxObjC.git", :tag => s.version.to_s }
+  rx_spec.source = { :git => "git@github.com:pasha010/RxObjC.git", :tag => rx_spec.version.to_s }
 
   rx_spec.requires_arc = true
 
