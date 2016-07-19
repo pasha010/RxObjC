@@ -238,7 +238,7 @@
 
     NSDate *end = [NSDate date];
 
-    XCTAssertEqualWithAccuracy(2, [end timeIntervalSinceDate:start], 0.5);
+    XCTAssertEqualWithAccuracy(2, [end timeIntervalSinceDate:start], 0.6);
     XCTAssertEqualObjects(a, @0);
 }
 
