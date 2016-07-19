@@ -56,7 +56,7 @@ This library contains everything you needed to write unit tests in the following
   rx_spec.homepage = "https://github.com/pasha010/RxObjC"
   rx_spec.license = 'MIT'
   rx_spec.author = { "Pavel Malkov" => "mpa026@gmail.com" }
-  rx_spec.source = { :git => "git@github.com:pasha010/RxObjC.git", :tag => rx_spec.version.to_s }
+  rx_spec.source = { :git => "https://github.com/pasha010/RxObjC.git", :tag => rx_spec.version.to_s }
 
   rx_spec.requires_arc = true
 
@@ -65,17 +65,20 @@ This library contains everything you needed to write unit tests in the following
   rx_spec.watchos.deployment_target = '2.0'
   rx_spec.tvos.deployment_target = '9.0'
 
-  rx_spec.public_header_files = 'RxObjC/RxObjC.h'
+  rx_spec.public_header_files = 'RxObjC/**/*.h'
   rx_spec.source_files = 'RxObjC/**/*.{h, m}'
 
   rx_spec.subspec 'RxBlocking' do |rx_blocking_spec|
     rx_blocking_spec.source_files = 'RxBlocking/*.{h, m}'
-    rx_blocking_spec.public_header_files = 'RxBlocking/RxBlocking.h'
+    rx_blocking_spec.public_header_files = 'RxBlocking/*.h'
   end
 
   rx_spec.subspec 'RxTests' do |rx_tests_spec|
       rx_tests_spec.source_files = 'RxTests/**/*.{h, m}'
-      rx_tests_spec.public_header_files = 'RxTests/RxTests.h'
+      rx_tests_spec.public_header_files = 'RxTests/**/*.h'
       rx_tests_spec.framework = 'XCTest'
+      rx_tests_spec.ios.deployment_target = '8.0'
+      rx_tests_spec.osx.deployment_target = '10.9'
+      rx_tests_spec.tvos.deployment_target = '9.0'
   end
 end

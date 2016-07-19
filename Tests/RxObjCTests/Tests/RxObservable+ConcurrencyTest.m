@@ -432,14 +432,13 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 
     [[xs observeOn:scheduler] subscribe:observer];
 
-    XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
+    XCTAssertEqualObjects(xs.subscriptions, @[RxSubscribedToHotObservable()]);
     [xs onCompleted];
 
     [self sleep:0.1];
 
-    XCTAssert([observer.events isEqualToArray:@[[self completed]]]);
-
-    XCTAssert([xs.subscriptions isEqualToArray:@[RxUnsunscribedFromHotObservable()]]);
+    XCTAssertEqualObjects(observer.events, @[completed(0)]);
+    XCTAssertEqualObjects(xs.subscriptions, @[RxUnsunscribedFromHotObservable()]);
 }
 
 - (void)testObserveOn_ConcurrentSchedulerIsSerialized {
