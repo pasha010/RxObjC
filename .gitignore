@@ -63,3 +63,4 @@ fastlane/test_output
 .idea/*
 Pods/
 /.idea/RxObjC.iml
+/compile_commands.json
