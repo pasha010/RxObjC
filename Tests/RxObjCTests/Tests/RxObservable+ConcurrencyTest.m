@@ -399,25 +399,26 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     
     [self sleep:0.1];
 
-    BOOL e = [observer.events isEqualToArray:@[
+    NSArray *events = @[
             [self next:@0],
             [self next:@1],
             [self next:@2],
-    ]];
-    XCTAssert(e);
+    ];
+    XCTAssertEqualObjects(observer.events, events);
+    
+    XCTAssertEqualObjects(xs.subscriptions, @[RxSubscribedToHotObservable()]);
 
-    XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
     [xs onCompleted];
 
     [self sleep:0.1];
 
-    BOOL b1 = [observer.events isEqualToArray:@[
+    NSArray *array = @[
             [self next:@0],
             [self next:@1],
             [self next:@2],
             [self completed]
-    ]];
-    XCTAssert(b1);
+    ];
+    XCTAssertEqualObjects(observer.events, array);
 
     [subscription dispose];
 
