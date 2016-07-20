@@ -44,7 +44,7 @@
     @weakify(self);
     return [[RxAnonymousDisposable alloc] initWithDisposeAction:^{
         @strongify(self);
-        RxAnyObserver *removed = [self->_observers removeKey:key];
+        __unused RxAnyObserver *removed = [self->_observers removeKey:key];
         NSAssert(removed != nil, @"");
 
         RxSubscription *existing = self.subscriptions[i];
