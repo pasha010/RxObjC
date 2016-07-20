@@ -23,7 +23,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ @ %u", _value, _time];
+    return [NSString stringWithFormat:@"%@ @ %lu", _value, (unsigned long)_time];
 }
 
 - (BOOL)isEqual:(id)other {
