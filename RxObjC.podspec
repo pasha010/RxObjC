@@ -65,18 +65,40 @@ This library contains everything you needed to write unit tests in the following
   rx_spec.watchos.deployment_target = '2.0'
   rx_spec.tvos.deployment_target = '9.0'
 
-  rx_spec.public_header_files = 'RxObjC/**/*.h'
-  rx_spec.source_files = 'RxObjC/**/*.{h, m}'
+  rx_spec.public_header_files = "RxObjC/*.h",
+                                "RxObjC/Concurrency/*.h",
+                                "RxObjC/DataStructures/*.h",
+                                "RxObjC/Disposables/*.h",
+                                "RxObjC/Extensions/*.h",
+                                "RxObjC/Observables/*.h",
+                                "RxObjC/Observables/Implementations/*.h",
+                                "RxObjC/Observers/*.h",
+                                "RxObjC/Platform/*.h",
+                                "RxObjC/Schedulers/*.h",
+                                "RxObjC/Schedulers/Internal/*.h",
+                                "RxObjC/Subjects/*.h"
+
+  rx_spec.source_files = "RxObjC/*{h,m}",
+                         "RxObjC/Concurrency/*{h,m}",
+                         "RxObjC/DataStructures/*{h,m}",
+                         "RxObjC/Disposables/*{h,m}",
+                         "RxObjC/Extensions/*{h,m}",
+                         "RxObjC/Observables/*{h,m}",
+                         "RxObjC/Observables/Implementations/*{h,m}",
+                         "RxObjC/Observers/*{h,m}",
+                         "RxObjC/Platform/*{h,m}",
+                         "RxObjC/Schedulers/*{h,m}",
+                         "RxObjC/Schedulers/Internal/*{h,m}",
+                         "RxObjC/Subjects/*{h,m}"
 
   rx_spec.subspec 'RxBlocking' do |rx_blocking_spec|
-    rx_blocking_spec.source_files = 'RxBlocking/*.{h, m}'
-    rx_blocking_spec.public_header_files = 'RxBlocking/*.h'
+    rx_blocking_spec.source_files = "RxBlocking/*.{h,m}"
+    rx_blocking_spec.public_header_files = "RxBlocking/*.h"
   end
 
   rx_spec.subspec 'RxTests' do |rx_tests_spec|
-      rx_tests_spec.source_files = 'RxTests/**/*.{h, m}'
-      rx_tests_spec.public_header_files = 'RxTests/**/*.h'
-      rx_tests_spec.framework = 'XCTest'
+      rx_tests_spec.source_files = "RxTests/**/*.{h,m}"
+      rx_tests_spec.public_header_files = "RxTests/**/*.h"
       rx_tests_spec.ios.deployment_target = '8.0'
       rx_tests_spec.osx.deployment_target = '10.9'
       rx_tests_spec.tvos.deployment_target = '9.0'

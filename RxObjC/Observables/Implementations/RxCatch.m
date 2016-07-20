@@ -151,7 +151,7 @@
 - (nullable RxTuple2<NSEnumerator<id <RxObservableConvertibleType>> *, NSNumber *> *)extract:(nonnull RxObservable *)observable {
     if ([observable isKindOfClass:[RxCatchSequence class]]) {
         RxCatchSequence *onError = (RxCatchSequence *) observable;
-        return [RxTuple2 tupleWithArray:@[onError->_sources, [EXTNil null]]];
+        return [RxTuple2 tupleWithArray:@[onError->_sources, [RxNil null]]];
     } else {
         return nil;
     }
@@ -171,7 +171,7 @@
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
     RxCatchSequenceSink *sink = [[RxCatchSequenceSink alloc] initWithObserver:observer];
-    sink.disposable = [sink run:[RxTuple2 tupleWithArray:@[_sources, [EXTNil null]]]];
+    sink.disposable = [sink run:[RxTuple2 tupleWithArray:@[_sources, [RxNil null]]]];
     return sink;
 }
 

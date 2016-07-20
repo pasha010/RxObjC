@@ -97,15 +97,18 @@
         // there is no memory leak in case this operator is used to generate non terminating
         // sequence.
         
-        if (tuple.second != [EXTNil null]) {
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "NotSuperclass"
+        if (tuple.second != [RxNil null]) {
             // `- 1` because generator.next() has just been called
             NSInteger left = tuple.second.integerValue;
             if (left - 1 >= 1) {
                 [_generators addObject:[RxTuple2 tupleWithArray:@[e, @(left - 1)]]];
             }
         } else {
-            [_generators addObject:[RxTuple2 tupleWithArray:@[e, [EXTNil null]]]];
+            [_generators addObject:[RxTuple2 tupleWithArray:@[e, [RxNil null]]]];
         }
+#pragma clang diagnostic pop
 
         RxTuple2<NSEnumerator<id <RxObservableConvertibleType>> *, NSNumber *> *nextGenerator = [self extract:nextCandidate];
         

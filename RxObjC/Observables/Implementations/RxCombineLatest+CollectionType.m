@@ -33,7 +33,7 @@
         _parent = parent;
 
         for (NSUInteger i = 0; i < parent->_count; i++) {
-            _values[i] = [EXTNil null];
+            _values[i] = [RxNil null];
             _isDone[i] = @NO;
             [_subscriptions addObject:[[RxSingleAssignmentDisposable alloc] init]];
         }
@@ -64,7 +64,7 @@
 
     switch (event.type) {
         case RxEventTypeNext: {
-            if (_values[atIndex] == [EXTNil null]) {
+            if (_values[atIndex] == [RxNil null]) {
                 _numberOfValues++;
             }
             

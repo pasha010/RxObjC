@@ -179,7 +179,7 @@
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
     RxRetryWhenSequenceSink *sink = [[RxRetryWhenSequenceSink alloc] initWithParent:self observer:observer];
-    sink.disposable = [sink run:[RxTuple2 tupleWithArray:@[_sources, [EXTNil null]]]];
+    sink.disposable = [sink run:[RxTuple2 tupleWithArray:@[_sources, [RxNil null]]]];
     return sink;
 }
 
