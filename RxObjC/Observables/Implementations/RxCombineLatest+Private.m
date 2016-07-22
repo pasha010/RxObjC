@@ -31,7 +31,6 @@
 - (nonnull id <RxDisposable>)run {
     NSMutableArray<id <RxDisposable>> *disposables = [NSMutableArray arrayWithCapacity:_arity];
 
-    @weakify(self);
     for (NSUInteger i = 0; i < _arity; i++) {
         RxSingleAssignmentDisposable *subscription = [[RxSingleAssignmentDisposable alloc] init];
         __block NSUInteger index = i;
@@ -39,7 +38,6 @@
                                                                                    parent:self
                                                                                     index:i
                                                                            setLatestValue:^(id element) {
-                                                                               @strongify(self);
                                                                                self->_latestElements[@(index)] = element;
                                                                            } this:subscription];
 

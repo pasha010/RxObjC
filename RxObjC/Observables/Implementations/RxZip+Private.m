@@ -48,14 +48,12 @@
 - (nonnull id<RxDisposable>)run {
     NSUInteger count = _values.count;
     NSMutableArray<RxSingleAssignmentDisposable *> *subscriptions = [NSMutableArray arrayWithCapacity:count];
-    @weakify(self);
     for (NSUInteger i = 0; i < count; i++) {
         RxSingleAssignmentDisposable *subscription = [[RxSingleAssignmentDisposable alloc] init];
         RxZipObserver *observer = [[RxZipObserver alloc] initWithLock:_lock
                                                                parent:self 
                                                                 index:i 
                                                          setNextValue:^(id o) {
-                                                             @strongify(self); 
                                                              return [self->_values[i] enqueue:o];
                                                          } this:subscription];
         subscription.disposable = [_parent.sources[i] subscribe:observer];

@@ -83,10 +83,7 @@
     RxSingleAssignmentDisposable *nextTimer = [[RxSingleAssignmentDisposable alloc] init];
     _timerD.disposable = nextTimer;
 
-    @weakify(self);
     nextTimer.disposable = [_parent->_scheduler scheduleRelative:@(_id) dueTime:_parent->_dueTime action:^id <RxDisposable>(NSNumber *state) {
-        @strongify(self);
-
         __block BOOL timerWins = NO;
 
         [self->_lock performLock:^{

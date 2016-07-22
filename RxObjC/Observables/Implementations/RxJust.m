@@ -27,13 +27,9 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    @weakify(self);
     return [_parent->_scheduler schedule:_parent->_element action:^id <RxDisposable>(RxStateType element) {
-        @strongify(self);
         [self forwardOn:[RxEvent next:element]];
-        @weakify(self);
         return [self->_parent->_scheduler schedule:nil action:^id <RxDisposable>(RxStateType _) {
-            @strongify(self);
             [self forwardOn:[RxEvent completed]];
             return [RxNopDisposable sharedInstance];
         }];

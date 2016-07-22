@@ -41,9 +41,7 @@
         }
     }];
     
-    @weakify(self);
     return [[RxAnonymousDisposable alloc] initWithDisposeAction:^{
-        @strongify(self);
         [subscription dispose];
         [self->_parent->_lock performLock:^{
             if (self->_parent->_count == 1) {

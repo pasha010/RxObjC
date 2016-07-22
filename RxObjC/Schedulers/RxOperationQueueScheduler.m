@@ -23,11 +23,8 @@
 
 - (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action {
     RxCompositeDisposable *compositeDisposable = [[RxCompositeDisposable alloc] init];
-    
-    @weakify(compositeDisposable);
 
     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-        @strongify(compositeDisposable);
         if (compositeDisposable.disposed) {
             return;
         }
