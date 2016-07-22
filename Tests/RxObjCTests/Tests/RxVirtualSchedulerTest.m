@@ -100,9 +100,7 @@
 
     NSMutableArray<NSNumber *> *times = [NSMutableArray array];
 
-    @weakify(scheduler);
     [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id o) {
-        @strongify(scheduler);
         [times addObject:[scheduler clock]];
         [scheduler scheduleRelative:nil dueTime:20.0 action:^id <RxDisposable>(id _o) {
             [times addObject:[scheduler clock]];
@@ -125,9 +123,7 @@
 
     NSMutableArray<NSNumber *> *times = [NSMutableArray array];
 
-    @weakify(scheduler);
     [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id o) {
-        @strongify(scheduler);
         [times addObject:[scheduler clock]];
         id <RxDisposable> d1 = [scheduler scheduleRelative:nil dueTime:20.0 action:^id <RxDisposable>(id _o) {
             [times addObject:[scheduler clock]];
@@ -154,9 +150,7 @@
 
     NSMutableArray<NSNumber *> *times = [NSMutableArray array];
 
-    @weakify(scheduler);
     [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id o) {
-        @strongify(scheduler);
         [times addObject:[scheduler clock]];
         [scheduler scheduleRelative:nil dueTime:20.0 action:^id <RxDisposable>(id _o) {
             [times addObject:[scheduler clock]];
@@ -181,9 +175,7 @@
 
     NSMutableArray<NSNumber *> *times = [NSMutableArray array];
 
-    @weakify(scheduler);
     [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id o) {
-        @strongify(scheduler);
         [times addObject:[scheduler clock]];
         [scheduler sleep:10];
         [scheduler scheduleRelative:nil dueTime:20.0 action:^id <RxDisposable>(id _o) {
@@ -209,14 +201,12 @@
     NSMutableArray<NSNumber *> *times = [NSMutableArray array];
     NSMutableArray<NSNumber *> *ticks = [NSMutableArray array];
 
-    @weakify(scheduler);
     for (NSUInteger i = 0; i < 20000; i++) {
         int random = rand() % 10000;
 
         [times addObject:@(random)];
 
         [scheduler scheduleRelative:nil dueTime:10 * random action:^id <RxDisposable>(id o) {
-            @strongify(scheduler);
             [ticks addObject:[scheduler clock]];
             return [RxNopDisposable sharedInstance];
         }];

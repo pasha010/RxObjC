@@ -30,9 +30,7 @@
 
 - (nonnull id <RxDisposable>)run {
     NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _parent->_scheduler;
-    @weakify(self);
     return [scheduler scheduleRecursive:@(YES) action:^(NSNumber *isFirstNumber, void (^recurse)(id)) {
-        @strongify(self);
         rx_tryCatch(^{
             BOOL isFirst = isFirstNumber.boolValue;
             if (!isFirst) {

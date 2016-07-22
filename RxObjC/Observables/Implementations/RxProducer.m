@@ -14,9 +14,7 @@
     if (![RxCurrentThreadScheduler sharedInstance].isScheduleRequired) {
         return [self run:observer];
     } else {
-        @weakify(self);
         return [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType _) {
-            @strongify(self);
             return [self run:observer];
         }];
     }

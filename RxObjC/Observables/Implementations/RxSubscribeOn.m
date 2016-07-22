@@ -41,9 +41,7 @@
     
     disposeEverything.disposable = cancelSchedule;
     
-    @weakify(self);
     cancelSchedule.disposable = [_parent->_scheduler schedule:nil action:^id <RxDisposable>(RxStateType __unused _) {
-        @strongify(self);
         id <RxDisposable> subscription = [self->_parent->_source subscribe:self];
         disposeEverything.disposable = [[RxScheduledDisposable alloc] initWithScheduler:self->_parent->_scheduler
                                                                           andDisposable:subscription];

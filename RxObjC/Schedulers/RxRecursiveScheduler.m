@@ -31,9 +31,7 @@
     __block BOOL isDone = NO;
 
     __block RxBagKey *removeKey = nil;
-    @weakify(self);
     __block id <RxDisposable> d = [_scheduler scheduleRelative:state dueTime:dueTime action:^id <RxDisposable>(id _state) {
-        @strongify(self);
         // best effort
         if (self->_group.disposed) {
             return [RxNopDisposable sharedInstance];
@@ -67,9 +65,7 @@
     __block BOOL isAdded = NO;
     __block BOOL isDone = NO;
     __block RxBagKey *removeKey = nil;
-    @weakify(self);
     id <RxDisposable> d = [_scheduler schedule:state action:^id <RxDisposable>(RxStateType _state) {
-        @strongify(self);
         // best effort
         if ([self->_group disposed]) {
             return [RxNopDisposable sharedInstance];
@@ -134,9 +130,7 @@
 
     __block RxBagKey *removeKey = nil;
 
-    @weakify(self);
     id <RxDisposable> d = [_scheduler schedule:state action:^id <RxDisposable>(RxStateType s) {
-        @strongify(self);
         if (!self) {
             return [RxNopDisposable sharedInstance];
         }

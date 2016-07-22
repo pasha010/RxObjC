@@ -46,13 +46,11 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    @weakify(self);
     for (NSUInteger i = 0; i < _parent->_sources.count; i++) {
         NSUInteger index = i;
         id <RxObservableConvertibleType> s = _parent->_sources[i];
         RxObservable *source = [s asObservable];
         _subscriptions[i].disposable = [source subscribe:[[RxAnyObserver alloc] initWithEventHandler:^(RxEvent *event) {
-            @strongify(self);
             [self on:event atIndex:index];
         }]];
     }

@@ -41,9 +41,7 @@
     if (OSAtomicIncrement32(&_calledStop) != 1) {
         return;
     }
-    @weakify(self);
     CFRunLoopPerformBlock(_currentRunLoop, kCFRunLoopDefaultMode, ^{
-        @strongify(self);
         if (!self) {
             return;
         }

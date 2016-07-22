@@ -120,9 +120,7 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    @weakify(self);
     id <RxDisposable> disposeTimer = [_parent->_scheduler scheduleRelative:nil dueTime:_parent->_duration action:^id <RxDisposable>(id _) {
-        @strongify(self);
         [self tick];
         return [RxNopDisposable sharedInstance];
     }];

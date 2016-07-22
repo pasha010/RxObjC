@@ -27,9 +27,7 @@
 
 - (nonnull id <RxDisposable>)run {
     NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _parent->_scheduler;
-    @weakify(self);
     return [scheduler scheduleRecursive:_parent->_element action:^(id e, void (^recurse)(id)) {
-        @strongify(self);
         [self forwardOn:[RxEvent next:e]];
         recurse(e);
     }];

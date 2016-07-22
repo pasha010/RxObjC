@@ -82,14 +82,11 @@ typedef void (^RxAmbSinkAction)(RxAmbObserver *__nonnull, RxEvent *__nonnull);
     RxSingleAssignmentDisposable *subscription2 = [[RxSingleAssignmentDisposable alloc] init];
     __block id <RxDisposable> disposeAll = [RxStableCompositeDisposable createDisposable1:subscription1 disposable2:subscription2];
 
-    @weakify(self);
     RxAmbSinkAction forwardEvent = ^(RxAmbObserver *__nonnull o, RxEvent *__nonnull event) {
-        @strongify(self);
         [self forwardOn:event];
     };
 
     void (^decide)(RxAmbObserver *, RxEvent *, RxAmbState, id <RxDisposable>)=^(RxAmbObserver *__nonnull o, RxEvent *__nonnull event, RxAmbState me, id <RxDisposable> __nonnull otherSubscription) {
-        @strongify(self);
         [self->_lock performLock:^{
             if (self->_choice == RxAmbStateNeither) {
                 self->_choice = me;
