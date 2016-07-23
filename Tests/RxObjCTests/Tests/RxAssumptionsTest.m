@@ -120,19 +120,9 @@ RxObservable<NSNumber *> *rx_returnSomethingInt() {
 
 - (void)testResourceLeaksDetectionIsTurnedOn {
 #if TRACE_RESOURCES
-
-#if (__LP64__)  ||  (__ARM_ARCH_7K__ >= 2)
-#define ENABLE_AUTORELEASE_FOR_DETECTION_IS_TURNED_ON 0
-#else
-#define ENABLE_AUTORELEASE_FOR_DETECTION_IS_TURNED_ON 1
-    NSLog(@"it's 32 bit arch");
-#endif
-
     int32_t startResourceCount = rx_resourceCount;
 
-#if ENABLE_AUTORELEASE_FOR_DETECTION_IS_TURNED_ON
     @autoreleasepool {
-#endif
 
         RxObservable<NSNumber *> *observable = [RxObservable just:@1];
 
@@ -140,11 +130,9 @@ RxObservable<NSNumber *> *rx_returnSomethingInt() {
         XCTAssertTrue(rx_resourceCount == startResourceCount + 1);
 
         observable = nil;
-#if ENABLE_AUTORELEASE_FOR_DETECTION_IS_TURNED_ON
     }
-#endif
 
-    XCTAssertTrue(rx_resourceCount == startResourceCount, @"rx_resourceCount == %d, startResourceCount = %d", rx_resourceCount, startResourceCount);
+    XCTAssertEqual(rx_resourceCount, startResourceCount);
 
 #elif RELEASE
     XCTAssert(NO, @"Can't run unit tests in without tracing");
