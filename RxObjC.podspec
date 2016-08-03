@@ -99,6 +99,12 @@ This library contains everything you needed to write unit tests in the following
     blocking.public_header_files = "RxBlocking/*.h"
   end
 
+  rx_spec.subspec 'RxCocoa' do |cocoa|
+    cocoa.dependency "RxObjC/Core"
+    cocoa.source_files = "RxCocoa/**/*.{h,m}"
+    cocoa.public_header_files = "RxCocoa/**/*.h"
+  end
+
   rx_spec.subspec 'RxTests' do |tests|
     tests.dependency "RxObjC/Core"
     tests.source_files = "RxTests/**/*.{h,m}"

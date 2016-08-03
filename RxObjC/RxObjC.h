@@ -89,6 +89,7 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxSchedulerType.h"
 
 #pragma mark - Schedulers
+#import "RxSchedulers.h"
 #import "RxConcurrentDispatchQueueScheduler.h"
 #import "RxConcurrentMainScheduler.h"
 #import "RxCurrentThreadScheduler.h"
@@ -98,7 +99,7 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxMainScheduler.h"
 #import "RxOperationQueueScheduler.h"
 #import "RxRecursiveScheduler.h"
-#import "RxSchedulers.h"
+#import "RxSchedulersTypes.h"
 #import "RxSchedulerServices+Emulation.h"
 #import "RxSerialDispatchQueueScheduler.h"
 #import "RxVirtualTimeConverterType.h"

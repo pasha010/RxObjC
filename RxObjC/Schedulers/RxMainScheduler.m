@@ -13,6 +13,10 @@
 }
 
 + (nonnull instancetype)sharedInstance {
+    return [RxMainScheduler instance];
+}
+
++ (nonnull instancetype)instance {
     static dispatch_once_t token;
     static RxMainScheduler *instance;
     dispatch_once(&token, ^{
