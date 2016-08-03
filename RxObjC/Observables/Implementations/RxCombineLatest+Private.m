@@ -31,7 +31,6 @@
 - (nonnull id <RxDisposable>)run {
     NSMutableArray<id <RxDisposable>> *disposables = [NSMutableArray arrayWithCapacity:_arity];
 
-    @weakify(self);
     for (NSUInteger i = 0; i < _arity; i++) {
         RxSingleAssignmentDisposable *subscription = [[RxSingleAssignmentDisposable alloc] init];
         __block NSUInteger index = i;
@@ -39,7 +38,6 @@
                                                                                    parent:self
                                                                                     index:i
                                                                            setLatestValue:^(id element) {
-                                                                               @strongify(self);
                                                                                self->_latestElements[@(index)] = element;
                                                                            } this:subscription];
 
@@ -53,7 +51,7 @@
 - (nonnull id)getResult {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:_arity];
     for (NSUInteger i = 0; i < _arity; i++) {
-        [array addObject:_latestElements[@(i)] ? : [EXTNil null]];
+        [array addObject:_latestElements[@(i)] ? : [RxNil null]];
     }
     return _parent->_resultSelector([RxTuple tupleWithArray:array]);
 }
@@ -86,10 +84,10 @@
 - (nonnull instancetype)initWithSource1:(nonnull RxObservable *)source1 source2:(nonnull RxObservable *)source2 resultSelector:(RxCombineLatest2ResultSelector)resultSelector {
     self = [super initWithSources:@[source1, source2] resultSelector:^id(RxTuple *__nonnull tuple) {
         RxTupleUnpack(id o1, id o2) = tuple;
-        if (o1 == [EXTNil null]) {
+        if (o1 == [RxNil null]) {
             o1 = nil;
         }
-        if (o2 == [EXTNil null]) {
+        if (o2 == [RxNil null]) {
             o2 = nil;
         }
         return resultSelector(o1, o2);
@@ -107,13 +105,13 @@
                          resultSelector:(RxCombineLatest3ResultSelector)resultSelector {
     self = [super initWithSources:@[source1, source2, source3] resultSelector:^id(RxTuple *__nonnull tuple) {
         RxTupleUnpack(id o1, id o2, id o3) = tuple;
-        if (o1 == [EXTNil null]) {
+        if (o1 == [RxNil null]) {
             o1 = nil;
         }
-        if (o2 == [EXTNil null]) {
+        if (o2 == [RxNil null]) {
             o2 = nil;
         }
-        if (o3 == [EXTNil null]) {
+        if (o3 == [RxNil null]) {
             o3 = nil;
         }
         return resultSelector(o1, o2, o3);
@@ -132,16 +130,16 @@
                          resultSelector:(RxCombineLatest4ResultSelector)resultSelector {
     self = [super initWithSources:@[source1, source2, source3, source4] resultSelector:^id(RxTuple *__nonnull tuple) {
         RxTupleUnpack(id o1, id o2, id o3, id o4) = tuple;
-        if (o1 == [EXTNil null]) {
+        if (o1 == [RxNil null]) {
             o1 = nil;
         }
-        if (o2 == [EXTNil null]) {
+        if (o2 == [RxNil null]) {
             o2 = nil;
         }
-        if (o3 == [EXTNil null]) {
+        if (o3 == [RxNil null]) {
             o3 = nil;
         }
-        if (o4 == [EXTNil null]) {
+        if (o4 == [RxNil null]) {
             o4 = nil;
         }
         return resultSelector(o1, o2, o3, o4);
@@ -161,19 +159,19 @@
                          resultSelector:(RxCombineLatest5ResultSelector)resultSelector {
     self = [super initWithSources:@[source1, source2, source3, source4, source5] resultSelector:^id(RxTuple *__nonnull tuple) {
         RxTupleUnpack(id o1, id o2, id o3, id o4, id o5) = tuple;
-        if (o1 == [EXTNil null]) {
+        if (o1 == [RxNil null]) {
             o1 = nil;
         }
-        if (o2 == [EXTNil null]) {
+        if (o2 == [RxNil null]) {
             o2 = nil;
         }
-        if (o3 == [EXTNil null]) {
+        if (o3 == [RxNil null]) {
             o3 = nil;
         }
-        if (o4 == [EXTNil null]) {
+        if (o4 == [RxNil null]) {
             o4 = nil;
         }
-        if (o5 == [EXTNil null]) {
+        if (o5 == [RxNil null]) {
             o5 = nil;
         }
         return resultSelector(o1, o2, o3, o4, o5);
@@ -194,22 +192,22 @@
                          resultSelector:(RxCombineLatest6ResultSelector)resultSelector {
     self = [super initWithSources:@[source1, source2, source3, source4, source5, source6] resultSelector:^id(RxTuple *__nonnull tuple) {
         RxTupleUnpack(id o1, id o2, id o3, id o4, id o5, id o6) = tuple;
-        if (o1 == [EXTNil null]) {
+        if (o1 == [RxNil null]) {
             o1 = nil;
         }
-        if (o2 == [EXTNil null]) {
+        if (o2 == [RxNil null]) {
             o2 = nil;
         }
-        if (o3 == [EXTNil null]) {
+        if (o3 == [RxNil null]) {
             o3 = nil;
         }
-        if (o4 == [EXTNil null]) {
+        if (o4 == [RxNil null]) {
             o4 = nil;
         }
-        if (o5 == [EXTNil null]) {
+        if (o5 == [RxNil null]) {
             o5 = nil;
         }
-        if (o6 == [EXTNil null]) {
+        if (o6 == [RxNil null]) {
             o6 = nil;
         }
         return resultSelector(o1, o2, o3, o4, o5, o6);
@@ -231,25 +229,25 @@
                          resultSelector:(RxCombineLatest7ResultSelector)resultSelector {
     self = [super initWithSources:@[source1, source2, source3, source4, source5, source6, source7] resultSelector:^id(RxTuple *__nonnull tuple) {
         RxTupleUnpack(id o1, id o2, id o3, id o4, id o5, id o6, id o7) = tuple;
-        if (o1 == [EXTNil null]) {
+        if (o1 == [RxNil null]) {
             o1 = nil;
         }
-        if (o2 == [EXTNil null]) {
+        if (o2 == [RxNil null]) {
             o2 = nil;
         }
-        if (o3 == [EXTNil null]) {
+        if (o3 == [RxNil null]) {
             o3 = nil;
         }
-        if (o4 == [EXTNil null]) {
+        if (o4 == [RxNil null]) {
             o4 = nil;
         }
-        if (o5 == [EXTNil null]) {
+        if (o5 == [RxNil null]) {
             o5 = nil;
         }
-        if (o6 == [EXTNil null]) {
+        if (o6 == [RxNil null]) {
             o6 = nil;
         }
-        if (o7 == [EXTNil null]) {
+        if (o7 == [RxNil null]) {
             o7 = nil;
         }
         return resultSelector(o1, o2, o3, o4, o5, o6, o7);
@@ -272,28 +270,28 @@
                          resultSelector:(RxCombineLatest8ResultSelector)resultSelector {
     self = [super initWithSources:@[source1, source2, source3, source4, source5, source6, source7, source8] resultSelector:^id(RxTuple *__nonnull tuple) {
         RxTupleUnpack(id o1, id o2, id o3, id o4, id o5, id o6, id o7, id o8) = tuple;
-        if (o1 == [EXTNil null]) {
+        if (o1 == [RxNil null]) {
             o1 = nil;
         }
-        if (o2 == [EXTNil null]) {
+        if (o2 == [RxNil null]) {
             o2 = nil;
         }
-        if (o3 == [EXTNil null]) {
+        if (o3 == [RxNil null]) {
             o3 = nil;
         }
-        if (o4 == [EXTNil null]) {
+        if (o4 == [RxNil null]) {
             o4 = nil;
         }
-        if (o5 == [EXTNil null]) {
+        if (o5 == [RxNil null]) {
             o5 = nil;
         }
-        if (o6 == [EXTNil null]) {
+        if (o6 == [RxNil null]) {
             o6 = nil;
         }
-        if (o7 == [EXTNil null]) {
+        if (o7 == [RxNil null]) {
             o7 = nil;
         }
-        if (o8 == [EXTNil null]) {
+        if (o8 == [RxNil null]) {
             o8 = nil;
         }
         return resultSelector(o1, o2, o3, o4, o5, o6, o7, o8);

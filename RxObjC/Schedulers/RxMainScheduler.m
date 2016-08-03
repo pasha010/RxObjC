@@ -57,12 +57,10 @@
 
     __block RxSingleAssignmentDisposable *cancel = [[RxSingleAssignmentDisposable alloc] init];
 
-    @weakify(self);
     dispatch_async(_mainQueue, ^{
         if (!cancel.disposed) {
             action(state);
         }
-        @strongify(self);
         OSAtomicDecrement32(&self->_numberEnqueued);
     });
 

@@ -1,7 +1,7 @@
 RxObjC: ReactiveX for Objective-C
 =================================
 [![Build Status](https://travis-ci.org/pasha010/RxObjC.svg?branch=master)](https://travis-ci.org/pasha010/RxObjC)
-[![Version](https://cocoapod-badges.herokuapp.com/v/RxObjC/1.0/badge.png)](https://cocoapod-badges.herokuapp.com/v/RxObjC/1.0/badge.png) [![Platform](https://cocoapod-badges.herokuapp.com/p/RxObjC/badge.png)](https://cocoapod-badges.herokuapp.com/p/$PODNAME/badge.png)
+[![Version](https://cocoapod-badges.herokuapp.com/v/RxObjC/1.0/badge.png)](https://cocoapod-badges.herokuapp.com/v/RxObjC/1.0/badge.png) [![Platform](https://cocoapod-badges.herokuapp.com/p/RxObjC/badge.png)](https://cocoapod-badges.herokuapp.com/p/$PODNAME/badge.png) [![codecov](https://codecov.io/gh/pasha010/RxObjC/branch/master/graph/badge.svg)](https://codecov.io/gh/pasha010/RxObjC) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
 RxObjC is a Objective-C port of [RxSwift](https://github.com/ReactiveX/RxSwift)

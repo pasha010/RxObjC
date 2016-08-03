@@ -65,39 +65,33 @@ typedef NS_ENUM(NSUInteger, RxObserveOnState) {
 
     if (shouldStart) {
         NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _scheduler;
-        @weakify(self);
         _scheduleDisposable.disposable = [scheduler scheduleRecursive:nil action:^(id o, void (^recurse)(id)) {
-            @strongify(self);
             [self run:o recurse:recurse];
         }];
     }
 }
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "NotSuperclass"
+#pragma ide diagnostic ignored "NotImplementsProtocol"
 - (void)run:(__unused id)state recurse:(void (^)(id))recurse {
     RxTuple2<RxEvent *, id <RxObserverType>> *tuple = [_lock calculateLocked:^RxTuple2<RxEvent *, id <RxObserverType>> *{
         id <RxObserverType> observer = _observer;
-        if (!observer) {
-            observer = [EXTNil null];
-        }
         if (_queue.count > 0) {
             RxEvent *event = [_queue dequeue];
-            if (!event) {
-                event = [EXTNil null];
-            }
-
-            return [RxTuple2 tupleWithArray:@[event, observer]];
+            return [RxTuple2 tupleWithArray:@[event ?: [RxNil null], observer ?: [RxNil null]]];
         } else {
             _state = RxObserveOnStateStopped;
-            return [RxTuple2 tupleWithArray:@[[EXTNil null], observer]];
+            return [RxTuple2 tupleWithArray:@[[RxNil null], observer ?: [RxNil null]]];
         }
     }];
     RxEvent *nextEvent = tuple.first;
-    if (nextEvent == [EXTNil null]) {
+    if (nextEvent == [RxNil null]) {
         nextEvent = nil;
     }
 
     id <RxObserverType> observer = tuple.second;
-    if (observer == [EXTNil null]) {
+    if (observer == [RxNil null]) {
         observer = nil;
     }
 
@@ -115,6 +109,7 @@ typedef NS_ENUM(NSUInteger, RxObserveOnState) {
         recurse(nil);
     }
 }
+#pragma clang diagnostic pop
 
 - (BOOL)_shouldContinue_synchronized {
     NSNumber *result = [_lock calculateLocked:^NSNumber * {

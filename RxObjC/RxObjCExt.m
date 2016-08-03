@@ -16,18 +16,18 @@
 #import <stdlib.h>
 #import <string.h>
 
-void ext_executeCleanupBlock (__strong ext_cleanupBlock_t *block) {
+void rx_executeCleanupBlock (__strong rx_cleanupBlock_t *block) {
     (*block)();
 }
 
 typedef NSMethodSignature *(*methodSignatureForSelectorIMP)(id, SEL, SEL);
-typedef void (^ext_specialProtocolInjectionBlock)(Class);
+typedef void (^rx_specialProtocolInjectionBlock)(Class);
 
 // a `const char *` equivalent to system struct objc_method_description
 typedef struct {
     SEL name;
     const char *types;
-} ext_methodDescription;
+} rx_methodDescription;
 
 // contains the information needed to reference a full special protocol
 typedef struct {
@@ -73,7 +73,7 @@ static pthread_mutex_t specialProtocolsLock = PTHREAD_MUTEX_INITIALIZER;
  * runtime, finds those conforming to special protocols, and then runs the
  * injection blocks as appropriate.
  */
-static void ext_injectSpecialProtocols (void) {
+static void rx_injectSpecialProtocols (void) {
     /*
      * don't lock specialProtocolsLock in this function, as it is called only
      * from public functions which already perform the synchronization
@@ -131,7 +131,7 @@ static void ext_injectSpecialProtocols (void) {
         return;
     }
 
-    // use this instead of ext_copyClassList() to avoid sending +initialize to
+    // use this instead of rx_copyClassList() to avoid sending +initialize to
     // classes that we don't plan to inject into (this avoids some SenTestingKit
     // timing issues)
     classCount = objc_getClassList(allClasses, classCount);
@@ -153,7 +153,7 @@ static void ext_injectSpecialProtocols (void) {
 
             // transfer ownership of the injection block to ARC and remove it
             // from the structure
-            ext_specialProtocolInjectionBlock injectionBlock = (__bridge_transfer id)specialProtocols[i].injectionBlock;
+            rx_specialProtocolInjectionBlock injectionBlock = (__bridge_transfer id)specialProtocols[i].injectionBlock;
             specialProtocols[i].injectionBlock = NULL;
 
             // loop through all classes
@@ -181,12 +181,12 @@ static void ext_injectSpecialProtocols (void) {
     specialProtocolsReady = 0;
 }
 
-unsigned ext_injectMethods (
+unsigned rx_injectMethods (
         Class aClass,
         Method *methods,
         unsigned count,
-        ext_methodInjectionBehavior behavior,
-        ext_failedMethodCallback failedToAddCallback
+        rx_methodInjectionBehavior behavior,
+        rx_failedMethodCallback failedToAddCallback
 ) {
     unsigned successes = 0;
 
@@ -199,21 +199,21 @@ unsigned ext_injectMethods (
 
         if (!isMeta) {
             // clear any +load and +initialize ignore flags
-            behavior &= ~(ext_methodInjectionIgnoreLoad | ext_methodInjectionIgnoreInitialize);
+            behavior &= ~(rx_methodInjectionIgnoreLoad | rx_methodInjectionIgnoreInitialize);
         }
 
         for (unsigned methodIndex = 0;methodIndex < count;++methodIndex) {
             Method method = methods[methodIndex];
             SEL methodName = method_getName(method);
 
-            if (behavior & ext_methodInjectionIgnoreLoad) {
+            if (behavior & rx_methodInjectionIgnoreLoad) {
                 if (methodName == @selector(load)) {
                     ++successes;
                     continue;
                 }
             }
 
-            if (behavior & ext_methodInjectionIgnoreInitialize) {
+            if (behavior & rx_methodInjectionIgnoreInitialize) {
                 if (methodName == @selector(initialize)) {
                     ++successes;
                     continue;
@@ -224,12 +224,12 @@ unsigned ext_injectMethods (
             IMP impl = method_getImplementation(method);
             const char *type = method_getTypeEncoding(method);
 
-            switch (behavior & ext_methodInjectionOverwriteBehaviorMask) {
-                case ext_methodInjectionFailOnExisting:
+            switch (behavior & rx_methodInjectionOverwriteBehaviorMask) {
+                case rx_methodInjectionFailOnExisting:
                     success = class_addMethod(aClass, methodName, impl, type);
                     break;
 
-                case ext_methodInjectionFailOnAnyExisting:
+                case rx_methodInjectionFailOnAnyExisting:
                     if (class_getInstanceMethod(aClass, methodName)) {
                         success = NO;
                         break;
@@ -237,11 +237,11 @@ unsigned ext_injectMethods (
 
                     // else fall through
 
-                case ext_methodInjectionReplace:
+                case rx_methodInjectionReplace:
                     class_replaceMethod(aClass, methodName, impl, type);
                     break;
 
-                case ext_methodInjectionFailOnSuperclassExisting:
+                case rx_methodInjectionFailOnSuperclassExisting:
                 {
                     Class superclass = class_getSuperclass(aClass);
                     if (superclass && class_getInstanceMethod(superclass, methodName))
@@ -253,7 +253,7 @@ unsigned ext_injectMethods (
                     break;
 
                 default:
-                    fprintf(stderr, "ERROR: Unrecognized method injection behavior: %i\n", (int)(behavior & ext_methodInjectionOverwriteBehaviorMask));
+                    fprintf(stderr, "ERROR: Unrecognized method injection behavior: %i\n", (int)(behavior & rx_methodInjectionOverwriteBehaviorMask));
             }
 
             if (success)
@@ -266,11 +266,11 @@ unsigned ext_injectMethods (
     return successes;
 }
 
-BOOL ext_injectMethodsFromClass (
+BOOL rx_injectMethodsFromClass (
         Class srcClass,
         Class dstClass,
-        ext_methodInjectionBehavior behavior,
-        ext_failedMethodCallback failedToAddCallback)
+        rx_methodInjectionBehavior behavior,
+        rx_failedMethodCallback failedToAddCallback)
 {
     unsigned count, addedCount;
     BOOL success = YES;
@@ -278,7 +278,7 @@ BOOL ext_injectMethodsFromClass (
     count = 0;
     Method *instanceMethods = class_copyMethodList(srcClass, &count);
 
-    addedCount = ext_injectMethods(
+    addedCount = rx_injectMethods(
             dstClass,
             instanceMethods,
             count,
@@ -294,8 +294,8 @@ BOOL ext_injectMethodsFromClass (
     Method *classMethods = class_copyMethodList(object_getClass(srcClass), &count);
 
     // ignore +load
-    behavior |= ext_methodInjectionIgnoreLoad;
-    addedCount = ext_injectMethods(
+    behavior |= rx_methodInjectionIgnoreLoad;
+    addedCount = rx_injectMethods(
             object_getClass(dstClass),
             classMethods,
             count,
@@ -310,7 +310,7 @@ BOOL ext_injectMethodsFromClass (
     return success;
 }
 
-Class ext_classBeforeSuperclass (Class receiver, Class superclass) {
+Class rx_classBeforeSuperclass (Class receiver, Class superclass) {
     Class previousClass = nil;
 
     while (![receiver isEqual:superclass]) {
@@ -321,7 +321,7 @@ Class ext_classBeforeSuperclass (Class receiver, Class superclass) {
     return previousClass;
 }
 
-Class *ext_copyClassList (unsigned *count) {
+Class *rx_copyClassList (unsigned *count) {
     // get the number of classes registered with the runtime
     int classCount = objc_getClassList(NULL, 0);
     if (!classCount) {
@@ -377,12 +377,12 @@ Class *ext_copyClassList (unsigned *count) {
     return allClasses;
 }
 
-unsigned ext_addMethods (Class aClass, Method *methods, unsigned count, BOOL checkSuperclasses, ext_failedMethodCallback failedToAddCallback) {
-    ext_methodInjectionBehavior behavior = ext_methodInjectionFailOnExisting;
+unsigned rx_addMethods (Class aClass, Method *methods, unsigned count, BOOL checkSuperclasses, rx_failedMethodCallback failedToAddCallback) {
+    rx_methodInjectionBehavior behavior = rx_methodInjectionFailOnExisting;
     if (checkSuperclasses)
-        behavior |= ext_methodInjectionFailOnSuperclassExisting;
+        behavior |= rx_methodInjectionFailOnSuperclassExisting;
 
-    return ext_injectMethods(
+    return rx_injectMethods(
             aClass,
             methods,
             count,
@@ -391,15 +391,15 @@ unsigned ext_addMethods (Class aClass, Method *methods, unsigned count, BOOL che
     );
 }
 
-BOOL ext_addMethodsFromClass (Class srcClass, Class dstClass, BOOL checkSuperclasses, ext_failedMethodCallback failedToAddCallback) {
-    ext_methodInjectionBehavior behavior = ext_methodInjectionFailOnExisting;
+BOOL rx_addMethodsFromClass (Class srcClass, Class dstClass, BOOL checkSuperclasses, rx_failedMethodCallback failedToAddCallback) {
+    rx_methodInjectionBehavior behavior = rx_methodInjectionFailOnExisting;
     if (checkSuperclasses)
-        behavior |= ext_methodInjectionFailOnSuperclassExisting;
+        behavior |= rx_methodInjectionFailOnSuperclassExisting;
 
-    return ext_injectMethodsFromClass(srcClass, dstClass, behavior, failedToAddCallback);
+    return rx_injectMethodsFromClass(srcClass, dstClass, behavior, failedToAddCallback);
 }
 
-BOOL ext_classIsKindOfClass (Class receiver, Class aClass) {
+BOOL rx_classIsKindOfClass (Class receiver, Class aClass) {
     while (receiver) {
         if (receiver == aClass)
             return YES;
@@ -410,7 +410,7 @@ BOOL ext_classIsKindOfClass (Class receiver, Class aClass) {
     return NO;
 }
 
-Class *ext_copyClassListConformingToProtocol (Protocol *protocol, unsigned *count) {
+Class *rx_copyClassListConformingToProtocol (Protocol *protocol, unsigned *count) {
     Class *allClasses;
 
     /*
@@ -419,7 +419,7 @@ Class *ext_copyClassListConformingToProtocol (Protocol *protocol, unsigned *coun
      */
     @autoreleasepool {
         unsigned classCount = 0;
-        allClasses = ext_copyClassList(&classCount);
+        allClasses = rx_copyClassList(&classCount);
 
         if (!allClasses)
             return NULL;
@@ -442,7 +442,7 @@ Class *ext_copyClassListConformingToProtocol (Protocol *protocol, unsigned *coun
     return allClasses;
 }
 
-ext_propertyAttributes *ext_copyPropertyAttributes (objc_property_t property) {
+rx_propertyAttributes *rx_copyPropertyAttributes (objc_property_t property) {
     const char * const attrString = property_getAttributes(property);
     if (!attrString) {
         fprintf(stderr, "ERROR: Could not get attribute string from property %s\n", property_getName(property));
@@ -468,9 +468,9 @@ ext_propertyAttributes *ext_copyPropertyAttributes (objc_property_t property) {
     }
 
     // allocate enough space for the structure and the type string (plus a NUL)
-    ext_propertyAttributes *attributes = calloc(1, sizeof(ext_propertyAttributes) + typeLength + 1);
+    rx_propertyAttributes *attributes = calloc(1, sizeof(rx_propertyAttributes) + typeLength + 1);
     if (!attributes) {
-        fprintf(stderr, "ERROR: Could not allocate ext_propertyAttributes structure for attribute string \"%s\" for property %s\n", attrString, property_getName(property));
+        fprintf(stderr, "ERROR: Could not allocate rx_propertyAttributes structure for attribute string \"%s\" for property %s\n", attrString, property_getName(property));
         return NULL;
     }
 
@@ -519,11 +519,11 @@ ext_propertyAttributes *ext_copyPropertyAttributes (objc_property_t property) {
                 break;
 
             case 'C':
-                attributes->memoryManagementPolicy = ext_propertyMemoryManagementPolicyCopy;
+                attributes->memoryManagementPolicy = rx_propertyMemoryManagementPolicyCopy;
                 break;
 
             case '&':
-                attributes->memoryManagementPolicy = ext_propertyMemoryManagementPolicyRetain;
+                attributes->memoryManagementPolicy = rx_propertyMemoryManagementPolicyRetain;
                 break;
 
             case 'N':
@@ -641,9 +641,9 @@ ext_propertyAttributes *ext_copyPropertyAttributes (objc_property_t property) {
     return NULL;
 }
 
-Class *ext_copySubclassList (Class targetClass, unsigned *subclassCount) {
+Class *rx_copySubclassList (Class targetClass, unsigned *subclassCount) {
     unsigned classCount = 0;
-    Class *allClasses = ext_copyClassList(&classCount);
+    Class *allClasses = rx_copyClassList(&classCount);
     if (!allClasses || !classCount) {
         fprintf(stderr, "ERROR: No classes registered with the runtime, cannot find %s!\n", class_getName(targetClass));
         return NULL;
@@ -686,7 +686,7 @@ Class *ext_copySubclassList (Class targetClass, unsigned *subclassCount) {
     return allClasses;
 }
 
-Method ext_getImmediateInstanceMethod (Class aClass, SEL aSelector) {
+Method rx_getImmediateInstanceMethod (Class aClass, SEL aSelector) {
     unsigned methodCount = 0;
     Method *methods = class_copyMethodList(aClass, &methodCount);
     Method foundMethod = NULL;
@@ -702,8 +702,8 @@ Method ext_getImmediateInstanceMethod (Class aClass, SEL aSelector) {
     return foundMethod;
 }
 
-BOOL ext_getPropertyAccessorsForClass (objc_property_t property, Class aClass, Method *getter, Method *setter) {
-    ext_propertyAttributes *attributes = ext_copyPropertyAttributes(property);
+BOOL rx_getPropertyAccessorsForClass (objc_property_t property, Class aClass, Method *getter, Method *setter) {
+    rx_propertyAttributes *attributes = rx_copyPropertyAttributes(property);
     if (!attributes)
         return NO;
 
@@ -735,21 +735,21 @@ BOOL ext_getPropertyAccessorsForClass (objc_property_t property, Class aClass, M
     return YES;
 }
 
-NSMethodSignature *ext_globalMethodSignatureForSelector (SEL aSelector) {
+NSMethodSignature *rx_globalMethodSignatureForSelector (SEL aSelector) {
     NSCParameterAssert(aSelector != NULL);
 
     // set up a small & simple cache/hash to avoid repeatedly scouring every
     // class & protocol in the runtime.
     static const size_t selectorCacheLength = 1 << 8;
     static const uintptr_t selectorCacheMask = (selectorCacheLength - 1);
-    static ext_methodDescription volatile methodDescriptionCache[selectorCacheLength];
+    static rx_methodDescription volatile methodDescriptionCache[selectorCacheLength];
 
     // reads and writes need to be atomic, but will be ridiculously fast,
     // so we can stay in userland for locks, and keep the speed.
     static OSSpinLock lock = OS_SPINLOCK_INIT;
 
     uintptr_t hash = (uintptr_t)((void *)aSelector) & selectorCacheMask;
-    ext_methodDescription methodDesc;
+    rx_methodDescription methodDesc;
 
     OSSpinLockLock(&lock);
     methodDesc = methodDescriptionCache[hash];
@@ -760,10 +760,10 @@ NSMethodSignature *ext_globalMethodSignatureForSelector (SEL aSelector) {
         return [NSMethodSignature signatureWithObjCTypes:methodDesc.types];
     }
 
-    methodDesc = (ext_methodDescription){.name = NULL, .types = NULL};
+    methodDesc = (rx_methodDescription){.name = NULL, .types = NULL};
 
     uint classCount = 0;
-    Class *classes = ext_copyClassList(&classCount);
+    Class *classes = rx_copyClassList(&classCount);
 
     if (classes) {
         @autoreleasepool {
@@ -777,7 +777,7 @@ NSMethodSignature *ext_globalMethodSignatureForSelector (SEL aSelector) {
                     method = class_getClassMethod(cls, aSelector);
 
                 if (method) {
-                    methodDesc = (ext_methodDescription){.name = aSelector, .types = method_getTypeEncoding(method)};
+                    methodDesc = (rx_methodDescription){.name = aSelector, .types = method_getTypeEncoding(method)};
                     break;
                 }
             }
@@ -797,7 +797,7 @@ NSMethodSignature *ext_globalMethodSignatureForSelector (SEL aSelector) {
                     objcMethodDesc = protocol_getMethodDescription(protocols[i], aSelector, NO, NO);
 
                 if (objcMethodDesc.name) {
-                    methodDesc = (ext_methodDescription){.name = objcMethodDesc.name, .types = objcMethodDesc.types};
+                    methodDesc = (rx_methodDescription){.name = objcMethodDesc.name, .types = objcMethodDesc.types};
                     break;
                 }
             }
@@ -820,7 +820,7 @@ NSMethodSignature *ext_globalMethodSignatureForSelector (SEL aSelector) {
     }
 }
 
-BOOL ext_loadSpecialProtocol (Protocol *protocol, void (^injectionBehavior)(Class destinationClass)) {
+BOOL rx_loadSpecialProtocol (Protocol *protocol, void (^injectionBehavior)(Class destinationClass)) {
     @autoreleasepool {
         NSCParameterAssert(protocol != nil);
         NSCParameterAssert(injectionBehavior != nil);
@@ -883,9 +883,9 @@ BOOL ext_loadSpecialProtocol (Protocol *protocol, void (^injectionBehavior)(Clas
         assert(specialProtocolCount < specialProtocolCapacity);
 
         // disable warning about "leaking" this block, which is released in
-        // ext_injectSpecialProtocols()
+        // rx_injectSpecialProtocols()
 #ifndef __clang_analyzer__
-        ext_specialProtocolInjectionBlock copiedBlock = [injectionBehavior copy];
+        rx_specialProtocolInjectionBlock copiedBlock = [injectionBehavior copy];
 
         // construct a new EXTSpecialProtocol structure and add it to the first
         // empty space in the array
@@ -904,7 +904,7 @@ BOOL ext_loadSpecialProtocol (Protocol *protocol, void (^injectionBehavior)(Clas
     return YES;
 }
 
-void ext_specialProtocolReadyForInjection (Protocol *protocol) {
+void rx_specialProtocolReadyForInjection (Protocol *protocol) {
     @autoreleasepool {
         NSCParameterAssert(protocol != nil);
 
@@ -934,7 +934,7 @@ void ext_specialProtocolReadyForInjection (Protocol *protocol) {
                     // loaded – if it now matches the total count of special
                     // protocols, begin the injection process
                     if (++specialProtocolsReady == specialProtocolCount)
-                        ext_injectSpecialProtocols();
+                        rx_injectSpecialProtocols();
                 }
 
                 break;
@@ -945,8 +945,8 @@ void ext_specialProtocolReadyForInjection (Protocol *protocol) {
     }
 }
 
-void ext_removeMethod (Class aClass, SEL methodName) {
-    Method existingMethod = ext_getImmediateInstanceMethod(aClass, methodName);
+void rx_removeMethod (Class aClass, SEL methodName) {
+    Method existingMethod = rx_getImmediateInstanceMethod(aClass, methodName);
     if (!existingMethod) {
         return;
     }
@@ -973,21 +973,21 @@ void ext_removeMethod (Class aClass, SEL methodName) {
     }
 }
 
-void ext_replaceMethods (Class aClass, Method *methods, unsigned count) {
-    ext_injectMethods(
+void rx_replaceMethods (Class aClass, Method *methods, unsigned count) {
+    rx_injectMethods(
             aClass,
             methods,
             count,
-            ext_methodInjectionReplace,
+            rx_methodInjectionReplace,
             NULL
     );
 }
 
-void ext_replaceMethodsFromClass (Class srcClass, Class dstClass) {
-    ext_injectMethodsFromClass(srcClass, dstClass, ext_methodInjectionReplace, NULL);
+void rx_replaceMethodsFromClass (Class srcClass, Class dstClass) {
+    rx_injectMethodsFromClass(srcClass, dstClass, rx_methodInjectionReplace, NULL);
 }
 
-NSString *ext_stringFromTypedBytes (const void *bytes, const char *encoding) {
+NSString *rx_stringFromTypedBytes (const void *bytes, const char *encoding) {
     switch (*encoding) {
         case 'c': return @(*(char *)bytes).description;
         case 'C': return @(*(unsigned char *)bytes).description;
@@ -1031,19 +1031,19 @@ NSString *ext_stringFromTypedBytes (const void *bytes, const char *encoding) {
 
 static id singleton = nil;
 
-@implementation EXTNil
+@implementation RxNil
 + (void)initialize {
-    if (self == [EXTNil class]) {
+    if (self == [RxNil class]) {
         if (!singleton)
             singleton = [self alloc];
     }
 }
 
-+ (EXTNil *)null {
++ (nonnull id)null {
     return singleton;
 }
 
-- (id)init {
+- (nonnull instancetype)init {
     return self;
 }
 
@@ -1069,8 +1069,8 @@ static id singleton = nil;
     [anInvocation setReturnValue:buffer];
 }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
-    return ext_globalMethodSignatureForSelector(selector);
+- (nullable NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
+    return rx_globalMethodSignatureForSelector(selector);
 }
 
 - (BOOL)respondsToSelector:(SEL)selector {
@@ -1093,11 +1093,11 @@ static id singleton = nil;
 }
 
 - (BOOL)isKindOfClass:(Class)class {
-    return [class isEqual:[EXTNil class]] || [class isEqual:[NSNull class]];
+    return [class isEqual:[RxNil class]] || [class isEqual:[NSNull class]];
 }
 
 - (BOOL)isMemberOfClass:(Class)class {
-    return [class isEqual:[EXTNil class]] || [class isEqual:[NSNull class]];
+    return [class isEqual:[RxNil class]] || [class isEqual:[NSNull class]];
 }
 
 - (BOOL)isProxy {

@@ -49,9 +49,7 @@
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
     __block RxDelaySubscriptionSink *sink = [[RxDelaySubscriptionSink alloc] initWithParent:self observer:observer];
-    @weakify(self);
     sink.disposable = [_scheduler scheduleRelative:nil dueTime:_dueTime action:^id <RxDisposable>(id o) {
-        @strongify(self);
         return [self->_source subscribe:sink];
     }];
     return sink;

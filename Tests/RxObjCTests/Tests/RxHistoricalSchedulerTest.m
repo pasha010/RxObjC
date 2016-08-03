@@ -113,9 +113,7 @@
 
     NSMutableArray<NSDate *> *times = [NSMutableArray array];
 
-    @weakify(scheduler);
     [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id o) {
-        @strongify(scheduler);
         [times addObject:[scheduler now]];
 
         [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id _o) {
@@ -143,9 +141,7 @@
 
     NSMutableArray<NSDate *> *times = [NSMutableArray array];
 
-    @weakify(scheduler);
     [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id o) {
-        @strongify(scheduler);
         [times addObject:[scheduler now]];
 
         id <RxDisposable> d1 = [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id _o) {
@@ -176,9 +172,7 @@
 
     NSMutableArray<NSDate *> *times = [NSMutableArray array];
 
-    @weakify(scheduler);
     [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id o) {
-        @strongify(scheduler);
 
         [times addObject:[scheduler now]];
         [scheduler scheduleRelative:nil dueTime:20.0 action:^id <RxDisposable>(id _o) {
@@ -207,10 +201,7 @@
 
     NSMutableArray<NSDate *> *times = [NSMutableArray array];
 
-    @weakify(scheduler);
     [scheduler scheduleRelative:nil dueTime:10.0 action:^id <RxDisposable>(id o) {
-        @strongify(scheduler);
-
         [times addObject:[scheduler now]];
 
         [scheduler sleep:100];

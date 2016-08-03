@@ -99,7 +99,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 - (void)testObserveOnDispatchQueue_EnsureCorrectImplementationIsChosen {
     [self runDispatchQueueSchedulerTests:^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
         XCTAssert(rx_numberOfSerialDispatchQueueObservables == 0);
-        RxObservable *a = [[RxObservable just:@0] observeOn:scheduler];
+        __unused RxObservable *a = [[RxObservable just:@0] observeOn:scheduler];
         XCTAssert(rx_numberOfSerialDispatchQueueObservables == 1);
         return [RxNopDisposable sharedInstance];
     }];
@@ -405,7 +405,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
             [self next:@2],
     ];
     XCTAssertEqualObjects(observer.events, events);
-    
+
     XCTAssertEqualObjects(xs.subscriptions, @[RxSubscribedToHotObservable()]);
 
     [xs onCompleted];

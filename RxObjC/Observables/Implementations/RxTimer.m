@@ -27,9 +27,7 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    @weakify(self);
     return [_parent->_scheduler schedulePeriodic:@0 startAfter:_parent->_dueTime period:_parent->_period action:^NSNumber *(NSNumber *__nonnull state) {
-        @strongify(self);
         [self forwardOn:[RxEvent next:state]];
         return @(state.intValue + 1);
     }];
@@ -52,9 +50,7 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    @weakify(self);
     return [_parent->_scheduler scheduleRelative:nil dueTime:_parent->_dueTime action:^id <RxDisposable>(id _) {
-        @strongify(self);
         [self forwardOn:[RxEvent next:@0]];
         [self forwardOn:[RxEvent completed]];
 

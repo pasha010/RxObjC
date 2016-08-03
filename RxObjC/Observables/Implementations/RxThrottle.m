@@ -61,9 +61,7 @@
 
             RxSingleAssignmentDisposable *d = [[RxSingleAssignmentDisposable alloc] init];
             _cancellable.disposable = d;
-            @weakify(self);
             d.disposable = [scheduler scheduleRelative:@(currentId) dueTime:dueTime action:^id <RxDisposable>(NSNumber *o) {
-                @strongify(self);
                 return [self propagate:o.unsignedLongLongValue];
             }];
             
@@ -148,9 +146,7 @@
 
             RxSingleAssignmentDisposable *d = [[RxSingleAssignmentDisposable alloc] init];
             _cancellable.disposable = d;
-            @weakify(self);
             d.disposable = [scheduler scheduleRelative:nil dueTime:dueTime action:^id <RxDisposable>(NSNumber *__unused o) {
-                @strongify(self);
                 return [self propagate];
             }];
 

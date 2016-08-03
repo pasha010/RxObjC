@@ -97,9 +97,7 @@
 
     _timerD.disposable = nextTimer;
 
-    @weakify(self);
     nextTimer.disposable = [_parent->_scheduler scheduleRelative:@(windowId) dueTime:_parent->_timeSpan action:^id <RxDisposable>(NSNumber *prevWindowId) {
-        @strongify(self);
         NSUInteger previousWindowID = prevWindowId.unsignedIntegerValue;
         [self->_lock performLock:^{
             if (previousWindowID != self->_windowID) {

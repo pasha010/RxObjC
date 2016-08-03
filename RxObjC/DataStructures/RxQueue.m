@@ -27,7 +27,7 @@
         _initialCapacity = capacity;
         _storage = [NSMutableArray arrayWithCapacity:capacity];
         for (NSUInteger i = 0; i < capacity; i++) {
-            [_storage addObject:[EXTNil null]];
+            [_storage addObject:[RxNil null]];
         }
     }
     return self;
@@ -58,7 +58,7 @@
 - (void)resizeTo:(NSUInteger)size {
     NSMutableArray<id> *newStorage = [NSMutableArray arrayWithCapacity:size];
     for (NSUInteger i = 0; i < size; i++) {
-        [newStorage addObject:[EXTNil null]];
+        [newStorage addObject:[RxNil null]];
     }
 
     NSUInteger count = _count;
@@ -109,7 +109,7 @@
     NSUInteger index = [self dequeueIndex];
     id element = _storage[index];
     @synchronized (self) {
-        _storage[index] = [EXTNil null];
+        _storage[index] = [RxNil null];
         _count -= 1;
     }
     return element;

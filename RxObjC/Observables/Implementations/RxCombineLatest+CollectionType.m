@@ -33,7 +33,7 @@
         _parent = parent;
 
         for (NSUInteger i = 0; i < parent->_count; i++) {
-            _values[i] = [EXTNil null];
+            _values[i] = [RxNil null];
             _isDone[i] = @NO;
             [_subscriptions addObject:[[RxSingleAssignmentDisposable alloc] init]];
         }
@@ -46,13 +46,11 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    @weakify(self);
     for (NSUInteger i = 0; i < _parent->_sources.count; i++) {
         NSUInteger index = i;
         id <RxObservableConvertibleType> s = _parent->_sources[i];
         RxObservable *source = [s asObservable];
         _subscriptions[i].disposable = [source subscribe:[[RxAnyObserver alloc] initWithEventHandler:^(RxEvent *event) {
-            @strongify(self);
             [self on:event atIndex:index];
         }]];
     }
@@ -64,7 +62,7 @@
 
     switch (event.type) {
         case RxEventTypeNext: {
-            if (_values[atIndex] == [EXTNil null]) {
+            if (_values[atIndex] == [RxNil null]) {
                 _numberOfValues++;
             }
             

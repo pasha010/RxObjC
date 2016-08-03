@@ -48,9 +48,7 @@
     _subscribeCount++;
     _observer = [[RxAnyObserver alloc] initWithObserver:observer];
 
-    @weakify(self);
     return [[RxAnonymousDisposable alloc] initWithDisposeAction:^{
-        @strongify(self);
         self->_observer = [[RxAnyObserver alloc] initWithEventHandler:^(RxEvent *_) {
 
         }];
