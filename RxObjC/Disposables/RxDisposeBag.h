@@ -5,8 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RxDisposeBase.h"
-
-@protocol RxDisposable;
+#import "RxDisposable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,6 +29,12 @@ Adds `disposable` to be disposed when dispose bag is being deinited.
 - parameter disposable: Disposable to add.
 */
 - (void)addDisposable:(nonnull id <RxDisposable>)disposable;
+
+@end
+
+@interface NSObject (RxAddDisposableTo) <RxDisposable>
+
+- (void)addDisposableTo:(nonnull RxDisposeBag *)bag;
 
 @end
 

@@ -93,7 +93,7 @@ BOOL rx_isWeakProperty(NSString *__nonnull propertyRuntimeInfo) {
 
 FOUNDATION_EXTERN RxObservable *__nonnull rx_observeWeaklyKeyPathSectionsFor(NSObject *__nonnull target, NSArray<NSString *> *__nonnull keyPathSections, NSKeyValueObservingOptions options) {
     NSString *propertyName = keyPathSections.firstObject;
-    NSArray<NSString *> *remainingPaths = [keyPathSections subarrayWithRange:NSMakeRange(1, keyPathSections.count)];
+    NSArray<NSString *> *remainingPaths = keyPathSections.count > 1 ? [keyPathSections subarrayWithRange:NSMakeRange(1, keyPathSections.count - 1)] : nil;
 
     objc_property_t pProperty = class_getProperty(object_getClass(target), propertyName.UTF8String);
 

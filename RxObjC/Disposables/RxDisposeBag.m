@@ -68,5 +68,18 @@ This is internal on purpose, take a look at `CompositeDisposable` instead.
     [self dispose];
 }
 
+@end
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+#pragma GCC diagnostic ignored "-Wprotocol"
+
+@implementation NSObject (RxAddDisposableTo)
+
+- (void)addDisposableTo:(nonnull RxDisposeBag *)bag {
+    [bag addDisposable:self];
+}
 
 @end
+
+#pragma clang diagnostic pop
