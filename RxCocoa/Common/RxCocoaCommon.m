@@ -90,7 +90,7 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
 }
 
 - (nonnull instancetype)initWithType:(RxCocoaErrorType)type object:(nullable id)object propertyName:(nullable id)propertyName sourceObject:(nullable id)sourceObject targetType:(nullable id)targetType {
-    self = [super init];
+    self = [super initWithDomain:@"rx.objc" code:_type userInfo:nil];
     if (self) {
         _type = type;
         _object = object;
@@ -281,7 +281,7 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
 }
 
 - (nonnull instancetype)initWithType:(nonnull NSString *)type andTarget:(nonnull id)target {
-    self = [super init];
+    self = [super initWithDomain:@"rx.objc" code:_type.hash userInfo:nil];
     if (self) {
         _type = type;
         _target = target;

@@ -573,7 +573,6 @@ static NSMutableDictionary<NSString *, RxInterceptWithOptimizedObserver> *optimi
 
 + (void)initialize {
     static dispatch_once_t token;
-    static RxObjCRuntime *_instance = nil;
     dispatch_once(&token, ^{
         _instance = [[RxObjCRuntime alloc] init];
         defaultTypeID = CFGetTypeID((__bridge CFTypeRef) RxObjCRuntime.class); // just need a reference of some object not from CF

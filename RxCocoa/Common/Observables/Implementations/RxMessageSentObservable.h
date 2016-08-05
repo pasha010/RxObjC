@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RxMessageSentObservable : NSObject <RxObservableConvertibleType, RxMessageSentObserver>
 
-@property (assign, nonatomic, readwrite) IMP targetImplementation;
-@property (assign, nonatomic, readonly) BOOL isActive;
+@property (nonatomic, readwrite) IMP targetImplementation;
+@property (nonatomic, readonly) BOOL isActive;
 
 
 @end

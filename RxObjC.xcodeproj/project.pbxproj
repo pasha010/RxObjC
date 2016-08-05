@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		17EEC00D23B23AC7C3623F9D /* NSObject+RxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECBC5E7EDEB4018E8E3B6 /* NSObject+RxTests.m */; };
 		17EEC01182EB2AC37151CAE6 /* RxTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7204B70017A1408D0F7 /* RxTarget.m */; };
 		17EEC01997736E1C58356A47 /* RxObservable+StandardSequenceOperators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC13A02519E4BF5CFAF0C /* RxObservable+StandardSequenceOperators.m */; };
 		17EEC01D13F593AA752F91BA /* RxBinaryDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC0D09BEEE61DD3CF8B84 /* RxBinaryDisposable.m */; };
@@ -261,6 +262,7 @@
 		17EECBA48F4132CDAFB1471E /* RxObservable+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC643A2A59A1C23E71057 /* RxObservable+Debug.m */; };
 		17EECBAA39B97C0CDB0A6856 /* RxBlockingObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC33F1449B355B1163E04 /* RxBlockingObservable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECBB659F7C72B61414C91 /* RxSynchronizedDisposeType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECCE9D0C3DA6B2807BDAF /* RxSynchronizedDisposeType.m */; };
+		17EECBB6C6A7AE6DE132070E /* NSObject+RxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECBC5E7EDEB4018E8E3B6 /* NSObject+RxTests.m */; };
 		17EECBC0A622C1AE39E5E3DF /* RxSchedulerType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC51EF407CBAF71151D55 /* RxSchedulerType.m */; };
 		17EECBDAE3FA3FF1C8398860 /* NSNotificationCenter+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD284B61B3243EB51E8A /* NSNotificationCenter+Rx.m */; };
 		17EECBE7834F326F4A5ACB0F /* RxKVORepresentable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC7496F9A72F7E5A0D259 /* RxKVORepresentable.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -322,6 +324,7 @@
 		17EECF0179760B6B321D2518 /* RxKVOObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC71FC76F1AF4B16E708E /* RxKVOObservable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECF04366D12B5F27F2559 /* RxScheduledDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC926CEFB396687D514C4 /* RxScheduledDisposable.m */; };
 		17EECF29F7C22E7FC68115D2 /* RxStartWith.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD30B4B4023D0F0CBDC7 /* RxStartWith.m */; };
+		17EECF39A9789175D0505865 /* NSObject+RxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECBC5E7EDEB4018E8E3B6 /* NSObject+RxTests.m */; };
 		17EECF3D79C8F1789875C4C2 /* RxKVOObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2BCA861E46F1BADBBA5 /* RxKVOObservable.m */; };
 		17EECF44B13A4C1ABDB0A88F /* RxObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC720402F5C6F6F87472A /* RxObservable.m */; };
 		17EECF4BE0B3448DA1BA84F5 /* RxBlockingObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4A515907EAFE6A5435E /* RxBlockingObservable.m */; };
@@ -1928,6 +1931,7 @@
 		17EECB91DE365201BB3876EE /* RxObserveOnSerialDispatchQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxObserveOnSerialDispatchQueue.m; sourceTree = "<group>"; };
 		17EECBB36E3E40C70A085261 /* RxObservable+Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RxObservable+Debug.h"; sourceTree = "<group>"; };
 		17EECBBE1D795B96CF4564F1 /* RxDebugProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDebugProducer.h; sourceTree = "<group>"; };
+		17EECBC5E7EDEB4018E8E3B6 /* NSObject+RxTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RxTests.m"; sourceTree = "<group>"; };
 		17EECBCC576A35603F6EF8C2 /* RxSynchronizedSubscribeType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSynchronizedSubscribeType.m; sourceTree = "<group>"; };
 		17EECBEEFA0D11610324E426 /* RxBehaviorSubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxBehaviorSubject.h; sourceTree = "<group>"; };
 		17EECBFD116D00FAAB852232 /* RxObserveOnSerialDispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObserveOnSerialDispatchQueue.h; sourceTree = "<group>"; };
@@ -2846,6 +2850,7 @@
 			children = (
 				17EECEE1D4D44780EA5AE4B4 /* NSNotificationCenterTests.m */,
 				17EEC7E1A44A52094C0B3816 /* NSUserDefaultsTests.m */,
+				17EECBC5E7EDEB4018E8E3B6 /* NSObject+RxTests.m */,
 			);
 			path = RxCocoaTests;
 			sourceTree = "<group>";
@@ -4547,6 +4552,7 @@
 				17EEC5C3C19D21AA59371C3D /* RxLazyEnumerator.m in Sources */,
 				17EEC3EA1479BC087A188466 /* NSNotificationCenterTests.m in Sources */,
 				17EEC6017056EC94EA38CD85 /* NSUserDefaultsTests.m in Sources */,
+				17EEC00D23B23AC7C3623F9D /* NSObject+RxTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5215,6 +5221,7 @@
 				17EECDA1DE05D8B0661D5DA2 /* RxLazyEnumerator.m in Sources */,
 				17EEC05EFD53E807C4E7E4E4 /* NSNotificationCenterTests.m in Sources */,
 				17EEC81A4349EBF0AB38A3B6 /* NSUserDefaultsTests.m in Sources */,
+				17EECF39A9789175D0505865 /* NSObject+RxTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5267,6 +5274,7 @@
 				17EECC4DAFD6755CCC5A42B7 /* RxLazyEnumerator.m in Sources */,
 				17EECD59AA72D2DCEB0C07BC /* NSNotificationCenterTests.m in Sources */,
 				17EEC89A0CDE9CDED6604D7B /* NSUserDefaultsTests.m in Sources */,
+				17EECBB6C6A7AE6DE132070E /* NSObject+RxTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

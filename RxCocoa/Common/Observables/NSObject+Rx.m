@@ -11,6 +11,7 @@
 #import "RxDeallocatingObservable.h"
 #import "RxCocoaCommon.h"
 #import "RxKVOObservable.h"
+#import "_Rx.h"
 #import <objc/runtime.h>
 
 SEL rx_deallocSelector() {
@@ -47,12 +48,31 @@ SEL rxDeallocatingSelectorReference() {
     return [[[RxKVOObservable alloc] initWithObject:self keyPath:keyPath options:options retainTarget:retainSelf] asObservable];
 }
 
-- (RxObservable *)rx_observe:(nonnull NSString *)keyPath options:(NSKeyValueObservingOptions)options {
+- (nonnull RxObservable *)rx_observe:(nonnull NSString *)keyPath options:(NSKeyValueObservingOptions)options {
     return [self rx_observe:keyPath options:options retainSelf:YES];
 }
 
+- (nonnull RxObservable *)rx_observe:(nonnull NSString *)keyPath {
+    return [self rx_observe:keyPath options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew];
+}
 
 @end
+
+#if !DISABLE_SWIZZLING
+
+@implementation NSObject (RxKVOWeakly)
+
+- (nonnull RxObservable *)rx_observeWeakly:(nonnull NSString *)keyPath options:(NSKeyValueObservingOptions)options {
+    return rx_observeWeaklyKeyPathFor(self, keyPath, options);
+}
+
+- (nonnull RxObservable *)rx_observeWeakly:(nonnull NSString *)keyPath {
+    return [self rx_observeWeakly:keyPath options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew];
+}
+
+@end
+
+#endif
 
 @implementation NSObject (RxDealloc)
 
@@ -72,6 +92,44 @@ SEL rxDeallocatingSelectorReference() {
 }
 
 #if !DISABLE_SWIZZLING
+
+- (nonnull RxObservable<NSArray<id> *> *)rx_sentMessage:(SEL)selector {
+    @synchronized (self) {
+        if (selector == rx_deallocSelector()) {
+            return [self.rx_deallocating map:^id(id element) {
+                return @[];
+            }];
+        }
+        SEL rxSelector = Rx_selector(selector);
+        void *selectorReference = Rx_reference_from_selector(rxSelector);
+
+        RxMessageSentObservable *subject;
+
+        RxMessageSentObservable *existingSubject = objc_getAssociatedObject(self, selectorReference);
+        if (existingSubject) {
+            subject = existingSubject;
+        } else {
+            subject = [[RxMessageSentObservable alloc] init];
+            objc_setAssociatedObject(self, selectorReference, subject, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
+
+        if (subject.isActive) {
+            return [subject asObservable];
+        }
+
+        NSError *error = nil;
+
+        IMP targetImplementation = Rx_ensure_observing(self, selectorReference, &error);
+        if (!targetImplementation) {
+            return [RxObservable error:error ? [error rxCocoaErrorForTarget:self] : [RxCocoaError unknown]];
+        }
+
+        subject.targetImplementation = targetImplementation;
+
+        return [subject asObservable];
+
+    }
+}
 
 - (nonnull RxObservable *)rx_deallocating {
     @synchronized (self) {
@@ -102,5 +160,18 @@ SEL rxDeallocatingSelectorReference() {
 }
 
 #endif
+
+- (nonnull id)rx_lazyInstanceObservable:(const char *)key createCachedObservable:(nonnull id __nonnull(^)())createCachedObservable {
+    id value = objc_getAssociatedObject(self, key);
+    if (value) {
+        return value;
+    }
+
+    id observable = createCachedObservable();
+
+    objc_setAssociatedObject(self, key, observable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+    return observable;
+}
 
 @end

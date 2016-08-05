@@ -77,7 +77,7 @@ void * __nonnull Rx_reference_from_selector(SEL __nonnull selector);
  * In case the same selector is being intercepted for a pair of base/sub classes,
  * this property will differentiate between interceptors that need to fire.
  */
-@property (nonatomic, assign, readonly) IMP __nonnull targetImplementation;
+@property (nonatomic, readonly) IMP __nonnull targetImplementation;
 
 - (void)messageSentWithParameters:(nonnull NSArray *)parameters;
 

@@ -51,7 +51,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nonnull RxObservable *)rx_observe:(nonnull NSString *)keyPath options:(NSKeyValueObservingOptions)options;
 
+- (nonnull RxObservable *)rx_observe:(nonnull NSString *)keyPath;
+
 @end
+
+#if !DISABLE_SWIZZLING
+
+@interface NSObject (RxKVOWeakly)
+
+/**
+ * Observes values on `keyPath` starting from `self` with `options` and doesn't retain `self`.
+ *
+ * It can be used in all cases where `rx_observe` can be used and additionally
+ *
+ * because it won't retain observed target, it can be used to observe arbitrary object graph whose ownership relation is unknown
+ * it can be used to observe `weak` properties
+ *
+ * *Since it needs to intercept object deallocation process it needs to perform swizzling of `dealloc` method on observed object.**
+
+ * @param keyPath: Key path of property names to observe.
+ * @param options: KVO mechanism notification options.
+ * @return: Observable sequence of objects on `keyPath`.
+ */
+- (nonnull RxObservable *)rx_observeWeakly:(nonnull NSString *)keyPath options:(NSKeyValueObservingOptions)options;
+
+- (nonnull RxObservable *)rx_observeWeakly:(nonnull NSString *)keyPath;
+
+@end
+
+#endif
 
 @interface NSObject (RxDealloc)
 /**
@@ -59,9 +87,17 @@ NS_ASSUME_NONNULL_BEGIN
  * After object is deallocated one `()` element will be produced and sequence will immediately complete.
  * @return: Observable sequence of object deallocated events.
  */
-- (nonnull RxObservable *)rx_deallocated;
+@property (nonnull, strong, readonly) RxObservable *rx_deallocated;
 
 #if !DISABLE_SWIZZLING
+
+/**
+ * Observable sequence of message arguments that completes when object is deallocated.
+ * In case an error occurs sequence will fail with `RxCocoaObjCRuntimeError`.
+ * In case some argument is `nil`, instance of `NSNull()` will be sent.
+ * @return: Observable sequence of object deallocating events.
+ */
+- (nonnull RxObservable<NSArray<id> *> *)rx_sentMessage:(SEL)selector;
 
 /**
  * Observable sequence of object deallocating events.
@@ -73,6 +109,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonnull, strong, readonly) RxObservable *rx_deallocating;
 
 #endif
+
+/**
+ * Helper to make sure that `Observable` returned from `createCachedObservable` is only created once.
+ * This is important because there is only one `target` and `action` properties on `NSControl` or `UIBarButtonItem`.
+ */
+- (nonnull id)rx_lazyInstanceObservable:(const char *)key createCachedObservable:(nonnull id __nonnull(^)())createCachedObservable;
 
 @end
 
