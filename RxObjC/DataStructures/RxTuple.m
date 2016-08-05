@@ -5,7 +5,38 @@
 
 #import "RxTuple.h"
 
+@implementation RxTupleNil
+
++ (nonnull instancetype)tupleNil {
+    static dispatch_once_t onceToken;
+    static RxTupleNil *tupleNil = nil;
+
+    dispatch_once(&onceToken, ^{
+        tupleNil = [[self alloc] init];
+    });
+
+    return tupleNil;
+}
+
+#pragma mark NSCopying
+
+- (id)copyWithZone:(NSZone *)zone {
+    return self;
+}
+
+#pragma mark NSCoding
+
+- (id)initWithCoder:(NSCoder *)coder {
+    // Always return the singleton.
+    return self.class.tupleNil;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+}
+@end
+
 @interface RxTuple2 ()
+
 @property (nonatomic, strong) NSArray<id> *backingArray;
 
 - (instancetype)initWithArray:(NSArray *)array;
@@ -51,7 +82,7 @@
     if (convert) {
         NSMutableArray *newArray = [NSMutableArray arrayWithCapacity:array.count];
         for (id object in array) {
-            [newArray addObject:(object == NSNull.null ? [RxNil null] : object)];
+            [newArray addObject:(object == NSNull.null ? RxTupleNil.tupleNil : object)];
         }
         backingArray = [newArray copy];
     }
@@ -125,7 +156,7 @@
     }
 
     id object = self.backingArray[index];
-    return (object == [RxNil null] ? nil : object);
+    return (object == RxTupleNil.tupleNil ? nil : object);
 }
 
 @end

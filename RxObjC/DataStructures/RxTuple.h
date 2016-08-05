@@ -40,6 +40,15 @@ NS_ASSUME_NONNULL_BEGIN
 #define RxTupleUnpack(...) \
         RxTupleUnpack_(__VA_ARGS__)
 
+/// A sentinel object that represents nils in the tuple.
+///
+/// It should never be necessary to create a tuple nil yourself. Just use
+/// +tupleNil.
+@interface RxTupleNil : NSObject <NSCopying, NSCoding>
+/// A singleton instance.
++ (nonnull instancetype)tupleNil;
+@end
+
 /**
  * @see RACTuple in ReactiveCocoa 2.5 version (Thanks!)
  * A tuple is an ordered collection of objects. It may contain nils, represented by RxNil.
@@ -128,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
     ([RxTuple tupleWithArray:@[ metamacro_foreach(RxTuplePack_object_or_rxtuplenil,, __VA_ARGS__) ]])
 
 #define RxTuplePack_object_or_rxtuplenil(INDEX, ARG) \
-    (ARG) ?: RxNil.null,
+    (ARG) ?: RxTupleNil.tupleNil,
 
 #define RxTupleUnpack_(...) \
     metamacro_foreach(RxTupleUnpack_decl,, __VA_ARGS__) \
