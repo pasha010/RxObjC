@@ -73,15 +73,14 @@
     return [NSString stringWithFormat:@"<%@: %p> %@", self.class, self, self.array];
 }
 
-- (BOOL)isEqual:(RxTuple *)object {
+- (BOOL)isEqual:(id)object {
     if (object == self) {
         return YES;
     }
-    if (![object isKindOfClass:self.class]) {
-        return NO;
+    if ([object isKindOfClass:self.class]) {
+        return [self.backingArray isEqual:[object backingArray]];
     }
-
-    return [self.backingArray isEqual:object.backingArray];
+    return NO;
 }
 
 - (NSUInteger)hash {
@@ -202,7 +201,7 @@
 }
 
 - (id)eighth {
-    return self[6];
+    return self[7];
 }
 
 @end
@@ -221,7 +220,7 @@
     return trampoline;
 }
 
-- (void)setObject:(RxTuple *)tuple forKeyedSubscript:(NSArray *)variables {
+- (void)setObject:(RxTuple2 *)tuple forKeyedSubscript:(NSArray *)variables {
     NSCParameterAssert(variables != nil);
 
     [variables enumerateObjectsUsingBlock:^(NSValue *value, NSUInteger index, BOOL *stop) {

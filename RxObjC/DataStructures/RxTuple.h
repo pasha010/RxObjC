@@ -166,7 +166,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RxTupleUnpackingTrampoline : NSObject
 
 + (instancetype)trampoline;
-- (void)setObject:(RxTuple *)tuple forKeyedSubscript:(NSArray *)variables;
+- (void)setObject:(RxTuple2 *)tuple forKeyedSubscript:(NSArray *)variables;
 
 @end
 
