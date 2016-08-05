@@ -698,7 +698,7 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     XCTAssertTrue(rootDeallocated);
 }
 
-#if TARGET_OS_MAC
+#if !TARGET_OS_IPHONE
 // just making sure it's all the same for NS extensions
 - (void)testObserve_ObserveNSRect {
     HasStrongProperty *root = [HasStrongProperty new];
