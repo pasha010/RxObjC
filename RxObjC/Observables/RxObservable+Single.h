@@ -98,7 +98,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param elements: Elements to prepend to the specified sequence.
  * @return: The source sequence prepended with the specified values.
  */
-- (nonnull RxObservable *)startWith:(nonnull NSArray *)elements;
+- (nonnull RxObservable *)startWithElements:(nonnull NSArray *)elements;
+
+- (nonnull RxObservable *)startWith:(nonnull id)element;
 
 @end
 

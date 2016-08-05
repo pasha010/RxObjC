@@ -16,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^RxKVOCallback)(id nullable);
+typedef void (^RxKVOCallback)(id __nullable object);
 
 @interface _RxKVOObserver<E> : NSObject
 

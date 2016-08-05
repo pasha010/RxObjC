@@ -79,7 +79,7 @@ void * __nonnull Rx_reference_from_selector(SEL __nonnull selector);
  */
 @property (nonatomic, assign, readonly) IMP __nonnull targetImplementation;
 
--(void)messageSentWithParameters:(NSArray* __nonnull)parameters;
+- (void)messageSentWithParameters:(nonnull NSArray *)parameters;
 
 @end
 

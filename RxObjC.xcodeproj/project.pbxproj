@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		17EEC01182EB2AC37151CAE6 /* RxTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7204B70017A1408D0F7 /* RxTarget.m */; };
 		17EEC01997736E1C58356A47 /* RxObservable+StandardSequenceOperators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC13A02519E4BF5CFAF0C /* RxObservable+StandardSequenceOperators.m */; };
 		17EEC01D13F593AA752F91BA /* RxBinaryDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC0D09BEEE61DD3CF8B84 /* RxBinaryDisposable.m */; };
 		17EEC05EFD53E807C4E7E4E4 /* NSNotificationCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEE1D4D44780EA5AE4B4 /* NSNotificationCenterTests.m */; };
@@ -39,6 +40,7 @@
 		17EEC0771AC64761C82407E8 /* RxObservableConvertibleType+Blocking.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC82FCD38D6557580A93A /* RxObservableConvertibleType+Blocking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EEC0777209E3B6B65A6BE8 /* RxObservableConvertibleType+Blocking.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC82FCD38D6557580A93A /* RxObservableConvertibleType+Blocking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EEC09F37839E89528AB460 /* RxAnonymousObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECCA08E4D9D4DE2B00083 /* RxAnonymousObservable.m */; };
+		17EEC0AC1DEDDF74084D01C5 /* RxCocoaCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECC0F86E099227D034714 /* RxCocoaCommon.m */; };
 		17EEC0CF2E67EC029710207D /* RxConcurrentDispatchQueueScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC99F8E1DB74BD05068B6 /* RxConcurrentDispatchQueueScheduler.m */; };
 		17EEC0D06C580A877AF6AC8B /* RxConcurrentMainScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2322102BEC88FECE2B6 /* RxConcurrentMainScheduler.m */; };
 		17EEC0DA7D7E9BDEBD08636B /* RxObservable+Bind.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC72D75B58AD67B1289A4 /* RxObservable+Bind.m */; };
@@ -49,71 +51,93 @@
 		17EEC114B03E92E0608AC7E9 /* RxConcurrentDispatchQueueScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC99F8E1DB74BD05068B6 /* RxConcurrentDispatchQueueScheduler.m */; };
 		17EEC1181B1AB450CCF0AE37 /* RxHistoricalScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECA7E210BB39CB7E209D9 /* RxHistoricalScheduler.m */; };
 		17EEC11ED98B94A87B98AAEC /* RxConcurrentDispatchQueueScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECDC772EBF0750572B848 /* RxConcurrentDispatchQueueScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EEC13B62271BE61E28CE41 /* RxKVOObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC71FC76F1AF4B16E708E /* RxKVOObservable.h */; };
 		17EEC13BD77A50966E6CB230 /* RxPublishSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC513FC452D6A05D77DE2 /* RxPublishSubject.m */; };
+		17EEC15FCADEEF736DF24419 /* RxKVOObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2BCA861E46F1BADBBA5 /* RxKVOObservable.m */; };
 		17EEC16CA9256FCC2C3E5A77 /* RxConcurrentMainScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2322102BEC88FECE2B6 /* RxConcurrentMainScheduler.m */; };
 		17EEC18F84CEEF04173C8816 /* RxProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC443AA47078EBCBAC0AE /* RxProducer.m */; };
 		17EEC19975BB2417EDCE2EFB /* RxThrottle.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC306BD48414DA0326E86 /* RxThrottle.m */; };
 		17EEC1AA713EC2221B34E08F /* RxError.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE9C9A555E9A447D2D22 /* RxError.m */; };
+		17EEC1BD782A5E58A01DDFD3 /* RxKVORepresentable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC478E8A5ADA32ADF223B /* RxKVORepresentable.m */; };
 		17EEC1CCA86F596ABBAA0AF9 /* NSEnumerator+Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6C910B5BF9937CFBF88 /* NSEnumerator+Operators.m */; };
 		17EEC1CCBA5D75E655F01D0B /* NSNotificationCenter+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECE2EBAF0CDD32F893045 /* NSNotificationCenter+Rx.h */; };
+		17EEC1CD91A631366EC0037C /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC51EB7BB33C167618921 /* RxDeallocObservable.m */; };
 		17EEC1DD9044088A9D57A541 /* NSThread+RxLocalStorageValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC8202FFC30DC3219A642 /* NSThread+RxLocalStorageValue.m */; };
 		17EEC1EC6E18E91A9142AF5B /* RxTakeLast.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC421102D3D1C60969336 /* RxTakeLast.m */; };
+		17EEC1EC87E6DCAD7DEFA9AE /* RxMessageSentObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECECE63FC329A8AA16EBE /* RxMessageSentObservable.m */; };
 		17EEC2087FD8CE8CE139425F /* NSUserDefaults+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECF3E5FB46AA5777A484A /* NSUserDefaults+Rx.h */; };
-		17EEC20DA1C9C437B48ECBB9 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC315F2FB35B0C59890AC /* RxDeallocObservable.h */; };
 		17EEC216FF7C8BC85A342B7D /* RxBlockingObservable+Operators.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC29C303413E3D9AA6822 /* RxBlockingObservable+Operators.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EEC23960BFD4962266A9AA /* RxTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7204B70017A1408D0F7 /* RxTarget.m */; };
 		17EEC239A8ABB62787DAC21E /* RxAddRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC26927CCC8C6A5283F98 /* RxAddRef.m */; };
 		17EEC23E21EEF560465CDF37 /* RxTailRecursiveSink.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECFAD32B78E35545D5016 /* RxTailRecursiveSink.m */; };
 		17EEC25E28BD758A25B273D5 /* NSEnumerator+Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6C910B5BF9937CFBF88 /* NSEnumerator+Operators.m */; };
 		17EEC2614511213959D66EAC /* RxRunLoopLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECCA7E9C8B21DCE63B381 /* RxRunLoopLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EEC2671E4DD7695806A07A /* RxTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7204B70017A1408D0F7 /* RxTarget.m */; };
 		17EEC26C168EC0194B1EFA67 /* RxObservableConvertibleType+Blocking.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC449553EC7874BF2B594 /* RxObservableConvertibleType+Blocking.m */; };
 		17EEC2ACF0B42F4FA4000B01 /* RxBlockingObservable+Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2F5429ADEFCE8C97B27 /* RxBlockingObservable+Operators.m */; };
 		17EEC2B566A5234CE5F60F19 /* RxCompositeDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7A4F1FE96881F235587 /* RxCompositeDisposable.m */; };
 		17EEC2BA42ECE01D6CF1FEBA /* RxMutableBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC5D56562D87BFF7809C6 /* RxMutableBox.m */; };
 		17EEC2BCB604E221C053A387 /* RxVirtualTimeConverterType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEF6FA66691F94860BA8 /* RxVirtualTimeConverterType.m */; };
+		17EEC2D3BF107CC435C00B18 /* RxKVOObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC91668268AF8206328DD /* RxKVOObserver.h */; };
 		17EEC2EFFF23B57E008F520F /* RxSchedulers.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC315483046D165BEBE8E /* RxSchedulers.m */; };
 		17EEC2F61B5CE4D994EE2EE2 /* RxDisposeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC158A65485D5E12CC9DA /* RxDisposeBase.m */; };
 		17EEC2FBD7EF38352168798A /* NSNotificationCenter+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECE2EBAF0CDD32F893045 /* NSNotificationCenter+Rx.h */; };
 		17EEC315D5FDCD30E8CCD907 /* RxObserveOnSerialDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECB91DE365201BB3876EE /* RxObserveOnSerialDispatchQueue.m */; };
-		17EEC31DDC4B301C9EDFB355 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC315F2FB35B0C59890AC /* RxDeallocObservable.h */; };
+		17EEC334652AA57A995299CF /* RxCocoaCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECDA483F44B47BFE7490A /* RxCocoaCommon.h */; };
 		17EEC3365703F59FD6671621 /* RxObservable+Zip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECA4F92A4585F4D755170 /* RxObservable+Zip.m */; };
+		17EEC3395FF71E6E1641E1AA /* RxCocoaCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECDA483F44B47BFE7490A /* RxCocoaCommon.h */; };
 		17EEC339BE8ADE35799A7B2B /* NSObject+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEE816D459B56FC0AEEF /* NSObject+Rx.m */; };
+		17EEC3446CED7D8CA788A298 /* RxTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC2D091805AA14513EA31 /* RxTarget.h */; };
+		17EEC349DC8A7C8B978D0DE6 /* RxMessageSentObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECECE63FC329A8AA16EBE /* RxMessageSentObservable.m */; };
 		17EEC365424477333D5BE43D /* RxSkip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF6BB88520278CE46A1A /* RxSkip.m */; };
 		17EEC36B69542B0B2069C5EE /* RxImmediateSchedulerType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECFB8F18B33A046439FE7 /* RxImmediateSchedulerType.m */; };
 		17EEC3744E384AE88CB4DC5F /* RxWithLatestFrom.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2922831186937606387 /* RxWithLatestFrom.m */; };
-		17EEC39926ABA4CDEA21CE77 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEF6687EEE67072E9A37 /* RxDeallocObservable.m */; };
+		17EEC38338834C85E26138BD /* RxKVOObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC71FC76F1AF4B16E708E /* RxKVOObservable.h */; };
 		17EEC3AE09641FD0EB40FD6E /* RxQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC030B46FAA54E48FBF70 /* RxQueue.m */; };
 		17EEC3AF8D4E477F304F35D5 /* RxConcurrentMainScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC169A5692E81551A91BC /* RxConcurrentMainScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EEC3B2C76EC29E487775C0 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC97424A241C015827E12 /* RxDeallocObservable.h */; };
 		17EEC3BD07424A0684071D30 /* NSEnumerator+Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6C910B5BF9937CFBF88 /* NSEnumerator+Operators.m */; };
 		17EEC3CD86E9B8A60AFADB59 /* RxObserveOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4999D5B8F7F0CE5A083 /* RxObserveOn.m */; };
+		17EEC3D583F7169C83D36C84 /* RxKVOObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC71FC76F1AF4B16E708E /* RxKVOObservable.h */; };
 		17EEC3D6B19903169F802FEB /* RxConcurrentDispatchQueueScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECDC772EBF0750572B848 /* RxConcurrentDispatchQueueScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EEC3DF7D63D1A4C1437795 /* RxRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC06C0E0DEAABD430AA58 /* RxRange.m */; };
+		17EEC3E17545B6A9170872B1 /* RxKVOObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC38F1A6EEC88EF01E876 /* RxKVOObserver.m */; };
 		17EEC3E39486913BA014D594 /* RxConcurrentMainScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC169A5692E81551A91BC /* RxConcurrentMainScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EEC3E62AD339E144CD44A9 /* RxDeallocatingObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF17C71D13C2767E5C16 /* RxDeallocatingObservable.m */; };
 		17EEC3EA1479BC087A188466 /* NSNotificationCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEE1D4D44780EA5AE4B4 /* NSNotificationCenterTests.m */; };
 		17EEC3EACB0788600A79D8CD /* NSUserDefaults+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECF3E5FB46AA5777A484A /* NSUserDefaults+Rx.h */; };
 		17EEC3F9CDCFB9C3D14601E2 /* RxObservableConvertibleType+Blocking.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC449553EC7874BF2B594 /* RxObservableConvertibleType+Blocking.m */; };
 		17EEC3FF44111CBB0CDEE454 /* RxObservableType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD8669A8F09E661BB331 /* RxObservableType.m */; };
+		17EEC41B086C31241EA5D7FD /* RxDeallocatingObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF17C71D13C2767E5C16 /* RxDeallocatingObservable.m */; };
 		17EEC425494F7547B1AF474F /* RxObservable+Single.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECB6935AEE5925DB8FD2B /* RxObservable+Single.m */; };
 		17EEC43858ECE301DA66248E /* RxSerialDispatchQueueScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC07704F79F45ADAE6058 /* RxSerialDispatchQueueScheduler.m */; };
 		17EEC43EA9558CB1CF3C209F /* RxObservable+Bind.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC3793D86637C3D04C94A /* RxObservable+Bind.h */; };
+		17EEC451A217ECC5D7E43124 /* RxTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC2D091805AA14513EA31 /* RxTarget.h */; };
+		17EEC46C1D24F945B65C8458 /* RxDeallocatingObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECA90326A26771313EC4C /* RxDeallocatingObservable.h */; };
 		17EEC47F7F4F609644F1EED9 /* RxTake.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD62F5D33C1A677C3E9C /* RxTake.m */; };
+		17EEC484B22AAC7AB4C8D0E7 /* RxKVOObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2BCA861E46F1BADBBA5 /* RxKVOObservable.m */; };
 		17EEC4968681ECB830A4C928 /* RxRunLoopLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECCA7E9C8B21DCE63B381 /* RxRunLoopLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EEC49A69E906C57373CE9E /* RxKVORepresentable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC478E8A5ADA32ADF223B /* RxKVORepresentable.m */; };
 		17EEC49B1A9C02B08093DC85 /* RxScheduledItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6377D565A38037B37B4 /* RxScheduledItem.m */; };
 		17EEC49F3A5A836CAC912F64 /* RxReplaySubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7C6E5FF23D1E81FAE8F /* RxReplaySubject.m */; };
 		17EEC4A9821840207C850FF5 /* RxObservable+Bind.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC72D75B58AD67B1289A4 /* RxObservable+Bind.m */; };
 		17EEC4B8E89AFDF3426BD45B /* RxRefCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC218CC6E8183F3CCABF3 /* RxRefCount.m */; };
+		17EEC4C9E4ADF693E465A004 /* RxDeallocatingObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECA90326A26771313EC4C /* RxDeallocatingObservable.h */; };
 		17EEC4CAF4370D14EF6F5BAF /* RxObservable+Multiple.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC5C761F35AED8862793F /* RxObservable+Multiple.m */; };
 		17EEC4D413FE33DCA3734F8A /* RxSchedulers.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC315483046D165BEBE8E /* RxSchedulers.m */; };
 		17EEC4FD4DC8D0DEB0F15151 /* RxBlockingObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4A515907EAFE6A5435E /* RxBlockingObservable.m */; };
 		17EEC50135A6977B5A67153F /* RxObserverType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC63E796EA716BA3C6F63 /* RxObserverType.m */; };
 		17EEC502E455A54DC8DBA405 /* RxRetryWhen.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC3EEF1FA7CD2042039AD /* RxRetryWhen.m */; };
+		17EEC509971867865B1C9A7E /* RxKVOObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC38F1A6EEC88EF01E876 /* RxKVOObserver.m */; };
 		17EEC50B5F0DFD661A98BD4F /* RxSchedulers.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC315483046D165BEBE8E /* RxSchedulers.m */; };
 		17EEC51CF25A487B273E9640 /* RxObjCExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF885910A2DE13765AF7 /* RxObjCExt.m */; };
+		17EEC51D057F0FF794DF1759 /* RxMessageSentObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECFFA5755E92611D2D420 /* RxMessageSentObservable.h */; };
 		17EEC529D037AF602337BC79 /* NSNotificationCenter+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD284B61B3243EB51E8A /* NSNotificationCenter+Rx.m */; };
 		17EEC53AD92C271DC349AD01 /* RxObservable+Bind.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC3793D86637C3D04C94A /* RxObservable+Bind.h */; };
-		17EEC54FC2BB64411C3A6C16 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEF6687EEE67072E9A37 /* RxDeallocObservable.m */; };
 		17EEC5577CE27F86FE4769EB /* RxWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4F25D3CF6D2F453CF50 /* RxWindow.m */; };
 		17EEC56A7F37B523E1ECF01F /* NSNotificationCenter+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECE2EBAF0CDD32F893045 /* NSNotificationCenter+Rx.h */; };
 		17EEC578E664B2461EBE57B7 /* RxSchedulers.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECB748E877D033FD673DF /* RxSchedulers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EEC57E6E873305C20B81C9 /* RxCocoaCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECDA483F44B47BFE7490A /* RxCocoaCommon.h */; };
 		17EEC58B47859B3ADE8065DA /* RxSerialDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC9ED58FFA9B13D9AFB47 /* RxSerialDisposable.m */; };
 		17EEC58FDD64579790F56049 /* RxRepeatElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7891D995840DD8CC09A /* RxRepeatElement.m */; };
 		17EEC59C2880B8EE26149EAD /* RxFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECFAD3D61AB94359F8722 /* RxFilter.m */; };
@@ -121,23 +145,28 @@
 		17EEC5A51F162E33E155EE30 /* RxBlockingObservable+Operators.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC29C303413E3D9AA6822 /* RxBlockingObservable+Operators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EEC5AB5DCFB2065276098B /* RxSubscriptionDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC20896492F901375562D /* RxSubscriptionDisposable.m */; };
 		17EEC5B4709EB5718EC37B05 /* RxTimeout.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC10357F096AC207E5DC8 /* RxTimeout.m */; };
+		17EEC5BCA2F2919978407E00 /* RxMessageSentObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECECE63FC329A8AA16EBE /* RxMessageSentObservable.m */; };
 		17EEC5C25932B5FC639344BF /* RxZip+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC219AB81006FA04634B3 /* RxZip+Private.m */; };
 		17EEC5C3C19D21AA59371C3D /* RxLazyEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC515BF9773B4B6DDBDBA /* RxLazyEnumerator.m */; };
 		17EEC5C9E3143DF2DCC6F566 /* RxTakeWhile.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE85ABCB2ACCBD30AF50 /* RxTakeWhile.m */; };
 		17EEC5D0B688B6607CDF7AF6 /* RxCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE88E2F6E2DB650519F6 /* RxCatch.m */; };
 		17EEC5D18592654000FB6727 /* RxRunLoopLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7CC22D67D409E95DC37 /* RxRunLoopLock.m */; };
+		17EEC5D27FF5CE2527985225 /* RxKVORepresentable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC478E8A5ADA32ADF223B /* RxKVORepresentable.m */; };
 		17EEC5E583E2F20E7D9B51EE /* RxMerge+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF7D83673ACEC6182C09 /* RxMerge+Private.m */; };
+		17EEC5EAA56794E84B1F7215 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC97424A241C015827E12 /* RxDeallocObservable.h */; };
 		17EEC5F3BFDCFACFA283650C /* RxVirtualTimeScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC8EA1BA40BC4EC846868 /* RxVirtualTimeScheduler.m */; };
 		17EEC6017056EC94EA38CD85 /* NSUserDefaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7E1A44A52094C0B3816 /* NSUserDefaultsTests.m */; };
 		17EEC626033742C7F08148FB /* RxSchedulers.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECB748E877D033FD673DF /* RxSchedulers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EEC631FC4C813E437DF740 /* RxMessageSentObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECFFA5755E92611D2D420 /* RxMessageSentObservable.h */; };
 		17EEC64EC3F2A609F9597436 /* RxBlockingObservable+Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2F5429ADEFCE8C97B27 /* RxBlockingObservable+Operators.m */; };
 		17EEC6695B351FF8156DB586 /* RxOperationQueueScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC890C005A54F8917E2C7 /* RxOperationQueueScheduler.m */; };
 		17EEC669D702C60A3085EF94 /* RxInfiniteSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECC93DCDAEF654B9053E5 /* RxInfiniteSequence.m */; };
+		17EEC66C825C437442D68C09 /* RxKVOObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC38F1A6EEC88EF01E876 /* RxKVOObserver.m */; };
 		17EEC68C015588990380E2C8 /* RxSchedulerServices+Emulation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC9C85D59BC8A6B8E827F /* RxSchedulerServices+Emulation.m */; };
-		17EEC68E48B34B30D604FD42 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC315F2FB35B0C59890AC /* RxDeallocObservable.h */; };
 		17EEC696AF9059FA36ADFEB8 /* RxStableCompositeDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC44716BCA249885043C6 /* RxStableCompositeDisposable.m */; };
 		17EEC69E968D5020F49EC307 /* RxDistinctUntilChanged.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC289A56F0774AEFB8E09 /* RxDistinctUntilChanged.m */; };
 		17EEC69F6178FD90900AE3AB /* NSObject+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECAC2C27AD0A613D770BE /* NSObject+Rx.h */; };
+		17EEC6B797300FD6AEA12FE3 /* RxDeallocatingObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECA90326A26771313EC4C /* RxDeallocatingObservable.h */; };
 		17EEC6C6BBC76110F1DD9E63 /* RxBufferTimeCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC57F146BD72788C08D7C /* RxBufferTimeCount.m */; };
 		17EEC6CC0B70F3FC5FF3569B /* RxSchedulers.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECB748E877D033FD673DF /* RxSchedulers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EEC6CEEA833E674261F4F1 /* RxBlockingObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4A515907EAFE6A5435E /* RxBlockingObservable.m */; };
@@ -156,17 +185,21 @@
 		17EEC7BF8C0D1C120D2174EC /* RxReduce.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6C264034651AC6ABDB4 /* RxReduce.m */; };
 		17EEC7C15524E4728DDE7A5E /* RxBlockingObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC33F1449B355B1163E04 /* RxBlockingObservable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EEC7C3AB3943732804239E /* NSUserDefaults+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE3B4337891247B66AFF /* NSUserDefaults+Rx.m */; };
+		17EEC7C9FC5F836241156336 /* RxMessageSentObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECFFA5755E92611D2D420 /* RxMessageSentObservable.h */; };
 		17EEC7CA56FA9437E285200F /* RxRunLoopLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECCA7E9C8B21DCE63B381 /* RxRunLoopLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EEC7DAC954633C8D9999D9 /* RxSkipWhile.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECFB37377EC98BF52F0A7 /* RxSkipWhile.m */; };
 		17EEC7E7AE0639D411370AEA /* RxOperationQueueScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC890C005A54F8917E2C7 /* RxOperationQueueScheduler.m */; };
+		17EEC806FD6DED9CE05D5C2A /* RxKVOObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC38F1A6EEC88EF01E876 /* RxKVOObserver.m */; };
 		17EEC814783BA38AB5227EAB /* NSUserDefaults+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECF3E5FB46AA5777A484A /* NSUserDefaults+Rx.h */; };
 		17EEC818214AEF718D11F5FB /* RxRunLoopLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7CC22D67D409E95DC37 /* RxRunLoopLock.m */; };
 		17EEC81A4349EBF0AB38A3B6 /* NSUserDefaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7E1A44A52094C0B3816 /* NSUserDefaultsTests.m */; };
+		17EEC837D3FB882F6C99D862 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC51EB7BB33C167618921 /* RxDeallocObservable.m */; };
 		17EEC8392DB274832C91FAB0 /* NSEnumerator+Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6C910B5BF9937CFBF88 /* NSEnumerator+Operators.m */; };
 		17EEC840730EADA350DC632A /* NSObject+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECAC2C27AD0A613D770BE /* NSObject+Rx.h */; };
 		17EEC844912B39401A54D9C4 /* RxMainScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF51D07787CD2D2B241C /* RxMainScheduler.m */; };
 		17EEC849B9028BEE86D02A03 /* RxCurrentThreadScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC6DAE57A5B0F8688F5D1 /* RxCurrentThreadScheduler.m */; };
 		17EEC8553F7042BA1D39BEBF /* RxObservable+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC97680159D2C555F43FE /* RxObservable+Binding.m */; };
+		17EEC86CD35F1BA42B217535 /* RxKVOObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2BCA861E46F1BADBBA5 /* RxKVOObservable.m */; };
 		17EEC87DCF57B6B973B75DF6 /* NSNotificationCenter+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECE2EBAF0CDD32F893045 /* NSNotificationCenter+Rx.h */; };
 		17EEC87F4F65076309BB2176 /* RxObservableConvertibleType+Blocking.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC449553EC7874BF2B594 /* RxObservableConvertibleType+Blocking.m */; };
 		17EEC893EB0D56D6ADC70FF0 /* RxTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC670691317AE01F6DD5C /* RxTuple.m */; };
@@ -176,30 +209,39 @@
 		17EEC8C6FC3B1791371F0DBE /* RxBehaviorSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC976ECB99234F56A792A /* RxBehaviorSubject.m */; };
 		17EEC8E3D5A45A67CC013B7F /* NSUserDefaults+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECF3E5FB46AA5777A484A /* NSUserDefaults+Rx.h */; };
 		17EEC8EE9E710388AB9CA95F /* RxCombineLatest+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECAB59D72C37AD23C40EC /* RxCombineLatest+Private.m */; };
+		17EEC8F37EE243BB6F2D8BE1 /* RxKVOObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC91668268AF8206328DD /* RxKVOObserver.h */; };
 		17EEC90B6ED4164507D238CC /* RxRunLoopLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECCA7E9C8B21DCE63B381 /* RxRunLoopLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EEC90EB36B64626BB68907 /* RxAnyObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4460F27DB3B0A80F4EF /* RxAnyObserver.m */; };
 		17EEC90EEFC0876A351E9638 /* RxShareReplay1WhileConnected.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC924112CAAB7D9286E76 /* RxShareReplay1WhileConnected.m */; };
-		17EEC938889487A473EB7B87 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEF6687EEE67072E9A37 /* RxDeallocObservable.m */; };
+		17EEC9138399A0AC1F4C30B0 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC51EB7BB33C167618921 /* RxDeallocObservable.m */; };
+		17EEC91FF68335993C56C336 /* RxKVORepresentable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC7496F9A72F7E5A0D259 /* RxKVORepresentable.h */; };
+		17EEC935B105F1C2ACD6D093 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC51EB7BB33C167618921 /* RxDeallocObservable.m */; };
 		17EEC949B8733E3E08EEFBAA /* RxSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC09A1E4F85C60936A4BA /* RxSequence.m */; };
 		17EEC96B084A697E87AB4839 /* RxNever.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC76650959F7352AC81B3 /* RxNever.m */; };
 		17EEC979CC8BBA51F6DCE77D /* RxAsyncLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC95E4ACB1766EAB88B91 /* RxAsyncLock.m */; };
 		17EEC9871481D40664585759 /* RxConcurrentDispatchQueueScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC99F8E1DB74BD05068B6 /* RxConcurrentDispatchQueueScheduler.m */; };
 		17EEC99B8CC1E61AC5D23022 /* RxDeferred.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC3F4E7FD3B3B117530BE /* RxDeferred.m */; };
 		17EEC9A7709A587C2A53D90F /* RxBlockingObservable+Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2F5429ADEFCE8C97B27 /* RxBlockingObservable+Operators.m */; };
+		17EEC9A7B329E30BE10F0C47 /* RxDeallocatingObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF17C71D13C2767E5C16 /* RxDeallocatingObservable.m */; };
 		17EEC9BEF69B5ED30B1F361F /* RxDo.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC427D6026BE550CB342D /* RxDo.m */; };
 		17EEC9CD701E990BACE984B2 /* RxZip+CollectionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4CA030E71E97EC5F105 /* RxZip+CollectionType.m */; };
 		17EEC9CD9E0A314F648D8C87 /* RxObservableConvertibleType+Blocking.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC82FCD38D6557580A93A /* RxObservableConvertibleType+Blocking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EEC9E6175B4BF91A7E327D /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC97424A241C015827E12 /* RxDeallocObservable.h */; };
 		17EEC9F57E36DD3AB38B0C89 /* RxSink.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC9FF1FDD75F0AF6D04BD /* RxSink.m */; };
 		17EECA3BE102D9DD76375F63 /* RxObjCExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF885910A2DE13765AF7 /* RxObjCExt.m */; };
 		17EECA4112B3FD5DB2C78BE0 /* NSObject+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEE816D459B56FC0AEEF /* NSObject+Rx.m */; };
 		17EECA4146BEE4DCDC25863E /* RxTakeUntil.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2003BAA8901C5F4EAC4 /* RxTakeUntil.m */; };
 		17EECA4DF7245D8A55CD3D40 /* RxConnectableObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC383E6B43804C5A3D5EE /* RxConnectableObservable.m */; };
 		17EECA58B0C2DC04257D1483 /* RxObserverBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE517351E269D1E8C445 /* RxObserverBase.m */; };
+		17EECA67D724E7DCB4AE7F26 /* RxMessageSentObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECECE63FC329A8AA16EBE /* RxMessageSentObservable.m */; };
 		17EECA6D5B10DA0C7E309BF0 /* RxObservable+CombineLatest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC9B7B4837035EEBD177B /* RxObservable+CombineLatest.m */; };
 		17EECA7168F964C76E65AAF2 /* RxCombineLatest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC5CFA8C39A74962C88DA /* RxCombineLatest.m */; };
+		17EECA7FB4E7EF12E02FBDFE /* RxCocoaCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECC0F86E099227D034714 /* RxCocoaCommon.m */; };
+		17EECA897998D8F648AFE3DB /* RxMessageSentObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECFFA5755E92611D2D420 /* RxMessageSentObservable.h */; };
 		17EECA8FF678B1007BA56D68 /* RxTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC29145752399643D2F9B /* RxTimer.m */; };
 		17EECA9B6B7F03F5E335E15F /* RxAmb.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECDB06FF1A757DF517519 /* RxAmb.m */; };
 		17EECAA49D935EECBFA207DC /* RxOperationQueueScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC890C005A54F8917E2C7 /* RxOperationQueueScheduler.m */; };
+		17EECABA33B2FAB221356CB6 /* RxCocoaCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECDA483F44B47BFE7490A /* RxCocoaCommon.h */; };
 		17EECAC24C646C066DBA103C /* RxObservable+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF16B43C854C6BF74A46 /* RxObservable+Creation.m */; };
 		17EECADA07FACA5262AAB0A7 /* RxOperationQueueScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC0DA947B3B3E728FFABD /* RxOperationQueueScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECAE231C574905B7EEFF7 /* RxObservable+Bind.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC3793D86637C3D04C94A /* RxObservable+Bind.h */; };
@@ -211,6 +253,8 @@
 		17EECB2B7E1EC8B8EA7DDEAC /* RxObservableConvertibleType+Blocking.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC449553EC7874BF2B594 /* RxObservableConvertibleType+Blocking.m */; };
 		17EECB43B6A31F1DB08EE237 /* RxLockOwnerType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2A07F560C99C34EAFFF /* RxLockOwnerType.m */; };
 		17EECB4A405614ED15CDE25B /* RxZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2F5B5D4B2BE1EF929B9 /* RxZip.m */; };
+		17EECB5F3D88B630AB0C5806 /* RxKVOObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC91668268AF8206328DD /* RxKVOObserver.h */; };
+		17EECB6A0C780D1E350A14BB /* RxKVOObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC91668268AF8206328DD /* RxKVOObserver.h */; };
 		17EECB6DDA853B2DAF9E02DC /* RxObservableConvertibleType+Blocking.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC82FCD38D6557580A93A /* RxObservableConvertibleType+Blocking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECB8993D44CAE2644770A /* RxBlockingObservable+Operators.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC29C303413E3D9AA6822 /* RxBlockingObservable+Operators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECB8AE684CB56CBBE82CC /* RxSingleAssignmentDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECCA9C4DF7FCF07B9AB29 /* RxSingleAssignmentDisposable.m */; };
@@ -219,16 +263,21 @@
 		17EECBB659F7C72B61414C91 /* RxSynchronizedDisposeType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECCE9D0C3DA6B2807BDAF /* RxSynchronizedDisposeType.m */; };
 		17EECBC0A622C1AE39E5E3DF /* RxSchedulerType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC51EF407CBAF71151D55 /* RxSchedulerType.m */; };
 		17EECBDAE3FA3FF1C8398860 /* NSNotificationCenter+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD284B61B3243EB51E8A /* NSNotificationCenter+Rx.m */; };
+		17EECBE7834F326F4A5ACB0F /* RxKVORepresentable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC7496F9A72F7E5A0D259 /* RxKVORepresentable.h */; };
 		17EECBFD36B5FE39EE2F1FC7 /* NSObject+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECAC2C27AD0A613D770BE /* NSObject+Rx.h */; };
 		17EECC179F038AD6C0630F64 /* RxSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF90D87C0845A2892690 /* RxSample.m */; };
 		17EECC4DAFD6755CCC5A42B7 /* RxLazyEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC515BF9773B4B6DDBDBA /* RxLazyEnumerator.m */; };
 		17EECC6564617DCF7BCA805A /* RxDisposeBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD677672C86DF7113CC8 /* RxDisposeBag.m */; };
 		17EECC8230DDA01C59D3A58D /* RxHistoricalSchedulerTimeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC1E06DC66048C4C066D6 /* RxHistoricalSchedulerTimeConverter.m */; };
 		17EECC95DC24BFCE8073E669 /* RxAnonymousDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC62ADF8D7915248125E1 /* RxAnonymousDisposable.m */; };
+		17EECC96E1E54A1859BD2AA8 /* RxTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC2D091805AA14513EA31 /* RxTarget.h */; };
 		17EECC9C346EC83652B56BD3 /* RxObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC66DB57CB25B4011561A /* RxObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EECCA8746AB47F84540F8B /* RxDeallocatingObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF17C71D13C2767E5C16 /* RxDeallocatingObservable.m */; };
 		17EECCB077B7E6EA15A71D30 /* RxObservable+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC3277A0C25824138AE83 /* RxObservable+Extension.m */; };
+		17EECCB4656CDE1668EBD863 /* RxKVORepresentable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC7496F9A72F7E5A0D259 /* RxKVORepresentable.h */; };
 		17EECCB54B3E250FB8BA08E0 /* RxSingleAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4A25E4FC770F181EAC1 /* RxSingleAsync.m */; };
 		17EECCBA1E2C2987B76746F6 /* RxObservable+Bind.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC72D75B58AD67B1289A4 /* RxObservable+Bind.m */; };
+		17EECCCEF0072A095822E300 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC97424A241C015827E12 /* RxDeallocObservable.h */; };
 		17EECCDC645F0AE38D459B99 /* RxEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7424FC0CDA86EB3867A /* RxEmpty.m */; };
 		17EECCE843D6CE7FC7214014 /* RxCombineLatest+CollectionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC07E4CC499333B738FCF /* RxCombineLatest+CollectionType.m */; };
 		17EECCEC9F0D2B35BD5FA34F /* NSObject+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEE816D459B56FC0AEEF /* NSObject+Rx.m */; };
@@ -238,7 +287,10 @@
 		17EECD47B55F617D5C9092C5 /* RxObservable+Concurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC5EDA1A20E2983F213D0 /* RxObservable+Concurrency.m */; };
 		17EECD59AA72D2DCEB0C07BC /* NSNotificationCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEE1D4D44780EA5AE4B4 /* NSNotificationCenterTests.m */; };
 		17EECD6C3FE4C54469075F77 /* RxAnonymousObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2D8CEAE83E7EDFE5721 /* RxAnonymousObserver.m */; };
+		17EECD72A0CC3EEEE9E7082D /* RxTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7204B70017A1408D0F7 /* RxTarget.m */; };
+		17EECD7634005C6F889327CE /* RxTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC2D091805AA14513EA31 /* RxTarget.h */; };
 		17EECD8827B829BAF5F16FEE /* RxSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC781ECB9F37204F7F3E3 /* RxSwitch.m */; };
+		17EECD8C4D4AAAD5FF75E688 /* RxCocoaCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECC0F86E099227D034714 /* RxCocoaCommon.m */; };
 		17EECD93674A56247A912CF9 /* RxElementAt.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC43960DD7BB7197142DA /* RxElementAt.m */; };
 		17EECD9528162BB0004EE92A /* RxInvocableScheduledItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC1F56E467E5F7525254C /* RxInvocableScheduledItem.m */; };
 		17EECD982403D390E0FA80AF /* RxConcurrentMainScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC169A5692E81551A91BC /* RxConcurrentMainScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -248,6 +300,7 @@
 		17EECDB32B4BAC0D00947A22 /* RxErrorProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEF7E2A55026C0889328 /* RxErrorProducer.m */; };
 		17EECDC8F16912A31C347C0B /* RxPriorityQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE1ECD098A2CCD4B076E /* RxPriorityQueue.m */; };
 		17EECDC8FE3C3D4C92068750 /* RxMulticast.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEE41C84C313B5C1CCB3 /* RxMulticast.m */; };
+		17EECDCFA3779D9CBCFD4FB7 /* RxKVORepresentable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC7496F9A72F7E5A0D259 /* RxKVORepresentable.h */; };
 		17EECDD024A3E27B72FF7386 /* RxSkipUntil.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2973E2AD292BD07438B /* RxSkipUntil.m */; };
 		17EECDD24D0F1FB4432B82A0 /* RxOperationQueueScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC0DA947B3B3E728FFABD /* RxOperationQueueScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECE0A3B38D06896F6D77B /* RxEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEFD0E78FE2DA62A24AF /* RxEvent.m */; };
@@ -259,16 +312,17 @@
 		17EECE5CB5F9B855AD3AADD9 /* RxConcurrentDispatchQueueScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC99F8E1DB74BD05068B6 /* RxConcurrentDispatchQueueScheduler.m */; };
 		17EECE673924046122FCCD5B /* RxOperationQueueScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC0DA947B3B3E728FFABD /* RxOperationQueueScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECE77D1314AB594B81106 /* RxConcurrentDispatchQueueScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECDC772EBF0750572B848 /* RxConcurrentDispatchQueueScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		17EECE7CC97C14D6FC39D4D1 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEF6687EEE67072E9A37 /* RxDeallocObservable.m */; };
+		17EECE88E4273D064925118A /* RxDeallocatingObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECA90326A26771313EC4C /* RxDeallocatingObservable.h */; };
 		17EECE8AA6DA3ED4D06E6B80 /* RxBlockingObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4A515907EAFE6A5435E /* RxBlockingObservable.m */; };
 		17EECEA141DA1AA05851FC5E /* NSUserDefaults+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE3B4337891247B66AFF /* NSUserDefaults+Rx.m */; };
 		17EECEAE3E4492F03A373378 /* RxRunLoopLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7CC22D67D409E95DC37 /* RxRunLoopLock.m */; };
-		17EECEB5A2373635D58A72F4 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC315F2FB35B0C59890AC /* RxDeallocObservable.h */; };
 		17EECEBE48253156AFEF824E /* NSNotificationCenter+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD284B61B3243EB51E8A /* NSNotificationCenter+Rx.m */; };
 		17EECECAB948F7C112467E53 /* RxBlockingObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC33F1449B355B1163E04 /* RxBlockingObservable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECEECA208B50FB0CD03F5 /* RxDelaySubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC1EA5660B869E03F2D47 /* RxDelaySubscription.m */; };
+		17EECF0179760B6B321D2518 /* RxKVOObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC71FC76F1AF4B16E708E /* RxKVOObservable.h */; };
 		17EECF04366D12B5F27F2559 /* RxScheduledDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC926CEFB396687D514C4 /* RxScheduledDisposable.m */; };
 		17EECF29F7C22E7FC68115D2 /* RxStartWith.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD30B4B4023D0F0CBDC7 /* RxStartWith.m */; };
+		17EECF3D79C8F1789875C4C2 /* RxKVOObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2BCA861E46F1BADBBA5 /* RxKVOObservable.m */; };
 		17EECF44B13A4C1ABDB0A88F /* RxObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC720402F5C6F6F87472A /* RxObservable.m */; };
 		17EECF4BE0B3448DA1BA84F5 /* RxBlockingObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC4A515907EAFE6A5435E /* RxBlockingObservable.m */; };
 		17EECF52DF5BE78E9032C07B /* NSUserDefaults+Rx.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECE3B4337891247B66AFF /* NSUserDefaults+Rx.m */; };
@@ -276,12 +330,14 @@
 		17EECF75A3BB51E560FC7E99 /* RxRefCountDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECAD4F31829ACCDDCF965 /* RxRefCountDisposable.m */; };
 		17EECF76372D247C35C212D3 /* RxConcurrentMainScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2322102BEC88FECE2B6 /* RxConcurrentMainScheduler.m */; };
 		17EECF82A4EC5579B5737889 /* NSEnumerator+Operators.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC34EA2331E06E8D462A9 /* NSEnumerator+Operators.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17EECF863F03A8E057842447 /* RxKVORepresentable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC478E8A5ADA32ADF223B /* RxKVORepresentable.m */; };
 		17EECF896C38DEEA40A9EC2F /* RxOperationQueueScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC0DA947B3B3E728FFABD /* RxOperationQueueScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECF904751122D0322DFDE /* RxDebugProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF917D7595438CC21942 /* RxDebugProducer.m */; };
 		17EECF9C9CC5C73E4FA25884 /* NSEnumerator+Operators.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC34EA2331E06E8D462A9 /* NSEnumerator+Operators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECFA8AD4950B7A658C6FE /* NSObject+Rx.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECAC2C27AD0A613D770BE /* NSObject+Rx.h */; };
 		17EECFBF574D4D67DC626A2E /* RxBlockingObservable+Operators.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC29C303413E3D9AA6822 /* RxBlockingObservable+Operators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECFD855C3CE41FE8952E7 /* RxObjCCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECA16BACE27D6E912A953 /* RxObjCCommon.m */; };
+		17EECFE6EFFFE9B27AB9F86A /* RxCocoaCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECC0F86E099227D034714 /* RxCocoaCommon.m */; };
 		17EECFF23BD7175EC9D84FB2 /* RxSubscribeOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECCFAE000EBC9AAD53A84 /* RxSubscribeOn.m */; };
 		17EECFFC7A7E1B35A9B578C4 /* RxObjCExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECF885910A2DE13765AF7 /* RxObjCExt.m */; };
 		36499E641D34E4B90052141A /* RxCocoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 36499E631D34E4A10052141A /* RxCocoa.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1697,6 +1753,8 @@
 		17EEC2973E2AD292BD07438B /* RxSkipUntil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSkipUntil.m; sourceTree = "<group>"; };
 		17EEC29C303413E3D9AA6822 /* RxBlockingObservable+Operators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RxBlockingObservable+Operators.h"; sourceTree = "<group>"; };
 		17EEC2A07F560C99C34EAFFF /* RxLockOwnerType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxLockOwnerType.m; sourceTree = "<group>"; };
+		17EEC2BCA861E46F1BADBBA5 /* RxKVOObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxKVOObservable.m; sourceTree = "<group>"; };
+		17EEC2D091805AA14513EA31 /* RxTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTarget.h; sourceTree = "<group>"; };
 		17EEC2D3B5513900F902A593 /* RxTakeUntil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTakeUntil.h; sourceTree = "<group>"; };
 		17EEC2D8CEAE83E7EDFE5721 /* RxAnonymousObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxAnonymousObserver.m; sourceTree = "<group>"; };
 		17EEC2F5429ADEFCE8C97B27 /* RxBlockingObservable+Operators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RxBlockingObservable+Operators.m"; sourceTree = "<group>"; };
@@ -1707,7 +1765,6 @@
 		17EEC3078C462AFB9371114D /* RxDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDisposable.h; sourceTree = "<group>"; };
 		17EEC311F639E7A6F36B80AC /* RxInvocableScheduledItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxInvocableScheduledItem.h; sourceTree = "<group>"; };
 		17EEC315483046D165BEBE8E /* RxSchedulers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSchedulers.m; sourceTree = "<group>"; };
-		17EEC315F2FB35B0C59890AC /* RxDeallocObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDeallocObservable.h; sourceTree = "<group>"; };
 		17EEC316E3F38AF09D089669 /* RxErrorProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxErrorProducer.h; sourceTree = "<group>"; };
 		17EEC31FCB80A54BC639E8DF /* RxGenerate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxGenerate.h; sourceTree = "<group>"; };
 		17EEC3277A0C25824138AE83 /* RxObservable+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RxObservable+Extension.m"; sourceTree = "<group>"; };
@@ -1716,6 +1773,7 @@
 		17EEC34EA2331E06E8D462A9 /* NSEnumerator+Operators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSEnumerator+Operators.h"; sourceTree = "<group>"; };
 		17EEC3793D86637C3D04C94A /* RxObservable+Bind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RxObservable+Bind.h"; sourceTree = "<group>"; };
 		17EEC383E6B43804C5A3D5EE /* RxConnectableObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxConnectableObservable.m; sourceTree = "<group>"; };
+		17EEC38F1A6EEC88EF01E876 /* RxKVOObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxKVOObserver.m; sourceTree = "<group>"; };
 		17EEC38FF195638921357048 /* RxTake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTake.h; sourceTree = "<group>"; };
 		17EEC3999409C5E1B996CBF8 /* RxSerialDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSerialDisposable.h; sourceTree = "<group>"; };
 		17EEC3B2BCED4BA2D024EA1F /* RxBufferTimeCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxBufferTimeCount.h; sourceTree = "<group>"; };
@@ -1733,6 +1791,7 @@
 		17EEC4460F27DB3B0A80F4EF /* RxAnyObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxAnyObserver.m; sourceTree = "<group>"; };
 		17EEC44716BCA249885043C6 /* RxStableCompositeDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxStableCompositeDisposable.m; sourceTree = "<group>"; };
 		17EEC449553EC7874BF2B594 /* RxObservableConvertibleType+Blocking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RxObservableConvertibleType+Blocking.m"; sourceTree = "<group>"; };
+		17EEC478E8A5ADA32ADF223B /* RxKVORepresentable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxKVORepresentable.m; sourceTree = "<group>"; };
 		17EEC4999D5B8F7F0CE5A083 /* RxObserveOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxObserveOn.m; sourceTree = "<group>"; };
 		17EEC4A25E4FC770F181EAC1 /* RxSingleAsync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSingleAsync.m; sourceTree = "<group>"; };
 		17EEC4A515907EAFE6A5435E /* RxBlockingObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxBlockingObservable.m; sourceTree = "<group>"; };
@@ -1745,6 +1804,7 @@
 		17EEC509BC4D9FC8184F1D83 /* RxBooleanDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxBooleanDisposable.m; sourceTree = "<group>"; };
 		17EEC513FC452D6A05D77DE2 /* RxPublishSubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxPublishSubject.m; sourceTree = "<group>"; };
 		17EEC515BF9773B4B6DDBDBA /* RxLazyEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxLazyEnumerator.m; sourceTree = "<group>"; };
+		17EEC51EB7BB33C167618921 /* RxDeallocObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxDeallocObservable.m; sourceTree = "<group>"; };
 		17EEC51EF407CBAF71151D55 /* RxSchedulerType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSchedulerType.m; sourceTree = "<group>"; };
 		17EEC520DF3931938FFDC619 /* RxStartWith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxStartWith.h; sourceTree = "<group>"; };
 		17EEC53064CF8B65CE1213E9 /* RxTakeLast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTakeLast.h; sourceTree = "<group>"; };
@@ -1779,10 +1839,13 @@
 		17EEC6DAE57A5B0F8688F5D1 /* RxCurrentThreadScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxCurrentThreadScheduler.m; sourceTree = "<group>"; };
 		17EEC6F847609BC3C8765DCD /* RxReduce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxReduce.h; sourceTree = "<group>"; };
 		17EEC71CEB944C57FAC6BF33 /* RxSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSwitch.h; sourceTree = "<group>"; };
+		17EEC71FC76F1AF4B16E708E /* RxKVOObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxKVOObservable.h; sourceTree = "<group>"; };
 		17EEC720402F5C6F6F87472A /* RxObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxObservable.m; sourceTree = "<group>"; };
+		17EEC7204B70017A1408D0F7 /* RxTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxTarget.m; sourceTree = "<group>"; };
 		17EEC72D75B58AD67B1289A4 /* RxObservable+Bind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RxObservable+Bind.m"; sourceTree = "<group>"; };
 		17EEC73B1BF033BC0CD41FC1 /* RxNever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxNever.h; sourceTree = "<group>"; };
 		17EEC7424FC0CDA86EB3867A /* RxEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxEmpty.m; sourceTree = "<group>"; };
+		17EEC7496F9A72F7E5A0D259 /* RxKVORepresentable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxKVORepresentable.h; sourceTree = "<group>"; };
 		17EEC76650959F7352AC81B3 /* RxNever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxNever.m; sourceTree = "<group>"; };
 		17EEC76F5A89B72EB614B329 /* RxAnonymousDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxAnonymousDisposable.h; sourceTree = "<group>"; };
 		17EEC77495CDCC3FC3487412 /* RxAnyObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxAnyObserver.h; sourceTree = "<group>"; };
@@ -1815,6 +1878,7 @@
 		17EEC8F6F00C26E13CFE2CAB /* RxTailRecursiveSink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTailRecursiveSink.h; sourceTree = "<group>"; };
 		17EEC903ACBC5E1D431CA7A2 /* RxVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxVariable.m; sourceTree = "<group>"; };
 		17EEC90A0A23B0E50ADD3D55 /* RxScan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxScan.h; sourceTree = "<group>"; };
+		17EEC91668268AF8206328DD /* RxKVOObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxKVOObserver.h; sourceTree = "<group>"; };
 		17EEC916AF1930BFCFB47CD2 /* RxCompositeDisposable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxCompositeDisposable.h; sourceTree = "<group>"; };
 		17EEC92401FA9CEA3D755DC6 /* RxEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxEmpty.h; sourceTree = "<group>"; };
 		17EEC924112CAAB7D9286E76 /* RxShareReplay1WhileConnected.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxShareReplay1WhileConnected.m; sourceTree = "<group>"; };
@@ -1824,6 +1888,7 @@
 		17EEC96111E07B51EB116C9A /* RxMainScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxMainScheduler.h; sourceTree = "<group>"; };
 		17EEC97033F58BD17F50247D /* RxJust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxJust.m; sourceTree = "<group>"; };
 		17EEC972D73B50E386A72CB3 /* RxGenerate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxGenerate.m; sourceTree = "<group>"; };
+		17EEC97424A241C015827E12 /* RxDeallocObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDeallocObservable.h; sourceTree = "<group>"; };
 		17EEC97680159D2C555F43FE /* RxObservable+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RxObservable+Binding.m"; sourceTree = "<group>"; };
 		17EEC976ECB99234F56A792A /* RxBehaviorSubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxBehaviorSubject.m; sourceTree = "<group>"; };
 		17EEC97C21E785B4811BFA7A /* RxMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxMerge.h; sourceTree = "<group>"; };
@@ -1850,6 +1915,7 @@
 		17EECA87947839D3C07412F6 /* RxAmb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxAmb.h; sourceTree = "<group>"; };
 		17EECA887346B2CE6570F58A /* RxObserverType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObserverType.h; sourceTree = "<group>"; };
 		17EECA8891006C6147E96205 /* RxDo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDo.h; sourceTree = "<group>"; };
+		17EECA90326A26771313EC4C /* RxDeallocatingObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxDeallocatingObservable.h; sourceTree = "<group>"; };
 		17EECAB59D72C37AD23C40EC /* RxCombineLatest+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RxCombineLatest+Private.m"; sourceTree = "<group>"; };
 		17EECAC2C27AD0A613D770BE /* NSObject+Rx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Rx.h"; sourceTree = "<group>"; };
 		17EECAD302F445862178F17D /* RxConnectableObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxConnectableObservable.h; sourceTree = "<group>"; };
@@ -1865,6 +1931,7 @@
 		17EECBCC576A35603F6EF8C2 /* RxSynchronizedSubscribeType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSynchronizedSubscribeType.m; sourceTree = "<group>"; };
 		17EECBEEFA0D11610324E426 /* RxBehaviorSubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxBehaviorSubject.h; sourceTree = "<group>"; };
 		17EECBFD116D00FAAB852232 /* RxObserveOnSerialDispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxObserveOnSerialDispatchQueue.h; sourceTree = "<group>"; };
+		17EECC0F86E099227D034714 /* RxCocoaCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxCocoaCommon.m; sourceTree = "<group>"; };
 		17EECC14C4B65443FD3CBE06 /* RxImmediateSchedulerType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxImmediateSchedulerType.h; sourceTree = "<group>"; };
 		17EECC23EDB1BD928D32B48B /* RxSingleAsync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSingleAsync.h; sourceTree = "<group>"; };
 		17EECC30D652E46AD62A3F91 /* RxLockOwnerType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxLockOwnerType.h; sourceTree = "<group>"; };
@@ -1891,6 +1958,7 @@
 		17EECD677672C86DF7113CC8 /* RxDisposeBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxDisposeBag.m; sourceTree = "<group>"; };
 		17EECD6D65CFBE9B67E0661E /* RxScheduledItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxScheduledItem.h; sourceTree = "<group>"; };
 		17EECD8669A8F09E661BB331 /* RxObservableType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxObservableType.m; sourceTree = "<group>"; };
+		17EECDA483F44B47BFE7490A /* RxCocoaCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxCocoaCommon.h; sourceTree = "<group>"; };
 		17EECDB06FF1A757DF517519 /* RxAmb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxAmb.m; sourceTree = "<group>"; };
 		17EECDC0A19ACC817EA3E3F1 /* RxJust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxJust.h; sourceTree = "<group>"; };
 		17EECDC772EBF0750572B848 /* RxConcurrentDispatchQueueScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxConcurrentDispatchQueueScheduler.h; sourceTree = "<group>"; };
@@ -1910,16 +1978,17 @@
 		17EECE9C9A555E9A447D2D22 /* RxError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxError.m; sourceTree = "<group>"; };
 		17EECEBEDC142C7E812F5281 /* RxUsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxUsing.m; sourceTree = "<group>"; };
 		17EECEBF0BA67C095FC37007 /* RxZip+CollectionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RxZip+CollectionType.h"; sourceTree = "<group>"; };
+		17EECECE63FC329A8AA16EBE /* RxMessageSentObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxMessageSentObservable.m; sourceTree = "<group>"; };
 		17EECEDDF6A26633EFA137A4 /* RxSynchronizedOnType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxSynchronizedOnType.h; sourceTree = "<group>"; };
 		17EECEE172B4E5EAD23943AA /* RxShareReplay1WhileConnected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxShareReplay1WhileConnected.h; sourceTree = "<group>"; };
 		17EECEE1D4D44780EA5AE4B4 /* NSNotificationCenterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationCenterTests.m; sourceTree = "<group>"; };
 		17EECEE41C84C313B5C1CCB3 /* RxMulticast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxMulticast.m; sourceTree = "<group>"; };
 		17EECEE816D459B56FC0AEEF /* NSObject+Rx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Rx.m"; sourceTree = "<group>"; };
-		17EECEF6687EEE67072E9A37 /* RxDeallocObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxDeallocObservable.m; sourceTree = "<group>"; };
 		17EECEF6FA66691F94860BA8 /* RxVirtualTimeConverterType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxVirtualTimeConverterType.m; sourceTree = "<group>"; };
 		17EECEF7E2A55026C0889328 /* RxErrorProducer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxErrorProducer.m; sourceTree = "<group>"; };
 		17EECEFD0E78FE2DA62A24AF /* RxEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxEvent.m; sourceTree = "<group>"; };
 		17EECF16B43C854C6BF74A46 /* RxObservable+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RxObservable+Creation.m"; sourceTree = "<group>"; };
+		17EECF17C71D13C2767E5C16 /* RxDeallocatingObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxDeallocatingObservable.m; sourceTree = "<group>"; };
 		17EECF1E1922C3D6A4D28569 /* RxMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxMap.m; sourceTree = "<group>"; };
 		17EECF1E8EE799A9435AFA73 /* RxElementAt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxElementAt.h; sourceTree = "<group>"; };
 		17EECF3C73A546D8D1F2C06B /* RxNopDisposable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxNopDisposable.m; sourceTree = "<group>"; };
@@ -1942,6 +2011,7 @@
 		17EECFEC3CC63C1959093A43 /* RxTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTuple.h; sourceTree = "<group>"; };
 		17EECFF11F091EF486F1DB70 /* RxMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxMerge.m; sourceTree = "<group>"; };
 		17EECFF4F74B32FF6223F4A3 /* RxScheduledItemType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxScheduledItemType.h; sourceTree = "<group>"; };
+		17EECFFA5755E92611D2D420 /* RxMessageSentObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxMessageSentObservable.h; sourceTree = "<group>"; };
 		36499E621D34E4900052141A /* RxBlocking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxBlocking.h; sourceTree = "<group>"; };
 		36499E631D34E4A10052141A /* RxCocoa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxCocoa.h; sourceTree = "<group>"; };
 		36499F6D1D34F78F0052141A /* RxTestsDefTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxTestsDefTypes.h; sourceTree = "<group>"; };
@@ -2234,6 +2304,23 @@
 			path = Observables;
 			sourceTree = "<group>";
 		};
+		17EEC322AFE8CAB67006CDA3 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				17EEC2BCA861E46F1BADBBA5 /* RxKVOObservable.m */,
+				17EEC71FC76F1AF4B16E708E /* RxKVOObservable.h */,
+				17EEC97424A241C015827E12 /* RxDeallocObservable.h */,
+				17EEC51EB7BB33C167618921 /* RxDeallocObservable.m */,
+				17EEC38F1A6EEC88EF01E876 /* RxKVOObserver.m */,
+				17EEC91668268AF8206328DD /* RxKVOObserver.h */,
+				17EECECE63FC329A8AA16EBE /* RxMessageSentObservable.m */,
+				17EECFFA5755E92611D2D420 /* RxMessageSentObservable.h */,
+				17EECF17C71D13C2767E5C16 /* RxDeallocatingObservable.m */,
+				17EECA90326A26771313EC4C /* RxDeallocatingObservable.h */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
 		17EEC329BA3CF476F188623C /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
@@ -2388,8 +2475,7 @@
 				17EECF3E5FB46AA5777A484A /* NSUserDefaults+Rx.h */,
 				17EECEE816D459B56FC0AEEF /* NSObject+Rx.m */,
 				17EECAC2C27AD0A613D770BE /* NSObject+Rx.h */,
-				17EECEF6687EEE67072E9A37 /* RxDeallocObservable.m */,
-				17EEC315F2FB35B0C59890AC /* RxDeallocObservable.h */,
+				17EEC322AFE8CAB67006CDA3 /* Implementations */,
 			);
 			path = Observables;
 			sourceTree = "<group>";
@@ -2671,6 +2757,12 @@
 				17EEC72D75B58AD67B1289A4 /* RxObservable+Bind.m */,
 				17EEC3793D86637C3D04C94A /* RxObservable+Bind.h */,
 				17EECDBF736138B18B874950 /* Observables */,
+				17EEC7204B70017A1408D0F7 /* RxTarget.m */,
+				17EEC2D091805AA14513EA31 /* RxTarget.h */,
+				17EEC478E8A5ADA32ADF223B /* RxKVORepresentable.m */,
+				17EEC7496F9A72F7E5A0D259 /* RxKVORepresentable.h */,
+				17EECC0F86E099227D034714 /* RxCocoaCommon.m */,
+				17EECDA483F44B47BFE7490A /* RxCocoaCommon.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -3470,7 +3562,14 @@
 				17EEC56A7F37B523E1ECF01F /* NSNotificationCenter+Rx.h in Headers */,
 				17EEC814783BA38AB5227EAB /* NSUserDefaults+Rx.h in Headers */,
 				17EEC69F6178FD90900AE3AB /* NSObject+Rx.h in Headers */,
-				17EEC20DA1C9C437B48ECBB9 /* RxDeallocObservable.h in Headers */,
+				17EEC451A217ECC5D7E43124 /* RxTarget.h in Headers */,
+				17EECBE7834F326F4A5ACB0F /* RxKVORepresentable.h in Headers */,
+				17EECF0179760B6B321D2518 /* RxKVOObservable.h in Headers */,
+				17EEC3B2C76EC29E487775C0 /* RxDeallocObservable.h in Headers */,
+				17EECB6A0C780D1E350A14BB /* RxKVOObserver.h in Headers */,
+				17EEC631FC4C813E437DF740 /* RxMessageSentObservable.h in Headers */,
+				17EECE88E4273D064925118A /* RxDeallocatingObservable.h in Headers */,
+				17EEC57E6E873305C20B81C9 /* RxCocoaCommon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3487,7 +3586,14 @@
 				17EEC1CCBA5D75E655F01D0B /* NSNotificationCenter+Rx.h in Headers */,
 				17EEC8E3D5A45A67CC013B7F /* NSUserDefaults+Rx.h in Headers */,
 				17EEC840730EADA350DC632A /* NSObject+Rx.h in Headers */,
-				17EEC68E48B34B30D604FD42 /* RxDeallocObservable.h in Headers */,
+				17EEC3446CED7D8CA788A298 /* RxTarget.h in Headers */,
+				17EECCB4656CDE1668EBD863 /* RxKVORepresentable.h in Headers */,
+				17EEC38338834C85E26138BD /* RxKVOObservable.h in Headers */,
+				17EECCCEF0072A095822E300 /* RxDeallocObservable.h in Headers */,
+				17EEC2D3BF107CC435C00B18 /* RxKVOObserver.h in Headers */,
+				17EECA897998D8F648AFE3DB /* RxMessageSentObservable.h in Headers */,
+				17EEC6B797300FD6AEA12FE3 /* RxDeallocatingObservable.h in Headers */,
+				17EEC3395FF71E6E1641E1AA /* RxCocoaCommon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3504,7 +3610,14 @@
 				17EEC2FBD7EF38352168798A /* NSNotificationCenter+Rx.h in Headers */,
 				17EEC2087FD8CE8CE139425F /* NSUserDefaults+Rx.h in Headers */,
 				17EECFA8AD4950B7A658C6FE /* NSObject+Rx.h in Headers */,
-				17EEC31DDC4B301C9EDFB355 /* RxDeallocObservable.h in Headers */,
+				17EECC96E1E54A1859BD2AA8 /* RxTarget.h in Headers */,
+				17EECDCFA3779D9CBCFD4FB7 /* RxKVORepresentable.h in Headers */,
+				17EEC3D583F7169C83D36C84 /* RxKVOObservable.h in Headers */,
+				17EEC5EAA56794E84B1F7215 /* RxDeallocObservable.h in Headers */,
+				17EECB5F3D88B630AB0C5806 /* RxKVOObserver.h in Headers */,
+				17EEC7C9FC5F836241156336 /* RxMessageSentObservable.h in Headers */,
+				17EEC46C1D24F945B65C8458 /* RxDeallocatingObservable.h in Headers */,
+				17EEC334652AA57A995299CF /* RxCocoaCommon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3521,7 +3634,14 @@
 				17EEC87DCF57B6B973B75DF6 /* NSNotificationCenter+Rx.h in Headers */,
 				17EEC3EACB0788600A79D8CD /* NSUserDefaults+Rx.h in Headers */,
 				17EECBFD36B5FE39EE2F1FC7 /* NSObject+Rx.h in Headers */,
-				17EECEB5A2373635D58A72F4 /* RxDeallocObservable.h in Headers */,
+				17EECD7634005C6F889327CE /* RxTarget.h in Headers */,
+				17EEC91FF68335993C56C336 /* RxKVORepresentable.h in Headers */,
+				17EEC13B62271BE61E28CE41 /* RxKVOObservable.h in Headers */,
+				17EEC9E6175B4BF91A7E327D /* RxDeallocObservable.h in Headers */,
+				17EEC8F37EE243BB6F2D8BE1 /* RxKVOObserver.h in Headers */,
+				17EEC51D057F0FF794DF1759 /* RxMessageSentObservable.h in Headers */,
+				17EEC4C9E4ADF693E465A004 /* RxDeallocatingObservable.h in Headers */,
+				17EECABA33B2FAB221356CB6 /* RxCocoaCommon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4861,7 +4981,14 @@
 				17EECEBE48253156AFEF824E /* NSNotificationCenter+Rx.m in Sources */,
 				17EECEA141DA1AA05851FC5E /* NSUserDefaults+Rx.m in Sources */,
 				17EECA4112B3FD5DB2C78BE0 /* NSObject+Rx.m in Sources */,
-				17EEC938889487A473EB7B87 /* RxDeallocObservable.m in Sources */,
+				17EECD72A0CC3EEEE9E7082D /* RxTarget.m in Sources */,
+				17EEC49A69E906C57373CE9E /* RxKVORepresentable.m in Sources */,
+				17EEC15FCADEEF736DF24419 /* RxKVOObservable.m in Sources */,
+				17EEC935B105F1C2ACD6D093 /* RxDeallocObservable.m in Sources */,
+				17EEC66C825C437442D68C09 /* RxKVOObserver.m in Sources */,
+				17EECA67D724E7DCB4AE7F26 /* RxMessageSentObservable.m in Sources */,
+				17EEC9A7B329E30BE10F0C47 /* RxDeallocatingObservable.m in Sources */,
+				17EECFE6EFFFE9B27AB9F86A /* RxCocoaCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4876,7 +5003,14 @@
 				17EECBDAE3FA3FF1C8398860 /* NSNotificationCenter+Rx.m in Sources */,
 				17EEC0FB8B2FD3BA1C51F5A6 /* NSUserDefaults+Rx.m in Sources */,
 				17EECCEC9F0D2B35BD5FA34F /* NSObject+Rx.m in Sources */,
-				17EEC54FC2BB64411C3A6C16 /* RxDeallocObservable.m in Sources */,
+				17EEC2671E4DD7695806A07A /* RxTarget.m in Sources */,
+				17EEC1BD782A5E58A01DDFD3 /* RxKVORepresentable.m in Sources */,
+				17EEC86CD35F1BA42B217535 /* RxKVOObservable.m in Sources */,
+				17EEC1CD91A631366EC0037C /* RxDeallocObservable.m in Sources */,
+				17EEC3E17545B6A9170872B1 /* RxKVOObserver.m in Sources */,
+				17EEC5BCA2F2919978407E00 /* RxMessageSentObservable.m in Sources */,
+				17EECCA8746AB47F84540F8B /* RxDeallocatingObservable.m in Sources */,
+				17EECD8C4D4AAAD5FF75E688 /* RxCocoaCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4891,7 +5025,14 @@
 				17EEC8B7940FDBB047E650EE /* NSNotificationCenter+Rx.m in Sources */,
 				17EEC7C3AB3943732804239E /* NSUserDefaults+Rx.m in Sources */,
 				17EEC339BE8ADE35799A7B2B /* NSObject+Rx.m in Sources */,
-				17EEC39926ABA4CDEA21CE77 /* RxDeallocObservable.m in Sources */,
+				17EEC01182EB2AC37151CAE6 /* RxTarget.m in Sources */,
+				17EEC5D27FF5CE2527985225 /* RxKVORepresentable.m in Sources */,
+				17EECF3D79C8F1789875C4C2 /* RxKVOObservable.m in Sources */,
+				17EEC9138399A0AC1F4C30B0 /* RxDeallocObservable.m in Sources */,
+				17EEC806FD6DED9CE05D5C2A /* RxKVOObserver.m in Sources */,
+				17EEC1EC87E6DCAD7DEFA9AE /* RxMessageSentObservable.m in Sources */,
+				17EEC3E62AD339E144CD44A9 /* RxDeallocatingObservable.m in Sources */,
+				17EEC0AC1DEDDF74084D01C5 /* RxCocoaCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4906,7 +5047,14 @@
 				17EEC529D037AF602337BC79 /* NSNotificationCenter+Rx.m in Sources */,
 				17EECF52DF5BE78E9032C07B /* NSUserDefaults+Rx.m in Sources */,
 				17EECE2F1626B4C5FF07062A /* NSObject+Rx.m in Sources */,
-				17EECE7CC97C14D6FC39D4D1 /* RxDeallocObservable.m in Sources */,
+				17EEC23960BFD4962266A9AA /* RxTarget.m in Sources */,
+				17EECF863F03A8E057842447 /* RxKVORepresentable.m in Sources */,
+				17EEC484B22AAC7AB4C8D0E7 /* RxKVOObservable.m in Sources */,
+				17EEC837D3FB882F6C99D862 /* RxDeallocObservable.m in Sources */,
+				17EEC509971867865B1C9A7E /* RxKVOObserver.m in Sources */,
+				17EEC349DC8A7C8B978D0DE6 /* RxMessageSentObservable.m in Sources */,
+				17EEC41B086C31241EA5D7FD /* RxDeallocatingObservable.m in Sources */,
+				17EECA7FB4E7EF12E02FBDFE /* RxCocoaCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

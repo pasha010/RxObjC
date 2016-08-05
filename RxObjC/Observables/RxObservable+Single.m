@@ -14,6 +14,7 @@
 #import "RxInfiniteSequence.h"
 #import "RxRetryWhen.h"
 #import "RxScan.h"
+#import "../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
@@ -94,8 +95,15 @@
 
 @implementation NSObject (RxStartWith)
 
-- (nonnull RxObservable *)startWith:(nonnull NSArray *)elements {
+- (nonnull RxObservable *)startWithElements:(nonnull NSArray *)elements {
     return [[RxStartWith alloc] initWithSource:[self asObservable] elements:elements];
+}
+
+- (nonnull RxObservable *)startWith:(nonnull id)element {
+    if ([element isKindOfClass:[NSArray class]]) {
+        return [self startWithElements:element];
+    }
+    return [self startWithElements:@[element]];
 }
 
 @end
