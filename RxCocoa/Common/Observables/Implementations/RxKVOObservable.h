@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RxKVOObservable<Element> : NSObject <RxObservableType, RxKVOObservableProtocol>
 
-@property (nonnull, weak, nonatomic) id target;
+@property (nullable, weak, nonatomic) id target;
 @property (nonnull, strong, nonatomic) NSString *keyPath;
 @property (assign, nonatomic) BOOL retainTarget;
 @property (assign, nonatomic) NSKeyValueObservingOptions options;
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if !DISABLE_SWIZZLING
 
-FOUNDATION_EXTERN __nonnull RxObservable *rx_observeWeaklyKeyPathFor(NSObject *__nonnull target, NSString *__nonnull keyPath, NSKeyValueObservingOptions options);
+FOUNDATION_EXTERN RxObservable *__nonnull rx_observeWeaklyKeyPathFor(NSObject *__nonnull target, NSString *__nonnull keyPath, NSKeyValueObservingOptions options);
 
 /**
  * This should work correctly
@@ -44,7 +44,7 @@ FOUNDATION_EXTERN BOOL rx_isWeakProperty(NSString *__nonnull propertyRuntimeInfo
 
 @end
 
-FOUNDATION_EXTERN RxObservable *rx_observeWeaklyKeyPathSectionsFor(NSObject *__nonnull target, NSArray<NSString *> *__nonnull keyPathSections, NSKeyValueObservingOptions options);
+FOUNDATION_EXTERN RxObservable *__nonnull rx_observeWeaklyKeyPathSectionsFor(NSObject *__nonnull target, NSArray<NSString *> *__nonnull keyPathSections, NSKeyValueObservingOptions options);
 
 #endif
 

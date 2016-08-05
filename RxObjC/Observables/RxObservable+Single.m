@@ -14,7 +14,6 @@
 #import "RxInfiniteSequence.h"
 #import "RxRetryWhen.h"
 #import "RxScan.h"
-#import "../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"

@@ -264,12 +264,13 @@
     ]];
     XCTAssert(b);
 
-    XCTAssert([xs1.subscriptions isEqualToArray:@[
+    XCTAssertEqualObjects(xs1.subscriptions, @[
             [RxSubscription createWithSubscribe:200 unsubscribe:230]
-    ]]);
-    XCTAssert([xs2.subscriptions isEqualToArray:@[
+    ]);
+
+    XCTAssertEqualObjects(xs2.subscriptions, @[
             [RxSubscription createWithSubscribe:230 unsubscribe:250]
-    ]]);
+    ]);
 }
 
 - (void)testCatchSequenceOf_ErrorNever {

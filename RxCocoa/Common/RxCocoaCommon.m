@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
     RxCocoaErrorType _type;
 }
 
-+ (nullable instancetype)unknown {
++ (nonnull instancetype)unknown {
     static RxCocoaError *instance = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
     return instance;
 }
 
-+ (nullable instancetype)invalidOperation:(nonnull id)object {
++ (nonnull instancetype)invalidOperation:(nonnull id)object {
     static RxCocoaError *instance = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
     return instance;
 }
 
-+ (nullable instancetype)itemsNotYetBound:(nonnull id)object {
++ (nonnull instancetype)itemsNotYetBound:(nonnull id)object {
     static RxCocoaError *instance = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
     return instance;
 }
 
-+ (nullable instancetype)invalidPropertyName:(nonnull id)object propertyName:(nonnull NSString *)propertyName {
++ (nonnull instancetype)invalidPropertyName:(nonnull id)object propertyName:(nonnull NSString *)propertyName {
     static RxCocoaError *instance = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
     return instance;
 }
 
-+ (nullable instancetype)invalidObjectOnKeyPath:(nonnull id)object sourceObject:(nonnull id)sourceObject propertyName:(nonnull NSString *)propertyName {
++ (nonnull instancetype)invalidObjectOnKeyPath:(nonnull id)object sourceObject:(nonnull id)sourceObject propertyName:(nonnull NSString *)propertyName {
     static RxCocoaError *instance = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
     return instance;
 }
 
-+ (nullable instancetype)errorDuringSwizzling {
++ (nonnull instancetype)errorDuringSwizzling {
     static RxCocoaError *instance = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
@@ -76,7 +76,7 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
     return instance;
 }
 
-+ (nullable instancetype)castingError:(nonnull id)object targetType:(nonnull id)targetType {
++ (nonnull instancetype)castingError:(nonnull id)object targetType:(nonnull id)targetType {
     static RxCocoaError *instance = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
@@ -392,7 +392,7 @@ id __nonnull rx_castOrFatalError(Class __nonnull castClass, id __nonnull object,
                 if ([self.userInfo[RxObjCRuntimeErrorIsKVOKey] isKindOfClass:[NSNumber class]]) {
                     isKVO = [self.userInfo[RxObjCRuntimeErrorIsKVOKey] boolValue];
                 }
-                return [RxCocoaObjCRuntimeError objectMessagesAlreadyBeingIntercepted:target interceptionMechanism:isKVO ? RxCocoaInterceptionMechanismKVO : RxCocoaInterceptionMechanismUnknown]
+                return [RxCocoaObjCRuntimeError objectMessagesAlreadyBeingIntercepted:target interceptionMechanism:isKVO ? RxCocoaInterceptionMechanismKVO : RxCocoaInterceptionMechanismUnknown];
             }
             case RxObjCRuntimeErrorSelectorNotImplemented: {
                 return [RxCocoaObjCRuntimeError selectorNotImplemented:target];
@@ -416,8 +416,8 @@ id __nonnull rx_castOrFatalError(Class __nonnull castClass, id __nonnull object,
                 return [RxCocoaObjCRuntimeError observingMessagesWithUnsupportedReturnType:target];
             };
         }
-        return [RxCocoaObjCRuntimeError unknown:target];
     }
+    return [RxCocoaObjCRuntimeError unknown:target];
 }
 
 

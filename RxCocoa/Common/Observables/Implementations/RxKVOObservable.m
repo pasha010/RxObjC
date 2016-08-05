@@ -7,9 +7,8 @@
 //
 
 #import "RxKVOObservable.h"
-#import "RxCocoa.h"
+#import "NSObject+Rx.h"
 #import "RxCocoaCommon.h"
-
 
 @interface RxKVOObservable ()
 @property (nonnull, strong, nonatomic) id strongTarget;
@@ -45,7 +44,7 @@
     }];
 
     return [RxAnonymousDisposable create:^{
-        [observer dispose];
+        [kvoObserver dispose];
     }];
 }
 
@@ -53,7 +52,7 @@
 
 #if !DISABLE_SWIZZLING
 
-__nonnull RxObservable *rx_observeWeaklyKeyPathFor(NSObject *__nonnull target, NSString *__nonnull keyPath, NSKeyValueObservingOptions options) {
+RxObservable *__nonnull rx_observeWeaklyKeyPathFor(NSObject *__nonnull target, NSString *__nonnull keyPath, NSKeyValueObservingOptions options) {
     NSArray<NSString *> *components = [[keyPath componentsSeparatedByString:@"."] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary<NSString *, id> *bindings) {
         return ![evaluatedObject isEqualToString:@"self"];
     }]];
@@ -92,7 +91,7 @@ BOOL rx_isWeakProperty(NSString *__nonnull propertyRuntimeInfo) {
 @end
 #pragma clang diagnostic pop
 
-FOUNDATION_EXTERN RxObservable *rx_observeWeaklyKeyPathSectionsFor(NSObject *__nonnull target, NSArray<NSString *> *__nonnull keyPathSections, NSKeyValueObservingOptions options) {
+FOUNDATION_EXTERN RxObservable *__nonnull rx_observeWeaklyKeyPathSectionsFor(NSObject *__nonnull target, NSArray<NSString *> *__nonnull keyPathSections, NSKeyValueObservingOptions options) {
     NSString *propertyName = keyPathSections.firstObject;
     NSArray<NSString *> *remainingPaths = [keyPathSections subarrayWithRange:NSMakeRange(1, keyPathSections.count)];
 

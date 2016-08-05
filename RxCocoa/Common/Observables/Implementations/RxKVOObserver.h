@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol RxKVOObservableProtocol <NSObject>
 
-- (nonnull id)target;
+- (nullable id)target;
 - (nonnull NSString *)keyPath;
 - (BOOL)retainTarget;
 - (NSKeyValueObservingOptions)options;

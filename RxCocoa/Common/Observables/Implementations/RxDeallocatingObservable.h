@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <RxObjC/RxObjC.h>
-#import "RxCocoa.h"
+#import "_RxObjCRuntime.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
