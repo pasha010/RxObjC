@@ -105,7 +105,8 @@ This library contains everything you needed to write unit tests in the following
 
   rx_spec.subspec 'RxCocoa' do |cocoa|
     cocoa.dependency "RxObjC/Core"
-    cocoa.source_files = "RxCocoa/Common/*{h,m}",
+    cocoa.source_files = "RxCocoa/RxCocoa.h",
+                         "RxCocoa/Common/*{h,m}",
                          "RxCocoa/Common/Observables/*{h,m}",
                          "RxCocoa/Common/Observables/Implementations/*{h,m}"
     cocoa.public_header_files = "RxCocoa/Common/*.h",
