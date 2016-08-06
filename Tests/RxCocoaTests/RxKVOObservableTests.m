@@ -298,23 +298,25 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     __block NSString *latest = nil;
     __block BOOL disposed = NO;
 
-    Parent *parent = [[Parent alloc] initWithCallback:^(NSString *string) {
-        latest = string;
-    }];
+    @autoreleasepool {
+        Parent *parent = [[Parent alloc] initWithCallback:^(NSString *string) {
+            latest = string;
+        }];
 
-    [parent.rx_deallocated subscribeCompleted:^{
-        disposed = YES;
-    }];
+        [parent.rx_deallocated subscribeCompleted:^{
+            disposed = YES;
+        }];
 
-    XCTAssertEqualObjects(latest, @"");
-    XCTAssertTrue(disposed == false);
+        XCTAssertEqualObjects(latest, @"");
+        XCTAssertTrue(disposed == false);
 
-    parent.val = @"1";
+        parent.val = @"1";
 
-    XCTAssertEqualObjects(latest, @"1");
-    XCTAssertTrue(disposed == false);
+        XCTAssertEqualObjects(latest, @"1");
+        XCTAssertTrue(disposed == false);
 
-    parent = nil;
+        parent = nil;
+    }
 
     XCTAssertEqualObjects(latest, @"1");
     XCTAssertTrue(disposed == true);
@@ -324,23 +326,25 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     __block NSString *latest = nil;
     __block BOOL disposed = NO;
 
-    ParentWithChild *parent = [[ParentWithChild alloc] initWithCallback:^(NSString *string) {
-        latest = string;
-    }];
+    @autoreleasepool {
+        ParentWithChild *parent = [[ParentWithChild alloc] initWithCallback:^(NSString *string) {
+            latest = string;
+        }];
 
-    [parent.rx_deallocated subscribeCompleted:^{
-        disposed = YES;
-    }];
+        [parent.rx_deallocated subscribeCompleted:^{
+            disposed = YES;
+        }];
 
-    XCTAssertEqualObjects(latest, @"");
-    XCTAssertTrue(disposed == false);
+        XCTAssertEqualObjects(latest, @"");
+        XCTAssertTrue(disposed == false);
 
-    parent.val = @"1";
+        parent.val = @"1";
 
-    XCTAssertEqualObjects(latest, @"1");
-    XCTAssertTrue(disposed == false);
+        XCTAssertEqualObjects(latest, @"1");
+        XCTAssertTrue(disposed == false);
 
-    parent = nil;
+        parent = nil;
+    }
 
     XCTAssertEqualObjects(latest, @"1");
     XCTAssertTrue(disposed == true);
@@ -356,25 +360,27 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     __block NSString *latest = nil;
     __block BOOL disposed = NO;
 
-    HasStrongProperty *root = [HasStrongProperty new];
+    @autoreleasepool {
+        HasStrongProperty *root = [HasStrongProperty new];
 
-    [[root rx_observeWeakly:@"property"] subscribeNext:^(NSString *element) {
-        latest = element;
-    }];
+        [[root rx_observeWeakly:@"property"] subscribeNext:^(NSString *element) {
+            latest = element;
+        }];
 
-    [root.rx_deallocated subscribeCompleted:^{
-        disposed = YES;
-    }];
+        [root.rx_deallocated subscribeCompleted:^{
+            disposed = YES;
+        }];
 
-    XCTAssertTrue(latest == nil);
-    XCTAssertTrue(!disposed);
+        XCTAssertTrue(latest == nil);
+        XCTAssertTrue(!disposed);
 
-    root.property = @"a";
+        root.property = @"a";
 
-    XCTAssertEqualObjects(latest, @"a");
-    XCTAssertTrue(!disposed);
+        XCTAssertEqualObjects(latest, @"a");
+        XCTAssertTrue(!disposed);
 
-    root = nil;
+        root = nil;
+    }
 
     XCTAssertTrue(latest == nil);
     XCTAssertTrue(disposed);
@@ -384,25 +390,27 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     __block NSString *latest = nil;
     __block BOOL disposed = NO;
 
-    HasWeakProperty *root = [HasWeakProperty new];
+    @autoreleasepool {
+        HasWeakProperty *root = [HasWeakProperty new];
 
-    [[root rx_observeWeakly:@"property"] subscribeNext:^(NSString *element) {
-        latest = element;
-    }];
+        [[root rx_observeWeakly:@"property"] subscribeNext:^(NSString *element) {
+            latest = element;
+        }];
 
-    [root.rx_deallocated subscribeCompleted:^{
-        disposed = YES;
-    }];
+        [root.rx_deallocated subscribeCompleted:^{
+            disposed = YES;
+        }];
 
-    XCTAssertTrue(latest == nil);
-    XCTAssertTrue(!disposed);
+        XCTAssertTrue(latest == nil);
+        XCTAssertTrue(!disposed);
 
-    root.property = @"a";
+        root.property = @"a";
 
-    XCTAssertEqualObjects(latest, @"a");
-    XCTAssertTrue(!disposed);
+        XCTAssertEqualObjects(latest, @"a");
+        XCTAssertTrue(!disposed);
 
-    root = nil;
+        root = nil;
+    }
 
     XCTAssertTrue(latest == nil);
     XCTAssertTrue(disposed);
@@ -412,35 +420,37 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     __block NSString *latest = nil;
     __block BOOL disposed = NO;
 
-    HasStrongProperty *child = [HasStrongProperty new];
+    @autoreleasepool {
+        HasStrongProperty *child = [HasStrongProperty new];
 
-    HasWeakProperty *root = [HasWeakProperty new];
+        HasWeakProperty *root = [HasWeakProperty new];
 
-    [[root rx_observeWeakly:@"property.property"] subscribeNext:^(NSString *element) {
-        latest = element;
-    }];
+        [[root rx_observeWeakly:@"property.property"] subscribeNext:^(NSString *element) {
+            latest = element;
+        }];
 
-    [root.rx_deallocated subscribeCompleted:^{
-        disposed = YES;
-    }];
+        [root.rx_deallocated subscribeCompleted:^{
+            disposed = YES;
+        }];
 
-    XCTAssertTrue(latest == nil);
-    XCTAssertTrue(disposed == false);
+        XCTAssertTrue(latest == nil);
+        XCTAssertTrue(disposed == false);
 
-    root.property = child;
+        root.property = child;
 
-    XCTAssertTrue(latest == nil);
-    XCTAssertTrue(disposed == false);
+        XCTAssertTrue(latest == nil);
+        XCTAssertTrue(disposed == false);
 
-    NSString *one = @"1";
+        NSString *one = @"1";
 
-    child.property = one;
+        child.property = one;
 
-    XCTAssertEqualObjects(latest, @"1");
-    XCTAssertTrue(disposed == false);
+        XCTAssertEqualObjects(latest, @"1");
+        XCTAssertTrue(disposed == false);
 
-    root = nil;
-    child = nil;
+        root = nil;
+        child = nil;
+    }
 
     XCTAssertTrue(latest == nil);
     XCTAssertTrue(disposed == true);
@@ -450,33 +460,35 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     __block NSString *latest = nil;
     __block BOOL disposed = NO;
 
-    HasStrongProperty *child = [HasStrongProperty new];
+    @autoreleasepool {
+        HasStrongProperty *child = [HasStrongProperty new];
 
-    HasWeakProperty *root = [HasWeakProperty new];
+        HasWeakProperty *root = [HasWeakProperty new];
 
-    root.property = child;
+        root.property = child;
 
-    NSString *one = @"1";
+        NSString *one = @"1";
 
-    child.property = one;
+        child.property = one;
 
-    XCTAssertTrue(latest == nil);
-    XCTAssertTrue(disposed == false);
+        XCTAssertTrue(latest == nil);
+        XCTAssertTrue(disposed == false);
 
-    [[root rx_observeWeakly:@"property.property"] subscribeNext:^(NSString *element) {
-        latest = element;
-    }];
+        [[root rx_observeWeakly:@"property.property"] subscribeNext:^(NSString *element) {
+            latest = element;
+        }];
 
-    [root.rx_deallocated subscribeCompleted:^{
-        disposed = YES;
-    }];
+        [root.rx_deallocated subscribeCompleted:^{
+            disposed = YES;
+        }];
 
 
-    XCTAssertEqualObjects(latest, @"1");
-    XCTAssertTrue(disposed == false);
+        XCTAssertEqualObjects(latest, @"1");
+        XCTAssertTrue(disposed == false);
 
-    root = nil;
-    child = nil;
+        root = nil;
+        child = nil;
+    }
 
     XCTAssertTrue(latest == nil);
     XCTAssertTrue(disposed == true);
@@ -486,35 +498,37 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     __block NSString *latest = nil;
     __block BOOL disposed = NO;
 
-    HasWeakProperty *child = [HasWeakProperty new];
+    @autoreleasepool {
+        HasWeakProperty *child = [HasWeakProperty new];
 
-    HasStrongProperty *root = [HasStrongProperty new];
+        HasStrongProperty *root = [HasStrongProperty new];
 
-    [[root rx_observeWeakly:@"property.property"] subscribeNext:^(NSString *element) {
-        latest = element;
-    }];
+        [[root rx_observeWeakly:@"property.property"] subscribeNext:^(NSString *element) {
+            latest = element;
+        }];
 
-    [root.rx_deallocated subscribeCompleted:^{
-        disposed = YES;
-    }];
+        [root.rx_deallocated subscribeCompleted:^{
+            disposed = YES;
+        }];
 
-    XCTAssertTrue(latest == nil);
-    XCTAssertTrue(disposed == false);
+        XCTAssertTrue(latest == nil);
+        XCTAssertTrue(disposed == false);
 
-    root.property = child;
+        root.property = child;
 
-    XCTAssertTrue(latest == nil);
-    XCTAssertTrue(disposed == false);
+        XCTAssertTrue(latest == nil);
+        XCTAssertTrue(disposed == false);
 
-    NSString *one = @"1";
+        NSString *one = @"1";
 
-    child.property = one;
+        child.property = one;
 
-    XCTAssertEqualObjects(latest, @"1");
-    XCTAssertTrue(disposed == false);
+        XCTAssertEqualObjects(latest, @"1");
+        XCTAssertTrue(disposed == false);
 
-    root = nil;
-    child = nil;
+        root = nil;
+        child = nil;
+    }
 
     XCTAssertTrue(latest == nil);
     XCTAssertTrue(disposed == true);
@@ -524,33 +538,35 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     __block NSString *latest = nil;
     __block BOOL disposed = NO;
 
-    HasWeakProperty *child = [HasWeakProperty new];
+    @autoreleasepool {
+        HasWeakProperty *child = [HasWeakProperty new];
 
-    HasStrongProperty *root = [HasStrongProperty new];
+        HasStrongProperty *root = [HasStrongProperty new];
 
-    root.property = child;
+        root.property = child;
 
-    NSString *one = @"1";
+        NSString *one = @"1";
 
-    child.property = one;
+        child.property = one;
 
-    XCTAssertTrue(latest == nil);
-    XCTAssertTrue(disposed == false);
-    
-    [[root rx_observeWeakly:@"property.property"] subscribeNext:^(NSString *element) {
-        latest = element;
-    }];
+        XCTAssertTrue(latest == nil);
+        XCTAssertTrue(disposed == false);
 
-    [root.rx_deallocated subscribeCompleted:^{
-        disposed = YES;
-    }];
+        [[root rx_observeWeakly:@"property.property"] subscribeNext:^(NSString *element) {
+            latest = element;
+        }];
+
+        [root.rx_deallocated subscribeCompleted:^{
+            disposed = YES;
+        }];
 
 
-    XCTAssertEqualObjects(latest, @"1");
-    XCTAssertTrue(disposed == false);
+        XCTAssertEqualObjects(latest, @"1");
+        XCTAssertTrue(disposed == false);
 
-    root = nil;
-    child = nil;
+        root = nil;
+        child = nil;
+    }
 
     XCTAssertTrue(latest == nil);
     XCTAssertTrue(disposed == true);
@@ -644,24 +660,25 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
     HasStrongProperty *root = [HasStrongProperty new];
 
     __block NSString *latest = nil;
-
-    root.property = @"a";
-
-    XCTAssertTrue(latest == nil);
-
-    [[root rx_observeWeakly:@"property"] subscribeNext:^(id element) {
-        latest = element;
-    }];
-
-    XCTAssertEqualObjects(latest, @"a");
-
     __block BOOL rootDeallocated = NO;
 
-    [root.rx_deallocated subscribeCompleted:^{
-        rootDeallocated = YES;
-    }];
+    @autoreleasepool {
+        root.property = @"a";
 
-    root = nil;
+        XCTAssertTrue(latest == nil);
+
+        [[root rx_observeWeakly:@"property"] subscribeNext:^(id element) {
+            latest = element;
+        }];
+
+        XCTAssertEqualObjects(latest, @"a");
+
+        [root.rx_deallocated subscribeCompleted:^{
+            rootDeallocated = YES;
+        }];
+
+        root = nil;
+    }
 
     XCTAssertTrue(latest == nil);
     XCTAssertTrue(rootDeallocated);
@@ -669,30 +686,32 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
 
 - (void)testObserveWeakWithOptions_ObserveNotInitialValue {
     HasStrongProperty *root = [HasStrongProperty new];
-
-    __block NSString *latest = nil;
-
-    root.property = @"a";
-
-    XCTAssertTrue(latest == nil);
-
-    [[root rx_observeWeakly:@"property" options:NSKeyValueObservingOptionNew] subscribeNext:^(id element) {
-        latest = element;
-    }];
-
-    XCTAssertTrue(latest == nil);
-
-    root.property = @"b";
-
-    XCTAssertEqualObjects(latest, @"b");
-
     __block BOOL rootDeallocated = NO;
 
-    [root.rx_deallocated subscribeCompleted:^{
-        rootDeallocated = YES;
-    }];
+    __block NSString *latest=nil;
+    @autoreleasepool {
+        latest = nil;
 
-    root = nil;
+        root.property = @"a";
+
+        XCTAssertTrue(latest == nil);
+
+        [[root rx_observeWeakly:@"property" options:NSKeyValueObservingOptionNew] subscribeNext:^(id element) {
+            latest = element;
+        }];
+
+        XCTAssertTrue(latest == nil);
+
+        root.property = @"b";
+
+        XCTAssertEqualObjects(latest, @"b");
+
+        [root.rx_deallocated subscribeCompleted:^{
+            rootDeallocated = YES;
+        }];
+
+        root = nil;
+    }
 
     XCTAssertTrue(latest == nil);
     XCTAssertTrue(rootDeallocated);
