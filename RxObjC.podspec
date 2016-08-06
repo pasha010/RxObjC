@@ -1,12 +1,16 @@
 Pod::Spec.new do |rx_spec|
   rx_spec.name = "RxObjC"
-  rx_spec.version = "1.0.2"
+  rx_spec.version = "1.1"
   rx_spec.summary = "RxObjC is a Objective-C implementation of Reactive Extensions"
   rx_spec.description = <<-DESC
 RxObjC:
 RxObjC is a Objective-C port of [RxSwift]
 
 Like the original [Rx](https://github.com/Reactive-extensions/Rx.Net), its intention is to enable easy composition of asynchronous operations and event streams.
+
+RxCocoa: (see [RxSwift/RxCocoa](https://github.com/ReactiveX/RxSwift/tree/master/RxCocoa))
+* KVO extensions
+* Dealloc observing
 
 RxBlocking: (see [RxSwift/RxBlocking](https://github.com/ReactiveX/RxSwift/tree/master/RxBlocking))
 Set of blocking operators for RxObjC. These operators are mostly intended for unit/integration tests
@@ -101,8 +105,12 @@ This library contains everything you needed to write unit tests in the following
 
   rx_spec.subspec 'RxCocoa' do |cocoa|
     cocoa.dependency "RxObjC/Core"
-    cocoa.source_files = "RxCocoa/**/*.{h,m}"
-    cocoa.public_header_files = "RxCocoa/**/*.h"
+    cocoa.source_files = "RxCocoa/Common/*{h,m}",
+                         "RxCocoa/Common/Observables/*{h,m}",
+                         "RxCocoa/Common/Observables/Implementations/*{h,m}"
+    cocoa.public_header_files = "RxCocoa/Common/*.h",
+                                "RxCocoa/Common/Observables/*.h",
+                                "RxCocoa/Common/Observables/Implementations/*.h"
   end
 
   rx_spec.subspec 'RxTests' do |tests|
