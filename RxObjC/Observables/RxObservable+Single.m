@@ -94,8 +94,15 @@
 
 @implementation NSObject (RxStartWith)
 
-- (nonnull RxObservable *)startWith:(nonnull NSArray *)elements {
+- (nonnull RxObservable *)startWithElements:(nonnull NSArray *)elements {
     return [[RxStartWith alloc] initWithSource:[self asObservable] elements:elements];
+}
+
+- (nonnull RxObservable *)startWith:(nonnull id)element {
+    if ([element isKindOfClass:[NSArray class]]) {
+        return [self startWithElements:element];
+    }
+    return [self startWithElements:@[element]];
 }
 
 @end

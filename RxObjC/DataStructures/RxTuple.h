@@ -51,48 +51,82 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * @see RACTuple in ReactiveCocoa 2.5 version (Thanks!)
- * A tuple is an ordered collection of objects. It may contain nils, represented
- * by RxTupleNil.
+ * A tuple is an ordered collection of objects. It may contain nils, represented by RxNil.
  */
-@interface RxTuple<E1, E2, E3, E4, E5, E6, E7, E8> : NSObject <NSCoding, NSCopying, NSFastEnumeration>
+@interface RxTuple2<E1, E2> : NSObject <NSCoding, NSCopying, NSFastEnumeration>
 
 @property (nullable, nonatomic, readonly) E1 first;
 @property (nullable, nonatomic, readonly) E2 second;
-@property (nullable, nonatomic, readonly) E3 third;
-@property (nullable, nonatomic, readonly) E4 fourth;
-@property (nullable, nonatomic, readonly) E5 fifth;
-@property (nullable, nonatomic, readonly) E6 sixth;
-@property (nullable, nonatomic, readonly) E7 seventh;
-@property (nullable, nonatomic, readonly) E8 eighth;
 
-/// The number of objects in the tuple, including any nil values.
+/** The number of objects in the tuple, including any nil values. */
 @property (nonatomic, readonly) NSUInteger count;
 
-/// An array of all the objects in the tuple.
-///
-/// RxTupleNils are converted to NSNulls in the array.
+/**
+ * An array of all the objects in the tuple.
+ * RxNils are converted to NSNulls in the array.
+ */
 @property (nonnull, nonatomic, copy, readonly) NSArray<id> *array;
 
-/// Invokes +tupleWithArray:convertNullsToNils: with `convert` set to NO.
++ (nonnull instancetype)create:(nonnull E1)first and:(nonnull E2)second;
+
+/**
+ * Invokes +tupleWithArray:convertNullsToNils: with `convert` set to NO.
+ */
 + (nonnull instancetype)tupleWithArray:(nullable NSArray<id> *)array;
 
-/// Creates a new tuple out of the given array.
-///
-/// convert - Whether to convert `NSNull` objects in the array to `RxTupleNil`
-///           values for the tuple. If this is NO, `NSNull`s will be left
-///           untouched.
+/**
+ * Creates a new tuple out of the given array.
+ * @param convert Whether to convert `NSNull` objects in the array to `RxNil` alues for the tuple. If this is NO, `NSNull`s will be left untouched.
+ */
 + (nonnull instancetype)tupleWithArray:(nullable NSArray<id> *)array convertNullsToNils:(BOOL)convert;
 
-/// Creates a new tuple with the given objects.
-///
-/// To include nil objects in the tuple, use `RxTupleNil` in the argument list.
-+ (nonnull instancetype)tupleWithObjects:(nullable id)object, ... NS_REQUIRES_NIL_TERMINATION;
-
-
 - (nullable id)objectAtIndex:(NSUInteger)index;
+
 @end
 
-@interface RxTuple (ObjectSubscripting)
+@interface RxTuple3<E1, E2, E3> : RxTuple2<E1, E2>
+@property (nullable, nonatomic, readonly) E3 third;
+
++ (nonnull instancetype)create:(nonnull E1)first and:(nonnull E2)second and:(nonnull E3)third;
+
+@end
+
+@interface RxTuple4<E1, E2, E3, E4> : RxTuple3<E1, E2, E3>
+@property (nullable, nonatomic, readonly) E4 fourth;
+
++ (nonnull instancetype)create:(nonnull E1)o1 and:(nonnull E2)o2 and:(nonnull E3)o3 and:(nonnull E4)fourth;
+
+@end
+
+@interface RxTuple5<E1, E2, E3, E4, E5> : RxTuple4<E1, E2, E3, E4>
+@property (nullable, nonatomic, readonly) E5 fifth;
+
++ (nonnull instancetype)create:(nonnull E1)first and:(nonnull E2)second and:(nonnull E3)third and:(nonnull E4)fourth and:(nonnull E5)fifth;
+
+@end
+
+@interface RxTuple6<E1, E2, E3, E4, E5, E6> : RxTuple5<E1, E2, E3, E4, E5>
+@property (nullable, nonatomic, readonly) E6 sixth;
+
++ (nonnull instancetype)create:(nonnull E1)first and:(nonnull E2)second and:(nonnull E3)third and:(nonnull E4)fourth and:(nonnull E5)fifth and:(nonnull E6)sixth;
+
+@end
+
+@interface RxTuple7<E1, E2, E3, E4, E5, E6, E7> : RxTuple6<E1, E2, E3, E4, E5, E6>
+@property (nullable, nonatomic, readonly) E7 seventh;
+
++ (nonnull instancetype)create:(nonnull E1)first and:(nonnull E2)second and:(nonnull E3)third and:(nonnull E4)fourth and:(nonnull E5)fifth and:(nonnull E6)sixth and:(nonnull E7)seventh;
+
+@end
+
+@interface RxTuple<E1, E2, E3, E4, E5, E6, E7, E8> : RxTuple7<E1, E2, E3, E4, E5, E6, E7>
+@property (nullable, nonatomic, readonly) E8 eighth;
+
++ (nonnull instancetype)create:(nonnull E1)first and:(nonnull E2)second and:(nonnull E3)third and:(nonnull E4)fourth and:(nonnull E5)fifth and:(nonnull E6)sixth and:(nonnull E7)seventh and:(nonnull E8)eighth;
+
+@end
+
+@interface RxTuple2 (ObjectSubscripting)
 
 /// Invokes -objectAtIndex: with the given index.
 - (nullable id)objectAtIndexedSubscript:(NSUInteger)idx;
@@ -141,26 +175,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RxTupleUnpackingTrampoline : NSObject
 
 + (instancetype)trampoline;
-- (void)setObject:(RxTuple *)tuple forKeyedSubscript:(NSArray *)variables;
+- (void)setObject:(RxTuple2 *)tuple forKeyedSubscript:(NSArray *)variables;
 
-@end
-
-@interface RxTuple7<E1, E2, E3, E4, E5, E6, E7> : RxTuple<E1, E2, E3, E4, E5, E6, E7, id>
-@end
-
-@interface RxTuple6<E1, E2, E3, E4, E5, E6> : RxTuple7<E1, E2, E3, E4, E5, E6, id>
-@end
-
-@interface RxTuple5<E1, E2, E3, E4, E5> : RxTuple6<E1, E2, E3, E4, E5, id>
-@end
-
-@interface RxTuple4<E1, E2, E3, E4> : RxTuple5<E1, E2, E3, E4, id>
-@end
-
-@interface RxTuple3<E1, E2, E3> : RxTuple4<E1, E2, E3, id>
-@end
-
-@interface RxTuple2<E1, E2> : RxTuple3<E1, E2, id>
 @end
 
 NS_ASSUME_NONNULL_END

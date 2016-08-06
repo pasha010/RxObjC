@@ -35,18 +35,21 @@
 }
 @end
 
-@interface RxTuple ()
+@interface RxTuple2 ()
+
 @property (nonatomic, strong) NSArray<id> *backingArray;
+
+- (instancetype)initWithArray:(NSArray *)array;
 @end
 
-@implementation RxTuple
+@implementation RxTuple2
 
 #pragma mark Properties
 
 - (NSArray<id> *)array {
     NSMutableArray<id> *newArray = [NSMutableArray arrayWithCapacity:self.backingArray.count];
     for (id object in self.backingArray) {
-        [newArray addObject:(object == RxTupleNil.tupleNil ? NSNull.null : object)];
+        [newArray addObject:(object == [RxNil null] ? NSNull.null : object)];
     }
 
     return newArray;
@@ -54,67 +57,6 @@
 
 - (NSUInteger)count {
     return self.backingArray.count;
-}
-
-#pragma mark Lifecycle
-
-+ (nonnull instancetype)tupleWithArray:(nullable NSArray<id> *)array {
-    return [self tupleWithArray:array convertNullsToNils:NO];
-}
-
-+ (nonnull instancetype)tupleWithArray:(nullable NSArray<id> *)array convertNullsToNils:(BOOL)convert {
-    RxTuple *tuple = [[self alloc] init];
-
-    if (convert) {
-        NSMutableArray *newArray = [NSMutableArray arrayWithCapacity:array.count];
-        for (id object in array) {
-            [newArray addObject:(object == NSNull.null ? RxTupleNil.tupleNil : object)];
-        }
-        tuple.backingArray = newArray;
-    } else {
-        tuple.backingArray = [array copy];
-    }
-
-    return tuple;
-}
-
-+ (nonnull instancetype)tupleWithObjects:(nullable id)object, ... {
-    RxTuple *tuple = [[self alloc] init];
-
-    va_list args;
-    va_start(args, object);
-
-    NSUInteger count = 0;
-    for (id currentObject = object; currentObject != nil; currentObject = va_arg(args, id)) {
-        ++count;
-    }
-
-    va_end(args);
-
-    if (count == 0) {
-        tuple.backingArray = @[];
-        return tuple;
-    }
-
-    NSMutableArray *objects = [[NSMutableArray alloc] initWithCapacity:count];
-
-    va_start(args, object);
-    for (id currentObject = object; currentObject != nil; currentObject = va_arg(args, id)) {
-        [objects addObject:currentObject];
-    }
-
-    va_end(args);
-
-    tuple.backingArray = objects;
-    return tuple;
-}
-
-- (nonnull instancetype)init {
-    self = [super init];
-    if (self) {
-        _backingArray = [NSArray array];
-    }
-    return self;
 }
 
 - (id)first {
@@ -125,30 +67,36 @@
     return self[1];
 }
 
-- (id)third {
-    return self[2];
+#pragma mark Lifecycle
+
++ (nonnull instancetype)create:(nonnull id)first and:(nonnull id)second {
+    return [[self alloc] initWithArray:@[first ?: [RxNil null], second ?: [RxNil null]]];
 }
 
-- (id)fourth {
-    return self[3];
++ (nonnull instancetype)tupleWithArray:(nullable NSArray<id> *)array {
+    return [self tupleWithArray:array convertNullsToNils:NO];
 }
 
-- (id)fifth {
-    return self[4];
++ (nonnull instancetype)tupleWithArray:(nullable NSArray<id> *)array convertNullsToNils:(BOOL)convert {
+    NSArray *backingArray = [array copy];
+    if (convert) {
+        NSMutableArray *newArray = [NSMutableArray arrayWithCapacity:array.count];
+        for (id object in array) {
+            [newArray addObject:(object == NSNull.null ? RxTupleNil.tupleNil : object)];
+        }
+        backingArray = [newArray copy];
+    }
+
+    return [[self alloc] initWithArray:backingArray];
 }
 
-- (id)sixth {
-    return self[5];
+- (nonnull instancetype)initWithArray:(nonnull NSArray *)array {
+    self = [super init];
+    if (self) {
+        _backingArray = array;
+    }
+    return self;
 }
-
-- (id)seventh {
-    return self[6];
-}
-
-- (id)eighth {
-    return self[6];
-}
-
 
 #pragma mark NSObject
 
@@ -156,15 +104,14 @@
     return [NSString stringWithFormat:@"<%@: %p> %@", self.class, self, self.array];
 }
 
-- (BOOL)isEqual:(RxTuple *)object {
+- (BOOL)isEqual:(id)object {
     if (object == self) {
         return YES;
     }
-    if (![object isKindOfClass:self.class]) {
-        return NO;
+    if ([object isKindOfClass:self.class]) {
+        return [self.backingArray isEqual:[object backingArray]];
     }
-
-    return [self.backingArray isEqual:object.backingArray];
+    return NO;
 }
 
 - (NSUInteger)hash {
@@ -214,10 +161,78 @@
 
 @end
 
-@implementation RxTuple (ObjectSubscripting)
+@implementation RxTuple2 (ObjectSubscripting)
 
 - (nullable id)objectAtIndexedSubscript:(NSUInteger)idx {
     return [self objectAtIndex:idx];
+}
+
+@end
+
+@implementation RxTuple3
+
+- (id)third {
+    return self[2];
+}
+
++ (instancetype)create:(id)first and:(id)second and:(id)third {
+    return [[self alloc] initWithArray:@[first ?: [RxNil null], second ?: [RxNil null], third ?: [RxNil null]]];
+}
+
+@end
+@implementation RxTuple4
+
++ (instancetype)create:(id)o1 and:(id)o2 and:(id)o3 and:(id)o4 {
+    return [[self alloc] initWithArray:@[o1 ?: [RxNil null], o2 ?: [RxNil null], o3 ?: [RxNil null], o4 ?: [RxNil null]]];
+}
+
+- (id)fourth {
+    return self[3];
+}
+
+@end
+@implementation RxTuple5
+
++ (instancetype)create:(id)o1 and:(id)o2 and:(id)o3 and:(id)o4 and:(id)o5 {
+    return [[self alloc] initWithArray:@[o1 ?: [RxNil null], o2 ?: [RxNil null], o3 ?: [RxNil null], o4 ?: [RxNil null], o5 ?: [RxNil null]]];
+}
+
+- (id)fifth {
+    return self[4];
+}
+
+@end
+@implementation RxTuple6
+
++ (instancetype)create:(id)o1 and:(id)o2 and:(id)o3 and:(id)o4 and:(id)o5 and:(id)o6 {
+    return [[self alloc] initWithArray:@[o1 ?: [RxNil null], o2 ?: [RxNil null], o3 ?: [RxNil null], o4 ?: [RxNil null], o5 ?: [RxNil null], o6 ?: [RxNil null]]];
+}
+
+- (id)sixth {
+    return self[5];
+}
+
+@end
+@implementation RxTuple7
+
++ (instancetype)create:(id)o1 and:(id)o2 and:(id)o3 and:(id)o4 and:(id)o5 and:(id)o6 and:(id)o7 {
+    return [[self alloc] initWithArray:@[o1 ?: [RxNil null], o2 ?: [RxNil null], o3 ?: [RxNil null], o4 ?: [RxNil null], o5 ?: [RxNil null], o6 ?: [RxNil null], o7 ?: [RxNil null]]];
+}
+
+- (id)seventh {
+    return self[6];
+}
+
+@end
+
+@implementation RxTuple
+
++ (instancetype)create:(id)o1 and:(id)o2 and:(id)o3 and:(id)o4 and:(id)o5 and:(id)o6 and:(id)o7 and:(id)o8 {
+    return [[self alloc] initWithArray:@[o1 ?: [RxNil null], o2 ?: [RxNil null], o3 ?: [RxNil null], o4 ?: [RxNil null], o5 ?: [RxNil null], o6 ?: [RxNil null], o7 ?: [RxNil null], o8 ?: [RxNil null]]];
+}
+
+- (id)eighth {
+    return self[7];
 }
 
 @end
@@ -236,7 +251,7 @@
     return trampoline;
 }
 
-- (void)setObject:(RxTuple *)tuple forKeyedSubscript:(NSArray *)variables {
+- (void)setObject:(RxTuple2 *)tuple forKeyedSubscript:(NSArray *)variables {
     NSCParameterAssert(variables != nil);
 
     [variables enumerateObjectsUsingBlock:^(NSValue *value, NSUInteger index, BOOL *stop) {
@@ -245,17 +260,4 @@
     }];
 }
 
-@end
-
-@implementation RxTuple2
-@end
-@implementation RxTuple3
-@end
-@implementation RxTuple4
-@end
-@implementation RxTuple5
-@end
-@implementation RxTuple6
-@end
-@implementation RxTuple7
 @end

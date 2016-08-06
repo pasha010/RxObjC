@@ -40,7 +40,7 @@
 
 @implementation RxJustScheduled
 
-- (instancetype)initWithElement:(nonnull id)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
+- (instancetype)initWithElement:(nullable id)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
     self = [super init];
     if (self) {
         _element = element;
@@ -61,7 +61,7 @@
     id __nonnull _element;
 }
 
-- (nonnull instancetype)initWithElement:(nonnull id)element {
+- (nonnull instancetype)initWithElement:(nullable id)element {
     self = [super init];
     if (self) {
         _element = element;

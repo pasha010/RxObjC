@@ -256,20 +256,21 @@
         return [@[xs1, xs2] catchError];
     }];
 
-    BOOL b = [res.events isEqualToArray:@[
+    NSArray *events = @[
             [self next:210 element:@2],
             [self next:220 element:@3],
             [self next:240 element:@4],
             [self completed:250]
-    ]];
-    XCTAssert(b);
+    ];
+    XCTAssertEqualObjects(res.events, events);
 
-    XCTAssert([xs1.subscriptions isEqualToArray:@[
+    XCTAssertEqualObjects(xs1.subscriptions, @[
             [RxSubscription createWithSubscribe:200 unsubscribe:230]
-    ]]);
-    XCTAssert([xs2.subscriptions isEqualToArray:@[
+    ]);
+
+    XCTAssertEqualObjects(xs2.subscriptions, @[
             [RxSubscription createWithSubscribe:230 unsubscribe:250]
-    ]]);
+    ]);
 }
 
 - (void)testCatchSequenceOf_ErrorNever {

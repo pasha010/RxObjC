@@ -49,11 +49,11 @@
 
 @implementation RxObservable (Just)
 
-+ (nonnull RxObservable<id> *)just:(nonnull id)element {
++ (nonnull RxObservable<id> *)just:(nullable id)element {
     return [[RxJust alloc] initWithElement:element];
 }
 
-+ (nonnull RxObservable<id> *)just:(nonnull id)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
++ (nonnull RxObservable<id> *)just:(nullable id)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
     return [[RxJustScheduled alloc] initWithElement:element scheduler:scheduler];
 }
 

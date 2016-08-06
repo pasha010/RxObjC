@@ -24,6 +24,13 @@ NS_ASSUME_NONNULL_BEGIN
  * @return: The source sequence whose observations happen on the specified scheduler.
  */
 - (nonnull RxObservable *)observeOn:(nonnull id <RxImmediateSchedulerType>)scheduler;
+
+/**
+ * Wraps the source sequence in order to run its observer callbacks on the main thread scheduler.
+ * @see: [observeOn operator on reactivex.io](http://reactivex.io/documentation/operators/observeon.html)
+ * @return: The source sequence whose observations happen on the main thread scheduler.
+ */
+- (nonnull RxObservable *)observeOnMainThread;
 @end
 
 @interface NSObject (RxSubscribeOn)

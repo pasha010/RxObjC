@@ -30,6 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (nonnull instancetype)sharedInstance;
 
 /**
+ * Singleton instance of `MainScheduler`
+ * @return instance of `MainScheduler`
+ */
++ (nonnull instancetype)instance;
+
+/**
  * Singleton instance of `MainScheduler` that always schedules work asynchronously
  * and doesn't perform optimizations for calls scheduled from main thread.
  * @return instance of `MainScheduler`

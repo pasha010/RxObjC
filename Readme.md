@@ -33,7 +33,9 @@ end
 
 ##Modules:
 ###RxCocoa:
-soon :)
+_(see [RxSwift/RxCocoa](https://github.com/ReactiveX/RxSwift/tree/master/RxCocoa))_
+* KVO extensions
+* Dealloc observing
 
 ###RxBlocking: 
 _(see [RxSwift/RxBlocking](https://github.com/ReactiveX/RxSwift/tree/master/RxBlocking))_

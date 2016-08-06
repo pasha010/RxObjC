@@ -18,13 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
     id __nonnull _element;
     id <RxImmediateSchedulerType> __nonnull _scheduler;
 }
-- (instancetype)initWithElement:(nonnull Element)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
+- (instancetype)initWithElement:(nullable Element)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
 @end
 
 @interface RxJust<Element> : RxProducer<Element>
 
-- (nonnull instancetype)initWithElement:(nonnull Element)element;
+- (nonnull instancetype)initWithElement:(nullable Element)element;
 
 @end
 

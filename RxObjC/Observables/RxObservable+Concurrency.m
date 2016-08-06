@@ -12,6 +12,7 @@
 #import "RxObserveOnSerialDispatchQueue.h"
 #import "RxObserveOn.h"
 #import "RxSubscribeOn.h"
+#import "RxMainScheduler.h"
 
 
 #pragma clang diagnostic push
@@ -26,6 +27,10 @@
         return [[RxObserveOnSerialDispatchQueue alloc] initWithSource:[self asObservable] scheduler:queueScheduler];
     }
     return [[RxObserveOn alloc] initWithSource:[self asObservable] scheduler:scheduler];
+}
+
+- (nonnull RxObservable *)observeOnMainThread {
+    return [self observeOn:[RxMainScheduler instance]];
 }
 
 @end

@@ -1,21 +1,32 @@
 //
-//  RxSchedulers.h
+//  RxSchedulers
 //  RxObjC
-//
-//  Created by Pavel Malkov on 20.06.16.
+// 
+//  Created by Pavel Malkov on 03.08.16.
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#ifndef RxSchedulers_h
-#define RxSchedulers_h
-
 #import <Foundation/Foundation.h>
 
-@class RxAnyRecursiveScheduler;
+@class RxSerialDispatchQueueScheduler;
 
-typedef void (^RxRecursiveImmediateAction)(id __nullable state, void(^__nonnull recurse)(id __nullable));
+NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^RxAnyRecursiveSchedulerAction)(id __nullable state, RxAnyRecursiveScheduler * __nonnull scheduler);
+/**
+ * It's serial schedulers factory for creating RxSerialDispatchQueueScheduler class instances
+ */
+@interface RxSchedulers : NSObject
 
++ (nonnull RxSerialDispatchQueueScheduler *)userInteractive;
 
-#endif /* RxSchedulers_h */
++ (nonnull RxSerialDispatchQueueScheduler *)userInitiated;
+
++ (nonnull RxSerialDispatchQueueScheduler *)default;
+
++ (nonnull RxSerialDispatchQueueScheduler *)utility;
+
++ (nonnull RxSerialDispatchQueueScheduler *)background;
+
+@end
+
+NS_ASSUME_NONNULL_END
