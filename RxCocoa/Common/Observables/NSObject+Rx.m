@@ -11,8 +11,7 @@
 #import "RxDeallocatingObservable.h"
 #import "RxCocoaCommon.h"
 #import "RxKVOObservable.h"
-#import "_Rx.h"
-#import <objc/runtime.h>
+#import "RxMessageSentObservable.h"
 
 SEL rx_deallocSelector() {
     static SEL rx_deallocSelector;
