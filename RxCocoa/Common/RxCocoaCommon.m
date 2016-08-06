@@ -7,6 +7,7 @@
 //
 
 #import "RxCocoaCommon.h"
+#import "_RxObjCRuntime.h"
 
 typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
     RxCocoaErrorTypeUnknown,
@@ -172,12 +173,12 @@ typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
             return [NSString stringWithFormat:@"Error casting `%@` to `%@`", _object, _targetType];
         }
     }
+    return @"";
 }
 
 - (NSString *)debugDescription {
     return [self description];
 }
-
 
 @end
 

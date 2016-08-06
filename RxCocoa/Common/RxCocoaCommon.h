@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <RxObjC/RxObjC.h>
-#import "RxCocoa.h"
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
