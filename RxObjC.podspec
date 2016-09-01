@@ -1,6 +1,6 @@
 Pod::Spec.new do |rx_spec|
   rx_spec.name = "RxObjC"
-  rx_spec.version = "1.1"
+  rx_spec.version = "1.1.1"
   rx_spec.summary = "RxObjC is a Objective-C implementation of Reactive Extensions"
   rx_spec.description = <<-DESC
 RxObjC:
@@ -109,7 +109,8 @@ This library contains everything you needed to write unit tests in the following
                          "RxCocoa/Common/*{h,m}",
                          "RxCocoa/Common/Observables/*{h,m}",
                          "RxCocoa/Common/Observables/Implementations/*{h,m}"
-    cocoa.public_header_files = "RxCocoa/Common/*.h",
+    cocoa.public_header_files = "RxCocoa/RxCocoa.h",
+                                "RxCocoa/Common/*.h",
                                 "RxCocoa/Common/Observables/*.h",
                                 "RxCocoa/Common/Observables/Implementations/*.h"
   end
