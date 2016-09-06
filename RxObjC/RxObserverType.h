@@ -9,8 +9,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
-Supports push-style iteration over an observable sequence.
-*/
+ * Supports push-style iteration over an observable sequence.
+ */
 @protocol RxObserverType <NSObject>
 /**
  * Notify observer about sequence event.
@@ -23,20 +23,19 @@ Supports push-style iteration over an observable sequence.
 @interface NSObject (RxObserverType) <RxObserverType>
 
 /**
-Convenience method equivalent to `on(.Next(element: E))`
-
-- parameter element: Next element to send to observer(s)
-*/
+ * Convenience method equivalent to `on(.Next(element: E))`
+ * @param element: Next element to send to observer(s)
+ */
 - (void)onNext:(nullable id)element;
 
 /**
-Convenience method equivalent to `on(.Completed)`
-*/
+ * Convenience method equivalent to `on(.Completed)`
+ */
 - (void)onCompleted;
 
 /**
-Convenience method equivalent to `on(.Error(error: ErrorType))`
-- parameter error: ErrorType to send to observer(s)
+ * Convenience method equivalent to `on(.Error(error: ErrorType))`
+ * @param error: ErrorType to send to observer(s)
 */
 - (void)onError:(nullable NSError *)error;
 

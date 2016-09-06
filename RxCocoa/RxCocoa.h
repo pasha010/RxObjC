@@ -18,6 +18,8 @@
 #import "RxCocoaCommon.h"
 #import "RxKVORepresentable.h"
 #import "RxTarget.h"
+#import "RxDelegateProxy.h"
+#import "RxDelegateProxyType.h"
 
 #pragma mark - Common - Observables
 #import "NSNotificationCenter+Rx.h"

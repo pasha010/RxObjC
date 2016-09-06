@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "365F3A401D33AB960096A86C"
-               BuildableName = "RxCocoa.framework"
+               BuildableName = "RxCocoa-tvOS"
                BlueprintName = "RxCocoa-tvOS"
                ReferencedContainer = "container:RxObjC.xcodeproj">
             </BuildableReference>
