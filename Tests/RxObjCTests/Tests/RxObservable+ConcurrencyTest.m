@@ -600,9 +600,8 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
         return [xs subscribeOn:scheduler];
     }];
 
-    XCTAssert([res.events isEqualToArray:@[[self completed:300]]]);
-    // in swift unsubscribe == 301
-    XCTAssert([xs.subscriptions isEqualToArray:@[[RxSubscription createWithSubscribe:201 unsubscribe:300]]]);
+    XCTAssertEqualObjects(res.events, @[[self completed:300]]);
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:201 unsubscribe:301]]);
 }
 
 - (void)testSubscribeOn_SchedulerError {
@@ -616,10 +615,8 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
         return [xs subscribeOn:scheduler];
     }];
 
-    XCTAssert([res.events isEqualToArray:@[[self error:300 testError:[RxTestError testError]]]]);
-
-    // in swift unsubscribe == 301
-    XCTAssert([xs.subscriptions isEqualToArray:@[[RxSubscription createWithSubscribe:201 unsubscribe:300]]]);
+    XCTAssertEqualObjects(res.events, @[[self error:300 testError:[RxTestError testError]]]);
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:201 unsubscribe:301]]);
 }
 
 - (void)testSubscribeOn_SchedulerDispose {

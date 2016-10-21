@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #endif
 
-- (nonnull RxObservable<NSNumber/*CLAuthorizationStatus*/> *)rx_didChangeAuthorizationStatus;
+- (nonnull RxObservable<NSNumber/*<CLAuthorizationStatus>*/ *> *)rx_didChangeAuthorizationStatus;
 
 @end
 
