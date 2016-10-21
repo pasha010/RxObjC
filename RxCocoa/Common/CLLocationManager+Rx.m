@@ -6,15 +6,15 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <RxCocoa/RxCocoa.h>
+#import <RxCocoa/RxObjCCocoa.h>
 #import "CLLocationManager+Rx.h"
 #import "RxCLLocationManagerDelegateProxy.h"
-#import "RxDelegateProxy.h"
+#import "RxCocoaDelegateProxy.h"
 
 
 @implementation CLLocationManager (Rx)
 
-- (nonnull RxDelegateProxy *)rx_delegate {
+- (nonnull RxCocoaDelegateProxy *)rx_delegate {
     return [RxCLLocationManagerDelegateProxy proxyForObject:self];
 }
 

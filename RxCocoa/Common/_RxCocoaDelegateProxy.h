@@ -1,5 +1,5 @@
 //
-//  _RxDelegateProxy.h
+//  _RxCocoaDelegateProxy.h
 //  RxCocoa
 //
 //  Created by Pavel Malkov on 18.07.16.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface _RxDelegateProxy : NSObject
+@interface _RxCocoaDelegateProxy : NSObject
 
 @property (nonatomic, assign, readonly) id _forwardToDelegate;
 

@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "RxTest.h"
-#import "RxCocoa.h"
+#import "RxObjCCocoa.h"
 
 @interface NSObjectRxTests : RxTest
 @end

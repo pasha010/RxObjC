@@ -1,5 +1,5 @@
 //
-//  _RxKVOObserver.h
+//  _RxCocoaKVOObserver.h
 //  RxCocoa
 //
 //  Created by Pavel Malkov on 19.07.16.
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^RxKVOCallback)(id __nullable object);
 
-@interface _RxKVOObserver<E> : NSObject
+@interface _RxCocoaKVOObserver<E> : NSObject
 
 - (nonnull instancetype)initWithTarget:(nonnull E)target
                           retainTarget:(BOOL)retainTarget

@@ -1,5 +1,5 @@
 //
-//  RxDelegateProxy
+//  RxCocoaDelegateProxy
 //  RxObjC
 // 
 //  Created by Pavel Malkov on 05.09.16.
@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxCocoa.h"
+#import "RxObjCCocoa.h"
 #import <RxObjC/RxObjC.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,7 +19,7 @@ FOUNDATION_EXTERN uint8_t rx_dataSourceAssociatedTag;
  * Base class for `DelegateProxyType` protocol.
  * This implementation is not thread safe and can be used only from one thread (Main thread).
 */
-@interface RxDelegateProxy : _RxDelegateProxy
+@interface RxCocoaDelegateProxy : _RxCocoaDelegateProxy
 
 /**
  * Initializes new instance.

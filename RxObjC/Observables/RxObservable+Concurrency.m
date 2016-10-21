@@ -38,7 +38,7 @@
 @implementation NSObject (RxSubscribeOn)
 
 - (nonnull RxObservable *)subscribeOn:(nonnull id <RxImmediateSchedulerType>)scheduler {
-    return [[RxSubscribeOn alloc] initWithSource:[self asObservable] scheduler:scheduler];
+    return [[RxSubscribeOn alloc] initWithSource:self scheduler:scheduler];
 }
 
 @end

@@ -10,11 +10,11 @@
 #import <RxObjC/RxObjC.h>
 #import <CoreLocation/CoreLocation.h>
 #import "RxDelegateProxyType.h"
-#import "RxDelegateProxy.h"
+#import "RxCocoaDelegateProxy.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxCLLocationManagerDelegateProxy : RxDelegateProxy <CLLocationManagerDelegate, RxDelegateProxyType>
+@interface RxCLLocationManagerDelegateProxy : RxCocoaDelegateProxy <CLLocationManagerDelegate, RxDelegateProxyType>
 
 @end
 

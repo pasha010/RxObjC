@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxCocoa.h"
+#import "RxObjCCocoa.h"
 #import <RxObjC/RxObjC.h>
 
 NS_ASSUME_NONNULL_BEGIN

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "365F39171D33AAB30096A86C"
-               BuildableName = "RxCocoa-iOS"
+               BuildableName = "RxCocoa.framework"
                BlueprintName = "RxCocoa-iOS"
                ReferencedContainer = "container:RxObjC.xcodeproj">
             </BuildableReference>

@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <RxObjC/RxObjC.h>
 
-@class RxDelegateProxy;
+@class RxCocoaDelegateProxy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Reactive wrapper for `delegate`.
  * For more information take a look at `DelegateProxyType` protocol documentation.
  */
-- (nonnull RxDelegateProxy *)rx_delegate;
+- (nonnull RxCocoaDelegateProxy *)rx_delegate;
 
 /**
  * Reactive wrapper for `delegate` message.

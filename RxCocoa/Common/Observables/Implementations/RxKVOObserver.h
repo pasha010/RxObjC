@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <RxObjC/RxObjC.h>
-#import "_RxKVOObserver.h"
+#import "_RxCocoaKVOObserver.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface RxKVOObserver : _RxKVOObserver <RxDisposable>
+@interface RxKVOObserver : _RxCocoaKVOObserver <RxDisposable>
 
 @property (nullable, weak, nonatomic) RxKVOObserver *retainSelf;
 

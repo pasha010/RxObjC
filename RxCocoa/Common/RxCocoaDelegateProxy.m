@@ -1,17 +1,17 @@
 //
-//  RxDelegateProxy
+//  RxCocoaDelegateProxy
 //  RxObjC
 // 
 //  Created by Pavel Malkov on 05.09.16.
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "RxDelegateProxy.h"
+#import "RxCocoaDelegateProxy.h"
 
 uint8_t rx_delegateAssociatedTag = 0;
 uint8_t rx_dataSourceAssociatedTag = 0;
 
-@interface RxDelegateProxy ()
+@interface RxCocoaDelegateProxy ()
 /**
  * Parent object associated with delegate proxy.
  */
@@ -21,7 +21,7 @@ uint8_t rx_dataSourceAssociatedTag = 0;
 
 @end
 
-@implementation RxDelegateProxy
+@implementation RxCocoaDelegateProxy
 
 - (nonnull instancetype)initWithParentObject:(nonnull id)parentObject {
     self = [super init];
@@ -62,11 +62,11 @@ uint8_t rx_dataSourceAssociatedTag = 0;
 }
 
 + (const void *)delegateAssociatedObjectTag {
-    return [RxDelegateProxy _pointer:&rx_delegateAssociatedTag];
+    return [RxCocoaDelegateProxy _pointer:&rx_delegateAssociatedTag];
 }
 
 + (nonnull instancetype)createProxyForObject:(nonnull id)object {
-    return [[RxDelegateProxy alloc] initWithParentObject:object];
+    return [[RxCocoaDelegateProxy alloc] initWithParentObject:object];
 }
 
 + (nullable id)assignedProxyFor:(nonnull id)object {
