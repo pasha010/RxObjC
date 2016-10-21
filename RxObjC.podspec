@@ -108,10 +108,12 @@ This library contains everything you needed to write unit tests in the following
     cocoa.source_files = "RxCocoa/RxObjCCocoa.h",
                          "RxCocoa/Common/*{h,m}",
                          "RxCocoa/Common/Observables/*{h,m}",
+                         "RxCocoa/Common/Proxies/*{h,m}",
                          "RxCocoa/Common/Observables/Implementations/*{h,m}"
     cocoa.public_header_files = "RxCocoa/RxObjCCocoa.h",
                                 "RxCocoa/Common/*.h",
                                 "RxCocoa/Common/Observables/*.h",
+                                "RxCocoa/Common/Proxies/*.h",
                                 "RxCocoa/Common/Observables/Implementations/*.h"
   end
 

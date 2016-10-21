@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Upon connection of the connectable observable, the subject is subscribed to the source exactly one, and messages are forwarded to the observers registered with the connectable observable.
  * For specializations with fixed subject types, see `publish` and `replay`.
  * @see [multicast operator on reactivex.io](http://reactivex.io/documentation/operators/publish.html)
- * @param subject: Subject to push source elements into.
+ * @param subject - Subject to push source elements into.
  * @return: A connectable observable sequence that upon connection causes the source sequence to push results into the specified subject.
  */
 - (nonnull RxConnectableObservable<id <RxSubjectType>> *)multicast:(nonnull id <RxSubjectType>)subject;
@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
  * Each subscription to the resulting sequence causes a separate multicast invocation, exposing the sequence resulting from the selector function's invocation.
  * For specializations with fixed subject types, see `publish` and `replay`.
  * @see [multicast operator on reactivex.io](http://reactivex.io/documentation/operators/publish.html)
- * @param subjectSelector: Factory function to create an intermediate subject through which the source sequence's elements will be multicast to the selector function.
- * @param sel: Selector function which can use the multicasted source sequence subject to the policies enforced by the created subject.
+ * @param subjectSelector - Factory function to create an intermediate subject through which the source sequence's elements will be multicast to the selector function.
+ * @param sel - Selector function which can use the multicasted source sequence subject to the policies enforced by the created subject.
  * @return: An observable sequence that contains the elements of a sequence produced by multicasting the source sequence within a selector function.
  */
 - (nonnull RxObservable<id> *)multicast:(RxSubjectSelectorType)subjectSelector selector:(RxSelectorType)sel;
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns a connectable observable sequence that shares a single subscription to the underlying sequence replaying bufferSize elements.
  * This operator is a specialization of `multicast` using a `ReplaySubject`.
  * @see [replay operator on reactivex.io](http://reactivex.io/documentation/operators/replay.html)
- * @param bufferSize: Maximum element count of the replay buffer.
+ * @param bufferSize - Maximum element count of the replay buffer.
  * @return: A connectable observable sequence that shares a single subscription to the underlying sequence.
  */
 - (nonnull RxConnectableObservable<RxReplaySubject *> *)replay:(NSUInteger)bufferSize;
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns an observable sequence that shares a single subscription to the underlying sequence, and immediately upon subscription replays maximum number of elements in buffer.
  * This operator is a specialization of replay which creates a subscription when the number of observers goes from zero to one, then shares that subscription with all subsequent observers until the number of observers returns to zero, at which point the subscription is disposed.
  * @see [shareReplay operator on reactivex.io](http://reactivex.io/documentation/operators/replay.html)
- * @param bufferSize: Maximum element count of the replay buffer.
+ * @param bufferSize - Maximum element count of the replay buffer.
  * @return: An observable sequence that contains the elements of a sequence produced by multicasting the source sequence.
  */
 - (nonnull RxObservable *)shareReplay:(NSUInteger)bufferSize;

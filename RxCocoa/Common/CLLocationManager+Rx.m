@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import <RxCocoa/RxObjCCocoa.h>
+#import "RxObjCCocoa.h"
 #import "CLLocationManager+Rx.h"
 #import "RxCLLocationManagerDelegateProxy.h"
 #import "RxCocoaDelegateProxy.h"

@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RxObservable<E> (CombineLatest2)
 /**
  * Merges the specified observable sequences into one observable sequence by using the selector function whenever any of the observable sequences produces an element.
- * @param source1: first observable
- * @param source2: second observable
- * @param resultSelector: Function to invoke whenever any of the sources produces an element.
+ * @param source1 - first observable
+ * @param source2 - second observable
+ * @param resultSelector - Function to invoke whenever any of the sources produces an element.
  * @return: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
  */
 + (nonnull RxObservable<E> *)combineLatest:(nonnull id <RxObservableType>)source1

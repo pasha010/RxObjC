@@ -12,16 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^RxDisposeAction)();
 
 /**
-Represents an Action-based disposable.
-
-When dispose method is called, disposal action will be dereferenced.
+ * Represents an Action-based disposable.
+ * When dispose method is called, disposal action will be dereferenced.
 */
 @interface RxAnonymousDisposable : RxDisposeBase <RxCancelable>
 
 /**
-Constructs a new disposable with the given action used for disposal.
-
-- parameter disposeAction: Disposal action which will be run upon calling `dispose`.
+ * Constructs a new disposable with the given action used for disposal.
+ * @param disposeAction - Disposal action which will be run upon calling `dispose`.
 */
 - (nonnull instancetype)initWithDisposeAction:(nullable RxDisposeAction)disposeAction;
 

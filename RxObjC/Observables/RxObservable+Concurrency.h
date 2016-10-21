@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  * This only invokes observer callbacks on a `scheduler`. In case the subscription and/or unsubscription
  * actions have side-effects that require to be run on a scheduler, use `subscribeOn`.
  * @see: [observeOn operator on reactivex.io](http://reactivex.io/documentation/operators/observeon.html)
- * @param scheduler: Scheduler to notify observers on.
+ * @param scheduler - Scheduler to notify observers on.
  * @return: The source sequence whose observations happen on the specified scheduler.
  */
 - (nonnull RxObservable *)observeOn:(nonnull id <RxImmediateSchedulerType>)scheduler;
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * In order to invoke observer callbacks on a `scheduler`, use `observeOn`.
  * @see [subscribeOn operator on reactivex.io](http://reactivex.io/documentation/operators/subscribeon.html)
- * @param scheduler: Scheduler to perform subscription and unsubscription actions on.
+ * @param scheduler - Scheduler to perform subscription and unsubscription actions on.
  * @return: The source sequence whose subscriptions and unsubscriptions happen on the specified scheduler.
  */
 - (nonnull RxObservable *)subscribeOn:(nonnull id <RxImmediateSchedulerType>)scheduler;

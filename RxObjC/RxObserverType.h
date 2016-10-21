@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Convenience method equivalent to `on(.Next(element: E))`
- * @param element: Next element to send to observer(s)
+ * @param element - Next element to send to observer(s)
  */
 - (void)onNext:(nullable id)element;
 
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Convenience method equivalent to `on(.Error(error: ErrorType))`
- * @param error: ErrorType to send to observer(s)
+ * @param error - ErrorType to send to observer(s)
 */
 - (void)onError:(nullable NSError *)error;
 
