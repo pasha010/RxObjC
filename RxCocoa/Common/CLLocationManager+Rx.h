@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nonnull RxObservable<CLRegion *> *)rx_didExitRegion __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<RxTuple2<NSNumber * /*CLRegionState*/, CLRegion *> *> *)rx_didDetermineStateForRegion NS_AVAILABLE(10_10, 8_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (nonnull RxObservable<RxTuple2<NSNumber * /*CLRegionState*/, CLRegion *> *> *)rx_didDetermineStateForRegion __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 - (nonnull RxObservable<RxTuple2<CLRegion *, NSError *> *> *)rx_monitoringDidFailForRegionWithError __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
