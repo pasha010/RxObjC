@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nonnull RxObservable<CLRegion *> *)rx_didExitRegion;
 #endif
 
-#if TARGET_OS_IOS || TARGET_OS_MAC
+#if TARGET_OS_IOS || TARGET_OS_OSX
 
 - (nonnull RxObservable<RxTuple2<NSNumber * /*CLRegionState*/, CLRegion *> *> *)rx_didDetermineStateForRegion NS_AVAILABLE(10_10, 8_0);
 
@@ -68,9 +68,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nonnull RxObservable<CLVisit *> *)rx_didVisit;
 
-#endif
-
 - (nonnull RxObservable<NSNumber/*<CLAuthorizationStatus>*/ *> *)rx_didChangeAuthorizationStatus;
+
+#endif
 
 @end
 

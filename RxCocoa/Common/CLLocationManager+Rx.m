@@ -78,7 +78,7 @@
 
 #endif
 
-#if TARGET_OS_IOS || TARGET_OS_MAC
+#if TARGET_OS_IOS || TARGET_OS_OSX
 
 - (nonnull RxObservable<RxTuple2<NSNumber *, CLRegion *> *> *)rx_didDetermineStateForRegion {
     return [[[self rx_delegate] observe:@selector(locationManager:didDetermineState:forRegion:)]

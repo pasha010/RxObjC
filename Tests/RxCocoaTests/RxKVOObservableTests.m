@@ -12,7 +12,7 @@
 
 #if TARGET_OS_IOS
 #import <UIKit/UIKit.h>
-#elif TARGET_OS_MAC
+#elif TARGET_OS_OSX
 #import <Cocoa/Cocoa.h>
 #endif
 
