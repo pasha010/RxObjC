@@ -6,11 +6,15 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
+#import <RxObjC/RxObjC.h>
 #import "RxObjCCocoa.h"
 #import "CLLocationManager+Rx.h"
 #import "RxCLLocationManagerDelegateProxy.h"
 #import "RxCocoaDelegateProxy.h"
 
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @implementation CLLocationManager (Rx)
 
@@ -32,12 +36,16 @@
             }];
 }
 
+#if TARGET_OS_IOS || TARGET_OS_MAC
+
 - (nonnull RxObservable<NSError *> *)rx_didFinishDeferredUpdatesWithError {
     return [[[self rx_delegate] observe:@selector(locationManager:didFinishDeferredUpdatesWithError:)]
             map:^NSError *(NSArray *element) {
                 return rx_castOrThrow([NSError class], element[1]);
             }];
 }
+
+#endif
 
 #if TARGET_OS_IOS
 
@@ -145,3 +153,4 @@
 #endif
 
 @end
+#pragma clang diagnostic pop

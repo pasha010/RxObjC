@@ -10,6 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <RxObjC/RxObjC.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 @class RxCocoaDelegateProxy;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -32,46 +34,33 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nonnull RxObservable<NSError *> *)rx_didFailWithError;
 
-#if TARGET_OS_IOS || TARGET_OS_MAC
-
 - (nonnull RxObservable<NSError *> *)rx_didFinishDeferredUpdatesWithError;
 
-#endif
+- (nonnull RxObservable *)rx_didPauseLocationUpdates __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-#if TARGET_OS_IOS
+- (nonnull RxObservable *)rx_didResumeLocationUpdates __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable *)rx_didPauseLocationUpdates;
+- (nonnull RxObservable<CLHeading *> *)rx_didUpdateHeading __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable *)rx_didResumeLocationUpdates;
+- (nonnull RxObservable<CLRegion *> *)rx_didEnterRegion __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<CLHeading *> *)rx_didUpdateHeading;
+- (nonnull RxObservable<CLRegion *> *)rx_didExitRegion __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<CLRegion *> *)rx_didEnterRegion;
+- (nonnull RxObservable<RxTuple2<NSNumber * /*CLRegionState*/, CLRegion *> *> *)rx_didDetermineStateForRegion NS_AVAILABLE(10_10, 8_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<CLRegion *> *)rx_didExitRegion;
-#endif
+- (nonnull RxObservable<RxTuple2<CLRegion *, NSError *> *> *)rx_monitoringDidFailForRegionWithError __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-#if TARGET_OS_IOS || TARGET_OS_OSX
+- (nonnull RxObservable<CLRegion *> *)rx_didStartMonitoringForRegion __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<RxTuple2<NSNumber * /*CLRegionState*/, CLRegion *> *> *)rx_didDetermineStateForRegion NS_AVAILABLE(10_10, 8_0);
+- (nonnull RxObservable<RxTuple2<NSArray <CLBeacon *> *, CLBeaconRegion *> *> *)rx_didRangeBeaconsInRegion __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<RxTuple2<CLRegion *, NSError *> *> *)rx_monitoringDidFailForRegionWithError;
+- (nonnull RxObservable<RxTuple2<CLBeaconRegion *, NSError *> *> *)rx_rangingBeaconsDidFailForRegionWithError __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<CLRegion *> *)rx_didStartMonitoringForRegion;
+- (nonnull RxObservable<CLVisit *> *)rx_didVisit __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-#endif
-
-#if TARGET_OS_IOS
-- (nonnull RxObservable<RxTuple2<NSArray <CLBeacon *> *, CLBeaconRegion *> *> *)rx_didRangeBeaconsInRegion;
-
-- (nonnull RxObservable<RxTuple2<CLBeaconRegion *, NSError *> *> *)rx_rangingBeaconsDidFailForRegionWithError;
-
-- (nonnull RxObservable<CLVisit *> *)rx_didVisit;
-
-- (nonnull RxObservable<NSNumber/*<CLAuthorizationStatus>*/ *> *)rx_didChangeAuthorizationStatus;
-
-#endif
+- (nonnull RxObservable<NSNumber/*<CLAuthorizationStatus>*/ *> *)rx_didChangeAuthorizationStatus __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 @end
 
 NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop
