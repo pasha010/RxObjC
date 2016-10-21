@@ -1,6 +1,6 @@
 Pod::Spec.new do |rx_spec|
   rx_spec.name = "RxObjC"
-  rx_spec.version = "1.1.1"
+  rx_spec.version = "1.2.0"
   rx_spec.summary = "RxObjC is a Objective-C implementation of Reactive Extensions"
   rx_spec.description = <<-DESC
 RxObjC:
@@ -105,11 +105,11 @@ This library contains everything you needed to write unit tests in the following
 
   rx_spec.subspec 'RxCocoa' do |cocoa|
     cocoa.dependency "RxObjC/Core"
-    cocoa.source_files = "RxCocoa/RxCocoa.h",
+    cocoa.source_files = "RxCocoa/RxObjCCocoa.h",
                          "RxCocoa/Common/*{h,m}",
                          "RxCocoa/Common/Observables/*{h,m}",
                          "RxCocoa/Common/Observables/Implementations/*{h,m}"
-    cocoa.public_header_files = "RxCocoa/RxCocoa.h",
+    cocoa.public_header_files = "RxCocoa/RxObjCCocoa.h",
                                 "RxCocoa/Common/*.h",
                                 "RxCocoa/Common/Observables/*.h",
                                 "RxCocoa/Common/Observables/Implementations/*.h"
@@ -117,7 +117,7 @@ This library contains everything you needed to write unit tests in the following
 
   rx_spec.subspec 'RxTests' do |tests|
     tests.dependency "RxObjC/Core"
-    tests.source_files = "RxTests/**/*.{h,m}"
+    tests.source_files = "RxTests/**/*{h,m}"
     tests.public_header_files = "RxTests/**/*.h"
     tests.ios.deployment_target = '8.0'
     tests.osx.deployment_target = '10.9'
