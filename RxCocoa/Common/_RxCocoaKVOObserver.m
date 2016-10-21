@@ -1,14 +1,14 @@
 //
-//  _RxKVOObserver.m
+//  _RxCocoaKVOObserver.m
 //  RxCocoa
 //
 //  Created by Pavel Malkov on 19.07.16.
 //  Copyright © 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "_RxKVOObserver.h"
+#import "_RxCocoaKVOObserver.h"
 
-@interface _RxKVOObserver ()
+@interface _RxCocoaKVOObserver ()
 
 @property (nonatomic, unsafe_unretained) id target;
 @property (nullable, nonatomic, strong) id retainedTarget;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation _RxKVOObserver
+@implementation _RxCocoaKVOObserver
 
 - (nonnull instancetype)initWithTarget:(nonnull id)target
                           retainTarget:(BOOL)retainTarget

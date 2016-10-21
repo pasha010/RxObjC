@@ -13,8 +13,8 @@
 #import <objc/message.h>
 #import <libkern/OSAtomic.h>
 
-#import "_Rx.h"
-#import "_RxObjcRuntime.h"
+#import "_RxMacros.h"
+#import "_RxCocoaRuntime.h"
 
 #if !DISABLE_SWIZZLING
 

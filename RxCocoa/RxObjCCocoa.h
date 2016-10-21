@@ -10,14 +10,16 @@
 #define RxCocoa_h
 
 #pragma mark - Common
-#import "_Rx.h"
-#import "_RxDelegateProxy.h"
-#import "_RxKVOObserver.h"
-#import "_RxObjCRuntime.h"
+#import "_RxMacros.h"
+#import "_RxCocoaDelegateProxy.h"
+#import "_RxCocoaKVOObserver.h"
+#import "_RxCocoaRuntime.h"
 #import "RxObservable+Bind.h"
 #import "RxCocoaCommon.h"
 #import "RxKVORepresentable.h"
 #import "RxTarget.h"
+#import "RxCocoaDelegateProxy.h"
+#import "RxDelegateProxyType.h"
 
 #pragma mark - Common - Observables
 #import "NSNotificationCenter+Rx.h"

@@ -1,16 +1,16 @@
 //
-//  _RxDelegateProxy.m
+//  _RxCocoaDelegateProxy.m
 //  RxCocoa
 //
 //  Created by Pavel Malkov on 18.07.16.
 //  Copyright © 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "_RxDelegateProxy.h"
-#import "_Rx.h"
-#import "_RxObjCRuntime.h"
+#import "_RxCocoaDelegateProxy.h"
+#import "_RxMacros.h"
+#import "_RxCocoaRuntime.h"
 
-@interface _RxDelegateProxy ()
+@interface _RxCocoaDelegateProxy ()
 
 @property (nonatomic, strong) id strongForwardDelegate;
 
@@ -18,7 +18,7 @@
 
 static NSMutableDictionary *forwardableSelectorsPerClass = nil;
 
-@implementation _RxDelegateProxy
+@implementation _RxCocoaDelegateProxy
 
 + (nonnull NSSet<NSValue *> *)collectSelectorsForProtocol:(nonnull Protocol *)protocol {
     NSMutableSet *selectors = [NSMutableSet set];
@@ -106,7 +106,7 @@ static NSMutableDictionary *forwardableSelectorsPerClass = nil;
 }
 
 - (BOOL)canRespondToSelector:(SEL)selector {
-    @synchronized (_RxDelegateProxy.class) {
+    @synchronized (_RxCocoaDelegateProxy.class) {
         NSSet *allowedMethods = forwardableSelectorsPerClass[CLASS_VALUE(self.class)];
         NSAssert(allowedMethods != nil, @"Set of allowed methods not initialized");
         return [allowedMethods containsObject:SEL_VALUE(selector)];

@@ -7,7 +7,7 @@
 //
 
 #import "RxCocoaCommon.h"
-#import "_RxObjCRuntime.h"
+#import "_RxCocoaRuntime.h"
 
 typedef NS_ENUM(NSUInteger, RxCocoaErrorType) {
     RxCocoaErrorTypeUnknown,
