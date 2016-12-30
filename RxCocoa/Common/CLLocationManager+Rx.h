@@ -52,11 +52,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nonnull RxObservable<CLRegion *> *)rx_didStartMonitoringForRegion __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<RxTuple2<NSArray <CLBeacon *> *, CLBeaconRegion *> *> *)rx_didRangeBeaconsInRegion __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (nonnull RxObservable<RxTuple2<NSArray <CLBeacon *> *, CLBeaconRegion *> *> *)rx_didRangeBeaconsInRegion __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<RxTuple2<CLBeaconRegion *, NSError *> *> *)rx_rangingBeaconsDidFailForRegionWithError __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (nonnull RxObservable<RxTuple2<CLBeaconRegion *, NSError *> *> *)rx_rangingBeaconsDidFailForRegionWithError __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
-- (nonnull RxObservable<CLVisit *> *)rx_didVisit __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (nonnull RxObservable<CLVisit *> *)rx_didVisit __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_8_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 - (nonnull RxObservable<NSNumber/*<CLAuthorizationStatus>*/ *> *)rx_didChangeAuthorizationStatus __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
