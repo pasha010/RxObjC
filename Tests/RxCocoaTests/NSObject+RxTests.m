@@ -124,7 +124,7 @@
     XCTAssertTrue(fired);
 }
 
-- (void)testDeallocated_ObservableDispose {
+- (void)testDeallocating_ObservableDispose {
     NSObject *a = [NSObject new];
 
     __block BOOL fired = NO;
