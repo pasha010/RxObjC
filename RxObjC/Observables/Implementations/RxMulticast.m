@@ -5,9 +5,8 @@
 
 #import "RxMulticast.h"
 #import "RxSubjectType.h"
-#import "RxObservableBlockTypedef.h"
 #import "RxSink.h"
-#import "RxConnectableObservable.h"
+#import "RxConnectableObservableType.h"
 #import "RxBinaryDisposable.h"
 #import "RxNopDisposable.h"
 

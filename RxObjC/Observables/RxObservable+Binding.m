@@ -4,7 +4,6 @@
 //
 
 #import "RxObservable+Binding.h"
-#import "RxSubjectType.h"
 #import "RxMulticast.h"
 #import "RxPublishSubject.h"
 #import "RxReplaySubject.h"
@@ -14,13 +13,9 @@
 #import "RxShareReplay1WhileConnected.h"
 
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
+@implementation RxObservable (Multicast)
 
-@implementation NSObject (RxMulticast)
-
-- (nonnull RxConnectableObservable<id <RxSubjectType>> *)multicast:(nonnull id <RxSubjectType>)subject {
+- (nonnull RxConnectableObservable<id> *)multicast:(nonnull id <RxSubjectType>)subject {
     return [[RxConnectableObservableAdapter alloc] initWithSource:[self asObservable] andSubject:subject];
 }
 
@@ -30,55 +25,51 @@
 
 @end
 
-@implementation NSObject (RxPublish)
+@implementation RxObservable (Publish)
 
-- (nonnull RxConnectableObservable<RxPublishSubject *> *)publish {
-    RxConnectableObservable<RxPublishSubject *> *r = (RxConnectableObservable<RxPublishSubject *> *) [self multicast:[RxPublishSubject create]];
-    return r;
+- (nonnull RxConnectableObservable<id> *)publish {
+    return [self multicast:[RxPublishSubject create]];
 }
 
 @end
 
-@implementation NSObject (RxReplay)
+@implementation RxObservable (Replay)
 
-- (nonnull RxConnectableObservable<RxReplaySubject *> *)replay:(NSUInteger)bufferSize {
-    RxConnectableObservable<RxReplaySubject *> *r = (RxConnectableObservable<RxReplaySubject *> *) [self multicast:[RxReplaySubject createWithBufferSize:bufferSize]];
-    return r;
+- (nonnull RxConnectableObservable<id> *)replay:(NSUInteger)bufferSize {
+    return [self multicast:[RxReplaySubject createWithBufferSize:bufferSize]];
 }
 
-- (nonnull RxConnectableObservable<RxReplaySubject *> *)replayAll {
-    RxConnectableObservable<RxReplaySubject *> *r = (RxConnectableObservable<RxReplaySubject *> *) [self multicast:[RxReplaySubject createUnbounded]];
-    return r;
+- (nonnull RxConnectableObservable<id> *)replayAll {
+    return [self multicast:[RxReplaySubject createUnbounded]];
 }
 
 @end
 
-@implementation NSObject (RxRefcount)
+@implementation RxConnectableObservable (Refcount)
 
-- (nonnull RxObservable *)refCount {
+- (nonnull RxObservable<id> *)refCount {
     return [[RxRefCount alloc] initWithSource:self];
 }
 @end
 
-@implementation NSObject (RxShare)
+@implementation RxObservable (Share)
 
-- (nonnull RxObservable *)share {
+- (nonnull RxObservable<id> *)share {
     return [[self publish] refCount];
 }
 @end
 
-@implementation NSObject (RxShareReplay)
+@implementation RxObservable (ShareReplay)
 
-- (nonnull RxObservable *)shareReplay:(NSUInteger)bufferSize {
+- (nonnull RxObservable<id> *)shareReplay:(NSUInteger)bufferSize {
     if (bufferSize == 1) {
         return [[RxShareReplay1 alloc] initWithSource:[self asObservable]];
     }
     return [[self replay:bufferSize] refCount];
 }
 
-- (nonnull RxObservable *)shareReplayLatestWhileConnected {
+- (nonnull RxObservable<id> *)shareReplayLatestWhileConnected {
     return [[RxShareReplay1WhileConnected alloc] initWithSource:[self asObservable]];
 }
 
 @end
-#pragma clang diagnostic pop

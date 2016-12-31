@@ -3,13 +3,14 @@
 // Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
-#import "RxConnectableObservable.h"
+#import "RxConnectableObservableType.h"
 #import "RxObjCCommon.h"
 #import "RxSubjectType.h"
+#import "RxLock.h"
 
-@interface RxConnection<__covariant S : id <RxSubjectType>> : NSObject <RxDisposable>
+@interface RxConnection<__covariant S : id <RxSubjectType>, E> : NSObject <RxDisposable>
 
-- (nonnull instancetype)initWithParent:(nonnull RxConnectableObservableAdapter<S> *)parent
+- (nonnull instancetype)initWithParent:(nonnull RxConnectableObservableAdapter<S, E> *)parent
                                   lock:(RxSpinLock *)lock
                           subscription:(nonnull id <RxDisposable>)subscription;
 
@@ -17,17 +18,17 @@
 
 @end
 
-@interface RxConnectableObservableAdapter (Private)
-@property (nullable, strong) RxConnection<id <RxSubjectType>> *connection;
+@interface RxConnectableObservableAdapter<__covariant S : id <RxSubjectType>, E> (Private)
+@property (nullable, strong) RxConnection<S, E> *connection;
 @end
 
 @implementation RxConnection {
     RxSpinLock *__nonnull _lock;
-    RxConnectableObservableAdapter<id <RxSubjectType>> *__nullable _parent;
+    RxConnectableObservableAdapter<id <RxSubjectType>, id> *__nullable _parent;
     id <RxDisposable> __nullable _subscription;
 }
 
-- (nonnull instancetype)initWithParent:(nonnull RxConnectableObservableAdapter<id <RxSubjectType>> *)parent
+- (nonnull instancetype)initWithParent:(nonnull RxConnectableObservableAdapter<id <RxSubjectType>, id> *)parent
                                   lock:(RxSpinLock *)lock
                           subscription:(nonnull id <RxDisposable>)subscription {
     self = [super init];
@@ -66,6 +67,10 @@
     return rx_abstractMethod();
 }
 
+- (RxConnectableObservable *)asConnectableObservable {
+    return self;
+}
+
 @end
 
 @implementation RxConnectableObservableAdapter {
@@ -73,7 +78,7 @@
     id <RxSubjectType> __nonnull _subject;
     RxObservable<id> *__nonnull _source;
     RxSpinLock *__nonnull _lock;
-    RxConnection<id <RxSubjectType>> *__nullable _connection;
+    RxConnection<id <RxSubjectType>, id> *__nullable _connection;
 }
 
 - (nonnull instancetype)initWithSource:(nonnull RxObservable<id> *)source andSubject:(nonnull id <RxSubjectType>)subject {
@@ -102,11 +107,11 @@
     return [_subject subscribe:observer];
 }
 
-- (nullable RxConnection<id <RxSubjectType>> *)connection {
+- (nullable RxConnection<id <RxSubjectType>, id> *)connection {
     return _connection;
 }
 
-- (void)setConnection:(nullable RxConnection<id <RxSubjectType>> *)connection {
+- (void)setConnection:(nullable RxConnection<id <RxSubjectType>, id> *)connection {
     _connection = connection;
 }
 

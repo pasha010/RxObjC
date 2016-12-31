@@ -10,6 +10,8 @@
 #import "RxSubjectType.h"
 #import "RxConnectableObservableType.h"
 
+@class RxConnectableObservable<S>;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RxTestConnectableObservable<S : id <RxSubjectType>> : NSObject <RxConnectableObservableType>
