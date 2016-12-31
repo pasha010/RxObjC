@@ -9,11 +9,7 @@
 #import "RxObservable+Debug.h"
 #import "RxDebugProducer.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-
-@implementation NSObject (RxDebug)
+@implementation RxObservable (Debug)
 
 - (nonnull RxObservable *)debug:(NSString *)identifier {
     return [self debug:identifier file:[NSString stringWithFormat:@"%s", __FILE__]];
@@ -36,5 +32,3 @@
 }
 
 @end
-
-#pragma clang diagnostic pop
