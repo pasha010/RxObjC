@@ -7,11 +7,7 @@
 #import "RxReduce.h"
 #import "RxToArray.h"
 
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-@implementation NSObject (RxAggregate)
+@implementation RxObservable (Aggregate)
 
 - (nonnull RxObservable<id> *)reduce:(id)seed accumulator:(RxAccumulatorType)accumulator mapResult:(ResultSelectorType)mapResult {
     return [[RxReduce alloc] initWithSource:[self asObservable] seed:seed accumulator:accumulator mapResult:mapResult];
@@ -26,4 +22,3 @@
 }
 
 @end
-#pragma clang diagnostic pop

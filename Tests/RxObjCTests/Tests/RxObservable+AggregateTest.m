@@ -6,6 +6,7 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
+#import <RxObjC/RxObjC.h>
 #import "RxTest.h"
 #import "RxObservable+Aggregate.h"
 #import "RxTestScheduler.h"
@@ -34,7 +35,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [[xs asObservable] reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         }];
     }];
@@ -55,7 +56,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         }];
     }];
@@ -75,7 +76,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         }];
     }];
@@ -94,7 +95,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         }];
     }];
@@ -119,7 +120,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         }];
     }];
@@ -146,7 +147,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *aNumber, NSNumber *xNumber) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *aNumber, NSNumber *xNumber) {
             int a = aNumber.intValue;
             int x = xNumber.intValue;
             if (x < 3) {
@@ -171,7 +172,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         } mapResult:^RxResultType(NSNumber *o) {
             return @(o.intValue * 5);
@@ -196,7 +197,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         } mapResult:^RxResultType(NSNumber *o) {
             return @(o.intValue * 5);
@@ -220,7 +221,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         } mapResult:^RxResultType(NSNumber *o) {
             return @(o.intValue * 5);
@@ -241,7 +242,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         } mapResult:^RxResultType(NSNumber *o) {
             return @(o.intValue * 5);
@@ -268,7 +269,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         } mapResult:^RxResultType(NSNumber *o) {
             return @(o.intValue * 5);
@@ -298,7 +299,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             int a = o.intValue;
             int x = e.intValue;
             if (x < 3) {
@@ -330,7 +331,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
+        return [xs.asObservable reduce:@42 accumulator:^NSNumber *(NSNumber *o, NSNumber *e) {
             return @(o.intValue + e.intValue);
         } mapResult:^RxResultType(NSNumber *o) {
             @throw [RxTestError testError];
@@ -358,7 +359,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [[xs toArray] map:^RxEquatableArray *(NSArray *o) {
+        return [[xs.asObservable toArray] map:^RxEquatableArray *(NSArray *o) {
             return [[RxEquatableArray alloc] initWithElements:o];
         }];
     }];
@@ -384,7 +385,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [[xs toArray] map:^RxEquatableArray *(NSArray *o) {
+        return [[xs.asObservable toArray] map:^RxEquatableArray *(NSArray *o) {
             return [[RxEquatableArray alloc] initWithElements:o];
         }];
     }];
@@ -407,7 +408,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [[xs toArray] map:^RxEquatableArray *(NSArray *o) {
+        return [[xs.asObservable toArray] map:^RxEquatableArray *(NSArray *o) {
             return [[RxEquatableArray alloc] initWithElements:o];
         }];
     }];
@@ -430,7 +431,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [[xs toArray] map:^RxEquatableArray *(NSArray *o) {
+        return [[xs.asObservable toArray] map:^RxEquatableArray *(NSArray *o) {
             return [[RxEquatableArray alloc] initWithElements:o];
         }];
     }];
@@ -450,7 +451,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [[xs toArray] map:^RxEquatableArray *(NSArray *o) {
+        return [[xs.asObservable toArray] map:^RxEquatableArray *(NSArray *o) {
             return [[RxEquatableArray alloc] initWithElements:o];
         }];
     }];
@@ -476,7 +477,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [[xs toArray] map:^RxEquatableArray *(NSArray *o) {
+        return [[xs.asObservable toArray] map:^RxEquatableArray *(NSArray *o) {
             return [[RxEquatableArray alloc] initWithElements:o];
         }];
     }];

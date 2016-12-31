@@ -9,15 +9,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
-Represents an object that is both an observable sequence as well as an observer.
-*/
+ * Represents an object that is both an observable sequence as well as an observer.
+ */
 @protocol RxSubjectType <RxObservableType>
 
 /**
-Returns observer interface for subject.
-
-- returns: Observer interface for subject.
-*/
+ * Returns observer interface for subject.
+ * @return - Observer interface for subject.
+ */
 - (nonnull id <RxObserverType>)asObserver;
 
 @end
