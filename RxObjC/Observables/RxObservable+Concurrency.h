@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RxObservable.h"
 
+@class RxImmediateScheduler;
 @protocol RxImmediateSchedulerType;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param scheduler - Scheduler to notify observers on.
  * @return: The source sequence whose observations happen on the specified scheduler.
  */
-- (nonnull RxObservable *)observeOn:(nonnull id <RxImmediateSchedulerType>)scheduler;
+- (nonnull RxObservable *)observeOn:(nonnull RxImmediateScheduler *)scheduler;
 
 /**
  * Wraps the source sequence in order to run its observer callbacks on the main thread scheduler.

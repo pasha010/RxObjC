@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Abstracts the work that needs to be performed on a specific `NSOperationQueue`.
  * This scheduler is suitable for cases when there is some bigger chunk of work that needs to be performed in background and you want to fine tune concurrent processing using `maxConcurrentOperationCount`.
  */
-@interface RxOperationQueueScheduler : NSObject <RxImmediateSchedulerType>
+@interface RxOperationQueueScheduler : RxImmediateScheduler
 
 @property (nonnull, readonly) NSOperationQueue *operationQueue;
 

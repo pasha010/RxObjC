@@ -74,4 +74,10 @@ RxSubscription *RxUnsunscribedFromHotObservable() {
     }];
 }
 
+- (nonnull RxObservable *)asObservable {
+    return [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
+        return [self subscribe:observer];
+    }];
+}
+
 @end

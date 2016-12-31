@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
 
-@protocol RxImmediateSchedulerType;
+@class RxImmediateScheduler;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,12 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 @package
     NSInteger _start;
     NSUInteger _count;
-    id <RxImmediateSchedulerType> __nonnull _scheduler;
+    RxImmediateScheduler *__nonnull _scheduler;
 }
 
 - (nonnull instancetype)initWithStart:(NSInteger)start
                                 count:(NSUInteger)count
-                            scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
+                            scheduler:(nonnull RxImmediateScheduler *)scheduler;
 
 @end
 

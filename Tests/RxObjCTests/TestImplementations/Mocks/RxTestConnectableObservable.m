@@ -9,6 +9,8 @@
 #import "RxTestConnectableObservable.h"
 #import "RxConnectableObservable.h"
 #import "RxObservable+Binding.h"
+#import "RxObservable+Creation.h"
+#import "RxAnyObserver.h"
 
 @implementation RxTestConnectableObservable {
     RxConnectableObservable *__nonnull _o;
@@ -28,6 +30,12 @@
 
 - (nonnull id <RxDisposable>)subscribe:(nonnull id <RxObserverType>)observer {
     return [_o subscribe:observer];
+}
+
+- (nonnull RxObservable *)asObservable {
+    return [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
+        return [self subscribe:observer];
+    }];
 }
 
 @end

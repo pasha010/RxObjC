@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  * This is the default scheduler for operators that generate elements.
  * This scheduler is also sometimes called `trampoline scheduler`.
  */
-@interface RxCurrentThreadScheduler : NSObject <RxImmediateSchedulerType>
+@interface RxCurrentThreadScheduler : RxImmediateScheduler
 
 @property (nullable, strong) RxMutableBox<RxQueue<id <RxScheduledItemType>> *> *queue;
 

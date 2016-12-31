@@ -83,7 +83,9 @@
 }
 
 - (void)dispose {
-    [self synchronizedDispose];
+    [self _lock];
+    [self _synchronized_dispose];
+    [self _unlock];
 }
 
 - (void)_synchronized_dispose {

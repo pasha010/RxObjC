@@ -11,8 +11,10 @@
 #import "RxMainScheduler.h"
 
 @interface RxVirtualSchedulerItem : NSObject <RxDisposable>
+
 @property (nonnull, strong, readonly) RxVirtualTimeUnit time;
 @property (assign, readonly) NSUInteger id;
+
 @end
 
 @implementation RxVirtualSchedulerItem {

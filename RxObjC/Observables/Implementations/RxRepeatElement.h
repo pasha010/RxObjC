@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
 
-@protocol RxImmediateSchedulerType;
+@class RxImmediateScheduler;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RxRepeatElement<Element> : RxProducer<Element> {
 @package
     id __nonnull _element;
-    id <RxImmediateSchedulerType> __nonnull _scheduler;
+    RxImmediateScheduler *__nonnull _scheduler;
 }
 
 - (nonnull instancetype)initWithElement:(nonnull id)element
-                              scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
+                              scheduler:(nonnull RxImmediateScheduler *)scheduler;
 
 @end
 

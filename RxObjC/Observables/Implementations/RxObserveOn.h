@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
 
-@protocol RxImmediateSchedulerType;
+@class RxImmediateScheduler;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RxObserveOn<Element> : RxProducer<Element>
 
 - (nonnull instancetype)initWithSource:(nonnull RxObservable *)source
-                             scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
+                             scheduler:(nonnull RxImmediateScheduler *)scheduler;
 
 @end
 

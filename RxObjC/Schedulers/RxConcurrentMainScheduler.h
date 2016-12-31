@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxSchedulerType.h"
+#import "RxImmediateSchedulerType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * This scheduler is optimized for `subscribeOn` operator. If you want to observe observable sequence elements on main thread using `observeOn` operator,
  * `MainScheduler` is more suitable for that purpose.
  */
-@interface RxConcurrentMainScheduler : NSObject <RxSchedulerType>
+@interface RxConcurrentMainScheduler : RxScheduler
 
 @property (nonnull, readonly) NSDate *now;
 

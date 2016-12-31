@@ -53,9 +53,9 @@
         _disposeBag = [[RxDisposeBag alloc] init];
         _val = @"";
 
-        NSObject<RxDisposable> *d = [[self rx_observe:@"val" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew retainSelf:NO]
+        id<RxDisposable> d = [[self rx_observe:@"val" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew retainSelf:NO]
                 subscribeNext:callback];
-        [d addDisposableTo:_disposeBag];
+        [_disposeBag addDisposable:d];
     }
     return self;
 }
@@ -89,9 +89,9 @@
     self = [super init];
     if (self) {
         _disposeBag = [[RxDisposeBag alloc] init];
-        NSObject <RxDisposable> *d = [[parent rx_observe:@"val" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew retainSelf:NO]
+        id<RxDisposable> d = [[parent rx_observe:@"val" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew retainSelf:NO]
                     subscribeNext:callback];
-        [d addDisposableTo:_disposeBag];
+        [_disposeBag addDisposable:d];
     }
     return self;
 }

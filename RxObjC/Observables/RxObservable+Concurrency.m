@@ -21,7 +21,7 @@
 
 @implementation NSObject (RxObserveOn)
 
-- (nonnull RxObservable *)observeOn:(nonnull id <RxImmediateSchedulerType>)scheduler {
+- (nonnull RxObservable *)observeOn:(nonnull RxImmediateScheduler *)scheduler {
     if ([scheduler isKindOfClass:[RxSerialDispatchQueueScheduler class]]) {
         RxSerialDispatchQueueScheduler *queueScheduler = (RxSerialDispatchQueueScheduler *) scheduler;
         return [[RxObserveOnSerialDispatchQueue alloc] initWithSource:[self asObservable] scheduler:queueScheduler];

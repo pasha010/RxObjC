@@ -13,6 +13,7 @@
 
 @class RxAnyObserver;
 @protocol RxImmediateSchedulerType;
+@class RxImmediateScheduler;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -94,7 +95,7 @@ This method creates a new Observable instance with a variable number of elements
  * @param scheduler - Scheduler to send elements on. If `nil`, elements are sent immediatelly on subscription.
  * @return: The observable sequence whose elements are pulled from the given arguments.
  */
-+ (nonnull RxObservable<E> *)of:(nonnull NSArray<E> *)elements scheduler:(nullable id <RxImmediateSchedulerType>)scheduler;
++ (nonnull RxObservable<E> *)of:(nonnull NSArray<E> *)elements scheduler:(nullable RxImmediateScheduler *)scheduler;
 
 + (nonnull RxObservable<E> *)of:(nonnull NSArray<E> *)elements;
 
@@ -121,7 +122,7 @@ This method creates a new Observable instance with a variable number of elements
  */
 + (nonnull RxObservable<E> *)generate:(nonnull E)initialState
                             condition:(BOOL(^)(E))condition
-                            scheduler:(id <RxImmediateSchedulerType>)scheduler
+                            scheduler:(nonnull RxImmediateScheduler *)scheduler
                               iterate:(E(^)(E))iterate;
 
 + (nonnull RxObservable<E> *)generate:(nonnull E)initialState
@@ -136,7 +137,7 @@ This method creates a new Observable instance with a variable number of elements
  * @return: An observable sequence that repeats the given element infinitely.
  */
 + (nonnull RxObservable<E> *)repeatElement:(nonnull E)element
-                                 scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
+                                 scheduler:(nonnull RxImmediateScheduler *)scheduler;
 
 + (nonnull RxObservable<E> *)repeatElement:(nonnull E)element;
 
@@ -163,7 +164,7 @@ This method creates a new Observable instance with a variable number of elements
  */
 + (nonnull RxObservable<NSNumber *> *)range:(NSInteger)start
                                       count:(NSUInteger)count
-                                  scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
+                                  scheduler:(nonnull RxImmediateScheduler *)scheduler;
 
 + (nonnull RxObservable<NSNumber *> *)range:(NSInteger)start
                                       count:(NSUInteger)count;
@@ -177,20 +178,20 @@ This method creates a new Observable instance with a variable number of elements
  * @param scheduler - Scheduler for observing
  * @return: The observable sequence whose elements are pulled from the given enumerable sequence.
  */
-- (nonnull RxObservable<E> *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
+- (nonnull RxObservable<E> *)toObservable:(nullable RxImmediateScheduler *)scheduler;
 
 - (nonnull RxObservable<E> *)toObservable;
 
 @end
 
 @interface NSSet<E> (RxToObservable)
-- (nonnull RxObservable<E> *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
+- (nonnull RxObservable<E> *)toObservable:(nullable RxImmediateScheduler *)scheduler;
 
 - (nonnull RxObservable<E> *)toObservable;
 @end
 
 @interface NSEnumerator<E> (RxToObservable)
-- (nonnull RxObservable<E> *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler;
+- (nonnull RxObservable<E> *)toObservable:(nullable RxImmediateScheduler *)scheduler;
 
 - (nonnull RxObservable<E> *)toObservable;
 @end

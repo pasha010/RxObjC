@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxSchedulerType.h"
+#import "RxImmediateSchedulerType.h"
 
 @class RxDispatchQueueSchedulerQOS;
 
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  * internal serial queue can be customized using `serialQueueConfiguration`
  * callback.
  */
-@interface RxSerialDispatchQueueScheduler : NSObject <RxSchedulerType>
+@interface RxSerialDispatchQueueScheduler : RxScheduler
 
 @property (nonnull, strong, readonly) NSDate *now;
 

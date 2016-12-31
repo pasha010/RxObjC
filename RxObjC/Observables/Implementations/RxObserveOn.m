@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, RxObserveOnState) {
 @package
     RxSingleAssignmentDisposable *__nonnull _subscription;
 @private
-    id <RxImmediateSchedulerType> __nonnull _scheduler;
+    RxImmediateScheduler *__nonnull _scheduler;
     id <RxObserverType> __nullable _observer;
     RxSpinLock *__nonnull _lock;
     RxQueue<RxEvent *> *__nonnull _queue;
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, RxObserveOnState) {
 
 @implementation RxObserveOnSink
 
-- (nonnull instancetype)initWithScheduler:(nonnull id <RxImmediateSchedulerType>)scheduler observer:(nonnull id <RxObserverType>)observer {
+- (nonnull instancetype)initWithScheduler:(nonnull RxImmediateScheduler *)scheduler observer:(nonnull id <RxObserverType>)observer {
     self = [super init];
     if (self) {
         _lock = [[RxSpinLock alloc] init];
@@ -64,8 +64,7 @@ typedef NS_ENUM(NSUInteger, RxObserveOnState) {
     }]).boolValue;
 
     if (shouldStart) {
-        NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _scheduler;
-        _scheduleDisposable.disposable = [scheduler scheduleRecursive:nil action:^(id o, void (^recurse)(id)) {
+        _scheduleDisposable.disposable = [_scheduler scheduleRecursive:nil action:^(id o, void (^recurse)(id)) {
             [self run:o recurse:recurse];
         }];
     }
@@ -138,12 +137,12 @@ typedef NS_ENUM(NSUInteger, RxObserveOnState) {
 @end
 
 @implementation RxObserveOn {
-    id <RxImmediateSchedulerType> __nonnull _scheduler;
+    RxImmediateScheduler *__nonnull _scheduler;
     RxObservable *__nonnull _source;
 }
 
 - (nonnull instancetype)initWithSource:(nonnull RxObservable *)source
-                             scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
+                             scheduler:(nonnull RxImmediateScheduler *)scheduler {
     self = [super init];
     if (self) {
         _scheduler = scheduler;

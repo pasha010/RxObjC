@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxSchedulerType.h"
+#import "RxImmediateSchedulerType.h"
 
 typedef NS_ENUM(NSUInteger, RxSchedulePeriodicRecursiveCommand) {
     RxSchedulePeriodicRecursiveCommandTick,

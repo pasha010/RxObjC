@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxSchedulerType.h"
+#import "RxImmediateSchedulerType.h"
 
 @class RxDispatchQueueSchedulerQOS;
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Abstracts the work that needs to be performed on a specific `dispatch_queue_t`. You can also pass a serial dispatch queue, it shouldn't cause any problems.
  * This scheduler is suitable when some work needs to be performed in background.
 */
-@interface RxConcurrentDispatchQueueScheduler : NSObject <RxSchedulerType>
+@interface RxConcurrentDispatchQueueScheduler : RxScheduler
 
 @property (nonnull, readonly) NSDate *now;
 

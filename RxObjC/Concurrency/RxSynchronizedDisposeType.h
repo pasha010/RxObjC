@@ -10,12 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol RxSynchronizedDisposeType <RxLock, RxDisposable>
+
 - (void)_synchronized_dispose;
-@end
-
-@interface NSObject (RxSynchronizedDisposeType) <RxSynchronizedDisposeType>
-
-- (void)synchronizedDispose;
 
 @end
 

@@ -7,7 +7,6 @@
 //
 
 #import "RxTimer.h"
-#import "RxSchedulerType.h"
 #import "RxSink.h"
 #import "RxNopDisposable.h"
 

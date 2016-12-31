@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
 
-@protocol RxImmediateSchedulerType;
+@class RxImmediateScheduler;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,14 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
     BOOL (^_condition)(id);
     id (^_iterate)(id);
     id (^_resultSelector)(id);
-    id <RxImmediateSchedulerType> __nonnull _scheduler;
+    RxImmediateScheduler *__nonnull _scheduler;
 }
 
 - (nonnull instancetype)initWithInitialState:(nonnull S)initialState
                                    condition:(BOOL (^)(S))condition
                                      iterate:(S (^)(S))iterate
                               resultSelector:(E (^)(S))resultSelector
-                                   scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
+                                   scheduler:(nonnull RxImmediateScheduler *)scheduler;
 @end
 
 NS_ASSUME_NONNULL_END
