@@ -115,7 +115,7 @@ FOUNDATION_EXTERN RxObservable *__nonnull rx_observeWeaklyKeyPathSectionsFor(NSO
     RxKVOObservable *propertyObservable = [[RxKVOObservable alloc] initWithObject:target keyPath:propertyName options:options | NSKeyValueObservingOptionInitial retainTarget:NO];
 
     @weakify(target);
-    return [propertyObservable flatMapLatest:^id <RxObservableConvertibleType>(id nextTarget) {
+    return [propertyObservable.asObservable flatMapLatest:^id <RxObservableConvertibleType>(id nextTarget) {
         if (!nextTarget) {
             return [RxObservable just:nil];
         }

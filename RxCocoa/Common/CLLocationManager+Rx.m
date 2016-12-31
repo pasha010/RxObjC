@@ -24,8 +24,9 @@
 
 - (nonnull RxObservable<NSArray<CLLocation *> *> *)rx_didUpdateLocations {
     return [[[self rx_delegate] observe:@selector(locationManager:didUpdateLocations:)]
-            map:^CLLocation *(NSArray *element) {
-                return rx_castOrThrow([CLLocation class], element[1]);
+            map:^NSArray<CLLocation *> *(NSArray<CLLocation *> *element) {
+                /*return rx_castOrThrow([NSArray class], element[1]);*/
+                return element;
             }];
 }
 

@@ -33,7 +33,7 @@
             completed(400)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttle:20 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttle:20 scheduler:scheduler]];
 
     NSArray *events = @[
             next(230, @1),
@@ -62,7 +62,7 @@
             error(400, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttle:20 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttle:20 scheduler:scheduler]];
 
     NSArray *events = @[
             next(230, @1),
@@ -94,7 +94,7 @@
             completed(400)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttle:40 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttle:40 scheduler:scheduler]];
 
     NSArray *events = @[
             next(400, @7),
@@ -123,7 +123,7 @@
             error(400, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttle:40 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttle:40 scheduler:scheduler]];
 
     NSArray *events = @[
             error(400, testError())
@@ -144,7 +144,7 @@
             completed(300)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttle:10 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttle:10 scheduler:scheduler]];
 
     NSArray *events = @[
             completed(300)
@@ -165,7 +165,7 @@
             error(300, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttle:10 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttle:10 scheduler:scheduler]];
 
     NSArray *events = @[
             error(300, testError())
@@ -185,7 +185,7 @@
             next(150, @0),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttle:10 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttle:10 scheduler:scheduler]];
 
     NSArray *events = @[
     ];
@@ -210,7 +210,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs throttle:20 scheduler:scheduler]];
+            [xs.asObservable throttle:20 scheduler:scheduler]];
 
     NSArray *events = @[
             next(230, @1),
@@ -258,7 +258,7 @@
             completed(400)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttle:20 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttle:20 scheduler:scheduler]];
 
     NSArray *events = @[
             next(230, @1),
@@ -287,7 +287,7 @@
             error(400, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttleFirst:20 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttleFirst:20 scheduler:scheduler]];
 
     NSArray *events = @[
             next(230, @1),
@@ -319,7 +319,7 @@
             completed(400)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttleFirst:40 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttleFirst:40 scheduler:scheduler]];
 
     NSArray *events = @[
             next(400, @1),
@@ -348,7 +348,7 @@
             error(400, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttleFirst:40 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttleFirst:40 scheduler:scheduler]];
 
     NSArray *events = @[
             error(400, testError())
@@ -369,7 +369,7 @@
             completed(300)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttleFirst:10 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttleFirst:10 scheduler:scheduler]];
 
     NSArray *events = @[
             completed(300)
@@ -390,7 +390,7 @@
             error(300, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttleFirst:10 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttleFirst:10 scheduler:scheduler]];
 
     NSArray *events = @[
             error(300, testError())
@@ -410,7 +410,7 @@
             next(150, @0),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs throttleFirst:10 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable throttleFirst:10 scheduler:scheduler]];
 
     NSArray *events = @[
     ];
@@ -435,7 +435,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs throttleFirst:20 scheduler:scheduler]];
+            [xs.asObservable throttleFirst:20 scheduler:scheduler]];
 
     NSArray *events = @[
             next(230, @1),
@@ -492,7 +492,7 @@
             error(320, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs sample:ys]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable sample:ys]];
 
     NSArray *events = @[
             next(250, @3),
@@ -530,7 +530,7 @@
             completed(500)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs sample:ys]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable sample:ys]];
 
     NSArray *events = @[
             next(250, @3),
@@ -570,7 +570,7 @@
             completed(500)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs sample:ys]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable sample:ys]];
 
     NSArray *events = @[
             next(250, @3),
@@ -608,7 +608,7 @@
             completed(500)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs sample:ys]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable sample:ys]];
 
     NSArray *events = @[
             next(250, @3),
@@ -647,7 +647,7 @@
             completed(400)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs sample:ys]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable sample:ys]];
 
     NSArray *events = @[
             next(250, @3),
@@ -787,7 +787,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs take:0 scheduler:scheduler]];
+            [xs.asObservable take:0 scheduler:scheduler]];
 
     NSArray *events = @[
             completed(201)
@@ -810,7 +810,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs take:25 scheduler:scheduler]];
+            [xs.asObservable take:25 scheduler:scheduler]];
 
     NSArray *events = @[
             next(210, @1),
@@ -834,7 +834,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs take:50 scheduler:scheduler]];
+            [xs.asObservable take:50 scheduler:scheduler]];
 
     NSArray *events = @[
             next(210, @1),
@@ -857,7 +857,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs take:50 scheduler:scheduler]];
+            [xs.asObservable take:50 scheduler:scheduler]];
 
     NSArray *events = @[
             error(210, testError())
@@ -877,7 +877,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs take:50 scheduler:scheduler]];
+            [xs.asObservable take:50 scheduler:scheduler]];
 
     NSArray *events = @[
             completed(250)
@@ -903,7 +903,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [[xs take:55 scheduler:scheduler] take:35 scheduler:scheduler]
+            [[xs.asObservable take:55 scheduler:scheduler] take:35 scheduler:scheduler]
     ];
 
     NSArray *events = @[
@@ -933,7 +933,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs take:35 scheduler:scheduler]];
+            [xs.asObservable take:35 scheduler:scheduler]];
 
     NSArray *events = @[
             next(210, @1),
@@ -961,7 +961,7 @@
             completed(70)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs delaySubscription:30 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable delaySubscription:30 scheduler:scheduler]];
 
     NSArray *events = @[
             next(280, @42),
@@ -985,7 +985,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs delaySubscription:30 scheduler:scheduler]];
+            [xs.asObservable delaySubscription:30 scheduler:scheduler]];
 
     NSArray *events = @[
             next(280, @42),
@@ -1009,7 +1009,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:291 create:^RxObservable * {
-        return [xs delaySubscription:30 scheduler:scheduler];
+        return [xs.asObservable delaySubscription:30 scheduler:scheduler];
     }];
 
     NSArray *events = @[
@@ -1037,7 +1037,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs skip:0 scheduler:scheduler]];
+            [xs.asObservable skip:0 scheduler:scheduler]];
 
     NSArray *events = @[
             next(210, @1),
@@ -1061,7 +1061,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs skip:15 scheduler:scheduler]];
+            [xs.asObservable skip:15 scheduler:scheduler]];
 
     NSArray *events = @[
             next(220, @2),
@@ -1084,7 +1084,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs skip:50 scheduler:scheduler]];
+            [xs.asObservable skip:50 scheduler:scheduler]];
 
     NSArray *events = @[
             completed(230)
@@ -1104,7 +1104,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs skip:50 scheduler:scheduler]];
+            [xs.asObservable skip:50 scheduler:scheduler]];
 
     NSArray *events = @[
             error(210, testError())
@@ -1123,7 +1123,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs skip:50 scheduler:scheduler]];
+            [xs.asObservable skip:50 scheduler:scheduler]];
 
     NSArray *events = @[
     ];
@@ -1147,7 +1147,7 @@
             completed(230)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs ignoreElements]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable ignoreElements]];
 
     NSArray *events = @[
             completed(230)
@@ -1180,7 +1180,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [[xs buffer:70 count:3 scheduler:scheduler]
+            [[xs.asObservable buffer:70 count:3 scheduler:scheduler]
                     map:^RxEquatableArray *(NSArray *array) {
                         return [[RxEquatableArray alloc] initWithElements:array];
                     }]];
@@ -1219,7 +1219,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [[xs buffer:70 count:3 scheduler:scheduler]
+            [[xs.asObservable buffer:70 count:3 scheduler:scheduler]
                     map:^RxEquatableArray *(NSArray *array) {
                         return [[RxEquatableArray alloc] initWithElements:array];
                     }]];
@@ -1257,7 +1257,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:370 create:^RxObservable * {
-        return [[xs buffer:70 count:3 scheduler:scheduler]
+        return [[xs.asObservable buffer:70 count:3 scheduler:scheduler]
                 map:^RxEquatableArray *(NSArray *array) {
                     return [[RxEquatableArray alloc] initWithElements:array];
                 }];
@@ -1309,7 +1309,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        RxObservable<RxObservable *> *window = [xs window:70 count:3 scheduler:scheduler];
+        RxObservable<RxObservable *> *window = [xs.asObservable window:70 count:3 scheduler:scheduler];
         RxObservable<NSString *> *mapWithIndex = [window mapWithIndex:^RxObservable<NSString *> *(RxObservable<NSNumber *> *o, NSInteger index) {
             return [o map:^NSString *(NSNumber *element) {
                 return [NSString stringWithFormat:@"%zd %@", index, element];
@@ -1354,7 +1354,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        RxObservable<RxObservable *> *window = [xs window:70 count:3 scheduler:scheduler];
+        RxObservable<RxObservable *> *window = [xs.asObservable window:70 count:3 scheduler:scheduler];
         RxObservable<NSString *> *mapWithIndex = [window mapWithIndex:^RxObservable<NSString *> *(RxObservable<NSNumber *> *o, NSInteger index) {
             return [o map:^NSString *(NSNumber *element) {
                 return [NSString stringWithFormat:@"%zd %@", index, element];
@@ -1400,7 +1400,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:370 create:^RxObservable * {
-        RxObservable<RxObservable *> *window = [xs window:70 count:3 scheduler:scheduler];
+        RxObservable<RxObservable *> *window = [xs.asObservable window:70 count:3 scheduler:scheduler];
         RxObservable<NSString *> *mapWithIndex = [window mapWithIndex:^RxObservable<NSString *> *(RxObservable<NSNumber *> *o, NSInteger index) {
             return [o map:^NSString *(NSNumber *element) {
                 return [NSString stringWithFormat:@"%zd %@", index, element];
@@ -1443,7 +1443,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        RxObservable<RxObservable *> *window = [xs window:70 count:3 scheduler:scheduler];
+        RxObservable<RxObservable *> *window = [xs.asObservable window:70 count:3 scheduler:scheduler];
         RxObservable<NSString *> *mapWithIndex = [window mapWithIndex:^RxObservable<NSString *> *(RxObservable<NSNumber *> *o, NSInteger index) {
             return [[o map:^NSString *(NSNumber *element) {
                 return [NSString stringWithFormat:@"%zd %@", index, element];
@@ -1507,7 +1507,7 @@
             completed(300)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs timeout:200 scheduler:scheduler]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable timeout:200 scheduler:scheduler]];
 
     NSArray *events = @[
             completed(300),
@@ -1528,7 +1528,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:200 scheduler:scheduler]];
+            [xs.asObservable timeout:200 scheduler:scheduler]];
 
     NSArray *events = @[
             error(300, testError())
@@ -1548,7 +1548,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:1000 scheduler:scheduler]];
+            [xs.asObservable timeout:1000 scheduler:scheduler]];
 
     NSArray *events = @[
     ];
@@ -1571,7 +1571,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:30 scheduler:scheduler]];
+            [xs.asObservable timeout:30 scheduler:scheduler]];
 
     NSArray *events = @[
             next(210, @42),
@@ -1599,7 +1599,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:30 scheduler:scheduler]];
+            [xs.asObservable timeout:30 scheduler:scheduler]];
 
     NSArray *events = @[
             next(210, @42),
@@ -1627,7 +1627,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:25 scheduler:scheduler]];
+            [xs.asObservable timeout:25 scheduler:scheduler]];
 
     NSArray *events = @[
             next(210, @42),
@@ -1658,7 +1658,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:370 create:^RxObservable * {
-        return [xs timeout:40 scheduler:scheduler];
+        return [xs.asObservable timeout:40 scheduler:scheduler];
     }];
 
     NSArray *events = @[
@@ -1696,7 +1696,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:100 other:ys scheduler:scheduler]];
+            [xs.asObservable timeout:100 other:ys scheduler:scheduler]];
 
     NSArray *events = @[
             next(350, @(-1)),
@@ -1735,7 +1735,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:100 other:ys scheduler:scheduler]];
+            [xs.asObservable timeout:100 other:ys scheduler:scheduler]];
 
     NSArray *events = @[
             next(240, @3),
@@ -1772,7 +1772,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:100 other:ys scheduler:scheduler]];
+            [xs.asObservable timeout:100 other:ys scheduler:scheduler]];
 
     NSArray *events = @[
             next(240, @3),
@@ -1801,7 +1801,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:100 other:ys scheduler:scheduler]];
+            [xs.asObservable timeout:100 other:ys scheduler:scheduler]];
 
     NSArray *events = @[
             next(400, @(-1)),
@@ -1829,7 +1829,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:100 other:ys scheduler:scheduler]];
+            [xs.asObservable timeout:100 other:ys scheduler:scheduler]];
 
     NSArray *events = @[
             next(400, @(-1)),
@@ -1857,7 +1857,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:100 other:ys scheduler:scheduler]];
+            [xs.asObservable timeout:100 other:ys scheduler:scheduler]];
 
     NSArray *events = @[
             error(400, testError())
@@ -1885,7 +1885,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:100 other:ys scheduler:scheduler]];
+            [xs.asObservable timeout:100 other:ys scheduler:scheduler]];
 
     NSArray *events = @[
             completed(250)
@@ -1912,7 +1912,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:100 other:ys scheduler:scheduler]];
+            [xs.asObservable timeout:100 other:ys scheduler:scheduler]];
 
     NSArray *events = @[
             error(250, testError())
@@ -1947,7 +1947,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWithObservable:
-            [xs timeout:100 other:ys scheduler:scheduler]];
+            [xs.asObservable timeout:100 other:ys scheduler:scheduler]];
 
     NSArray *events = @[
             next(240, @3),

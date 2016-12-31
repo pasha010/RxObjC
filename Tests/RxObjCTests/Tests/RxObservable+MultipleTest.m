@@ -603,7 +603,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+        return [xs.asObservable flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
             return observables[index.unsignedIntegerValue];
         }];
     }];
@@ -675,7 +675,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+        return [xs.asObservable flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
             return observables[index.unsignedIntegerValue];
         }];
     }];
@@ -733,7 +733,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+        return [xs.asObservable flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
             return observables[index.unsignedIntegerValue];
         }];
     }];
@@ -788,7 +788,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+        return [xs.asObservable flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
             if (index.integerValue < 1) {
                 return observables[index.unsignedIntegerValue];
             } else {
@@ -2564,7 +2564,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     __block BOOL sourceNotDisposed = NO;
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [[l doOn:^(RxEvent *event) {
+        return [[l.asObservable doOn:^(RxEvent *event) {
             sourceNotDisposed = YES;
         }] takeUntil:r];
     }];
@@ -2595,7 +2595,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     __block BOOL sourceNotDisposed = NO;
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l.asObservable takeUntil:[r doOn:^(RxEvent *event) {
+        return [l.asObservable takeUntil:[r.asObservable doOn:^(RxEvent *event) {
             sourceNotDisposed = YES;
         }]];
     }];

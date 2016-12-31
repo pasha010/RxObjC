@@ -21,11 +21,7 @@
 #import "RxElementAt.h"
 #import "RxSingleAsync.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-
-@implementation NSObject (RxFilter)
+@implementation RxObservable (Filter)
 
 - (nonnull RxObservable *)filter:(nonnull BOOL(^)(id __nonnull))predicate {
     return [[RxFilter alloc] initWithSource:[self asObservable] predicate:predicate];
@@ -33,7 +29,7 @@
 
 @end
 
-@implementation NSObject (RxTakeWhile)
+@implementation RxObservable (TakeWhile)
 
 - (nonnull RxObservable *)takeWhile:(nonnull BOOL (^)(id element))predicate {
     return [[RxTakeWhile alloc] initWithSource:[self asObservable] predicate:predicate];
@@ -45,7 +41,7 @@
 
 @end
 
-@implementation NSObject (RxTakeSequence)
+@implementation RxObservable (TakeSequence)
 
 - (nonnull RxObservable *)take:(NSUInteger)count {
     if (count == 0) {
@@ -56,7 +52,7 @@
 
 @end
 
-@implementation NSObject (RxTakeLast)
+@implementation RxObservable (TakeLast)
 
 - (nonnull RxObservable *)takeLast:(NSUInteger)count {
     return [[RxTakeLast alloc] initWithSource:[self asObservable] count:count];
@@ -64,7 +60,7 @@
 
 @end
 
-@implementation NSObject (RxSkipSequence)
+@implementation RxObservable (SkipSequence)
 
 - (nonnull RxObservable *)skip:(NSUInteger)count {
     return [[RxSkipCount alloc] initWithSource:[self asObservable] count:count];
@@ -72,7 +68,7 @@
 
 @end
 
-@implementation NSObject (RxSkipWhile)
+@implementation RxObservable (SkipWhile)
 
 - (nonnull RxObservable *)skipWhile:(nonnull BOOL(^)(id __nonnull element))predicate {
     return [[RxSkipWhile alloc] initWithSource:[self asObservable] predicate:predicate];
@@ -84,7 +80,7 @@
 
 @end
 
-@implementation NSObject (RxMap)
+@implementation RxObservable (Map)
 
 - (nonnull RxObservable *)map:(RxMapSelector)mapSelector {
     return [[self asObservable] _composeMap:mapSelector];
@@ -96,7 +92,7 @@
 
 @end
 
-@implementation NSObject (RxFlatMap)
+@implementation RxObservable (FlatMap)
 
 - (nonnull RxObservable *)flatMap:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector {
     return [[RxFlatMap alloc] initWithSource:[self asObservable] selector:selector];
@@ -108,7 +104,7 @@
 
 @end
 
-@implementation NSObject (RxFlatMapFirst)
+@implementation RxObservable (FlatMapFirst)
 
 - (nonnull RxObservable *)flatMapFirst:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector {
     return [[RxFlatMapFirst alloc] initWithSource:[self asObservable] selector:selector];
@@ -116,7 +112,7 @@
 
 @end
 
-@implementation NSObject (RxFlatMapLatest)
+@implementation RxObservable (FlatMapLatest)
 
 - (nonnull RxObservable *)flatMapLatest:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector {
     return [[RxFlatMapLatest alloc] initWithSource:[self asObservable] selector:selector];
@@ -124,7 +120,7 @@
 
 @end
 
-@implementation NSObject (RxElementAt)
+@implementation RxObservable (ElementAt)
 
 - (nonnull RxObservable *)elementAt:(NSUInteger)index {
     return [[RxElementAt alloc] initWithSource:[self asObservable] index:index throwOnEmpty:YES];
@@ -132,7 +128,7 @@
 
 @end
 
-@implementation NSObject (RxSingle)
+@implementation RxObservable (Single)
 
 - (nonnull RxObservable *)single {
     return [[RxSingleAsync alloc] initWithSource:[self asObservable]];
@@ -143,5 +139,3 @@
 }
 
 @end
-
-#pragma clang diagnostic pop
