@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
 
-@protocol RxConnectableObservableType;
+@class RxConnectableObservable;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxRefCount<CO : id <RxConnectableObservableType>> : RxProducer {
+@interface RxRefCount<__covariant CO : RxConnectableObservable *> : RxProducer {
 @package
     NSRecursiveLock *__nonnull _lock;
     NSUInteger _count;
     id<RxDisposable> __nullable _connectableSubscription;
-    id <RxConnectableObservableType> __nonnull _source;
+    CO __nonnull _source;
 }
 
 - (nonnull instancetype)initWithSource:(nonnull CO)source;

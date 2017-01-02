@@ -14,25 +14,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSArray<E> (RxCombineLatest) <RxObservableType>
+@interface NSArray<E> (RxCombineLatest) // where E is RxObservable
 /**
  * Merges the specified observable sequences into one observable sequence by using the selector function whenever any of the observable sequences produces an element.
  * @see [combinelatest operator on reactivex.io](http://reactivex.io/documentation/operators/combinelatest.html)
  * @param resultSelector: Function to invoke whenever any of the sources produces an element.
  * @return: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
  */
-- (nonnull RxObservable<E> *)combineLatest:(nonnull E(^)(NSArray<E> *__nonnull))resultSelector;
+- (nonnull RxObservable<id> *)combineLatest:(nonnull id(^)(NSArray<E> *__nonnull))resultSelector;
 
 @end
 
-@interface NSArray<E> (RxZip) <RxObservableType>
+@interface NSArray<E> (RxZip) // where E is RxObservable
 /**
  * Merges the specified observable sequences into one observable sequence by using the selector function whenever all of the observable sequences have produced an element at a corresponding index.
  * @see [zip operator on reactivex.io](http://reactivex.io/documentation/operators/zip.html)
  * @param resultSelector: Function to invoke for each series of elements at corresponding indexes in the sources.
  * @return: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
  */
-- (nonnull RxObservable<E> *)zip:(nonnull E(^)(NSArray<E> *__nonnull))resultSelector;
+- (nonnull RxObservable<id> *)zip:(nonnull id(^)(NSArray<E> *__nonnull))resultSelector;
 
 @end
 

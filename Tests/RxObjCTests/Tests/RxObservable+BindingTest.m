@@ -218,7 +218,7 @@
 
     RxTestConnectableObservable<RxMySubject<NSNumber *> *> *observable = [[RxTestConnectableObservable alloc] initWithObservable:[RxObservable of:@[@0, @1, @2]] subject:subject];
 
-    id <RxDisposable> d = [observable subscribeNext:^(NSNumber *n) {
+    id <RxDisposable> d = [[observable asObservable] subscribeNext:^(NSNumber *n) {
         nEvents++;
     }];
 
@@ -237,7 +237,7 @@
     RxTestConnectableObservable *observable = [[RxTestConnectableObservable alloc] initWithObservable:[@[[RxObservable of:@[@0, @1, @2]], [RxObservable error:testError()]] concat]
                                                                                               subject:subject];
 
-    id <RxDisposable> d = [observable subscribeError:^(NSError *error) {
+    id <RxDisposable> d = [[observable asObservable] subscribeError:^(NSError *error) {
         nEvents++;
     }];
 
@@ -257,7 +257,7 @@
             [[RxTestConnectableObservable alloc] initWithObservable:[RxObservable error:[RxTestError testError]]
                                                             subject:subject];
 
-    id <RxDisposable> d = [observable subscribeError:^(NSError *error) {
+    id <RxDisposable> d = [[observable asObservable] subscribeError:^(NSError *error) {
         nEvents++;
     }];
 
@@ -276,7 +276,7 @@
     RxTestConnectableObservable *observable = [[RxTestConnectableObservable alloc] initWithObservable:[RxObservable empty]
                                                                                               subject:subject];
 
-    id <RxDisposable> d = [observable subscribeCompleted:^{
+    id <RxDisposable> d = [[observable asObservable] subscribeCompleted:^{
         nEvents++;
     }];
 

@@ -12,7 +12,7 @@
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 #pragma GCC diagnostic ignored "-Wprotocol"
 
-@implementation NSObject (RxBind)
+@implementation RxObservable (Bind)
 
 - (nonnull id <RxDisposable>)bindTo:(nonnull id <RxObserverType>)observer {
     return [self subscribe:observer];
