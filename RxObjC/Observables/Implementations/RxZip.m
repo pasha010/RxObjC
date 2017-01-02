@@ -126,7 +126,7 @@
 }
 
 - (void)on:(nonnull RxEvent<id> *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent<id> *)event {

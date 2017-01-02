@@ -56,7 +56,7 @@
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (nonnull id <RxObservableConvertibleType>)performMap:(nonnull id)element {
@@ -125,7 +125,7 @@
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {

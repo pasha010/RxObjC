@@ -38,7 +38,7 @@
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {
@@ -108,7 +108,7 @@
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {

@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)_synchronized_on:(nonnull RxEvent<id> *)event;
 @end
 
-@interface NSObject (RxSynchronizedOnType) <RxSynchronizedOnType>
-- (void)synchronizedOn:(nonnull RxEvent<id> *)event;
-@end
+FOUNDATION_EXTERN void rx_synchronizedOn(id <RxSynchronizedOnType> _Nonnull locker, RxEvent<id> *_Nonnull event);
+
+
 
 NS_ASSUME_NONNULL_END

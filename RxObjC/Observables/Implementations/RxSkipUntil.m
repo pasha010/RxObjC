@@ -12,7 +12,7 @@
 #import "RxStableCompositeDisposable.h"
 #import "RxLockOwnerType.h"
 
-@interface RxSkipUntilSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxSkipUntilSink<O : id<RxObserverType>> : RxSink<O> <RxSynchronizedOnType>
 
 @property BOOL forwardElements;
 @property (nonnull, readonly) RxSingleAssignmentDisposable *sourceSubscription;
@@ -50,7 +50,7 @@
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {
@@ -93,7 +93,7 @@
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {

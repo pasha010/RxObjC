@@ -12,7 +12,7 @@
 #import "RxStableCompositeDisposable.h"
 #import "RxLockOwnerType.h"
 
-@interface RxTakeUntilSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxTakeUntilSink<O : id<RxObserverType>> : RxSink<O> <RxSynchronizedOnType>
 @property BOOL open;
 @end
 
@@ -47,7 +47,7 @@
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {
@@ -90,7 +90,7 @@
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {
