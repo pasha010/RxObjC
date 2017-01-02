@@ -27,7 +27,7 @@
 }
 
 - (void)messageSentWithParameters:(nonnull NSArray *)parameters {
-    [_subject onNext:parameters];
+    rx_onNext(_subject, parameters);
 }
 
 - (nonnull RxObservable *)asObservable {
@@ -35,7 +35,7 @@
 }
 
 - (void)dealloc {
-    [_subject onCompleted];
+    rx_onCompleted(_subject);
 }
 
 @end

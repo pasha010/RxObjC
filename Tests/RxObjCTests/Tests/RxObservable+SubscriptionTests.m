@@ -49,7 +49,7 @@
     XCTAssertTrue(onCompletedCalled == 0);
     XCTAssertTrue(onDisposedCalled == 0);
 
-    [publishSubject onNext:@1];
+    rx_onNext(publishSubject, @1);
 
     XCTAssertTrue([lastElement isEqualToNumber:@1]);
     XCTAssertTrue(lastError == nil);
@@ -59,7 +59,7 @@
     XCTAssertTrue(onDisposedCalled == 0);
 
     [subscription dispose];
-    [publishSubject onNext:@2];
+    rx_onNext(publishSubject, @2);
 
     XCTAssertTrue([lastElement isEqualToNumber:@1]);
     XCTAssertTrue(lastError == nil);
@@ -99,7 +99,7 @@
     XCTAssertTrue(onCompletedCalled == 0);
     XCTAssertTrue(onDisposedCalled == 0);
 
-    [publishSubject onError:[RxTestError testError]];
+    rx_onError(publishSubject, [RxTestError testError]);
 
     XCTAssertTrue(lastElement == nil);
     XCTAssertTrue(lastError == [RxTestError testError]);
@@ -109,8 +109,8 @@
     XCTAssertTrue(onDisposedCalled == 1);
 
     [subscription dispose];
-    [publishSubject onNext:@2];
-    [publishSubject onCompleted];
+    rx_onNext(publishSubject, @2);
+    rx_onCompleted(publishSubject);
 
     XCTAssertTrue(lastElement == nil);
     XCTAssertTrue(lastError == [RxTestError testError]);
@@ -150,7 +150,7 @@
     XCTAssertTrue(onCompletedCalled == 0);
     XCTAssertTrue(onDisposedCalled == 0);
 
-    [publishSubject onCompleted];
+    rx_onCompleted(publishSubject);
 
     XCTAssertTrue(lastElement == nil);
     XCTAssertTrue(lastError == nil);
@@ -160,8 +160,8 @@
     XCTAssertTrue(onDisposedCalled == 1);
 
     [subscription dispose];
-    [publishSubject onNext:@1];
-    [publishSubject onError:[RxTestError testError]];
+    rx_onNext(publishSubject, @1);
+    rx_onError(publishSubject, [RxTestError testError]);
 
     XCTAssertTrue(lastElement == nil);
     XCTAssertTrue(lastError == nil);
@@ -201,11 +201,11 @@
     XCTAssertTrue(onCompletedCalled == 0);
     XCTAssertTrue(onDisposedCalled == 0);
 
-    [publishSubject onNext:@1];
+    rx_onNext(publishSubject, @1);
     [subscription dispose];
-    [publishSubject onNext:@2];
-    [publishSubject onError:[RxTestError testError]];
-    [publishSubject onCompleted];
+    rx_onNext(publishSubject, @2);
+    rx_onError(publishSubject, [RxTestError testError]);
+    rx_onCompleted(publishSubject);
 
     XCTAssertTrue([lastElement isEqualToNumber:@1]);
     XCTAssertTrue(lastError == nil);

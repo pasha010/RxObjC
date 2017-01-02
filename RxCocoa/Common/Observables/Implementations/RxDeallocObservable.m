@@ -20,8 +20,8 @@
 }
 
 - (void)dealloc {
-    [_subject onNext:nil];
-    [_subject onCompleted];
+    rx_onNext(_subject, nil);
+    rx_onCompleted(_subject);
 }
 
 @end

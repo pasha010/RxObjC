@@ -717,7 +717,7 @@
     id <RxDisposable> d = [[[RxObservable interval:0 scheduler:scheduler] takeWhile:^BOOL(NSNumber *element) {
         return element.integerValue < 10;
     }] subscribeOnNext:^(NSNumber *element) {
-        [observer onNext:element];
+        rx_onNext(observer, element);
     } onCompleted:^{
         [expectation fulfill];
     }];

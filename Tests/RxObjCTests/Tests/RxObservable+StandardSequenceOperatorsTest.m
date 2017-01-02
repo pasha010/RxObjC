@@ -3617,7 +3617,7 @@ BOOL isPrime(NSNumber *n) {
     RxBehaviorSubject *k = [RxBehaviorSubject create:@NO];
 
     [[k take:1] subscribeNext:^(NSNumber *n) {
-        [k onNext:@(!n.boolValue)];
+        rx_onNext(k, @(!n.boolValue));
     }];
 }
 
@@ -3859,10 +3859,10 @@ BOOL isPrime(NSNumber *n) {
     NSMutableArray<NSNumber *> *elements = [NSMutableArray array];
     [[k takeLast:1] subscribeNext:^(NSNumber *n) {
         [elements addObject:n];
-        [k onNext:@(!n.boolValue)];
+        rx_onNext(k, @(!n.boolValue));
     }];
 
-    [k onCompleted];
+    rx_onCompleted(k);
 
     XCTAssertEqualObjects(elements, @[@NO]);
 }
@@ -5024,7 +5024,7 @@ BOOL isPrime(NSNumber *n) {
 - (void)testSingle_DecrementCountsFirst {
     RxBehaviorSubject *k = [RxBehaviorSubject create:@NO];
     [[k single] subscribeNext:^(NSNumber *n) {
-        [k onNext:@(!n.boolValue)];
+        rx_onNext(k, @(!n.boolValue));
     }];
 }
 
@@ -5160,7 +5160,7 @@ BOOL isPrime(NSNumber *n) {
     [[k single:^BOOL(id o) {
         return YES;
     }] subscribeNext:^(NSNumber *n) {
-        [k onNext:@(!n.boolValue)];
+        rx_onNext(k, @(!n.boolValue));
     }];
 }
 

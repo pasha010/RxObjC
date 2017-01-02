@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern RxSubscription *RxSubscribedToHotObservable();
 extern RxSubscription *RxUnsunscribedFromHotObservable();
 
-@interface RxPrimitiveHotObservable : NSObject <RxObservableType>
+@interface RxPrimitiveHotObservable : NSObject <RxObservableType, RxObserverType>
 
 @property (nonnull, nonatomic, strong, readonly) NSArray<RxSubscription *> *subscriptions;
 @property (nonnull, nonatomic, strong, readonly) RxBag<RxAnyObserver *> *observers;

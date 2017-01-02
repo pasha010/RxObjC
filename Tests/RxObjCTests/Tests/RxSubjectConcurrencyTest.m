@@ -100,7 +100,7 @@
 
     __block int state = 0;
 
-    __block RxMutableBox *o = [[RxMutableBox alloc] initWithValue:_observer];
+    __block RxMutableBox<RxAnyObserver<NSNumber *> *> *o = [[RxMutableBox alloc] initWithValue:_observer];
 
     __block BOOL ranAll = NO;
 

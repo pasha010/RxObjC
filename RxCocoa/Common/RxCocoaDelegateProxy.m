@@ -91,7 +91,7 @@ uint8_t rx_dataSourceAssociatedTag = 0;
 
 - (void)dealloc {
     for (RxPublishSubject *v in self.subjectsForSelector.allValues) {
-        [v onCompleted];
+        rx_onCompleted(v);
     }
 #if TRACE_RESOURCES
     OSAtomicDecrement32(&rx_resourceCount);

@@ -36,6 +36,23 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nonnull RxAnyObserver<Element> *)asObserver;
 
+/**
+ * Convenience method equivalent to `on(.Next(element: E))`
+ * @param element - Next element to send to observer(s)
+ */
+- (void)onNext:(nullable id)element;
+
+/**
+ * Convenience method equivalent to `on(.Completed)`
+ */
+- (void)onCompleted;
+
+/**
+ * Convenience method equivalent to `on(.Error(error: ErrorType))`
+ * @param error - ErrorType to send to observer(s)
+*/
+- (void)onError:(nullable NSError *)error;
+
 @end
 
 FOUNDATION_EXTERN RxAnyObserver<id> *_Nonnull rx_asObserver(id <RxObserverType> _Nonnull observer);
