@@ -11,7 +11,6 @@
 #import "RxBag.h"
 #import "RxAnyObserver.h"
 #import "RxLock.h"
-#import "RxSynchronizedSubscribeType.h"
 #import "RxNopDisposable.h"
 #import "RxSubscriptionDisposable.h"
 

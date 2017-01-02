@@ -45,14 +45,6 @@ Send `event` to this observer.
 
 #pragma clang diagnostic pop
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-@implementation NSObject (RxAnyObserver)
-
-- (nonnull RxAnyObserver<id> *)asObserver {
-    return [[RxAnyObserver alloc] initWithObserver:self];
+RxAnyObserver<id> *_Nonnull rx_asObserver(id <RxObserverType> _Nonnull observer) {
+    return [[RxAnyObserver alloc] initWithObserver:observer];
 }
-
-@end
-#pragma clang diagnostic pop

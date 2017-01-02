@@ -9,42 +9,35 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
-A type-erased `ObserverType`.
-
-Forwards operations to an arbitrary underlying observer with the same `Element` type, hiding the specifics of the underlying observer type.
-*/
+ * A type-erased `ObserverType`.
+ *
+ * Forwards operations to an arbitrary underlying observer with the same `Element` type, hiding the specifics of the underlying observer type.
+ */
 
 @interface RxAnyObserver<__covariant Element> : NSObject <RxObserverType>
 
 @property (copy, nonatomic) RxEventHandler observer;
 
 /**
-Construct an instance whose `on(event)` calls `observer.on(event)`
-
-- parameter observer: Observer that receives sequence events.
-*/
+ * Construct an instance whose `on(event)` calls `observer.on(event)`
+ * @param observer - Observer that receives sequence events.
+ */
 - (nonnull instancetype)initWithObserver:(nonnull id <RxObserverType>)observer;
 
 /**
-Construct an instance whose `on(event)` calls `eventHandler(event)`
-
-- parameter eventHandler: Event handler that observes sequences events.
-*/
+ * Construct an instance whose `on(event)` calls `eventHandler(event)`
+ * @param eventHandler - Event handler that observes sequences events.
+ */
 - (nonnull instancetype)initWithEventHandler:(RxEventHandler)eventHandler NS_DESIGNATED_INITIALIZER;
 
 /**
- Erases type of observer and returns canonical observer.
-
- - returns: type erased observer.
+ * Erases type of observer and returns canonical observer.
+ * @return - type erased observer.
  */
 - (nonnull RxAnyObserver<Element> *)asObserver;
 
 @end
 
-@interface NSObject (RxAnyObserver) <RxObserverType>
-
-- (nonnull RxAnyObserver<id> *)asObserver;
-
-@end
+FOUNDATION_EXTERN RxAnyObserver<id> *_Nonnull rx_asObserver(id <RxObserverType> _Nonnull observer);
 
 NS_ASSUME_NONNULL_END

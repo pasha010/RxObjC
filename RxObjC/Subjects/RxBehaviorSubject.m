@@ -100,8 +100,7 @@
         return [RxNopDisposable sharedInstance];
     }
 
-    NSObject<RxObserverType> *o = ((NSObject <RxObserverType> *) observer);
-    RxBagKey *key = [_observers insert:[o asObserver]];
+    RxBagKey *key = [_observers insert:rx_asObserver(observer)];
 
     [observer on:[RxEvent next:_value]];
 

@@ -24,7 +24,6 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxLockOwnerType.h"
 #import "RxSynchronizedDisposeType.h"
 #import "RxSynchronizedOnType.h"
-#import "RxSynchronizedSubscribeType.h"
 #import "RxSynchronizedUnsubscribeType.h"
 
 #pragma mark - DataStructures
