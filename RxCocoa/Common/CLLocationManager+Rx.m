@@ -12,10 +12,6 @@
 #import "RxCLLocationManagerDelegateProxy.h"
 #import "RxCocoaDelegateProxy.h"
 
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-
 @implementation CLLocationManager (Rx)
 
 - (nonnull RxCocoaDelegateProxy *)rx_delegate {
@@ -154,4 +150,3 @@
 #endif
 
 @end
-#pragma clang diagnostic pop

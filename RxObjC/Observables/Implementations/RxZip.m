@@ -121,7 +121,15 @@
     return self;
 }
 
-- (nonnull RxSpinLock *)lock {
+- (void)rx_lock {
+    [[self getRxLock] lock];
+}
+
+- (void)rx_unlock {
+    [[self getRxLock] unlock];
+}
+
+- (nonnull RxSpinLock *)getRxLock {
     return _lock;
 }
 

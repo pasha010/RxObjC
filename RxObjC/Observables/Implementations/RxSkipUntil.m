@@ -12,7 +12,7 @@
 #import "RxStableCompositeDisposable.h"
 #import "RxLockOwnerType.h"
 
-@interface RxSkipUntilSink<O : id<RxObserverType>> : RxSink<O> <RxSynchronizedOnType>
+@interface RxSkipUntilSink<O : id<RxObserverType>> : RxSink<O> <RxSynchronizedOnType, RxLockOwnerType>
 
 @property BOOL forwardElements;
 @property (nonnull, readonly) RxSingleAssignmentDisposable *sourceSubscription;
@@ -45,8 +45,16 @@
 }
 #endif
 
-- (NSRecursiveLock *)lock {
-    return _parent.lock;
+- (void)rx_lock {
+    [[self getRxLock] lock];
+}
+
+- (void)rx_unlock {
+    [[self getRxLock] unlock];
+}
+
+- (nonnull RxSpinLock *)getRxLock {
+    return [_parent getRxLock];
 }
 
 - (void)on:(nonnull RxEvent *)event {
@@ -88,7 +96,15 @@
     return self;
 }
 
-- (NSRecursiveLock *)lock {
+- (void)rx_lock {
+    [[self getRxLock] lock];
+}
+
+- (void)rx_unlock {
+    [[self getRxLock] unlock];
+}
+
+- (nonnull RxSpinLock *)getRxLock {
     return _lock;
 }
 

@@ -40,7 +40,15 @@
     return [RxStableCompositeDisposable createDisposable1:subscription disposable2:_cancellable];
 }
 
-- (nonnull RxSpinLock *)lock {
+- (void)rx_lock {
+    [[self getRxLock] lock];
+}
+
+- (void)rx_unlock {
+    [[self getRxLock] unlock];
+}
+
+- (nonnull RxSpinLock *)getRxLock {
     return _lock;
 }
 
@@ -126,7 +134,15 @@
     return [RxStableCompositeDisposable createDisposable1:subscription disposable2:_cancellable];
 }
 
-- (nonnull RxSpinLock *)lock {
+- (void)rx_lock {
+    [[self getRxLock] lock];
+}
+
+- (void)rx_unlock {
+    [[self getRxLock] unlock];
+}
+
+- (nonnull RxSpinLock *)getRxLock {
     return _lock;
 }
 

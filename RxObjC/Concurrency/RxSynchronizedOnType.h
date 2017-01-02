@@ -4,9 +4,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxEvent.h"
 #import "RxObserverType.h"
 #import "RxLock.h"
+
+@class RxEvent<E>;
 
 NS_ASSUME_NONNULL_BEGIN
 

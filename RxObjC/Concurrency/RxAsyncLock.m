@@ -26,11 +26,11 @@
     return self;
 }
 
-- (void)_lock {
+- (void)rx_lock {
     [_lock lock];
 }
 
-- (void)_unlock {
+- (void)rx_unlock {
     [_lock unlock];
 }
 
@@ -83,9 +83,9 @@
 }
 
 - (void)dispose {
-    [self _lock];
+    [self rx_lock];
     [self _synchronized_dispose];
-    [self _unlock];
+    [self rx_unlock];
 }
 
 - (void)_synchronized_dispose {

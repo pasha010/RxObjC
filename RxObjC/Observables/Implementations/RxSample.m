@@ -33,7 +33,15 @@
     return self;
 }
 
-- (nonnull NSRecursiveLock *)lock {
+- (void)rx_lock {
+    [[self getRxLock] lock];
+}
+
+- (void)rx_unlock {
+    [[self getRxLock] unlock];
+}
+
+- (nonnull RxSpinLock *)getRxLock {
     return _parent->_lock;
 }
 
@@ -103,7 +111,15 @@
     return [RxStableCompositeDisposable createDisposable1:_sourceSubscription disposable2:samplerSubscription];
 }
 
-- (nonnull NSRecursiveLock *)lock {
+- (void)rx_lock {
+    [[self getRxLock] lock];
+}
+
+- (void)rx_unlock {
+    [[self getRxLock] unlock];
+}
+
+- (nonnull RxSpinLock *)getRxLock {
     return _lock;
 }
 

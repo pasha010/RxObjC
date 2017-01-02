@@ -10,8 +10,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import <RxObjC/RxObjC.h>
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 @class RxCocoaDelegateProxy;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -63,4 +61,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-#pragma clang diagnostic pop

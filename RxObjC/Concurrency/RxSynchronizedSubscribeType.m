@@ -11,9 +11,9 @@
 @implementation NSObject (RxSynchronizedSubscribeType)
 
 - (nonnull id <RxDisposable>)synchronizedSubscribe:(nonnull id <RxObserverType>)observer {
-    [self _lock];
+    [self rx_lock];
     id <RxDisposable> disposable = [self _synchronized_subscribe:observer];
-    [self _unlock];
+    [self rx_unlock];
     return disposable;
 }
 

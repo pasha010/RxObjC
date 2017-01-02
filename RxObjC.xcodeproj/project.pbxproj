@@ -282,7 +282,6 @@
 		17EECB0C34E737447BA2A8B8 /* RxBlockingObservable+Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2F5429ADEFCE8C97B27 /* RxBlockingObservable+Operators.m */; };
 		17EECB0E58A6A9389465CB67 /* RxLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECD33BED8B329719C19D5 /* RxLock.m */; };
 		17EECB2B7E1EC8B8EA7DDEAC /* RxObservableConvertibleType+Blocking.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC449553EC7874BF2B594 /* RxObservableConvertibleType+Blocking.m */; };
-		17EECB43B6A31F1DB08EE237 /* RxLockOwnerType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2A07F560C99C34EAFFF /* RxLockOwnerType.m */; };
 		17EECB4A405614ED15CDE25B /* RxZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2F5B5D4B2BE1EF929B9 /* RxZip.m */; };
 		17EECB5F3D88B630AB0C5806 /* RxKVOObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC91668268AF8206328DD /* RxKVOObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17EECB6A0C780D1E350A14BB /* RxKVOObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC91668268AF8206328DD /* RxKVOObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -994,7 +993,6 @@
 		365F36111D33A8C20096A86C /* RxObservable+Zip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECA4F92A4585F4D755170 /* RxObservable+Zip.m */; };
 		365F36121D33A8C20096A86C /* RxZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2F5B5D4B2BE1EF929B9 /* RxZip.m */; };
 		365F36131D33A8C20096A86C /* RxZip+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC219AB81006FA04634B3 /* RxZip+Private.m */; };
-		365F36141D33A8C20096A86C /* RxLockOwnerType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2A07F560C99C34EAFFF /* RxLockOwnerType.m */; };
 		365F36151D33A8C20096A86C /* RxReplaySubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7C6E5FF23D1E81FAE8F /* RxReplaySubject.m */; };
 		365F36161D33A8C20096A86C /* RxRefCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC218CC6E8183F3CCABF3 /* RxRefCount.m */; };
 		365F36171D33A8C20096A86C /* RxErrorProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEF7E2A55026C0889328 /* RxErrorProducer.m */; };
@@ -1117,7 +1115,6 @@
 		365F37271D33A9AC0096A86C /* RxObservable+Zip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECA4F92A4585F4D755170 /* RxObservable+Zip.m */; };
 		365F37281D33A9AC0096A86C /* RxZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2F5B5D4B2BE1EF929B9 /* RxZip.m */; };
 		365F37291D33A9AC0096A86C /* RxZip+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC219AB81006FA04634B3 /* RxZip+Private.m */; };
-		365F372A1D33A9AC0096A86C /* RxLockOwnerType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2A07F560C99C34EAFFF /* RxLockOwnerType.m */; };
 		365F372B1D33A9AC0096A86C /* RxReplaySubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7C6E5FF23D1E81FAE8F /* RxReplaySubject.m */; };
 		365F372C1D33A9AC0096A86C /* RxRefCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC218CC6E8183F3CCABF3 /* RxRefCount.m */; };
 		365F372D1D33A9AC0096A86C /* RxErrorProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEF7E2A55026C0889328 /* RxErrorProducer.m */; };
@@ -1240,7 +1237,6 @@
 		365F383D1D33AA510096A86C /* RxObservable+Zip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECA4F92A4585F4D755170 /* RxObservable+Zip.m */; };
 		365F383E1D33AA510096A86C /* RxZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2F5B5D4B2BE1EF929B9 /* RxZip.m */; };
 		365F383F1D33AA510096A86C /* RxZip+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC219AB81006FA04634B3 /* RxZip+Private.m */; };
-		365F38401D33AA510096A86C /* RxLockOwnerType.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC2A07F560C99C34EAFFF /* RxLockOwnerType.m */; };
 		365F38411D33AA510096A86C /* RxReplaySubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7C6E5FF23D1E81FAE8F /* RxReplaySubject.m */; };
 		365F38421D33AA510096A86C /* RxRefCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC218CC6E8183F3CCABF3 /* RxRefCount.m */; };
 		365F38431D33AA510096A86C /* RxErrorProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEF7E2A55026C0889328 /* RxErrorProducer.m */; };
@@ -1772,7 +1768,6 @@
 		17EEC2922831186937606387 /* RxWithLatestFrom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxWithLatestFrom.m; sourceTree = "<group>"; };
 		17EEC2973E2AD292BD07438B /* RxSkipUntil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxSkipUntil.m; sourceTree = "<group>"; };
 		17EEC29C303413E3D9AA6822 /* RxBlockingObservable+Operators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RxBlockingObservable+Operators.h"; sourceTree = "<group>"; };
-		17EEC2A07F560C99C34EAFFF /* RxLockOwnerType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxLockOwnerType.m; sourceTree = "<group>"; };
 		17EEC2BCA861E46F1BADBBA5 /* RxKVOObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxKVOObservable.m; sourceTree = "<group>"; };
 		17EEC2D091805AA14513EA31 /* RxTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTarget.h; sourceTree = "<group>"; };
 		17EEC2D3B5513900F902A593 /* RxTakeUntil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTakeUntil.h; sourceTree = "<group>"; };
@@ -2461,7 +2456,6 @@
 				17EEC81F0E6CD663CBCBDD96 /* RxSynchronizedOnType.m */,
 				17EECBCC576A35603F6EF8C2 /* RxSynchronizedSubscribeType.m */,
 				17EEC9D46D3B3D6296B5CFA8 /* RxSynchronizedSubscribeType.h */,
-				17EEC2A07F560C99C34EAFFF /* RxLockOwnerType.m */,
 			);
 			path = Concurrency;
 			sourceTree = "<group>";
@@ -4470,7 +4464,6 @@
 				17EEC3365703F59FD6671621 /* RxObservable+Zip.m in Sources */,
 				17EECB4A405614ED15CDE25B /* RxZip.m in Sources */,
 				17EEC5C25932B5FC639344BF /* RxZip+Private.m in Sources */,
-				17EECB43B6A31F1DB08EE237 /* RxLockOwnerType.m in Sources */,
 				17EEC49F3A5A836CAC912F64 /* RxReplaySubject.m in Sources */,
 				17EEC4B8E89AFDF3426BD45B /* RxRefCount.m in Sources */,
 				17EECDB32B4BAC0D00947A22 /* RxErrorProducer.m in Sources */,
@@ -4661,7 +4654,6 @@
 				365F36111D33A8C20096A86C /* RxObservable+Zip.m in Sources */,
 				365F36121D33A8C20096A86C /* RxZip.m in Sources */,
 				365F36131D33A8C20096A86C /* RxZip+Private.m in Sources */,
-				365F36141D33A8C20096A86C /* RxLockOwnerType.m in Sources */,
 				365F36151D33A8C20096A86C /* RxReplaySubject.m in Sources */,
 				365F36161D33A8C20096A86C /* RxRefCount.m in Sources */,
 				365F36171D33A8C20096A86C /* RxErrorProducer.m in Sources */,
@@ -4798,7 +4790,6 @@
 				365F37271D33A9AC0096A86C /* RxObservable+Zip.m in Sources */,
 				365F37281D33A9AC0096A86C /* RxZip.m in Sources */,
 				365F37291D33A9AC0096A86C /* RxZip+Private.m in Sources */,
-				365F372A1D33A9AC0096A86C /* RxLockOwnerType.m in Sources */,
 				365F372B1D33A9AC0096A86C /* RxReplaySubject.m in Sources */,
 				365F372C1D33A9AC0096A86C /* RxRefCount.m in Sources */,
 				365F372D1D33A9AC0096A86C /* RxErrorProducer.m in Sources */,
@@ -4935,7 +4926,6 @@
 				365F383D1D33AA510096A86C /* RxObservable+Zip.m in Sources */,
 				365F383E1D33AA510096A86C /* RxZip.m in Sources */,
 				365F383F1D33AA510096A86C /* RxZip+Private.m in Sources */,
-				365F38401D33AA510096A86C /* RxLockOwnerType.m in Sources */,
 				365F38411D33AA510096A86C /* RxReplaySubject.m in Sources */,
 				365F38421D33AA510096A86C /* RxRefCount.m in Sources */,
 				365F38431D33AA510096A86C /* RxErrorProducer.m in Sources */,

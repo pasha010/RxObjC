@@ -6,7 +6,7 @@
 #import "RxSynchronizedOnType.h"
 
 void rx_synchronizedOn(id <RxSynchronizedOnType> _Nonnull locker, RxEvent<id> *_Nonnull event) {
-    [locker _lock];
+    [locker rx_lock];
     [locker _synchronized_on:event];
-    [locker _unlock];
+    [locker rx_unlock];
 }
