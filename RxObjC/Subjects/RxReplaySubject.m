@@ -13,7 +13,6 @@
 #import "RxObjCCommon.h"
 #import "RxSynchronizedUnsubscribeType.h"
 #import "RxSynchronizedOnType.h"
-#import "RxSynchronizedSubscribeType.h"
 #import "RxError.h"
 #import "RxNopDisposable.h"
 #import "RxSubscriptionDisposable.h"
@@ -148,9 +147,7 @@
         return [RxNopDisposable sharedInstance];
     }
 
-    NSObject<RxObserverType> *obj = (NSObject<RxObserverType> *) observer;
-
-    RxAnyObserver *anyObserver = [obj asObserver];
+    RxAnyObserver *anyObserver = rx_asObserver(observer);
 
     [self replayBuffer:anyObserver];
 

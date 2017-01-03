@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef id <RxDisposable> __nonnull(^RxBinder)(id <RxObservableType> __nonnull observable);
 typedef RxBinder __nonnull(^RxBinderWithCurriedArg)(id <RxObservableType> __nonnull observable);
 
-@interface NSObject (RxBind) <RxObservableType>
+@interface RxObservable<E> (Bind)
 /**
  * Creates new subscription and sends elements to observer.
  * In this form it's equivalent to `subscribe` method, but it communicates intent better, and enables

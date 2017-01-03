@@ -4,14 +4,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxSchedulerType.h"
+#import "RxImmediateSchedulerType.h"
 #import "RxVirtualTimeConverterType.h"
 
 @protocol RxVirtualTimeConverterType;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxVirtualTimeScheduler<VirtualTimeUnit, __covariant Converter : id <RxVirtualTimeConverterType>> : NSObject <RxSchedulerType>
+@interface RxVirtualTimeScheduler<VirtualTimeUnit, __covariant Converter : id <RxVirtualTimeConverterType>> : RxScheduler
 
 /**
  * Scheduler's absolute time clock value.

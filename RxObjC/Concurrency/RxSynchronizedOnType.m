@@ -5,17 +5,8 @@
 
 #import "RxSynchronizedOnType.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-@implementation NSObject (RxSynchronizedOnType)
-
-- (void)synchronizedOn:(nonnull RxEvent *)event {
-    [self _lock];
-    [self _synchronized_on:event];
-    [self _unlock];
+void rx_synchronizedOn(id <RxSynchronizedOnType> _Nonnull locker, RxEvent<id> *_Nonnull event) {
+    [locker rx_lock];
+    [locker _synchronized_on:event];
+    [locker rx_unlock];
 }
-
-
-@end
-#pragma clang diagnostic pop

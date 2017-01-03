@@ -9,7 +9,7 @@
 #import "RxScan.h"
 #import "RxSink.h"
 
-@interface RxScanSink<ElementType, Accumulate, O : id<RxObserverType>> : RxSink<O>
+@interface RxScanSink<ElementType, Accumulate, O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @property (nonnull, readonly) RxScan<ElementType, Accumulate> *parent;
 @property (nonnull, readonly) Accumulate accumulate;
 @end

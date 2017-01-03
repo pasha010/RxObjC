@@ -156,7 +156,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 - (void)testObserveOnDispatchQueue_Never {
     [self runDispatchQueueSchedulerTests:^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
         RxObservable *xs = [RxObservable never];
-        return [[xs observeOn:scheduler] subscribeNext:^(id o) {
+        return [[xs.asObservable observeOn:scheduler] subscribeNext:^(id o) {
             XCTAssert(NO);
         }];
     }];
@@ -168,23 +168,23 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 
     [self runDispatchQueueSchedulerMultiplexedTests:@[
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
-                id <RxDisposable> subscription = [[xs observeOn:scheduler] subscribe:observer];
+                id <RxDisposable> subscription = [[xs.asObservable observeOn:scheduler] subscribe:observer];
                 XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-                [xs onNext:@0];
+                rx_onNext(xs, @0);
                 return subscription;
             },
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
                 BOOL b = [observer.events isEqualToArray:@[[self next:@0]]];
                 XCTAssert(b);
-                [xs onNext:@1];
-                [xs onNext:@2];
+                rx_onNext(xs, @1);
+                rx_onNext(xs, @2);
                 return [RxNopDisposable sharedInstance];
             },
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
                 BOOL b = [observer.events isEqualToArray:@[[self next:@0], [self next:@1], [self next:@2]]];
                 XCTAssert(b);
                 XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-                [xs onCompleted];
+                rx_onCompleted(xs);
                 return [RxNopDisposable sharedInstance];
             },
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
@@ -202,9 +202,9 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     
     [self runDispatchQueueSchedulerMultiplexedTests:@[
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
-                id <RxDisposable> subscription = [[xs observeOn:scheduler] subscribe:observer];
+                id <RxDisposable> subscription = [[xs.asObservable observeOn:scheduler] subscribe:observer];
                 XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-                [xs onCompleted];
+                rx_onCompleted(xs);
                 return subscription;
             },
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
@@ -221,16 +221,16 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 
     [self runDispatchQueueSchedulerMultiplexedTests:@[
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
-                id <RxDisposable> subscription = [[xs observeOn:scheduler] subscribe:observer];
+                id <RxDisposable> subscription = [[xs.asObservable observeOn:scheduler] subscribe:observer];
                 XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-                [xs onNext:@0];
+                rx_onNext(xs, @0);
                 return subscription;
             },
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
                 BOOL b = [observer.events isEqualToArray:@[[self next:@0]]];
                 XCTAssert(b);
-                [xs onNext:@1];
-                [xs onNext:@2];
+                rx_onNext(xs, @1);
+                rx_onNext(xs, @2);
                 return [RxNopDisposable sharedInstance];
             },
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
@@ -240,7 +240,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
                         [self next:@2]]];
                 XCTAssert(b);
                 XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-                [xs onError:[RxTestError testError]];
+                rx_onError(xs, [RxTestError testError]);
                 return [RxNopDisposable sharedInstance];
             },
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
@@ -263,9 +263,9 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 
     [self runDispatchQueueSchedulerMultiplexedTests:@[
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
-                subscription = [[xs observeOn:scheduler] subscribe:observer];
+                subscription = [[xs.asObservable observeOn:scheduler] subscribe:observer];
                 XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-                [xs onNext:@0];
+                rx_onNext(xs, @0);
                 return subscription;
             },
             ^id <RxDisposable>(RxSerialDispatchQueueScheduler *scheduler) {
@@ -275,7 +275,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
                 [subscription dispose];
                 XCTAssert([xs.subscriptions isEqualToArray:@[RxUnsunscribedFromHotObservable()]]);
 
-                [xs onError:[RxTestError testError]];
+                rx_onError(xs, [RxTestError testError]);
 
                 return [RxNopDisposable sharedInstance];
             },
@@ -295,7 +295,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 
 @implementation RxObservableConcurrentSchedulerConcurrencyTest
 
-- (nonnull id <RxImmediateSchedulerType>)createScheduler {
+- (nonnull RxImmediateScheduler *)createScheduler {
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     queue.maxConcurrentOperationCount = 8;
     return [[RxOperationQueueScheduler alloc] initWithOperationQueue:queue];
@@ -303,7 +303,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 
 #if TRACE_RESOURCES
 - (void)testObserveOn_EnsureCorrectImplementationIsChosen {
-    id <RxImmediateSchedulerType> scheduler = [self createScheduler];
+    RxImmediateScheduler *scheduler = [self createScheduler];
     XCTAssert(rx_numberOfSerialDispatchQueueObservables == 0);
     [[RxObservable just:@0] observeOn:scheduler];
     [self sleep:0.1];
@@ -316,7 +316,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 
     RxBehaviorSubject *stop = [RxBehaviorSubject create:@0];
 
-    id <RxImmediateSchedulerType> scheduler = [self createScheduler];
+    RxImmediateScheduler *scheduler = [self createScheduler];
 
     NSCondition *condition = [[NSCondition alloc] init];
     
@@ -349,8 +349,8 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
         }
         [condition unlock];
 
-        [stop onCompleted];
-        
+        rx_onCompleted(stop);
+
         return [RxNopDisposable sharedInstance];
     };
 
@@ -365,11 +365,11 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 }
 
 - (void)testObserveOn_Never {
-    id <RxImmediateSchedulerType> scheduler = [self createScheduler];
+    RxImmediateScheduler *scheduler = [self createScheduler];
 
     RxObservable *xs = [RxObservable never];
 
-    id <RxDisposable> subscription = [[xs observeOn:scheduler] subscribeNext:^(id o) {
+    id <RxDisposable> subscription = [[xs.asObservable observeOn:scheduler] subscribeNext:^(id o) {
         XCTAssert(NO);
     }];
 
@@ -382,21 +382,21 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     RxPrimitiveHotObservable *xs = [[RxPrimitiveHotObservable alloc] init];
     RxPrimitiveMockObserver *observer = [[RxPrimitiveMockObserver alloc] init];
 
-    id <RxImmediateSchedulerType> scheduler = [self createScheduler];
+    RxImmediateScheduler *scheduler = [self createScheduler];
 
-    id <RxDisposable> subscription = [[xs observeOn:scheduler] subscribe:observer];
+    id <RxDisposable> subscription = [[xs.asObservable observeOn:scheduler] subscribe:observer];
 
     XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-    [xs onNext:@0];
+    rx_onNext(xs, @0);
 
     [self sleep:0.1];
 
     BOOL b = [observer.events isEqualToArray:@[[self next:@0]]];
     XCTAssert(b);
 
-    [xs onNext:@1];
-    [xs onNext:@2];
-    
+    rx_onNext(xs, @1);
+    rx_onNext(xs, @2);
+
     [self sleep:0.1];
 
     NSArray *events = @[
@@ -408,7 +408,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 
     XCTAssertEqualObjects(xs.subscriptions, @[RxSubscribedToHotObservable()]);
 
-    [xs onCompleted];
+    rx_onCompleted(xs);
 
     [self sleep:0.1];
 
@@ -429,12 +429,12 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     RxPrimitiveHotObservable *xs = [[RxPrimitiveHotObservable alloc] init];
     RxPrimitiveMockObserver *observer = [[RxPrimitiveMockObserver alloc] init];
 
-    id <RxImmediateSchedulerType> scheduler = [self createScheduler];
+    RxImmediateScheduler *scheduler = [self createScheduler];
 
-    [[xs observeOn:scheduler] subscribe:observer];
+    [[xs.asObservable observeOn:scheduler] subscribe:observer];
 
     XCTAssertEqualObjects(xs.subscriptions, @[RxSubscribedToHotObservable()]);
-    [xs onCompleted];
+    rx_onCompleted(xs);
 
     [self sleep:0.1];
 
@@ -448,9 +448,9 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     
     __block BOOL executed = NO;
 
-    id <RxImmediateSchedulerType> scheduler = [self createScheduler];
+    RxImmediateScheduler *scheduler = [self createScheduler];
 
-    RxObservable<NSNumber *> *res = [[xs observeOn:scheduler] map:^NSNumber *(NSNumber *v) {
+    RxObservable<NSNumber *> *res = [[xs.asObservable observeOn:scheduler] map:^NSNumber *(NSNumber *v) {
         if (v.integerValue == 0) {
             [self sleep:0.1]; // 100 ms is enough
             executed = YES;
@@ -461,10 +461,10 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     id <RxDisposable> subscription = [res subscribe:observer];
 
     XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-    [xs onNext:@0];
-    [xs onNext:@1];
-    [xs onCompleted];
-    
+    rx_onNext(xs, @0);
+    rx_onNext(xs, @1);
+    rx_onCompleted(xs);
+
     [self sleep:0.1];
 
     NSArray *array = @[
@@ -485,18 +485,18 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     RxPrimitiveHotObservable *xs = [[RxPrimitiveHotObservable alloc] init];
     RxPrimitiveMockObserver *observer = [[RxPrimitiveMockObserver alloc] init];
 
-    id <RxImmediateSchedulerType> scheduler = [self createScheduler];
+    RxImmediateScheduler *scheduler = [self createScheduler];
 
-    [[xs observeOn:scheduler] subscribe:observer];
+    [[xs.asObservable observeOn:scheduler] subscribe:observer];
 
     XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-    [xs onNext:@0];
+    rx_onNext(xs, @0);
 
     [self sleep:0.1];
 
     XCTAssert([observer.events isEqualToArray:@[[self next:@0]]]);
-    [xs onNext:@1];
-    [xs onNext:@2];
+    rx_onNext(xs, @1);
+    rx_onNext(xs, @2);
 
     [self sleep:0.1];
 
@@ -508,7 +508,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     XCTAssert([observer.events isEqualToArray:array]);
     XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
 
-    [xs onError:[RxTestError testError]];
+    rx_onError(xs, [RxTestError testError]);
 
     [self sleep:0.1];
 
@@ -527,10 +527,10 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     RxPrimitiveHotObservable *xs = [[RxPrimitiveHotObservable alloc] init];
     RxPrimitiveMockObserver *observer = [[RxPrimitiveMockObserver alloc] init];
 
-    id <RxImmediateSchedulerType> scheduler = [self createScheduler];
-    id <RxDisposable> subscription = [[xs observeOn:scheduler] subscribe:observer];
+    RxImmediateScheduler *scheduler = [self createScheduler];
+    id <RxDisposable> subscription = [[xs.asObservable observeOn:scheduler] subscribe:observer];
     XCTAssert([xs.subscriptions isEqualToArray:@[RxSubscribedToHotObservable()]]);
-    [xs onNext:@0];
+    rx_onNext(xs, @0);
 
     [self sleep:0.1];
 
@@ -539,7 +539,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     [subscription dispose];
     XCTAssert([xs.subscriptions isEqualToArray:@[RxUnsunscribedFromHotObservable()]]);
 
-    [xs onError:[RxTestError testError]];
+    rx_onError(xs, [RxTestError testError]);
 
     [self sleep:0.1];
 
@@ -597,11 +597,11 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs subscribeOn:scheduler];
+        return [xs.asObservable subscribeOn:scheduler];
     }];
 
     XCTAssertEqualObjects(res.events, @[[self completed:300]]);
-    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:201 unsubscribe:301]]);
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:201 unsubscribe:300]]);
 }
 
 - (void)testSubscribeOn_SchedulerError {
@@ -612,11 +612,11 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs subscribeOn:scheduler];
+        return [xs.asObservable subscribeOn:scheduler];
     }];
 
     XCTAssertEqualObjects(res.events, @[[self error:300 testError:[RxTestError testError]]]);
-    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:201 unsubscribe:301]]);
+    XCTAssertEqualObjects(xs.subscriptions, @[[RxSubscription createWithSubscribe:201 unsubscribe:300]]);
 }
 
 - (void)testSubscribeOn_SchedulerDispose {
@@ -628,7 +628,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs subscribeOn:scheduler];
+        return [xs.asObservable subscribeOn:scheduler];
     }];
 
     XCTAssert([res.events isEqualToArray:@[[self next:210 element:@2]]]);

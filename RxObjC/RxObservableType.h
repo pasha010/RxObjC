@@ -43,10 +43,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface NSObject (RxObservableType) <RxObservableType>
-
-- (nonnull RxObservable *)asObservable;
-
-@end
-
 NS_ASSUME_NONNULL_END

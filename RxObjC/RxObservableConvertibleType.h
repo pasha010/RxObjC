@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class RxObservable;
+@class RxObservable<E>;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Type that can be converted to observable sequence (`Observer<E>`).
  */
 @protocol RxObservableConvertibleType <NSObject>
-- (nonnull RxObservable *)asObservable;
+- (nonnull RxObservable<id> *)asObservable;
 @end
 
 NS_ASSUME_NONNULL_END

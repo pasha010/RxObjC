@@ -4,8 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxSchedulerType.h"
-#import "RxSchedulersTypes.h"
+#import "RxImmediateSchedulerType.h"
 
 @protocol RxImmediateSchedulerType;
 

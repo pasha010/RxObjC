@@ -77,7 +77,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs distinctUntilChangedWithKeySelector:^id(id o) { return o; }]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable distinctUntilChangedWithKeySelector:^id(id o) { return o; }]];
 
     NSArray *correctMessages = @[
             next(210, @2),
@@ -106,7 +106,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs distinctUntilChangedWithKeySelector:^id(id o) { return o; }]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable distinctUntilChangedWithKeySelector:^id(id o) { return o; }]];
 
     NSArray *correctMessages = @[
             next(210, @2),
@@ -133,7 +133,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs distinctUntilChangedWithComparer:^BOOL(id lhs, id rhs) { return YES; }]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable distinctUntilChangedWithComparer:^BOOL(id lhs, id rhs) { return YES; }]];
 
     NSArray *correctMessages = @[
             next(210, @2),
@@ -156,7 +156,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs distinctUntilChangedWithComparer:^BOOL(id lhs, id rhs) { return NO; }]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable distinctUntilChangedWithComparer:^BOOL(id lhs, id rhs) { return NO; }]];
 
     NSArray *correctMessages = @[
             next(210, @2),
@@ -182,7 +182,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs distinctUntilChangedWithKeySelector:^NSNumber *(NSNumber *o) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable distinctUntilChangedWithKeySelector:^NSNumber *(NSNumber *o) {
         return @(o.integerValue % 2);
     }]];
 
@@ -206,7 +206,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs distinctUntilChangedWithKeySelector:^NSNumber *(NSNumber *o) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable distinctUntilChangedWithKeySelector:^NSNumber *(NSNumber *o) {
         @throw testError();
     }]];
 
@@ -228,7 +228,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs distinctUntilChanged:^id(id o) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable distinctUntilChanged:^id(id o) {
         return o;
     } comparer:^BOOL(id lhs, id rhs) {
         @throw testError();
@@ -261,7 +261,7 @@
 
     __block NSInteger i = 0;
     __block NSInteger sum = 2 + 3 + 4 + 5;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOn:^(RxEvent<NSNumber *> *event) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOn:^(RxEvent<NSNumber *> *event) {
         if (event.isNext) {
             i++;
             sum -= (event.element ? event.element.integerValue : 0);
@@ -296,7 +296,7 @@
     ]];
 
     __block NSInteger i = 0;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOn:^(RxEvent<NSNumber *> *event) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOn:^(RxEvent<NSNumber *> *event) {
         if (event.isNext) {
             i++;
         }
@@ -331,7 +331,7 @@
     __block NSInteger i = 0;
     __block NSInteger sum = 2 + 3 + 4 + 5;
     __block BOOL completedEvaluation = NO;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOn:^(RxEvent<NSNumber *> *event) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOn:^(RxEvent<NSNumber *> *event) {
         if (event.isNext) {
             i++;
             sum -= (event.element ? event.element.integerValue : 0);
@@ -365,7 +365,7 @@
 
     __block NSInteger i = 0;
     __block BOOL completedEvaluation = NO;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOn:^(RxEvent<NSNumber *> *event) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOn:^(RxEvent<NSNumber *> *event) {
         if (event.isNext) {
             i++;
         }
@@ -399,7 +399,7 @@
     __block NSInteger i = 0;
     __block NSInteger sum = 2 + 3 + 4 + 5;
     __block BOOL sawError = NO;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOn:^(RxEvent<NSNumber *> *event) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOn:^(RxEvent<NSNumber *> *event) {
         if (event.isNext) {
             i++;
             sum -= event.element.integerValue;
@@ -439,7 +439,7 @@
     __block NSInteger i = 0;
     __block NSInteger sum = 2 + 3 + 4 + 5;
     __block BOOL sawError = NO;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOn:^(RxEvent<NSNumber *> *event) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOn:^(RxEvent<NSNumber *> *event) {
         if (event.isNext) {
             i++;
             sum -= event.element.integerValue;
@@ -474,7 +474,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOn:^(RxEvent *event) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOn:^(RxEvent *event) {
         @throw testError();
     }]];
     NSArray *events = @[
@@ -498,7 +498,7 @@
     ]];
 
     __block NSInteger numberOfTimesInvoked = 0;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOnNext:^(id value) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOnNext:^(id value) {
         numberOfTimesInvoked++;
     }]];
 
@@ -529,7 +529,7 @@
     ]];
 
     __block NSInteger numberOfTimesInvoked = 0;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOnNext:^(id value) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOnNext:^(id value) {
         if (numberOfTimesInvoked > 2) {
             @throw testError();
         }
@@ -560,7 +560,7 @@
 
     __block NSError *recordedError = nil;
     __block NSInteger numberOfTimesInvoked = 0;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOnError:^(NSError *error) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOnError:^(NSError *error) {
         recordedError = error;
         numberOfTimesInvoked++;
     }]];
@@ -586,7 +586,7 @@
             error(250, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOnError:^(NSError *error) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOnError:^(NSError *error) {
         @throw testError1();
     }]];
 
@@ -613,7 +613,7 @@
 
     __block BOOL didComplete = NO;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOnCompleted:^() {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOnCompleted:^() {
         didComplete = YES;
     }]];
 
@@ -644,7 +644,7 @@
     ]];
 
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs doOnCompleted:^() {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable doOnCompleted:^() {
         @throw testError();
     }]];
 
@@ -674,7 +674,7 @@
             completed(250) 
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs retry]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable retry]];
 
     NSArray *events = @[
             next(300, @1),
@@ -697,7 +697,7 @@
             next(200, @3),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs retry]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable retry]];
 
     NSArray *events = @[
             next(300, @1),
@@ -721,7 +721,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:1100 create:^RxObservable * {
-        return [xs retry];
+        return [xs.asObservable retry];
     }];
 
     NSArray *events = @[
@@ -757,7 +757,7 @@
             error(20, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs retry:3]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable retry:3]];
 
     NSArray *events = @[
             next(205, @1),
@@ -792,7 +792,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:231 create:^RxObservable * {
-        return [xs retry:3];
+        return [xs.asObservable retry:3];
     }];
 
     NSArray *events = @[
@@ -823,7 +823,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:251 create:^RxObservable * {
-        return [xs retry:3];
+        return [xs.asObservable retry:3];
     }];
 
     NSArray *events = @[
@@ -856,7 +856,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs retry:3]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable retry:3]];
 
     NSArray *events = @[
             next(300, @1),
@@ -920,7 +920,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
-        return [xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
+        return [xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
             return empty;
         }];
     }];
@@ -953,7 +953,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
-        return [xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
+        return [xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
             return never;
         }];
     }];
@@ -989,7 +989,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
-        return [xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
+        return [xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
             return never;
         }];
     }];
@@ -1024,7 +1024,7 @@
             completed(0),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
         return empty;
     }]];
 
@@ -1053,7 +1053,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
-        return [xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *errors) {
+        return [xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *errors) {
             return [errors scan:@0 accumulator:^NSNumber *(NSNumber *_a, NSError *_e) {
                 NSInteger a = _a.integerValue;
                 a++;
@@ -1098,7 +1098,7 @@
             completed(230)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
         return [empty asObservable];
     }]];
 
@@ -1127,7 +1127,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
-        return [xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *errors) {
+        return [xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *errors) {
             return [[errors scan:@0 accumulator:^NSNumber *(NSNumber *accumulate, NSError *element) {
                 return @(accumulate.integerValue + 1);
             }] takeWhile:^BOOL(NSNumber *num) {
@@ -1167,7 +1167,7 @@
             next(150, @1),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *observable) {
         return never;
     }]];
 
@@ -1196,7 +1196,7 @@
     __block NSInteger maxAttempts = 4;
 
     RxTestableObserver *res = [scheduler startWhenDisposed:800 create:^RxObservable * {
-        return [xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *errors) {
+        return [xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *errors) {
             return [errors flatMapWithIndex:^id <RxObservableConvertibleType>(NSError *element, NSUInteger index) {
                 if (index >= maxAttempts - 1) {
                     return [RxObservable error:element];
@@ -1236,7 +1236,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:800 create:^RxObservable * {
-        return [xs retryWhen:^id <RxObservableType>(RxObservable<NSError *> *errors) {
+        return [xs.asObservable retryWhen:^id <RxObservableType>(RxObservable<NSError *> *errors) {
             return errors;
         } customErrorClass:[RxCustomTestError class]];
     }];
@@ -1292,7 +1292,7 @@
             next(0, @0),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs scan:@42 accumulator:RxCombinePlus()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable scan:@42 accumulator:RxCombinePlus()]];
 
     NSArray *correct = @[
     ];
@@ -1313,7 +1313,7 @@
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs scan:@42 accumulator:RxCombinePlus()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable scan:@42 accumulator:RxCombinePlus()]];
 
     NSArray *correct = @[
             completed(250)
@@ -1337,7 +1337,7 @@
     ]];
 
     NSNumber *seed = @42;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs scan:seed accumulator:RxCombinePlus()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable scan:seed accumulator:RxCombinePlus()]];
 
     NSArray *correct = @[
             next(220, @(seed.integerValue + 2)),
@@ -1361,7 +1361,7 @@
     ]];
 
     NSNumber *seed = @42;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs scan:seed accumulator:RxCombinePlus()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable scan:seed accumulator:RxCombinePlus()]];
 
     NSArray *correct = @[
             error(250, testError())
@@ -1388,7 +1388,7 @@
     ]];
 
     NSNumber *seed = @42;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs scan:seed accumulator:RxCombinePlus()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable scan:seed accumulator:RxCombinePlus()]];
 
     NSArray *correct = @[
             next(210, @(seed.integerValue + 2)),
@@ -1419,7 +1419,7 @@
     ]];
 
     NSNumber *seed = @42;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs scan:seed accumulator:^NSNumber *(NSNumber *accumulate, NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable scan:seed accumulator:^NSNumber *(NSNumber *accumulate, NSNumber *element) {
         if (element.integerValue == 4) {
             @throw testError();
         } else {

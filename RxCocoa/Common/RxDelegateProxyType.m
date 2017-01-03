@@ -17,24 +17,24 @@
 
 + (nonnull id <RxDelegateProxyType>)proxyForObject:(nonnull id)object {
     [RxMainScheduler ensureExecutingOnScheduler];
-    id maybeProxy = [NSObject assignedProxyFor:object];
+    id maybeProxy = [self assignedProxyFor:object];
     
     id proxy;
     
     if (!maybeProxy) {
-        proxy = [NSObject createProxyForObject:object];
-        [NSObject assignProxy:proxy toObject:object];
-        NSAssert([NSObject assignedProxyFor:object] == proxy, @"[NSObject assignedProxyFor:object] == proxy");
+        proxy = [self createProxyForObject:object];
+        [self assignProxy:proxy toObject:object];
+        NSAssert([self assignedProxyFor:object] == proxy, @"[NSObject assignedProxyFor:object] == proxy");
     } else {
         proxy = maybeProxy;
     }
 
-    id currentDelegate = [NSObject currentDelegateFor:object];
+    id currentDelegate = [self currentDelegateFor:object];
 
     if (currentDelegate != proxy) {
         [proxy setForwardToDelegate:currentDelegate retainDelegate:NO];
-        [NSObject setCurrentDelegate:proxy toObject:object];
-        NSAssert([NSObject currentDelegateFor:object] == proxy, @"[NSObject currentDelegateFor:object] == proxy");
+        [self setCurrentDelegate:proxy toObject:object];
+        NSAssert([self currentDelegateFor:object] == proxy, @"[NSObject currentDelegateFor:object] == proxy");
         NSAssert([proxy forwardToDelegate] == currentDelegate, @"[proxy forwardToDelegate] == currentDelegate");
     }
     return proxy;
@@ -46,7 +46,7 @@
     
     @weakify(forwardDelegate);
 
-    id <RxDelegateProxyType> proxy = [NSObject proxyForObject:object];
+    id <RxDelegateProxyType> proxy = [self proxyForObject:object];
 
     NSString *s = [NSString stringWithFormat:
             @"This is a feature to warn you that there is already a delegate (or data source) set somewhere previously. The action you are trying to perform will clear that delegate (data source) and that means that some of your features that depend on that delegate (data source) being set will likely stop working.\n"
@@ -60,8 +60,8 @@
 
     // refresh properties after delegate is set
     // some views like UITableView cache `respondsToSelector`
-    [NSObject setCurrentDelegate:nil toObject:object];
-    [NSObject setCurrentDelegate:proxy toObject:object];
+    [self setCurrentDelegate:nil toObject:object];
+    [self setCurrentDelegate:proxy toObject:object];
 
     NSAssert([proxy forwardToDelegate] == forwardDelegate, @"Setting of delegate failed");
 
@@ -85,9 +85,9 @@
                                               retainDataSource:(BOOL)retainDataSource
                                                        binding:(void(^)(id <RxDelegateProxyType>, RxEvent *))binding {
 
-    id proxy = [NSObject proxyForObject:object];
+    id proxy = [[self class] proxyForObject:object];
 
-    id <RxDisposable> disposable = [NSObject installForwardDelegate:dataSource retainDelegate:retainDataSource onProxyForObject:object];
+    id <RxDisposable> disposable = [[self class] installForwardDelegate:dataSource retainDelegate:retainDataSource onProxyForObject:object];
 
     id <RxDisposable> subscription = [[[self asObservable]
             // source can never end, otherwise it would release the subscriber
@@ -96,7 +96,7 @@
                 [RxMainScheduler ensureExecutingOnScheduler];
                 
                 if (object) {
-                    NSAssert(proxy == [NSObject currentDelegateFor:object], @"Proxy changed");
+                    NSAssert(proxy == [[self class] currentDelegateFor:object], @"Proxy changed");
                 }
                 
                 binding(proxy, event);

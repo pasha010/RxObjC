@@ -27,8 +27,7 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _parent->_scheduler;
-    return [scheduler scheduleRecursive:@0.0 action:^(NSNumber *i, void (^recurse)(id)) {
+    return [_parent->_scheduler scheduleRecursive:@0.0 action:^(NSNumber *i, void (^recurse)(id)) {
         if (i.integerValue < self->_parent->_count) {
             [self forwardOn:[RxEvent next:@(self->_parent->_start + i.integerValue)]];
             recurse(@(i.doubleValue + 1));
@@ -45,7 +44,7 @@
 
 - (nonnull instancetype)initWithStart:(NSInteger)start
                                 count:(NSUInteger)count 
-                            scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
+                            scheduler:(nonnull RxImmediateScheduler *)scheduler {
     self = [super init];
     if (self) {
         _start = start;

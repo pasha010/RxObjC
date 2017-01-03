@@ -48,6 +48,12 @@
     }];
 }
 
+- (nonnull RxObservable *)asObservable {
+    return [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
+        return [self subscribe:observer];
+    }];
+}
+
 @end
 
 #if !DISABLE_SWIZZLING
@@ -71,11 +77,7 @@ BOOL rx_isWeakProperty(NSString *__nonnull propertyRuntimeInfo) {
     return [propertyRuntimeInfo rangeOfString:@",W,"].location != NSNotFound;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-
-@implementation NSObject (RxFinishWhenDealloc)
+@implementation RxObservable (FinishWhenDealloc)
 
 - (nonnull RxObservable *)finishWithNilWhenDealloc:(nonnull NSObject *)target {
     RxObservable *deallocating = target.rx_deallocating;
@@ -89,7 +91,6 @@ BOOL rx_isWeakProperty(NSString *__nonnull propertyRuntimeInfo) {
 }
 
 @end
-#pragma clang diagnostic pop
 
 FOUNDATION_EXTERN RxObservable *__nonnull rx_observeWeaklyKeyPathSectionsFor(NSObject *__nonnull target, NSArray<NSString *> *__nonnull keyPathSections, NSKeyValueObservingOptions options) {
     NSString *propertyName = keyPathSections.firstObject;
@@ -109,7 +110,7 @@ FOUNDATION_EXTERN RxObservable *__nonnull rx_observeWeaklyKeyPathSectionsFor(NSO
     RxKVOObservable *propertyObservable = [[RxKVOObservable alloc] initWithObject:target keyPath:propertyName options:options | NSKeyValueObservingOptionInitial retainTarget:NO];
 
     @weakify(target);
-    return [propertyObservable flatMapLatest:^id <RxObservableConvertibleType>(id nextTarget) {
+    return [propertyObservable.asObservable flatMapLatest:^id <RxObservableConvertibleType>(id nextTarget) {
         if (!nextTarget) {
             return [RxObservable just:nil];
         }

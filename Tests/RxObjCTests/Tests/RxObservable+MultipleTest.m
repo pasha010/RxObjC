@@ -38,7 +38,7 @@
     __block NSNumber *handlerCalled = nil;
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [o1 catchError:^RxObservable *(NSError *error) {
+        return [o1.asObservable catchError:^RxObservable *(NSError *error) {
             handlerCalled = scheduler.clock;
             return [o2 asObservable];
         }];
@@ -76,7 +76,7 @@
     __block NSNumber *handlerCalled = nil;
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [o1 catchError:^RxObservable *(NSError *error) {
+        return [o1.asObservable catchError:^RxObservable *(NSError *error) {
             handlerCalled = scheduler.clock;
             @throw [RxTestError testError1];
         }];
@@ -420,7 +420,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs switchLatest];
+        return [xs.asObservable switchLatest];
     }];
 
     NSArray *correct = @[
@@ -485,7 +485,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs switchLatest];
+        return [xs.asObservable switchLatest];
     }];
 
     NSArray *correct = @[
@@ -537,7 +537,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs switchLatest];
+        return [xs.asObservable switchLatest];
     }];
 
     NSArray *correct = @[
@@ -603,7 +603,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+        return [xs.asObservable flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
             return observables[index.unsignedIntegerValue];
         }];
     }];
@@ -675,7 +675,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+        return [xs.asObservable flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
             return observables[index.unsignedIntegerValue];
         }];
     }];
@@ -733,7 +733,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+        return [xs.asObservable flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
             return observables[index.unsignedIntegerValue];
         }];
     }];
@@ -788,7 +788,7 @@
     RxTestableObservable *xs = [scheduler createHotObservable:xSequence];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
+        return [xs.asObservable flatMapLatest:^id <RxObservableConvertibleType>(NSNumber *index) {
             if (index.integerValue < 1) {
                 return observables[index.unsignedIntegerValue];
             } else {
@@ -1512,7 +1512,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs merge];
+        return [xs.asObservable merge];
     }];
 
     NSArray *messages = @[
@@ -1573,7 +1573,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs merge];
+        return [xs.asObservable merge];
     }];
 
     NSArray *messages = @[
@@ -1635,7 +1635,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs merge];
+        return [xs.asObservable merge];
     }];
 
     NSArray *messages = @[
@@ -1687,7 +1687,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs merge];
+        return [xs.asObservable merge];
     }];
 
     NSArray *messages = @[
@@ -1748,7 +1748,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs mergeWithMaxConcurrent:2];
+        return [xs.asObservable mergeWithMaxConcurrent:2];
     }];
 
     NSArray *messages = @[
@@ -1817,7 +1817,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs mergeWithMaxConcurrent:2];
+        return [xs.asObservable mergeWithMaxConcurrent:2];
     }];
 
     NSArray *messages = @[
@@ -1885,7 +1885,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs mergeWithMaxConcurrent:3];
+        return [xs.asObservable mergeWithMaxConcurrent:3];
     }];
 
     NSArray *messages = @[
@@ -1953,7 +1953,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs mergeWithMaxConcurrent:3];
+        return [xs.asObservable mergeWithMaxConcurrent:3];
     }];
 
     NSArray *messages = @[
@@ -2021,7 +2021,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:450 create:^RxObservable * {
-        return [xs mergeWithMaxConcurrent:2];
+        return [xs.asObservable mergeWithMaxConcurrent:2];
     }];
 
     NSArray *messages = @[
@@ -2085,7 +2085,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs mergeWithMaxConcurrent:2];
+        return [xs.asObservable mergeWithMaxConcurrent:2];
     }];
 
     NSArray *messages = @[
@@ -2149,7 +2149,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs mergeWithMaxConcurrent:2];
+        return [xs.asObservable mergeWithMaxConcurrent:2];
     }];
 
     NSArray *messages = @[
@@ -2261,7 +2261,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2298,7 +2298,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2335,7 +2335,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2374,7 +2374,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2409,7 +2409,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2439,7 +2439,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2469,7 +2469,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2497,7 +2497,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2529,7 +2529,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2564,7 +2564,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     __block BOOL sourceNotDisposed = NO;
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [[l doOn:^(RxEvent *event) {
+        return [[l.asObservable doOn:^(RxEvent *event) {
             sourceNotDisposed = YES;
         }] takeUntil:r];
     }];
@@ -2595,7 +2595,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     __block BOOL sourceNotDisposed = NO;
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:[r doOn:^(RxEvent *event) {
+        return [l.asObservable takeUntil:[r.asObservable doOn:^(RxEvent *event) {
             sourceNotDisposed = YES;
         }]];
     }];
@@ -2625,7 +2625,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     __block BOOL sourceNotDisposed = NO;
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l takeUntil:r];
+        return [l.asObservable takeUntil:r];
     }];
 
     NSArray *events = @[
@@ -2651,7 +2651,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [x1 amb:x2];
+        return [x1.asObservable amb:x2];
     }];
 
     NSArray *events = @[
@@ -2715,7 +2715,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [x1 amb:x2];
+        return [x1.asObservable amb:x2];
     }];
 
     NSArray *events = @[
@@ -2747,7 +2747,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [x1 amb:x2];
+        return [x1.asObservable amb:x2];
     }];
 
     NSArray *events = @[
@@ -2780,7 +2780,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [x1 amb:x2];
+        return [x1.asObservable amb:x2];
     }];
 
     NSArray *events = @[
@@ -2813,7 +2813,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [x1 amb:x2];
+        return [x1.asObservable amb:x2];
     }];
 
     NSArray *events = @[
@@ -2845,7 +2845,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [x1 amb:x2];
+        return [x1.asObservable amb:x2];
     }];
 
     NSArray *events = @[
@@ -2876,7 +2876,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [x1 amb:x2];
+        return [x1.asObservable amb:x2];
     }];
 
     NSArray *events = @[
@@ -3771,7 +3771,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -3809,7 +3809,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -3843,7 +3843,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -3879,7 +3879,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -3910,7 +3910,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -3940,7 +3940,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -3976,7 +3976,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -4011,7 +4011,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -4041,7 +4041,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -4070,7 +4070,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -4108,7 +4108,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     }];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [l skipUntil:r];
+        return [l.asObservable skipUntil:r];
     }];
 
     NSArray *events = @[
@@ -4148,7 +4148,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
+        return [xs.asObservable withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
             return [NSString stringWithFormat:@"%@%@", x, y];
         }];
     }];
@@ -4182,7 +4182,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     RxTestScheduler *scheduler = [[RxTestScheduler alloc] initWithInitialClock:0];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [[xs withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSNumber *y) {
+        return [[xs.asObservable withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSNumber *y) {
             return [NSString stringWithFormat:@"%@%@", x, y];
         }] take:1];
     }];
@@ -4217,7 +4217,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
+        return [xs.asObservable withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
             return [NSString stringWithFormat:@"%@%@", x, y];
         }];
     }];
@@ -4261,7 +4261,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
+        return [xs.asObservable withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
             return [NSString stringWithFormat:@"%@%@", x, y];
         }];
     }];
@@ -4309,7 +4309,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
+        return [xs.asObservable withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
             return [NSString stringWithFormat:@"%@%@", x, y];
         }];
     }];
@@ -4356,7 +4356,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
+        return [xs.asObservable withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
             return [NSString stringWithFormat:@"%@%@", x, y];
         }];
     }];
@@ -4399,7 +4399,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
+        return [xs.asObservable withLatestFrom:ys resultSelector:^NSString *(NSNumber *x, NSString *y) {
             if (x.integerValue == 5) {
                 @throw testError();
             }
@@ -4447,7 +4447,7 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs withLatestFrom:ys];
+        return [xs.asObservable withLatestFrom:ys];
     }];
 
     NSArray *events = @[

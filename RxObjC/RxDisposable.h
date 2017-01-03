@@ -7,10 +7,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Respresents a disposable resource.
+/**
+ * Respresents a disposable resource.
+ */
 @protocol RxDisposable <NSObject>
-/// Dispose resource.
+/**
+ * Dispose resource.
+ */
 - (void)dispose;
+
 @end
 
 NS_ASSUME_NONNULL_END

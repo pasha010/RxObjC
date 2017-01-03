@@ -11,13 +11,8 @@
 #import "RxAnonymousDisposable.h"
 #import "RxNopDisposable.h"
 #import "RxBinaryDisposable.h"
-#import "RxObservable.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-
-@implementation NSObject (RxObservableTypeExtension)
+@implementation RxObservable (Subscription)
 
 - (nonnull id <RxDisposable>)subscribeWith:(nonnull void (^)(RxEvent<id> *__nonnull ))on {
     id <RxObserverType> observer = [[RxAnonymousObserver alloc] initWithEventHandler:^(RxEvent<id> *__nonnull e) {
@@ -115,5 +110,3 @@
 }
 
 @end
-
-#pragma clang diagnostic pop

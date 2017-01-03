@@ -9,10 +9,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol RxLockOwnerType <RxLock>
-- (nonnull RxSpinLock *)lock;
-@end
+@required
 
-@interface NSObject (RxLockOwnerType) <RxLockOwnerType>
+- (nonnull RxSpinLock *)getRxLock;
+
 @end
 
 NS_ASSUME_NONNULL_END

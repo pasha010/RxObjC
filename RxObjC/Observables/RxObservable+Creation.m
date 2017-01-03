@@ -73,7 +73,7 @@
     return [self of:elements scheduler:nil];
 }
 
-+ (nonnull RxObservable *)of:(nonnull NSArray *)elements scheduler:(nullable id <RxImmediateSchedulerType>)scheduler {
++ (nonnull RxObservable *)of:(nonnull NSArray *)elements scheduler:(nullable RxImmediateScheduler *)scheduler {
     return [[RxSequence alloc] initWithElements:[elements objectEnumerator] scheduler:scheduler];
 }
 
@@ -87,7 +87,7 @@
 
 + (nonnull RxObservable *)generate:(nonnull id)initialState
                          condition:(BOOL(^)(id))condition
-                         scheduler:(id <RxImmediateSchedulerType>)scheduler
+                         scheduler:(nonnull RxImmediateScheduler *)scheduler
                            iterate:(id(^)(id))iterate {
     return [[RxGenerate alloc] initWithInitialState:initialState
                                           condition:condition
@@ -103,7 +103,7 @@
 }
 
 + (nonnull RxObservable *)repeatElement:(nonnull id)element
-                              scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
+                              scheduler:(nonnull RxImmediateScheduler *)scheduler {
     return [[RxRepeatElement alloc] initWithElement:element scheduler:scheduler];
 }
 
@@ -122,7 +122,7 @@
 
 + (nonnull RxObservable *)range:(NSInteger)start
                           count:(NSUInteger)count
-                      scheduler:(nonnull id<RxImmediateSchedulerType>)scheduler {
+                      scheduler:(nonnull RxImmediateScheduler *)scheduler {
     return [[RxRangeProducer alloc] initWithStart:start count:count scheduler:scheduler];
 }
 
@@ -134,7 +134,7 @@
 
 @implementation NSArray (RxToObservable)
 
-- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler {
+- (nonnull RxObservable *)toObservable:(nullable RxImmediateScheduler *)scheduler {
     return [[self objectEnumerator] toObservable:scheduler];
 }
 
@@ -146,7 +146,7 @@
 
 @implementation NSSet (RxToObservable)
 
-- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler {
+- (nonnull RxObservable *)toObservable:(nullable RxImmediateScheduler *)scheduler {
     return [[self objectEnumerator] toObservable:scheduler];
 }
 
@@ -158,7 +158,7 @@
 
 @implementation NSEnumerator (RxToObservable)
 
-- (nonnull RxObservable *)toObservable:(nullable id <RxImmediateSchedulerType>)scheduler {
+- (nonnull RxObservable *)toObservable:(nullable RxImmediateScheduler *)scheduler {
     return [[RxSequence alloc] initWithElements:self scheduler:scheduler];
 }
 

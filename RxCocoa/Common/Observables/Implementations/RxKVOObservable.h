@@ -38,9 +38,9 @@ FOUNDATION_EXTERN RxObservable *__nonnull rx_observeWeaklyKeyPathFor(NSObject *_
  */
 FOUNDATION_EXTERN BOOL rx_isWeakProperty(NSString *__nonnull propertyRuntimeInfo);
 
-@interface NSObject (RxFinishWhenDealloc) <RxObservableType>
+@interface RxObservable<E> (FinishWhenDealloc)
 
-- (nonnull RxObservable *)finishWithNilWhenDealloc:(nonnull NSObject *)target;
+- (nonnull RxObservable<E> *)finishWithNilWhenDealloc:(nonnull NSObject *)target;
 
 @end
 

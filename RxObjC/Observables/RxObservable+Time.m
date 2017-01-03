@@ -22,12 +22,7 @@
 #import "RxSerialDispatchQueueScheduler.h"
 #import "RxSchedulers.h"
 
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-
-@implementation NSObject (RxThrottle)
+@implementation RxObservable (Throttle)
 
 - (nonnull RxObservable *)throttle:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [self debounce:dueTime scheduler:scheduler];
@@ -51,7 +46,7 @@
 
 @end
 
-@implementation NSObject (RxSample)
+@implementation RxObservable (Sample)
 
 - (nonnull RxObservable *)sample:(nonnull id <RxObservableType>)sampler {
     return [[RxSample alloc] initWithSource:[self asObservable] sampler:[sampler asObservable] onlyNew:YES];
@@ -83,7 +78,7 @@
 
 @end
 
-@implementation NSObject (RxTake)
+@implementation RxObservable (Take)
 
 - (nonnull RxObservable *)take:(RxTimeInterval)duration scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxTakeTime alloc] initWithSource:[self asObservable] duration:duration scheduler:scheduler];
@@ -91,7 +86,7 @@
 
 @end
 
-@implementation NSObject (RxSkip)
+@implementation RxObservable (Skip)
 
 - (nonnull RxObservable *)skip:(RxTimeInterval)duration scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxSkipTime alloc] initWithSource:[self asObservable] duration:duration scheduler:scheduler];
@@ -99,7 +94,7 @@
 
 @end
 
-@implementation NSObject (RxIgnoreElements)
+@implementation RxObservable (IgnoreElements)
 
 - (nonnull RxObservable *)ignoreElements {
     return [self filter:^BOOL(id o) {
@@ -109,7 +104,7 @@
 
 @end
 
-@implementation NSObject (RxDelaySubscription)
+@implementation RxObservable (DelaySubscription)
 
 - (nonnull RxObservable *)delaySubscription:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxDelaySubscription alloc] initWithSource:[self asObservable] dueTime:dueTime scheduler:scheduler];
@@ -117,7 +112,7 @@
 
 @end
 
-@implementation NSObject (RxBuffer)
+@implementation RxObservable (Buffer)
 
 - (nonnull RxObservable<NSArray<id> *> *)buffer:(RxTimeInterval)timeSpan count:(NSUInteger)count scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxBufferTimeCount alloc] initWithSource:[self asObservable] timeSpan:timeSpan count:count scheduler:scheduler];
@@ -125,7 +120,7 @@
 
 @end
 
-@implementation NSObject (RxWindow)
+@implementation RxObservable (Window)
 
 - (nonnull RxObservable<RxObservable *> *)window:(RxTimeInterval)timeSpan count:(NSUInteger)count scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxWindowTimeCount alloc] initWithSource:[self asObservable] timeSpan:timeSpan count:count scheduler:scheduler];
@@ -133,7 +128,7 @@
 
 @end
 
-@implementation NSObject (RxTimeout)
+@implementation RxObservable (Timeout)
 
 - (nonnull RxObservable *)timeout:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler {
     return [[RxTimeout alloc] initWithSource:[self asObservable] dueTime:dueTime other:[RxObservable error:[RxError timeout]] scheduler:scheduler];
@@ -147,5 +142,3 @@
 }
 
 @end
-
-#pragma clang diagnostic pop

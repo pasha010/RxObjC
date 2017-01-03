@@ -111,12 +111,20 @@
     return self;
 }
 
-- (NSRecursiveLock *)lock {
+- (void)rx_lock {
+    [[self getRxLock] lock];
+}
+
+- (void)rx_unlock {
+    [[self getRxLock] unlock];
+}
+
+- (nonnull RxSpinLock *)getRxLock {
     return _lock;
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {

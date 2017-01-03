@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
-#import "RxSchedulerType.h"
+#import "RxImmediateSchedulerType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

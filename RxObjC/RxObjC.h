@@ -24,7 +24,6 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxLockOwnerType.h"
 #import "RxSynchronizedDisposeType.h"
 #import "RxSynchronizedOnType.h"
-#import "RxSynchronizedSubscribeType.h"
 #import "RxSynchronizedUnsubscribeType.h"
 
 #pragma mark - DataStructures
@@ -86,7 +85,6 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxObservableConvertibleType.h"
 #import "RxObservableType.h"
 #import "RxObserverType.h"
-#import "RxSchedulerType.h"
 
 #pragma mark - Schedulers
 #import "RxSchedulers.h"

@@ -5,28 +5,14 @@
 
 #import "RxObserverType.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-@implementation NSObject (RxObserverType)
-
-- (void)onNext:(nullable id)element {
-    if ([self respondsToSelector:@selector(on:)]) {
-        [self on:[RxEvent next:element]];
-    }
+void rx_onNext(id <RxObserverType> _Nonnull observer, id _Nullable element) {
+    [observer on:[RxEvent next:element]];
 }
 
-- (void)onCompleted {
-    if ([self respondsToSelector:@selector(on:)]) {
-        [self on:[RxEvent completed]];
-    }
+void rx_onCompleted(id <RxObserverType> _Nonnull observer) {
+    [observer on:[RxEvent completed]];
 }
 
-- (void)onError:(nullable NSError *)error {
-    if ([self respondsToSelector:@selector(on:)]) {
-        [self on:[RxEvent error:error]];
-    }
+void rx_onError(id <RxObserverType> _Nonnull observer, NSError *_Nullable error) {
+    [observer on:[RxEvent error:error]];
 }
-
-@end
-#pragma clang diagnostic pop

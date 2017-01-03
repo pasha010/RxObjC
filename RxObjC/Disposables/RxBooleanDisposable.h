@@ -4,7 +4,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxDisposable.h"
 #import "RxCancelable.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -12,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
 Represents a disposable resource that can be checked for disposal status.
 */
-@interface RxBooleanDisposable : NSObject <RxDisposable, RxCancelable>
+@interface RxBooleanDisposable : NSObject <RxCancelable>
 
 - (nonnull instancetype)init;
 - (nonnull instancetype)initWithDisposed:(BOOL)disposed NS_DESIGNATED_INITIALIZER;

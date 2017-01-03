@@ -9,7 +9,7 @@
 #import "RxFilter.h"
 #import "RxSink.h"
 
-@interface RxFilterSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxFilterSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxFilterSink {

@@ -15,45 +15,41 @@
 #import "RxRetryWhen.h"
 #import "RxScan.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
+@implementation RxObservable (DistinctUntilChanged)
 
-@implementation NSObject (RxDistinctUntilChanged)
-
-- (nonnull RxObservable *)distinctUntilChanged {
+- (nonnull RxObservable<id> *)distinctUntilChanged {
     return [self distinctUntilChanged:^id(id o) {
         return o;
-    } comparer:^BOOL(id lhs, id rhs) {
+    }                        comparer:^BOOL(id lhs, id rhs) {
         return [lhs isEqual:rhs];
     }];
 }
 
-- (nonnull RxObservable *)distinctUntilChangedWithKeySelector:(id (^)(id))keySelector {
+- (nonnull RxObservable<id> *)distinctUntilChangedWithKeySelector:(id (^)(id))keySelector {
     return [self distinctUntilChanged:keySelector comparer:^BOOL(id lhs, id rhs) {
         return [lhs isEqual:rhs];
     }];
 }
 
-- (nonnull RxObservable *)distinctUntilChangedWithComparer:(BOOL(^)(id lhs, id rhs))comparer {
+- (nonnull RxObservable<id> *)distinctUntilChangedWithComparer:(BOOL(^)(id lhs, id rhs))comparer {
     return [self distinctUntilChanged:^id(id o) {
         return o;
-    } comparer:comparer];
+    }                        comparer:comparer];
 }
 
-- (nonnull RxObservable *)distinctUntilChanged:(id(^)(id))keySelector comparer:(BOOL(^)(id lhs, id rhs))comparer {
+- (nonnull RxObservable<id> *)distinctUntilChanged:(id(^)(id))keySelector comparer:(BOOL(^)(id lhs, id rhs))comparer {
     return [[RxDistinctUntilChanged alloc] initWithSource:[self asObservable] keySelector:keySelector comparer:comparer];
 }
 
 @end
 
-@implementation NSObject (RxDoOn)
+@implementation RxObservable (DoOn)
 
-- (nonnull RxObservable *)doOn:(void (^)(RxEvent *))eventHandler {
+- (nonnull RxObservable<id> *)doOn:(void (^)(RxEvent<id> *))eventHandler {
     return [[RxDo alloc] initWithSource:[self asObservable] eventHandler:eventHandler];
 }
 
-- (nonnull RxObservable *)doOn:(nullable void (^)(id value))onNext onError:(nullable void (^)(NSError *))onError onCompleted:(nullable void (^)())onCompleted {
+- (nonnull RxObservable<id> *)doOn:(nullable void (^)(id value))onNext onError:(nullable void (^)(NSError *))onError onCompleted:(nullable void (^)())onCompleted {
     return [self doOn:^(RxEvent *event) {
         switch (event.type) {
             case RxEventTypeNext: {
@@ -78,27 +74,27 @@
     }];
 }
 
-- (nonnull RxObservable *)doOnNext:(void (^)(id value))onNext {
+- (nonnull RxObservable<id> *)doOnNext:(void (^)(id value))onNext {
     return [self doOn:onNext onError:nil onCompleted:nil];
 }
 
-- (nonnull RxObservable *)doOnError:(void (^)(NSError *))onError {
+- (nonnull RxObservable<id> *)doOnError:(void (^)(NSError *))onError {
     return [self doOn:nil onError:onError onCompleted:nil];
 }
 
-- (RxObservable *)doOnCompleted:(void (^)())onCompleted {
+- (nonnull RxObservable<id> *)doOnCompleted:(void (^)())onCompleted {
     return [self doOn:nil onError:nil onCompleted:onCompleted];
 }
 
 @end
 
-@implementation NSObject (RxStartWith)
+@implementation RxObservable (StartWith)
 
-- (nonnull RxObservable *)startWithElements:(nonnull NSArray *)elements {
+- (nonnull RxObservable<id> *)startWithElements:(nonnull NSArray<id> *)elements {
     return [[RxStartWith alloc] initWithSource:[self asObservable] elements:elements];
 }
 
-- (nonnull RxObservable *)startWith:(nonnull id)element {
+- (nonnull RxObservable<id> *)startWith:(nonnull id)element {
     if ([element isKindOfClass:[NSArray class]]) {
         return [self startWithElements:element];
     }
@@ -107,13 +103,13 @@
 
 @end
 
-@implementation NSObject (RxRetry)
+@implementation RxObservable (Retry)
 
-- (nonnull RxObservable *)retry {
+- (nonnull RxObservable<id> *)retry {
     return [[RxCatchSequence alloc] initWithSources:[[RxInfiniteSequence alloc] initWithRepeatedValue:[self asObservable]]];
 }
 
-- (nonnull RxObservable *)retry:(NSUInteger)maxAttemptCount {
+- (nonnull RxObservable<id> *)retry:(NSUInteger)maxAttemptCount {
     NSMutableArray<RxObservable *> *array = [NSMutableArray arrayWithCapacity:maxAttemptCount];
     for (NSUInteger i = 0; i < maxAttemptCount; i++) {
         [array addObject:[self asObservable]];
@@ -121,12 +117,12 @@
     return [[RxCatchSequence alloc] initWithSources:[array objectEnumerator]];
 }
 
-- (nonnull RxObservable *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler {
+- (nonnull RxObservable<id> *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler {
     return [self retryWhen:notificationHandler customErrorClass:nil];
 }
 
-- (nonnull RxObservable *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler
-                    customErrorClass:(nullable Class)errorClass {
+- (nonnull RxObservable<id> *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler
+                       customErrorClass:(nullable Class)errorClass {
     return [[RxRetryWhenSequence alloc] initWithSources:[[RxInfiniteSequence alloc] initWithRepeatedValue:[self asObservable]]
                                     notificationHandler:notificationHandler
                                        customErrorClass:errorClass];
@@ -134,12 +130,10 @@
 
 @end
 
-@implementation NSObject (RxScan)
+@implementation RxObservable (Scan)
 
-- (nonnull RxObservable *)scan:(nonnull id)seed accumulator:(id __nonnull(^)(id __nonnull accumulate, id __nonnull element))accumulator {
+- (nonnull RxObservable<id> *)scan:(nonnull id)seed accumulator:(id __nonnull (^)(id __nonnull accumulate, id __nonnull element))accumulator {
     return [[RxScan alloc] initWithSource:[self asObservable] seed:seed accumulator:accumulator];
 }
 
 @end
-
-#pragma clang diagnostic pop

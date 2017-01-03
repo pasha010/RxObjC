@@ -29,8 +29,7 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _parent->_scheduler;
-    return [scheduler scheduleRecursive:@(YES) action:^(NSNumber *isFirstNumber, void (^recurse)(id)) {
+    return [_parent->_scheduler scheduleRecursive:@(YES) action:^(NSNumber *isFirstNumber, void (^recurse)(id)) {
         rx_tryCatch(^{
             BOOL isFirst = isFirstNumber.boolValue;
             if (!isFirst) {
@@ -61,7 +60,7 @@
                                    condition:(BOOL (^)(id))condition 
                                      iterate:(id (^)(id))iterate 
                               resultSelector:(id (^)(id))resultSelector 
-                                   scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
+                                   scheduler:(nonnull RxImmediateScheduler *)scheduler {
     self = [super init];
     if (self) {
         _initialState = initialState;

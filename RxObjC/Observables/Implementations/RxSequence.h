@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "RxProducer.h"
 
-@protocol RxImmediateSchedulerType;
+@class RxImmediateScheduler;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RxSequence<Element> : RxProducer<Element> {
 @package
     NSEnumerator<id> *__nonnull _elements;
-    id <RxImmediateSchedulerType> __nullable _scheduler;
+    RxImmediateScheduler *__nullable _scheduler;
 }
 
 - (nonnull instancetype)initWithElements:(nonnull NSEnumerator<Element> *)elements
-                               scheduler:(nullable id <RxImmediateSchedulerType>)scheduler;
+                               scheduler:(nullable RxImmediateScheduler *)scheduler;
 @end
 
 NS_ASSUME_NONNULL_END

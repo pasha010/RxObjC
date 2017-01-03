@@ -10,31 +10,33 @@
 #import "RxObservable.h"
 #import "RxObservable+Extension.h"
 
+@protocol RxObservableConvertibleType;
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSArray<E> (RxCombineLatest) <RxObservableType>
+@interface NSArray<E> (RxCombineLatest) // where E is RxObservable
 /**
  * Merges the specified observable sequences into one observable sequence by using the selector function whenever any of the observable sequences produces an element.
  * @see [combinelatest operator on reactivex.io](http://reactivex.io/documentation/operators/combinelatest.html)
  * @param resultSelector: Function to invoke whenever any of the sources produces an element.
  * @return: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
  */
-- (nonnull RxObservable<E> *)combineLatest:(nonnull E(^)(NSArray<E> *__nonnull))resultSelector;
+- (nonnull RxObservable<id> *)combineLatest:(nonnull id(^)(NSArray<E> *__nonnull))resultSelector;
 
 @end
 
-@interface NSArray<E> (RxZip) <RxObservableType>
+@interface NSArray<E> (RxZip) // where E is RxObservable
 /**
  * Merges the specified observable sequences into one observable sequence by using the selector function whenever all of the observable sequences have produced an element at a corresponding index.
  * @see [zip operator on reactivex.io](http://reactivex.io/documentation/operators/zip.html)
  * @param resultSelector: Function to invoke for each series of elements at corresponding indexes in the sources.
  * @return: An observable sequence containing the result of combining elements of the sources using the specified result selector function.
  */
-- (nonnull RxObservable<E> *)zip:(nonnull E(^)(NSArray<E> *__nonnull))resultSelector;
+- (nonnull RxObservable<id> *)zip:(nonnull id(^)(NSArray<E> *__nonnull))resultSelector;
 
 @end
 
-@interface NSObject (RxSwitch) <RxObservableType>
+@interface RxObservable<E> (Switch)
 /**
  * Transforms an observable sequence of observable sequences into an observable sequence
  * producing values only from the most recent observable sequence.
@@ -44,18 +46,18 @@ NS_ASSUME_NONNULL_BEGIN
  * @see [switch operator on reactivex.io](http://reactivex.io/documentation/operators/switch.html)
  * @return: The observable sequence that at any point in time produces the elements of the most recent inner observable sequence that has been received.
  */
-- (nonnull RxObservable *)switchLatest;
+- (nonnull RxObservable<E> *)switchLatest;
 
 @end
 
-@interface NSObject (RxConcatWith) <RxObservableType>
+@interface RxObservable<E> (ConcatWith)
 /**
  * Concatenates the second observable sequence to `self` upon successful termination of `self`.
  * @see [concat operator on reactivex.io](http://reactivex.io/documentation/operators/concat.html)
  * @param second: Second observable sequence.
  * @return: An observable sequence that contains the elements of `self`, followed by those of the second sequence.
  */
-- (nonnull RxObservable *)concatWith:(nonnull RxObservable *)second;
+- (nonnull RxObservable<E> *)concatWith:(nonnull id <RxObservableConvertibleType>)second;
 
 @end
 
@@ -85,23 +87,23 @@ NS_ASSUME_NONNULL_BEGIN
 - (nonnull RxObservable<E> *)concat:(NSUInteger)count;
 @end
 
-@interface NSObject (RxConcat) <RxObservableType>
+@interface RxObservable<E> (Concat)
 /**
  * Concatenates all inner observable sequences, as long as the previous observable sequence terminated successfully.
  * @see [concat operator on reactivex.io](http://reactivex.io/documentation/operators/concat.html)
  * @return: An observable sequence that contains the elements of each observed inner sequence, in sequential order.
  */
-- (nonnull RxObservable *)concat;
+- (nonnull RxObservable<E> *)concat;
 
 @end
 
-@interface NSObject (RxMerge) <RxObservableType>
+@interface RxObservable<E> (Merge)
 /**
  * Merges elements from all observable sequences in the given enumerable sequence into a single observable sequence.
  * @see [merge operator on reactivex.io](http://reactivex.io/documentation/operators/merge.html)
  * @return: The observable sequence that merges the elements of the observable sequences.
  */
-- (nonnull RxObservable *)merge;
+- (nonnull RxObservable<E> *)merge;
 
 /**
  * Merges elements from all inner observable sequences into a single observable sequence, limiting the number of concurrent subscriptions to inner sequences.
@@ -109,18 +111,18 @@ NS_ASSUME_NONNULL_BEGIN
  * @param maxConcurrent: Maximum number of inner observable sequences being subscribed to concurrently.
  * @return: The observable sequence that merges the elements of the inner sequences.
  */
-- (nonnull RxObservable *)mergeWithMaxConcurrent:(NSUInteger)maxConcurrent;
+- (nonnull RxObservable<E> *)mergeWithMaxConcurrent:(NSUInteger)maxConcurrent;
 
 @end
 
-@interface NSObject (RxCatch) <RxObservableType>
+@interface RxObservable<E> (Catch)
 /**
  * Continues an observable sequence that is terminated by an error with the observable sequence produced by the handler.
  * @see [catch operator on reactivex.io](http://reactivex.io/documentation/operators/catch.html)
  * @param handler: Error handler function, producing another observable sequence.
  * @return: An observable sequence containing the source sequence's elements, followed by the elements produced by the handler's resulting observable sequence in case an error occurred.
  */
-- (nonnull RxObservable *)catchError:(RxObservable *(^)(NSError *))handler;
+- (nonnull RxObservable<E> *)catchError:(RxObservable<E> *(^)(NSError *))handler;
 
 /**
  * Continues an observable sequence that is terminated by an error with a single element.
@@ -128,7 +130,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param element: Last element in an observable sequence in case error occurs.
  * @return: An observable sequence containing the source sequence's elements, followed by the `element` in case an error occurred.
  */
-- (nonnull RxObservable *)catchErrorJustReturn:(nonnull id)element;
+- (nonnull RxObservable<E> *)catchErrorJustReturn:(nonnull E)element;
 
 @end
 
@@ -150,36 +152,36 @@ NS_ASSUME_NONNULL_BEGIN
 - (nonnull RxObservable<E> *)catchError;
 @end
 
-@interface NSObject (RxTakeUntil) <RxObservableType>
+@interface RxObservable<E> (TakeUntil)
 /**
  * Returns the elements from the source observable sequence until the other observable sequence produces an element.
  * @see [takeUntil operator on reactivex.io](http://reactivex.io/documentation/operators/takeuntil.html)
  * @param other: Observable sequence that terminates propagation of elements of the source sequence.
  * @return: An observable sequence containing the elements of the source sequence up to the point the other sequence interrupted further propagation.
  */
-- (nonnull RxObservable *)takeUntil:(nonnull id <RxObservableType>)other;
+- (nonnull RxObservable<E> *)takeUntil:(nonnull id <RxObservableType>)other;
 
 @end
 
-@interface NSObject (RxSkipUntil) <RxObservableType>
+@interface RxObservable<E> (SkipUntil)
 /**
  * Returns the elements from the source observable sequence that are emitted after the other observable sequence produces an element.
  * @see [skipUntil operator on reactivex.io](http://reactivex.io/documentation/operators/skipuntil.html)
  * @param other: Observable sequence that starts propagation of elements of the source sequence.
  * @return: An observable sequence containing the elements of the source sequence that are emitted after the other sequence emits an item.
  */
-- (nonnull RxObservable *)skipUntil:(nonnull id <RxObservableType>)other;
+- (nonnull RxObservable<E> *)skipUntil:(nonnull id <RxObservableType>)other;
 
 @end
 
-@interface NSObject (RxAmb) <RxObservableType>
+@interface RxObservable<E> (Amb)
 /**
  * Propagates the observable sequence that reacts first.
  * @see [amb operator on reactivex.io](http://reactivex.io/documentation/operators/amb.html)
  * @param right: Second observable sequence.
  * @return: An observable sequence that surfaces either of the given sequences, whichever reacted first.
  */
-- (nonnull RxObservable *)amb:(nonnull id <RxObservableType>)right;
+- (nonnull RxObservable<E> *)amb:(nonnull id <RxObservableType>)right;
 
 @end
 
@@ -201,7 +203,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nonnull RxObservable<E> *)amb;
 @end
 
-@interface NSObject (RxWithLatestFrom) <RxObservableType>
+@interface RxObservable<E> (WithLatestFrom)
 /**
  * Merges two observable sequences into one observable sequence by combining each element from self with the latest element from the second source, if any.
  * @see [combineLatest operator on reactivex.io](http://reactivex.io/documentation/operators/combinelatest.html)
@@ -209,8 +211,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @param resultSelector: Function to invoke for each element from the self combined with the latest element from the second source, if any.
  * @return: An observable sequence containing the result of combining each element of the self  with the latest element from the second source, if any, using the specified result selector function.
  */
-- (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second
-                          resultSelector:(id __nonnull(^)(id __nonnull x, id __nonnull y))resultSelector;
+- (nonnull RxObservable<E> *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second
+                             resultSelector:(E __nonnull (^)(id __nonnull x, id __nonnull y))resultSelector;
 
 /**
  * Merges two observable sequences into one observable sequence by using latest element from the second sequence every time when `self` emitts an element.
@@ -218,7 +220,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param second: Second observable source.
  * @return: An observable sequence containing the result of combining each element of the self  with the latest element from the second source, if any, using the specified result selector function.
  */
-- (nonnull RxObservable *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second;
+- (nonnull RxObservable<E> *)withLatestFrom:(nonnull id <RxObservableConvertibleType>)second;
 
 @end
 

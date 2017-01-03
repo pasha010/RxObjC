@@ -6,11 +6,9 @@
 #import "RxImmediateSchedulerType.h"
 #import "RxAnonymousDisposable.h"
 #import "RxRecursiveScheduler.h"
+#import "RxSchedulerServices+Emulation.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-@implementation NSObject (RxImmediateSchedulerType)
+@implementation RxImmediateScheduler
 
 - (nonnull id <RxDisposable>)scheduleRecursive:(nullable id)state action:(RxRecursiveImmediateAction)action {
     RxRecursiveImmediateScheduler *recursiveScheduler = [[RxRecursiveImmediateScheduler alloc] initWithActon:action andScheduler:self];
@@ -21,4 +19,29 @@
 }
 
 @end
-#pragma clang diagnostic pop
+
+@implementation RxScheduler
+
+- (nonnull id <RxDisposable>)schedulePeriodic:(nullable id)state
+                                   startAfter:(RxTimeInterval)startAfter
+                                       period:(RxTimeInterval)period
+                                       action:(id(^)(id __nullable))action {
+    RxSchedulePeriodicRecursive *schedule = [[RxSchedulePeriodicRecursive alloc] initWithScheduler:self
+                                                                                        startAfter:startAfter
+                                                                                            period:period
+                                                                                            action:action
+                                                                                             state:state];
+    return [schedule start];
+}
+
+- (nonnull id <RxDisposable>)scheduleRecursive:(nonnull id)state
+                                       dueTime:(RxTimeInterval)dueTime
+                                        action:(RxAnyRecursiveSchedulerAction)action {
+    RxAnyRecursiveScheduler *scheduler = [[RxAnyRecursiveScheduler alloc] initWithScheduler:self andAction:action];
+    [scheduler schedule:state dueTime:dueTime];
+    return [[RxAnonymousDisposable alloc] initWithDisposeAction:^{
+        [scheduler dispose];
+    }];
+}
+
+@end

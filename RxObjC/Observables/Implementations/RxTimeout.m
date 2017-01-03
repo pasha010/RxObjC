@@ -13,7 +13,7 @@
 #import "RxStableCompositeDisposable.h"
 #import "RxNopDisposable.h"
 
-@interface RxTimeoutSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxTimeoutSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxTimeoutSink {

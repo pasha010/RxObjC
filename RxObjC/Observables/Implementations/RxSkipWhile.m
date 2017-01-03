@@ -9,7 +9,7 @@
 #import "RxSkipWhile.h"
 #import "RxSink.h"
 
-@interface RxSkipWhileSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxSkipWhileSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxSkipWhileSink {
@@ -52,7 +52,7 @@
 
 @end
 
-@interface RxSkipWhileSinkWithIndex<O : id<RxObserverType>> : RxSink<O>
+@interface RxSkipWhileSinkWithIndex<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxSkipWhileSinkWithIndex {
@@ -123,7 +123,7 @@
 
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
-    RxSink *sink;
+    RxSink <RxObserverType> *sink;
     if (_predicate) {
         sink = [[RxSkipWhileSink alloc] initWithParent:self observer:observer];
     } else if (_indexPredicate) {

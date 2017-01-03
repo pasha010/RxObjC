@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <RxObjC/RxObjC.h>
 
-@class RxBlockingObservable;
+@class RxBlockingObservable<E>;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSObject (RxBlocking)/* <RxObservableConvertibleType>*/
+@interface RxObservable<E> (Blocking)
 /**
  * Converts an Observable into a `BlockingObservable` (an Observable with blocking operators).
  * @return: `BlockingObservable` version of `self`
  */
-- (nonnull RxBlockingObservable *)toBlocking;
+- (nonnull RxBlockingObservable<E> *)toBlocking;
 
 @end
 

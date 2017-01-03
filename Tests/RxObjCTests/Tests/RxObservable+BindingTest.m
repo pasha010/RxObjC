@@ -38,7 +38,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs multicast:^id <RxSubjectType> {
+        return [xs.asObservable multicast:^id <RxSubjectType> {
             return [RxPublishSubject create];
         } selector:^RxObservable *(RxObservable *observable) {
             return observable;
@@ -73,7 +73,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs multicast:^id <RxSubjectType> {
+        return [xs.asObservable multicast:^id <RxSubjectType> {
             return [RxPublishSubject create];
         } selector:^RxObservable *(RxObservable *observable) {
             return observable;
@@ -107,7 +107,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs multicast:^id <RxSubjectType> {
+        return [xs.asObservable multicast:^id <RxSubjectType> {
             return [RxPublishSubject create];
         } selector:^RxObservable *(RxObservable *observable) {
             return observable;
@@ -142,7 +142,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs multicast:^id <RxSubjectType> {
+        return [xs.asObservable multicast:^id <RxSubjectType> {
             return [RxPublishSubject create];
         } selector:^RxObservable *(RxObservable *observable) {
             return [RxObservable zip:observable and:observable resultSelector:^NSNumber *(NSNumber *a, NSNumber *b) {
@@ -173,7 +173,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs multicast:^id <RxSubjectType> {
+        return [xs.asObservable multicast:^id <RxSubjectType> {
             @throw [RxTestError testError];
             return [RxPublishSubject create];
         } selector:^RxObservable *(RxObservable *observable) {
@@ -195,7 +195,7 @@
     ]];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [xs multicast:^id <RxSubjectType> {
+        return [xs.asObservable multicast:^id <RxSubjectType> {
             return [RxPublishSubject create];
         } selector:^RxObservable *(RxObservable *observable) {
             @throw [RxTestError testError];
@@ -218,7 +218,7 @@
 
     RxTestConnectableObservable<RxMySubject<NSNumber *> *> *observable = [[RxTestConnectableObservable alloc] initWithObservable:[RxObservable of:@[@0, @1, @2]] subject:subject];
 
-    id <RxDisposable> d = [observable subscribeNext:^(NSNumber *n) {
+    id <RxDisposable> d = [[observable asObservable] subscribeNext:^(NSNumber *n) {
         nEvents++;
     }];
 
@@ -237,7 +237,7 @@
     RxTestConnectableObservable *observable = [[RxTestConnectableObservable alloc] initWithObservable:[@[[RxObservable of:@[@0, @1, @2]], [RxObservable error:testError()]] concat]
                                                                                               subject:subject];
 
-    id <RxDisposable> d = [observable subscribeError:^(NSError *error) {
+    id <RxDisposable> d = [[observable asObservable] subscribeError:^(NSError *error) {
         nEvents++;
     }];
 
@@ -257,7 +257,7 @@
             [[RxTestConnectableObservable alloc] initWithObservable:[RxObservable error:[RxTestError testError]]
                                                             subject:subject];
 
-    id <RxDisposable> d = [observable subscribeError:^(NSError *error) {
+    id <RxDisposable> d = [[observable asObservable] subscribeError:^(NSError *error) {
         nEvents++;
     }];
 
@@ -276,7 +276,7 @@
     RxTestConnectableObservable *observable = [[RxTestConnectableObservable alloc] initWithObservable:[RxObservable empty]
                                                                                               subject:subject];
 
-    id <RxDisposable> d = [observable subscribeCompleted:^{
+    id <RxDisposable> d = [[observable asObservable] subscribeCompleted:^{
         nEvents++;
     }];
 
@@ -303,7 +303,7 @@
     RxTestConnectableObservable *conn = [[RxTestConnectableObservable alloc] initWithObservable:[xs asObservable] subject:subject];
 
     RxTestableObserver *res = [scheduler start:^RxObservable * {
-        return [conn refCount];
+        return [conn.asConnectableObservable refCount];
     }];
 
     NSArray *array = @[
@@ -337,7 +337,7 @@
     RxMySubject<NSNumber *> *subject = [RxMySubject create];
 
     RxTestConnectableObservable *conn = [[RxTestConnectableObservable alloc] initWithObservable:xs subject:subject];
-    RxObservable *refd = [conn refCount];
+    RxObservable *refd = [conn.asConnectableObservable refCount];
 
     id <RxDisposable> dis1 = [refd subscribeWith:^(RxEvent *__unused event){}];
     XCTAssertEqual(count, 1);
@@ -412,7 +412,7 @@
             [self completed:300]
     ]];
 
-    __block RxObservable *res = [[xs publish] refCount];
+    __block RxObservable *res = [[xs.asObservable publish] refCount];
     
     __block id <RxDisposable> d1 = nil;
     __block RxTestableObserver<NSNumber *> *o1 = [scheduler createObserver];
@@ -500,7 +500,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ys = [xs replay:3];}];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ys = [xs.asObservable replay:3];}];
     [scheduler scheduleAt:450 action:^{subscription = [ys subscribe:res];}];
     [scheduler scheduleAt:RxTestSchedulerDefaultDisposed action:^{[subscription dispose];}];
 
@@ -557,7 +557,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ys = [xs replay:3];}];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ys = [xs.asObservable replay:3];}];
     [scheduler scheduleAt:450 action:^{subscription = [ys subscribe:res];}];
     [scheduler scheduleAt:RxTestSchedulerDefaultDisposed action:^{[subscription dispose];}];
 
@@ -612,7 +612,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ys = [xs replay:3];}];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ys = [xs.asObservable replay:3];}];
     [scheduler scheduleAt:450 action:^{subscription = [ys subscribe:res];}];
     [scheduler scheduleAt:RxTestSchedulerDefaultDisposed action:^{[subscription dispose];}];
 
@@ -667,7 +667,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ys = [xs replay:3];}];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ys = [xs.asObservable replay:3];}];
     [scheduler scheduleAt:450 action:^{subscription = [ys subscribe:res];}];
     [scheduler scheduleAt:475 action:^{[subscription dispose];}];
 
@@ -723,7 +723,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs replay:1]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable replay:1]; }];
     [scheduler scheduleAt:450 action:^{ subscription = [ys subscribe:res]; }];
     [scheduler scheduleAt:RxTestSchedulerDefaultDisposed action:^{ [subscription dispose]; }];
 
@@ -778,7 +778,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs replay:1]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable replay:1]; }];
     [scheduler scheduleAt:450 action:^{ subscription = [ys subscribe:res]; }];
     [scheduler scheduleAt:RxTestSchedulerDefaultDisposed action:^{ [subscription dispose]; }];
 
@@ -831,7 +831,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs replay:1]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable replay:1]; }];
     [scheduler scheduleAt:450 action:^{ subscription = [ys subscribe:res]; }];
     [scheduler scheduleAt:RxTestSchedulerDefaultDisposed action:^{ [subscription dispose]; }];
 
@@ -884,7 +884,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs replay:1]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable replay:1]; }];
     [scheduler scheduleAt:450 action:^{ subscription = [ys subscribe:res]; }];
     [scheduler scheduleAt:475 action:^{ [subscription dispose]; }];
 
@@ -938,7 +938,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs replayAll]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable replayAll]; }];
     [scheduler scheduleAt:450 action:^{ subscription = [ys subscribe:res]; }];
     [scheduler scheduleAt:RxTestSchedulerDefaultDisposed action:^{ [subscription dispose]; }];
 
@@ -999,7 +999,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs replayAll]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable replayAll]; }];
     [scheduler scheduleAt:450 action:^{ subscription = [ys subscribe:res]; }];
     [scheduler scheduleAt:RxTestSchedulerDefaultDisposed action:^{ [subscription dispose]; }];
 
@@ -1055,7 +1055,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs replayAll]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable replayAll]; }];
     [scheduler scheduleAt:450 action:^{ subscription = [ys subscribe:res]; }];
     [scheduler scheduleAt:RxTestSchedulerDefaultDisposed action:^{ [subscription dispose]; }];
 
@@ -1111,7 +1111,7 @@
     __block id <RxDisposable> connection = nil;
     __block RxTestableObserver<NSNumber *> *res = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs replayAll]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable replayAll]; }];
     [scheduler scheduleAt:450 action:^{ subscription = [ys subscribe:res]; }];
     [scheduler scheduleAt:475 action:^{ [subscription dispose]; }];
 
@@ -1557,7 +1557,7 @@
     __block RxTestableObserver<NSNumber *> *res1 = [scheduler createObserver];
     __block RxTestableObserver<NSNumber *> *res2 = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs shareReplayLatestWhileConnected]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable shareReplayLatestWhileConnected]; }];
 
     [scheduler scheduleAt:335 action:^{ subscription1 = [ys subscribe:res1]; }];
     [scheduler scheduleAt:400 action:^{ [subscription1 dispose]; }];
@@ -1626,7 +1626,7 @@
     __block RxTestableObserver<NSNumber *> *res1 = [scheduler createObserver];
     __block RxTestableObserver<NSNumber *> *res2 = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs shareReplayLatestWhileConnected]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable shareReplayLatestWhileConnected]; }];
 
     [scheduler scheduleAt:335 action:^{ subscription1 = [ys subscribe:res1]; }];
     [scheduler scheduleAt:400 action:^{ [subscription1 dispose]; }];
@@ -1692,7 +1692,7 @@
     __block RxTestableObserver<NSNumber *> *res1 = [scheduler createObserver];
     __block RxTestableObserver<NSNumber *> *res2 = [scheduler createObserver];
 
-    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs shareReplayLatestWhileConnected]; }];
+    [scheduler scheduleAt:RxTestSchedulerDefaultCreated action:^{ ys = [xs.asObservable shareReplayLatestWhileConnected]; }];
 
     [scheduler scheduleAt:335 action:^{ subscription1 = [ys subscribe:res1]; }];
     [scheduler scheduleAt:400 action:^{ [subscription1 dispose]; }];

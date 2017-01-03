@@ -16,8 +16,8 @@
     return [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
         @strongify(object);
         id <NSObject> nsObserver = [self addObserverForName:name object:object queue:nil usingBlock:^(NSNotification *notification) {
-                [observer onNext:notification];
-            }];
+            [observer onNext:notification];
+        }];
         return [RxAnonymousDisposable create:^{
             [self removeObserver:nsObserver];
         }];

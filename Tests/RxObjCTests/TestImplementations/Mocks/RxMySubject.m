@@ -9,6 +9,7 @@
 #import "RxMySubject.h"
 #import "RxAnyObserver.h"
 #import "RxAnonymousDisposable.h"
+#import "RxObservable+Creation.h"
 
 @implementation RxMySubject {
     NSMutableDictionary<id, id <RxDisposable>> *__nonnull _disposeOn;
@@ -53,6 +54,12 @@
 
         }];
         self->_disposed = YES;
+    }];
+}
+
+- (nonnull RxObservable *)asObservable {
+    return [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
+        return [self subscribe:observer];
     }];
 }
 

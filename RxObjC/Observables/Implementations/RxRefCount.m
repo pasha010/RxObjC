@@ -13,14 +13,14 @@
 #import "RxLock.h"
 #import "RxAnonymousDisposable.h"
 
-@interface RxRefCountSink<CO : id <RxConnectableObservableType>> : RxSink <RxObserverType>
+@interface RxRefCountSink<__covariant CO : RxConnectableObservable *> : RxSink <RxObserverType> {
+    RxRefCount<CO> *__nonnull _parent;
+}
 @end
 
-@implementation RxRefCountSink {
-    RxRefCount *__nonnull _parent;
-}
+@implementation RxRefCountSink
 
-- (nonnull instancetype)initWithParent:(nonnull RxRefCount *)parent observer:(nonnull id <RxObserverType>)observer {
+- (nonnull instancetype)initWithParent:(nonnull RxRefCount<RxConnectableObservable *> *)parent observer:(nonnull id <RxObserverType>)observer {
     self = [super initWithObserver:observer];
     if (self) {
         _parent = parent;
@@ -29,8 +29,7 @@
 }
 
 - (nonnull id<RxDisposable>)run {
-    NSObject<RxConnectableObservableType> *source = (NSObject<RxConnectableObservableType> *)_parent->_source;
-    __block id <RxDisposable> subscription = [source subscribeSafe:self];
+    __block id <RxDisposable> subscription = [_parent->_source subscribeSafe:self];
 
     [_parent->_lock performLock:^{
         if (_parent->_count == 0) {
@@ -69,7 +68,7 @@
 
 @implementation RxRefCount
 
-- (nonnull instancetype)initWithSource:(id <RxConnectableObservableType>)source {
+- (nonnull instancetype)initWithSource:(nonnull RxConnectableObservable *)source {
     self = [super init];
     if (self) {
         _lock = [[NSRecursiveLock alloc] init];

@@ -11,6 +11,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+
 @implementation RxAnyObserver
 
 - (nonnull instancetype)initWithObserver:(nonnull id <RxObserverType>)observer {
@@ -41,18 +42,22 @@ Send `event` to this observer.
     return self;
 }
 
-@end
+- (void)onNext:(nullable id)element {
+    [self on:[RxEvent next:element]];
+}
 
-#pragma clang diagnostic pop
+- (void)onCompleted {
+    [self on:[RxEvent completed]];
+}
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-@implementation NSObject (RxAnyObserver)
-
-- (nonnull RxAnyObserver<id> *)asObserver {
-    return [[RxAnyObserver alloc] initWithObserver:self];
+- (void)onError:(nullable NSError *)error {
+    [self on:[RxEvent error:error]];
 }
 
 @end
+
 #pragma clang diagnostic pop
+
+RxAnyObserver<id> *_Nonnull rx_asObserver(id <RxObserverType> _Nonnull observer) {
+    return [[RxAnyObserver alloc] initWithObserver:observer];
+}

@@ -13,7 +13,7 @@
 #import "RxBinaryDisposable.h"
 #import "RxLockOwnerType.h"
 
-@interface RxTakeCountSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxTakeCountSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxTakeCountSink {
@@ -83,12 +83,20 @@
     return self;
 }
 
-- (nonnull RxSpinLock *)lock {
+- (void)rx_lock {
+    [[self getRxLock] lock];
+}
+
+- (void)rx_unlock {
+    [[self getRxLock] unlock];
+}
+
+- (nonnull RxSpinLock *)getRxLock {
     return _lock;
 }
 
 - (void)on:(nonnull RxEvent *)event {
-    [self synchronizedOn:event];
+    rx_synchronizedOn(self, event);
 }
 
 - (void)_synchronized_on:(nonnull RxEvent *)event {

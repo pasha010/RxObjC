@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxSubscribeOn<O : id<RxObservableType>> : RxProducer {
+@interface RxSubscribeOn<E, O : id <RxObservableType>> : RxProducer<E> {
 @package
     id <RxImmediateSchedulerType> __nonnull _scheduler;
     id<RxObservableType> __nonnull _source;
@@ -23,4 +23,5 @@ NS_ASSUME_NONNULL_BEGIN
                              scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
 @end
+
 NS_ASSUME_NONNULL_END

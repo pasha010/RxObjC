@@ -14,14 +14,9 @@
 #import "RxSubscribeOn.h"
 #import "RxMainScheduler.h"
 
+@implementation RxObservable (ObserveOn)
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-#pragma GCC diagnostic ignored "-Wprotocol"
-
-@implementation NSObject (RxObserveOn)
-
-- (nonnull RxObservable *)observeOn:(nonnull id <RxImmediateSchedulerType>)scheduler {
+- (nonnull RxObservable *)observeOn:(nonnull RxImmediateScheduler *)scheduler {
     if ([scheduler isKindOfClass:[RxSerialDispatchQueueScheduler class]]) {
         RxSerialDispatchQueueScheduler *queueScheduler = (RxSerialDispatchQueueScheduler *) scheduler;
         return [[RxObserveOnSerialDispatchQueue alloc] initWithSource:[self asObservable] scheduler:queueScheduler];
@@ -35,12 +30,10 @@
 
 @end
 
-@implementation NSObject (RxSubscribeOn)
+@implementation RxObservable (SubscribeOn)
 
 - (nonnull RxObservable *)subscribeOn:(nonnull id <RxImmediateSchedulerType>)scheduler {
     return [[RxSubscribeOn alloc] initWithSource:self scheduler:scheduler];
 }
 
 @end
-
-#pragma clang diagnostic pop

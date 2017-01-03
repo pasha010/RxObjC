@@ -32,10 +32,4 @@ Adds `disposable` to be disposed when dispose bag is being deinited.
 
 @end
 
-@interface NSObject (RxAddDisposableTo) <RxDisposable>
-
-- (void)addDisposableTo:(nonnull RxDisposeBag *)bag;
-
-@end
-
 NS_ASSUME_NONNULL_END

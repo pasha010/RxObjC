@@ -26,8 +26,7 @@
 }
 
 - (nonnull id <RxDisposable>)run {
-    NSObject <RxImmediateSchedulerType> *scheduler = (NSObject <RxImmediateSchedulerType> *) _parent->_scheduler;
-    return [scheduler scheduleRecursive:_parent->_element action:^(id e, void (^recurse)(id)) {
+    return [_parent->_scheduler scheduleRecursive:_parent->_element action:^(id e, void (^recurse)(id)) {
         [self forwardOn:[RxEvent next:e]];
         recurse(e);
     }];
@@ -37,7 +36,7 @@
 
 @implementation RxRepeatElement
 
-- (nonnull instancetype)initWithElement:(nonnull id)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler {
+- (nonnull instancetype)initWithElement:(nonnull id)element scheduler:(nonnull RxImmediateScheduler *)scheduler {
     self = [super init];
     if (self) {
         _element = element;

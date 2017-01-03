@@ -9,6 +9,8 @@
 #import "RxTestableObservable.h"
 #import "RxTestScheduler.h"
 #import "RxObjCCommon.h"
+#import "RxAnyObserver.h"
+#import "RxObservable+Creation.h"
 
 @implementation RxTestableObservable
 
@@ -28,5 +30,10 @@
     return nil;
 }
 
+- (nonnull RxObservable *)asObservable {
+    return [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
+        return [self subscribe:observer];
+    }];
+}
 
 @end

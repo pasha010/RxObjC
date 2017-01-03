@@ -62,7 +62,7 @@ BOOL isPrime(NSNumber *n) {
             completed(630)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs filter:^BOOL(NSNumber *n) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable filter:^BOOL(NSNumber *n) {
         invoked++;
         return isPrime(n);
     }]];
@@ -103,7 +103,7 @@ BOOL isPrime(NSNumber *n) {
             completed(600)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs filter:^BOOL(NSNumber *n) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable filter:^BOOL(NSNumber *n) {
         invoked++;
         return YES;
     }]];
@@ -149,7 +149,7 @@ BOOL isPrime(NSNumber *n) {
             completed(600)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs filter:^BOOL(NSNumber *n) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable filter:^BOOL(NSNumber *n) {
         invoked++;
         return NO;
     }]];
@@ -187,7 +187,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:400 create:^RxObservable * {
-        return [xs filter:^BOOL(NSNumber *n) {
+        return [xs.asObservable filter:^BOOL(NSNumber *n) {
             invoked++;
             return isPrime(n);
         }];
@@ -232,7 +232,7 @@ BOOL isPrime(NSNumber *n) {
 
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeWhile:^BOOL(NSNumber *n) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeWhile:^BOOL(NSNumber *n) {
         invoked++;
         return isPrime(n);
     }]];
@@ -273,7 +273,7 @@ BOOL isPrime(NSNumber *n) {
 
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeWhile:^BOOL(NSNumber *n) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeWhile:^BOOL(NSNumber *n) {
         invoked++;
         return isPrime(n);
     }]];
@@ -316,7 +316,7 @@ BOOL isPrime(NSNumber *n) {
 
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeWhile:^BOOL(NSNumber *n) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeWhile:^BOOL(NSNumber *n) {
         invoked++;
         return isPrime(n);
     }]];
@@ -355,7 +355,7 @@ BOOL isPrime(NSNumber *n) {
 
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeWhile:^BOOL(NSNumber *n) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeWhile:^BOOL(NSNumber *n) {
         invoked++;
         return isPrime(n);
     }]];
@@ -398,7 +398,7 @@ BOOL isPrime(NSNumber *n) {
     __block NSInteger invoked = 0;
 
     RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
-        return [xs takeWhile:^BOOL(NSNumber *n) {
+        return [xs.asObservable takeWhile:^BOOL(NSNumber *n) {
             invoked++;
             return isPrime(n);
         }];
@@ -439,7 +439,7 @@ BOOL isPrime(NSNumber *n) {
     __block NSInteger invoked = 0;
 
     RxTestableObserver *res = [scheduler startWhenDisposed:400 create:^RxObservable * {
-        return [xs takeWhile:^BOOL(NSNumber *n) {
+        return [xs.asObservable takeWhile:^BOOL(NSNumber *n) {
             invoked++;
             return isPrime(n);
         }];
@@ -484,7 +484,7 @@ BOOL isPrime(NSNumber *n) {
     __block NSInteger invoked = 0;
 
     RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
-        return [xs takeWhile:^BOOL(NSNumber *n) {
+        return [xs.asObservable takeWhile:^BOOL(NSNumber *n) {
             invoked++;
             return isPrime(n);
         }];
@@ -523,7 +523,7 @@ BOOL isPrime(NSNumber *n) {
     __block NSInteger invoked = 0;
 
     RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
-        return [xs takeWhile:^BOOL(NSNumber *n) {
+        return [xs.asObservable takeWhile:^BOOL(NSNumber *n) {
             invoked++;
             if (invoked == 3) {
                 @throw testError();
@@ -565,7 +565,7 @@ BOOL isPrime(NSNumber *n) {
             error(600, testError()),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeWhileWithIndex:^BOOL(NSNumber *num, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeWhileWithIndex:^BOOL(NSNumber *num, NSUInteger index) {
         return index < 5;
     }]];
 
@@ -600,7 +600,7 @@ BOOL isPrime(NSNumber *n) {
             completed(400),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeWhileWithIndex:^BOOL(NSNumber *num, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeWhileWithIndex:^BOOL(NSNumber *num, NSUInteger index) {
         return YES;
     }]];
 
@@ -637,7 +637,7 @@ BOOL isPrime(NSNumber *n) {
             error(400, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeWhileWithIndex:^BOOL(NSNumber *num, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeWhileWithIndex:^BOOL(NSNumber *num, NSUInteger index) {
         return YES;
     }]];
 
@@ -674,7 +674,7 @@ BOOL isPrime(NSNumber *n) {
             completed(400),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeWhileWithIndex:^BOOL(NSNumber *num, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeWhileWithIndex:^BOOL(NSNumber *num, NSUInteger index) {
         if (index < 5) {
             return YES;
         }
@@ -707,7 +707,7 @@ BOOL isPrime(NSNumber *n) {
             next(150, @1)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs map:^NSNumber *(NSNumber *o) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable map:^NSNumber *(NSNumber *o) {
         return @(o.integerValue * 2);
     }]];
 
@@ -728,7 +728,7 @@ BOOL isPrime(NSNumber *n) {
             completed(300),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs map:^NSNumber *(NSNumber *o) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable map:^NSNumber *(NSNumber *o) {
         return @(o.integerValue * 2);
     }]];
 
@@ -754,7 +754,7 @@ BOOL isPrime(NSNumber *n) {
             completed(300)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs map:^NSNumber *(NSNumber *o) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable map:^NSNumber *(NSNumber *o) {
         return @(o.integerValue * 2);
     }]];
 
@@ -784,7 +784,7 @@ BOOL isPrime(NSNumber *n) {
             error(300, testError()),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs map:^NSNumber *(NSNumber *o) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable map:^NSNumber *(NSNumber *o) {
         return @(o.integerValue * 2);
     }]];
 
@@ -815,7 +815,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:290 create:^RxObservable * {
-        return [xs map:^NSNumber *(NSNumber *o) {
+        return [xs.asObservable map:^NSNumber *(NSNumber *o) {
             return @(o.integerValue * 2);
         }];
     }];
@@ -845,7 +845,7 @@ BOOL isPrime(NSNumber *n) {
             error(300, testError1()),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs map:^NSNumber *(NSNumber *o) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable map:^NSNumber *(NSNumber *o) {
         if (o.integerValue < 2) {
             return @(o.integerValue * 2);
         }
@@ -871,7 +871,7 @@ BOOL isPrime(NSNumber *n) {
             next(150, @1),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
         return @((element.integerValue + index) * 2);
     }]];
 
@@ -892,7 +892,7 @@ BOOL isPrime(NSNumber *n) {
             completed(300),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
         return @((element.integerValue + index) * 2);
     }]];
 
@@ -918,7 +918,7 @@ BOOL isPrime(NSNumber *n) {
             completed(300)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
         return @((element.integerValue + index) * 2);
     }]];
 
@@ -948,7 +948,7 @@ BOOL isPrime(NSNumber *n) {
             error(300, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
         return @((element.integerValue + index) * 2);
     }]];
 
@@ -979,7 +979,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:290 create:^RxObservable * {
-        return [xs mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
+        return [xs.asObservable mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
             return @((element.integerValue + index) * 2);
         }];
     }];
@@ -1009,7 +1009,7 @@ BOOL isPrime(NSNumber *n) {
             error(300, testError1())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable mapWithIndex:^NSNumber *(NSNumber *element, NSInteger index) {
         if (element.integerValue < 7) {
             return @((element.integerValue + index) * 2);
         }
@@ -1047,7 +1047,7 @@ BOOL isPrime(NSNumber *n) {
             next(150, @1),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[[xs map:^NSNumber *(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[[xs.asObservable map:^NSNumber *(NSNumber *element) {
         return @(element.integerValue * 10);
     }] map:^NSNumber *(NSNumber *element) {
         return @(element.integerValue + 1);
@@ -1070,7 +1070,7 @@ BOOL isPrime(NSNumber *n) {
             completed(300)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[[xs map:^NSNumber *(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[[xs.asObservable map:^NSNumber *(NSNumber *element) {
         return @(element.integerValue * 10);
     }] map:^NSNumber *(NSNumber *element) {
         return @(element.integerValue + 1);
@@ -1098,7 +1098,7 @@ BOOL isPrime(NSNumber *n) {
             completed(300)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[[xs map:^NSNumber *(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[[xs.asObservable map:^NSNumber *(NSNumber *element) {
         return @(element.integerValue * 10);
     }] map:^NSNumber *(NSNumber *element) {
         return @(element.integerValue + 1);
@@ -1130,7 +1130,7 @@ BOOL isPrime(NSNumber *n) {
             error(300, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[[xs map:^NSNumber *(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[[xs.asObservable map:^NSNumber *(NSNumber *element) {
         return @(element.integerValue * 10);
     }] map:^NSNumber *(NSNumber *element) {
         return @(element.integerValue + 1);
@@ -1163,7 +1163,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:290 create:^RxObservable * {
-        return [[xs map:^NSNumber *(NSNumber *element) {
+        return [[xs.asObservable map:^NSNumber *(NSNumber *element) {
             return @(element.integerValue * 10);
         }] map:^NSNumber *(NSNumber *element) {
             return @(element.integerValue + 1);
@@ -1196,7 +1196,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:290 create:^RxObservable * {
-        return [[xs map:^NSNumber *(NSNumber *element) {
+        return [[xs.asObservable map:^NSNumber *(NSNumber *element) {
             if (element.integerValue < 2) {
                 return @(element.integerValue * 10);
             }
@@ -1231,7 +1231,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:290 create:^RxObservable * {
-        return [[xs map:^NSNumber *(NSNumber *element) {
+        return [[xs.asObservable map:^NSNumber *(NSNumber *element) {
             return @(element.integerValue * 10);
         }] map:^NSNumber *(NSNumber *element) {
             if (element.integerValue < 20) {
@@ -1264,7 +1264,7 @@ BOOL isPrime(NSNumber *n) {
             next(210, @0),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[[xs map:^NSNumber *(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[[xs.asObservable map:^NSNumber *(NSNumber *element) {
         XCTAssertEqual(rx_numberOfMapOperators, 2);
         return @(element.integerValue * 10);
     }] map:^NSNumber *(NSNumber *element) {
@@ -1295,7 +1295,7 @@ BOOL isPrime(NSNumber *n) {
             next(210, @0),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[[[xs map:^NSNumber *(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[[[xs.asObservable map:^NSNumber *(NSNumber *element) {
         return @(element.integerValue * 10);
     }] filter:^BOOL(id o) {
         return YES;
@@ -1364,7 +1364,7 @@ BOOL isPrime(NSNumber *n) {
             completed(900)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapFirst:^id <RxObservableConvertibleType>(id element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapFirst:^id <RxObservableConvertibleType>(id element) {
         return element;
     }]];
 
@@ -1437,7 +1437,7 @@ BOOL isPrime(NSNumber *n) {
             ]]),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapFirst:^id <RxObservableConvertibleType>(id element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapFirst:^id <RxObservableConvertibleType>(id element) {
         return element;
     }]];
 
@@ -1508,7 +1508,7 @@ BOOL isPrime(NSNumber *n) {
             completed(900)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapFirst:^id <RxObservableConvertibleType>(id element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapFirst:^id <RxObservableConvertibleType>(id element) {
         return element;
     }]];
 
@@ -1580,7 +1580,7 @@ BOOL isPrime(NSNumber *n) {
             error(900, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapFirst:^id <RxObservableConvertibleType>(id element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapFirst:^id <RxObservableConvertibleType>(id element) {
         return element;
     }]];
 
@@ -1651,7 +1651,7 @@ BOOL isPrime(NSNumber *n) {
             completed(900)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapFirst:^id <RxObservableConvertibleType>(id element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapFirst:^id <RxObservableConvertibleType>(id element) {
         return element;
     }]];
 
@@ -1723,7 +1723,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:700 create:^RxObservable * {
-        return [xs flatMapFirst:^id <RxObservableConvertibleType>(id element) {
+        return [xs.asObservable flatMapFirst:^id <RxObservableConvertibleType>(id element) {
             return element;
         }];
     }];
@@ -1794,7 +1794,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     __block NSInteger invoked = 0;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapFirst:^id <RxObservableConvertibleType>(id element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapFirst:^id <RxObservableConvertibleType>(id element) {
         invoked++;
         if (invoked == 2) {
             @throw testError1();
@@ -1838,7 +1838,7 @@ BOOL isPrime(NSNumber *n) {
             completed(290)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapFirst:^id <RxObservableConvertibleType>(NSNumber *x) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapFirst:^id <RxObservableConvertibleType>(NSNumber *x) {
         return [[[RxObservable interval:10 scheduler:scheduler]
                 map:^id(id element) {
                     return x;
@@ -1906,7 +1906,7 @@ BOOL isPrime(NSNumber *n) {
             completed(900)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMap:RxReturnSelf()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMap:RxReturnSelf()]];
 
     NSArray *events = @[
             next(310, @102),
@@ -1992,7 +1992,7 @@ BOOL isPrime(NSNumber *n) {
             ]])
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMap:RxReturnSelf()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMap:RxReturnSelf()]];
 
     NSArray *events = @[
             next(310, @102),
@@ -2077,7 +2077,7 @@ BOOL isPrime(NSNumber *n) {
             completed(900),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMap:RxReturnSelf()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMap:RxReturnSelf()]];
 
     NSArray *events = @[
             next(310, @102),
@@ -2162,7 +2162,7 @@ BOOL isPrime(NSNumber *n) {
             error(900, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMap:RxReturnSelf()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMap:RxReturnSelf()]];
 
     NSArray *events = @[
             next(310, @102),
@@ -2247,7 +2247,7 @@ BOOL isPrime(NSNumber *n) {
             completed(900)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMap:RxReturnSelf()]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMap:RxReturnSelf()]];
 
     NSArray *events = @[
             next(310, @102),
@@ -2331,7 +2331,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:700 create:^RxObservable * {
-        return [xs flatMap:RxReturnSelf()];
+        return [xs.asObservable flatMap:RxReturnSelf()];
     }];
 
     NSArray *events = @[
@@ -2413,7 +2413,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     __block NSInteger invoked = 0;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMap:^id <RxObservableConvertibleType>(id element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMap:^id <RxObservableConvertibleType>(id element) {
         invoked++;
         if (invoked == 3) {
             @throw testError();
@@ -2464,7 +2464,7 @@ BOOL isPrime(NSNumber *n) {
             completed(290)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMap:^id <RxObservableConvertibleType>(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMap:^id <RxObservableConvertibleType>(NSNumber *element) {
         return [[[RxObservable interval:10 scheduler:scheduler]
                 map:^id(id _) {
                     return element;
@@ -2506,7 +2506,7 @@ BOOL isPrime(NSNumber *n) {
             completed(290)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapWithIndex:^id <RxObservableConvertibleType>(NSNumber *element, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(NSNumber *element, NSUInteger index) {
         return [RxObservable just:[[RxElementIndexPair alloc] initWithElement:element index:index]];
     }]];
 
@@ -2565,7 +2565,7 @@ BOOL isPrime(NSNumber *n) {
             completed(900)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
         return element;
     }]];
 
@@ -2653,7 +2653,7 @@ BOOL isPrime(NSNumber *n) {
             ]]),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
         return element;
     }]];
 
@@ -2740,7 +2740,7 @@ BOOL isPrime(NSNumber *n) {
             completed(900)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
         return element;
     }]];
 
@@ -2827,7 +2827,7 @@ BOOL isPrime(NSNumber *n) {
             error(900, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
         return element;
     }]];
 
@@ -2914,7 +2914,7 @@ BOOL isPrime(NSNumber *n) {
             completed(900)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
         return element;
     }]];
 
@@ -2999,7 +2999,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:700 create:^RxObservable * {
-        return [xs flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
+        return [xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(id element, NSUInteger index) {
             return element;
         }];
     }];
@@ -3082,12 +3082,12 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     __block int invoked = 0;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapWithIndex:^id <RxObservableConvertibleType>(NSNumber *element, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(RxTestableObservable *x, NSUInteger index) {
         invoked++;
         if (invoked == 3) {
             @throw testError();
         }
-        return element;
+        return x;
     }]];
 
     NSArray *events = @[
@@ -3132,7 +3132,7 @@ BOOL isPrime(NSNumber *n) {
             completed(290)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs flatMapWithIndex:^id <RxObservableConvertibleType>(NSNumber *element, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(NSNumber *element, NSUInteger index) {
         return [[[RxObservable interval:10 scheduler:scheduler]
                 map:^id(id _) {
                     return element;
@@ -3193,7 +3193,7 @@ BOOL isPrime(NSNumber *n) {
             completed(690)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs take:20]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable take:20]];
 
     NSArray *events = @[
             next(210, @9),
@@ -3248,7 +3248,7 @@ BOOL isPrime(NSNumber *n) {
             completed(690)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs take:17]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable take:17]];
 
     NSArray *events = @[
             next(210, @9),
@@ -3303,7 +3303,7 @@ BOOL isPrime(NSNumber *n) {
             completed(690)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs take:10]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable take:10]];
 
     NSArray *events = @[
             next(210, @9),
@@ -3351,7 +3351,7 @@ BOOL isPrime(NSNumber *n) {
             error(690, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs take:20]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable take:20]];
 
     NSArray *events = @[
             next(210, @9),
@@ -3406,7 +3406,7 @@ BOOL isPrime(NSNumber *n) {
             error(690, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs take:17]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable take:17]];
 
     NSArray *events = @[
             next(210, @9),
@@ -3461,7 +3461,7 @@ BOOL isPrime(NSNumber *n) {
             error(690, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs take:3]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable take:3]];
 
     NSArray *events = @[
             next(210, @9),
@@ -3503,7 +3503,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:250 create:^RxObservable * {
-        return [xs take:3];
+        return [xs.asObservable take:3];
     }];
 
     NSArray *events = @[
@@ -3544,7 +3544,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:400 create:^RxObservable * {
-        return [xs take:3];
+        return [xs.asObservable take:3];
     }];
 
     NSArray *events = @[
@@ -3570,7 +3570,7 @@ BOOL isPrime(NSNumber *n) {
             next(230, @13),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs take:0]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable take:0]];
 
     NSArray *events = @[
             completed(200)
@@ -3598,7 +3598,7 @@ BOOL isPrime(NSNumber *n) {
             completed(400)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs take:3]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable take:3]];
 
     NSArray *events = @[
             next(210, @9),
@@ -3617,7 +3617,7 @@ BOOL isPrime(NSNumber *n) {
     RxBehaviorSubject *k = [RxBehaviorSubject create:@NO];
 
     [[k take:1] subscribeNext:^(NSNumber *n) {
-        [k onNext:@(!n.boolValue)];
+        rx_onNext(k, @(!n.boolValue));
     }];
 }
 
@@ -3639,7 +3639,7 @@ BOOL isPrime(NSNumber *n) {
             completed(300)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeLast:7]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeLast:7]];
 
     NSArray *events = @[
             next(300, @9),
@@ -3670,7 +3670,7 @@ BOOL isPrime(NSNumber *n) {
             completed(310)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeLast:5]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeLast:5]];
 
     NSArray *events = @[
             next(310, @9),
@@ -3703,7 +3703,7 @@ BOOL isPrime(NSNumber *n) {
             completed(350)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeLast:5]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeLast:5]];
 
     NSArray *events = @[
             next(350, @7),
@@ -3734,7 +3734,7 @@ BOOL isPrime(NSNumber *n) {
             error(300, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeLast:7]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeLast:7]];
 
     NSArray *events = @[
             error(300, testError())
@@ -3760,7 +3760,7 @@ BOOL isPrime(NSNumber *n) {
             error(310, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeLast:5]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeLast:5]];
 
     NSArray *events = @[
             error(310, testError())
@@ -3788,7 +3788,7 @@ BOOL isPrime(NSNumber *n) {
             error(360, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeLast:5]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeLast:5]];
 
     NSArray *events = @[
             error(360, testError())
@@ -3810,7 +3810,7 @@ BOOL isPrime(NSNumber *n) {
             next(230, @13),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeLast:0]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeLast:0]];
 
     NSArray *events = @[
     ];
@@ -3838,7 +3838,7 @@ BOOL isPrime(NSNumber *n) {
             completed(400)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs takeLast:3]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable takeLast:3]];
 
     NSArray *events = @[
             next(400, @3),
@@ -3859,10 +3859,10 @@ BOOL isPrime(NSNumber *n) {
     NSMutableArray<NSNumber *> *elements = [NSMutableArray array];
     [[k takeLast:1] subscribeNext:^(NSNumber *n) {
         [elements addObject:n];
-        [k onNext:@(!n.boolValue)];
+        rx_onNext(k, @(!n.boolValue));
     }];
 
-    [k onCompleted];
+    rx_onCompleted(k);
 
     XCTAssertEqualObjects(elements, @[@NO]);
 }
@@ -3897,7 +3897,7 @@ BOOL isPrime(NSNumber *n) {
             completed(690)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skip:20]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skip:20]];
 
     NSArray *events = @[
             completed(690),
@@ -3935,7 +3935,7 @@ BOOL isPrime(NSNumber *n) {
             completed(690)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skip:17]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skip:17]];
 
     NSArray *events = @[
             completed(690),
@@ -3973,7 +3973,7 @@ BOOL isPrime(NSNumber *n) {
             completed(690)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skip:10]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skip:10]];
 
     NSArray *events = @[
             next(460, @72),
@@ -4018,7 +4018,7 @@ BOOL isPrime(NSNumber *n) {
             completed(690)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skip:0]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skip:0]];
 
     NSArray *events = @[
             next(210, @9),
@@ -4073,7 +4073,7 @@ BOOL isPrime(NSNumber *n) {
             error(690, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skip:20]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skip:20]];
 
     NSArray *events = @[
             error(690, testError())
@@ -4111,7 +4111,7 @@ BOOL isPrime(NSNumber *n) {
             error(690, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skip:17]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skip:17]];
 
     NSArray *events = @[
             error(690, testError())
@@ -4149,7 +4149,7 @@ BOOL isPrime(NSNumber *n) {
             error(690, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skip:3]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skip:3]];
 
     NSArray *events = @[
             next(280, @1),
@@ -4201,7 +4201,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:250 create:^RxObservable * {
-        return [xs skip:3];
+        return [xs.asObservable skip:3];
     }];
 
     NSArray *events = @[
@@ -4240,7 +4240,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:400 create:^RxObservable * {
-        return [xs skip:3];
+        return [xs.asObservable skip:3];
     }];
 
     NSArray *events = @[
@@ -4282,7 +4282,7 @@ BOOL isPrime(NSNumber *n) {
     
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skipWhile:^BOOL(NSNumber *x) {
         invoked++;
         return isPrime(x);
     }]];
@@ -4319,7 +4319,7 @@ BOOL isPrime(NSNumber *n) {
 
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skipWhile:^BOOL(NSNumber *x) {
         invoked++;
         return isPrime(x);
     }]];
@@ -4360,7 +4360,7 @@ BOOL isPrime(NSNumber *n) {
 
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skipWhile:^BOOL(NSNumber *x) {
         invoked++;
         return isPrime(x);
     }]];
@@ -4397,7 +4397,7 @@ BOOL isPrime(NSNumber *n) {
 
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skipWhile:^BOOL(NSNumber *x) {
         invoked++;
         return isPrime(x);
     }]];
@@ -4439,7 +4439,7 @@ BOOL isPrime(NSNumber *n) {
     __block NSInteger invoked = 0;
 
     RxTestableObserver *res = [scheduler startWhenDisposed:300 create:^RxObservable * {
-        return [xs skipWhile:^BOOL(NSNumber *x) {
+        return [xs.asObservable skipWhile:^BOOL(NSNumber *x) {
             invoked++;
             return isPrime(x);
         }];
@@ -4477,7 +4477,7 @@ BOOL isPrime(NSNumber *n) {
     __block NSInteger invoked = 0;
 
     RxTestableObserver *res = [scheduler startWhenDisposed:470 create:^RxObservable * {
-        return [xs skipWhile:^BOOL(NSNumber *x) {
+        return [xs.asObservable skipWhile:^BOOL(NSNumber *x) {
             invoked++;
             return isPrime(x);
         }];
@@ -4518,7 +4518,7 @@ BOOL isPrime(NSNumber *n) {
 
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skipWhile:^BOOL(NSNumber *x) {
         invoked++;
         return isPrime(x);
     }]];
@@ -4565,7 +4565,7 @@ BOOL isPrime(NSNumber *n) {
 
     __block NSInteger invoked = 0;
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhile:^BOOL(NSNumber *x) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skipWhile:^BOOL(NSNumber *x) {
         invoked++;
         if (invoked == 3) {
             @throw testError();
@@ -4604,7 +4604,7 @@ BOOL isPrime(NSNumber *n) {
             completed(600)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhileWithIndex:^BOOL(NSNumber *x, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skipWhileWithIndex:^BOOL(NSNumber *x, NSUInteger index) {
         return index < 5;
     }]];
 
@@ -4639,7 +4639,7 @@ BOOL isPrime(NSNumber *n) {
             error(400, testError()),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhileWithIndex:^BOOL(NSNumber *x, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skipWhileWithIndex:^BOOL(NSNumber *x, NSUInteger index) {
         return index < 5;
     }]];
 
@@ -4671,7 +4671,7 @@ BOOL isPrime(NSNumber *n) {
             completed(400),
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs skipWhileWithIndex:^BOOL(NSNumber *x, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable skipWhileWithIndex:^BOOL(NSNumber *x, NSUInteger index) {
         if (index < 5) {
             return YES;
         }
@@ -4718,7 +4718,7 @@ BOOL isPrime(NSNumber *n) {
             completed(690)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs elementAt:10]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable elementAt:10]];
 
     NSArray *events = @[
             next(460, @72),
@@ -4745,7 +4745,7 @@ BOOL isPrime(NSNumber *n) {
             completed(320)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs elementAt:10]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable elementAt:10]];
 
     NSArray *events = @[
             error(320, [RxError argumentOutOfRange])
@@ -4783,7 +4783,7 @@ BOOL isPrime(NSNumber *n) {
             error(690, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs elementAt:10]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable elementAt:10]];
 
     NSArray *events = @[
             next(460, @72),
@@ -4810,7 +4810,7 @@ BOOL isPrime(NSNumber *n) {
             error(310, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs elementAt:10]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable elementAt:10]];
 
     NSArray *events = @[
             error(310, testError())
@@ -4849,7 +4849,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:250 create:^RxObservable * {
-        return [xs elementAt:3];
+        return [xs.asObservable elementAt:3];
     }];
 
     NSArray *events = @[
@@ -4888,7 +4888,7 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     RxTestableObserver *res = [scheduler startWhenDisposed:400 create:^RxObservable * {
-        return [xs elementAt:3];
+        return [xs.asObservable elementAt:3];
     }];
 
     NSArray *events = @[
@@ -4919,7 +4919,7 @@ BOOL isPrime(NSNumber *n) {
             completed(400)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs elementAt:0]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable elementAt:0]];
 
     NSArray *events = @[
             next(210, @9),
@@ -4944,7 +4944,7 @@ BOOL isPrime(NSNumber *n) {
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs single]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable single]];
 
     NSArray *events = @[
             error(250, RxError.noElements)
@@ -4965,7 +4965,7 @@ BOOL isPrime(NSNumber *n) {
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs single]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable single]];
 
     NSArray *events = @[
             next(210, @2),
@@ -4988,7 +4988,7 @@ BOOL isPrime(NSNumber *n) {
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs single]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable single]];
 
     NSArray *events = @[
             next(210, @2),
@@ -5009,7 +5009,7 @@ BOOL isPrime(NSNumber *n) {
             error(210, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs single]];
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable single]];
 
     NSArray *events = @[
             error(210, testError())
@@ -5024,7 +5024,7 @@ BOOL isPrime(NSNumber *n) {
 - (void)testSingle_DecrementCountsFirst {
     RxBehaviorSubject *k = [RxBehaviorSubject create:@NO];
     [[k single] subscribeNext:^(NSNumber *n) {
-        [k onNext:@(!n.boolValue)];
+        rx_onNext(k, @(!n.boolValue));
     }];
 }
 
@@ -5036,7 +5036,7 @@ BOOL isPrime(NSNumber *n) {
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable single:^BOOL(NSNumber *element) {
         return element.integerValue % 2 == 1;
     }]];
 
@@ -5062,7 +5062,7 @@ BOOL isPrime(NSNumber *n) {
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable single:^BOOL(NSNumber *element) {
         return element.integerValue == 4;
     }]];
 
@@ -5089,7 +5089,7 @@ BOOL isPrime(NSNumber *n) {
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable single:^BOOL(NSNumber *element) {
         return element.integerValue % 2 == 1;
     }]];
 
@@ -5112,7 +5112,7 @@ BOOL isPrime(NSNumber *n) {
             error(210, testError())
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable single:^BOOL(NSNumber *element) {
         return element.integerValue % 2 == 1;
     }]];
 
@@ -5138,7 +5138,7 @@ BOOL isPrime(NSNumber *n) {
             completed(250)
     ]];
 
-    RxTestableObserver *res = [scheduler startWithObservable:[xs single:^BOOL(NSNumber *element) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable single:^BOOL(NSNumber *element) {
         if (element.integerValue < 4) {
             return NO;
         }
@@ -5160,7 +5160,7 @@ BOOL isPrime(NSNumber *n) {
     [[k single:^BOOL(id o) {
         return YES;
     }] subscribeNext:^(NSNumber *n) {
-        [k onNext:@(!n.boolValue)];
+        rx_onNext(k, @(!n.boolValue));
     }];
 }
 
