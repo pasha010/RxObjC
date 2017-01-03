@@ -13,7 +13,7 @@ void rx_logEvent(NSString *identifier, NSString *content) {
     NSLog(@"%@ -> %@", identifier, content);
 }
 
-@interface RxDebugProducerSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxDebugProducerSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxDebugProducerSink {

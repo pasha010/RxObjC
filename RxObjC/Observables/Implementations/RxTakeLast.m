@@ -10,7 +10,7 @@
 #import "RxSink.h"
 #import "RxQueue.h"
 
-@interface RxTakeLastSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxTakeLastSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxTakeLastSink {

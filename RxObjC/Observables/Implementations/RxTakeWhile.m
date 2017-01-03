@@ -9,7 +9,7 @@
 #import "RxTakeWhile.h"
 #import "RxSink.h"
 
-@interface RxTakeWhileSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxTakeWhileSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxTakeWhileSink {
@@ -51,7 +51,7 @@
 
 @end
 
-@interface RxTakeWhileSinkWithIndex<O : id<RxObserverType>> : RxSink<O>
+@interface RxTakeWhileSinkWithIndex<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxTakeWhileSinkWithIndex {
@@ -120,7 +120,7 @@
 
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
-    RxSink *sink;
+    RxSink <RxObserverType> *sink;
     if (_predicate) {
         sink = [[RxTakeWhileSink alloc] initWithParent:self observer:observer];
     } else if (_indexPredicate) {

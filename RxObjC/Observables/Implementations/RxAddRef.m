@@ -13,7 +13,7 @@
 #import "RxObservable+Extension.h"
 
 
-@interface RxAddRefSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxAddRefSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxAddRefSink

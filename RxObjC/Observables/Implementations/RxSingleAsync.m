@@ -10,7 +10,7 @@
 #import "RxSink.h"
 #import "RxError.h"
 
-@interface RxSingleAsyncSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxSingleAsyncSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxSingleAsyncSink {

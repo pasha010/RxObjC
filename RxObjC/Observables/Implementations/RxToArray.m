@@ -59,7 +59,7 @@
 }
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
-    RxToArraySink<id, NSArray<id> *> *sink = [[RxToArraySink alloc] initWithParent:self andObserver:observer];
+    RxToArraySink *sink = [[RxToArraySink alloc] initWithParent:self andObserver:observer];
     sink.disposable = [_source subscribe:sink];
     return sink;
 }

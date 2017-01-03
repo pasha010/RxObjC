@@ -11,7 +11,7 @@
 #import "RxNopDisposable.h"
 #import "RxBinaryDisposable.h"
 
-@interface RxSkipCountSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxSkipCountSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxSkipCountSink {

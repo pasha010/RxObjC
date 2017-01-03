@@ -13,7 +13,7 @@
 #import "RxScheduledDisposable.h"
 #import "RxNopDisposable.h"
 
-@interface RxSubscribeOnSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxSubscribeOnSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxSubscribeOnSink {

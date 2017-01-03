@@ -11,7 +11,7 @@
 #import "RxObservable+Extension.h"
 #import "RxError.h"
 
-@interface RxElementAtSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxElementAtSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxElementAtSink {

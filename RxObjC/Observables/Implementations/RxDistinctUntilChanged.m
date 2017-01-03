@@ -9,7 +9,7 @@
 #import "RxDistinctUntilChanged.h"
 #import "RxSink.h"
 
-@interface RxDistinctUntilChangedSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxDistinctUntilChangedSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxDistinctUntilChangedSink {

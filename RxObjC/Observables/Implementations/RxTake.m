@@ -13,7 +13,7 @@
 #import "RxBinaryDisposable.h"
 #import "RxLockOwnerType.h"
 
-@interface RxTakeCountSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxTakeCountSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @implementation RxTakeCountSink {

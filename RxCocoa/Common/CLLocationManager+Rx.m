@@ -33,7 +33,7 @@
             }];
 }
 
-#if TARGET_OS_IOS || TARGET_OS_MAC
+/*#if TARGET_OS_IOS || TARGET_OS_MAC*/
 
 - (nonnull RxObservable<NSError *> *)rx_didFinishDeferredUpdatesWithError {
     return [[[self rx_delegate] observe:@selector(locationManager:didFinishDeferredUpdatesWithError:)]
@@ -42,9 +42,9 @@
             }];
 }
 
-#endif
+//#endif
 
-#if TARGET_OS_IOS
+//#if TARGET_OS_IOS
 
 - (nonnull RxObservable *)rx_didPauseLocationUpdates {
     return [[[self rx_delegate] observe:@selector(locationManagerDidPauseLocationUpdates:)]
@@ -81,9 +81,9 @@
             }];
 }
 
-#endif
+//#endif
 
-#if TARGET_OS_IOS || TARGET_OS_OSX
+//#if TARGET_OS_IOS || TARGET_OS_OSX
 
 - (nonnull RxObservable<RxTuple2<NSNumber *, CLRegion *> *> *)rx_didDetermineStateForRegion {
     return [[[self rx_delegate] observe:@selector(locationManager:didDetermineState:forRegion:)]
@@ -111,9 +111,9 @@
             }];
 }
 
-#endif
+//#endif
 
-#if TARGET_OS_IOS
+//#if TARGET_OS_IOS
 
 - (nonnull RxObservable<RxTuple2<NSArray<CLBeacon *> *, CLBeaconRegion *> *> *)rx_didRangeBeaconsInRegion {
     return [[[self rx_delegate] observe:@selector(locationManager:didRangeBeacons:inRegion:)]
@@ -133,12 +133,12 @@
             }];
 }
 
-- (nonnull RxObservable<CLVisit *> *)rx_didVisit {
+/*- (nonnull RxObservable<CLVisit *> *)rx_didVisit {
     return [[[self rx_delegate] observe:@selector(locationManager:didVisit:)]
             map:^CLVisit *(NSArray *a) {
                 return rx_castOrThrow([CLVisit class], a[1]);
             }];
-}
+}*/
 
 - (nonnull RxObservable<NSNumber *> *)rx_didChangeAuthorizationStatus {
     return [[[self rx_delegate] observe:@selector(locationManager:didChangeAuthorizationStatus:)]
@@ -147,6 +147,6 @@
             }];
 }
 
-#endif
+//#endif
 
 @end

@@ -11,7 +11,7 @@
 #import "RxSerialDisposable.h"
 #import "RxTailRecursiveSink.h"
 
-@interface RxCatchSink<O : id<RxObserverType>> : RxSink<O>
+@interface RxCatchSink<O : id<RxObserverType>> : RxSink<O> <RxObserverType>
 @end
 
 @interface RxCatchSinkProxy<O: id <RxObserverType>> : NSObject <RxObserverType>
@@ -109,7 +109,7 @@
 
 @end
 
-@interface RxCatchSequenceSink<O : id<RxObserverType>> : RxTailRecursiveSink
+@interface RxCatchSequenceSink<O : id<RxObserverType>> : RxTailRecursiveSink <RxObserverType>
 @end
 
 @implementation RxCatchSequenceSink {

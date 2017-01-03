@@ -25,7 +25,7 @@
 - (RxTuple *)createSubject {
     RxReplaySubject<NSNumber *> *subject = [RxReplaySubject createWithBufferSize:1];
     return [RxTuple tupleWithArray:@[subject.asObservable, [[RxAnyObserver alloc] initWithEventHandler:^(RxEvent<NSNumber *> *event) {
-        [[subject asObservable] on:event];
+        [subject on:event];
     }]]];
 }
 @end
@@ -35,7 +35,7 @@
 - (RxTuple *)createSubject {
     RxPublishSubject<NSNumber *> *subject = [RxPublishSubject create];
     return [RxTuple tupleWithArray:@[subject.asObservable, [[RxAnyObserver alloc] initWithEventHandler:^(RxEvent<NSNumber *> *event) {
-        [[subject asObservable] on:event];
+        [subject on:event];
     }]]];
 }
 @end

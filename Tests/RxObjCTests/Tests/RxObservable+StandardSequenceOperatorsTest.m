@@ -3082,12 +3082,12 @@ BOOL isPrime(NSNumber *n) {
     ]];
 
     __block int invoked = 0;
-    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(NSNumber *element, NSUInteger index) {
+    RxTestableObserver *res = [scheduler startWithObservable:[xs.asObservable flatMapWithIndex:^id <RxObservableConvertibleType>(RxTestableObservable *x, NSUInteger index) {
         invoked++;
         if (invoked == 3) {
             @throw testError();
         }
-        return element;
+        return x;
     }]];
 
     NSArray *events = @[
