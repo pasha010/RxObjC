@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @see - [toArray operator on reactivex.io](http://reactivex.io/documentation/operators/to.html)
  * @return - An observable sequence containing all the emitted elements as array.
  */
-- (nonnull RxObservable<NSArray<E> *> *)toArray;
+- (nonnull RxObservable<NSArray<id> *> *)toArray;
 
 @end
 
