@@ -13,7 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSUserDefaults (Rx)
 
-- (nonnull RxObservable *)rx_observeKey:(nullable NSString *)key;
+/**
+ * current implementation is bad
+ * not use this method
+ * @param key
+ * @return
+ */
+- (nonnull RxObservable *)rx_observeKey:(nullable NSString *)key __deprecated;
 
 @end
 
