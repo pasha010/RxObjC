@@ -1,5 +1,5 @@
 //
-//  RxKVORepresentable
+//  RxDeallocObservable
 //  RxObjC
 // 
 //  Created by Pavel Malkov on 03.08.16.
@@ -8,9 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class RxReplaySubject<E>;
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RxKVORepresentable : NSObject
+@interface RxDeallocObservable : NSObject
+
+@property (nonnull, strong, nonatomic, readonly) RxReplaySubject<id> *subject;
+
 - (nonnull instancetype)init;
 
 @end

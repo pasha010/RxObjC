@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxObservable.h"
-#import "RxObservableBlockTypedef.h"
-#import "RxObservable+Extension.h"
+#import <RxObjC/RxObservable.h>
+#import <RxObjC/RxObservableBlockTypedef.h>
+#import <RxObjC/RxObservable+Extension.h>
 
 @class RxAnyObserver;
 @protocol RxImmediateSchedulerType;
@@ -68,14 +68,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface RxObservable (Fail)
+@interface RxObservable<E> (Fail)
 /**
  * Returns an observable sequence that terminates with an `error`.
  * @see [throw operator on reactivex.io](http://reactivex.io/documentation/operators/empty-never-throw.html)
  * @param error - error for providing
  * @return: The observable sequence that terminates with specified error.
  */
-+ (nonnull RxObservable *)error:(nonnull NSError *)error;
++ (nonnull RxObservable<E> *)error:(nonnull NSError *)error;
 @end
 
 @interface RxObservable<E> (Of)

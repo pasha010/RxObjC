@@ -17,15 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface RxSchedulers : NSObject
 
-+ (nonnull RxSerialDispatchQueueScheduler *)userInteractive;
+@property (class, nonnull, readonly) RxSerialDispatchQueueScheduler *userInteractive NS_AVAILABLE(10_10, 8_0);
+@property (class, nonnull, readonly) RxSerialDispatchQueueScheduler *userInitiated NS_AVAILABLE(10_10, 8_0);
+@property (class, nonnull, readonly) RxSerialDispatchQueueScheduler *utility NS_AVAILABLE(10_10, 8_0);
+@property (class, nonnull, readonly) RxSerialDispatchQueueScheduler *background NS_AVAILABLE(10_10, 8_0);
 
-+ (nonnull RxSerialDispatchQueueScheduler *)userInitiated;
-
-+ (nonnull RxSerialDispatchQueueScheduler *)default;
-
-+ (nonnull RxSerialDispatchQueueScheduler *)utility;
-
-+ (nonnull RxSerialDispatchQueueScheduler *)background;
++ (nonnull RxSerialDispatchQueueScheduler *)default NS_AVAILABLE(10_10, 8_0);
 
 @end
 

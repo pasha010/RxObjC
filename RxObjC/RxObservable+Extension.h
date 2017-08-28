@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RxObservable.h"
+#import <RxObjC/RxObservable.h>
 
 @protocol RxDisposable;
 @protocol RxObserverType;

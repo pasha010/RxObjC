@@ -227,7 +227,7 @@
 }
 
 - (void)test_ThrottleWithRealScheduler {
-    RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSDate *start = [NSDate date];
 
@@ -452,7 +452,7 @@
 }
 
 - (void)test_ThrottleFirstWithRealScheduler {
-    RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSDate *start = [NSDate date];
 
@@ -708,7 +708,7 @@
 }
 
 - (void)testInterval_TimeSpan_Zero_DefaultScheduler {
-    RxSerialDispatchQueueScheduler *scheduler = [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type scheduler = [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     RxPrimitiveMockObserver *observer = [[RxPrimitiveMockObserver alloc] init];
 
@@ -756,7 +756,7 @@
 }
 
 - (void)test_IntervalWithRealScheduler {
-    RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSDate *start = [NSDate date];
 
@@ -1276,7 +1276,7 @@
 }
 
 - (void)testBufferWithTimeOrCount_Default {
-    RxSerialDispatchQueueScheduler *backgroundScheduler = [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type backgroundScheduler = [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_BACKGROUND];
 
     NSArray<NSNumber *> *result = [[[[[RxObservable range:1 count:10 scheduler:backgroundScheduler]
             buffer:1000 count:3 scheduler:backgroundScheduler]
@@ -1477,9 +1477,10 @@
 }
 
 - (void)testWindowWithTimeOrCount_Default {
-    RxSerialDispatchQueueScheduler *backgroundScheduler = [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type backgroundScheduler = [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_BACKGROUND];
 
-    NSString *result = [[[[[[[RxObservable range:1 count:10 scheduler:backgroundScheduler]
+    NSString *result = [[[[[[[RxObservable
+            range:1 count:10 scheduler:backgroundScheduler]
             window:1000 count:3 scheduler:backgroundScheduler]
             mapWithIndex:^RxObservable<NSString *> *(RxObservable<NSNumber *> *o, NSInteger index) {
                 return [o map:^NSString *(NSNumber *element) {

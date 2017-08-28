@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "RxImmediateSchedulerType.h"
 
-@class RxDispatchQueueSchedulerQOS;
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -23,41 +21,41 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Constructs new `ConcurrentDispatchQueueScheduler` that wraps `queue`.
- * @param queue: Target dispatch queue.
+ * @param queue Target dispatch queue.
  * @return RxConcurrentDispatchQueueScheduler instance
  */
 - (nonnull instancetype)initWithQueue:(dispatch_queue_t)queue;
 
-- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(nonnull RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS NS_AVAILABLE(10_10, 8_0);
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOSClass:(qos_class_t)qosClass NS_AVAILABLE(10_10, 8_0);
 
 + (int64_t)convertTimeIntervalToDispatchInterval:(NSTimeInterval)timeInterval;
 
 + (dispatch_time_t)convertTimeIntervalToDispatchTime:(NSTimeInterval)timeInterval;
 
 /**
- * Schedules an action to be executed immediatelly.
- * @param state: State passed to the action to be executed.
- * @param action: Action to be executed.
- * @return: The disposable object used to cancel the scheduled action (best effort).
+ * Schedules an action to be executed immediately.
+ * @param state State passed to the action to be executed.
+ * @param action Action to be executed.
+ * @return The disposable object used to cancel the scheduled action (best effort).
  */
 - (nonnull id <RxDisposable>)schedule:(nullable RxStateType)state action:(nonnull id <RxDisposable> (^)(RxStateType __nullable))action;
 
 /**
  * Schedules an action to be executed.
- * @param state: State passed to the action to be executed.
- * @param dueTime: Relative time after which to execute the action.
- * @param action: Action to be executed.
- * @return: The disposable object used to cancel the scheduled action (best effort).
+ * @param state State passed to the action to be executed.
+ * @param dueTime Relative time after which to execute the action.
+ * @param action Action to be executed.
+ * @return The disposable object used to cancel the scheduled action (best effort).
  */
 - (nonnull id <RxDisposable>)scheduleRelative:(nullable id)state dueTime:(RxTimeInterval)dueTime action:(id <RxDisposable>(^)(id))action;
 
 /**
  * Schedules a periodic piece of work.
- * @param state: State passed to the action to be executed.
- * @param startAfter: Period after which initial work should be run.
- * @param period: Period for running the work periodically.
- * @param action: Action to be executed.
- * @return: The disposable object used to cancel the scheduled action (best effort).
+ * @param state State passed to the action to be executed.
+ * @param startAfter Period after which initial work should be run.
+ * @param period Period for running the work periodically.
+ * @param action Action to be executed.
+ * @return The disposable object used to cancel the scheduled action (best effort).
  */
 - (nonnull id <RxDisposable>)schedulePeriodic:(nullable id)state
                                    startAfter:(RxTimeInterval)startAfter

@@ -7,64 +7,132 @@
 //
 
 #import "RxPerformanceTools.h"
-#import <objc/objc-api.h>
 #import <objc/runtime.h>
 #import <malloc/malloc.h>
 #import <mach/mach.h>
+#import <sys/mman.h>
 
-// TODO implement all from PerformanceTools.swift
+@interface RxPerformanceTools ()
 
-BOOL registeredMallocHooks = NO;
+@property (atomic, assign) int64_t allocations;
+@property (atomic, assign) int64_t bytes;
+@property (atomic, assign) BOOL registeredMallocHooks;
+@property (nonnull, atomic, strong) NSPointerArray *mallocFunctions;
+@property (nonnull, atomic, strong) NSPointerArray *proxies;
 
-RxMemoryInfo rx_getMemoryInfo() {
+@end
+
+static void *call0(malloc_zone_t *p, int64_t size) {
+    int64_t allocations = 0;
+    OSAtomicIncrement64Barrier(&allocations);
+    RxPerformanceTools.defaultTools.allocations = allocations;
+
+    int64_t bytes = 0;
+    OSAtomicAdd64Barrier(size, &bytes);
+    RxPerformanceTools.defaultTools.bytes = bytes;
+
+    void *(*fun)(malloc_zone_t *, int64_t) = [RxPerformanceTools.defaultTools.mallocFunctions pointerAtIndex:0];
+    return fun(p, size);
+}
+
+static void *call1(malloc_zone_t *p, int64_t size) {
+    int64_t allocations = 0;
+    OSAtomicIncrement64Barrier(&allocations);
+    RxPerformanceTools.defaultTools.allocations = allocations;
+
+    int64_t bytes = 0;
+    OSAtomicAdd64Barrier(size, &bytes);
+    RxPerformanceTools.defaultTools.bytes = bytes;
+
+    void *(*fun)(malloc_zone_t *, int64_t) = [RxPerformanceTools.defaultTools.mallocFunctions pointerAtIndex:1];
+    return fun(p, size);
+}
+
+static void *call2(malloc_zone_t *p, int64_t size) {
+    int64_t allocations = 0;
+    OSAtomicIncrement64Barrier(&allocations);
+    RxPerformanceTools.defaultTools.allocations = allocations;
+
+    int64_t bytes = 0;
+    OSAtomicAdd64Barrier(size, &bytes);
+    RxPerformanceTools.defaultTools.bytes = bytes;
+
+    void *(*fun)(malloc_zone_t *, int64_t) = [RxPerformanceTools.defaultTools.mallocFunctions pointerAtIndex:2];
+    return fun(p, size);
+}
+
+@implementation RxPerformanceTools
+
+@dynamic memoryInfo;
+
++ (nonnull RxPerformanceTools *)defaultTools {
+    @synchronized ([RxPerformanceTools class]) {
+        static dispatch_once_t token;
+        static RxPerformanceTools *tools = nil;
+        dispatch_once(&token, ^{
+            tools = [RxPerformanceTools new];
+        });
+        return tools;
+    }
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _registeredMallocHooks = NO;
+        _mallocFunctions = [NSPointerArray pointerArrayWithOptions:NSPointerFunctionsOpaqueMemory];
+        _proxies = [NSPointerArray pointerArrayWithOptions:NSPointerFunctionsOpaqueMemory];
+        [_proxies addPointer:call0];
+        [_proxies addPointer:call1];
+        [_proxies addPointer:call2];
+
+    }
+    return self;
+}
+
+- (RxMemoryInfo)memoryInfo {
     RxMemoryInfo result;
-    result.allocCalls = 0;
-    result.bytesAllocated = 0;
+    result.allocations = _allocations;
+    result.bytes = _bytes;
     return result;
 }
 
-void rx_registerMallocHooks() {
-    if (registeredMallocHooks) {
+
+- (void)registerMallocHooks {
+    if (_registeredMallocHooks) {
         return;
     }
 
-    registeredMallocHooks = YES;
+    _registeredMallocHooks = YES;
 
-
-    vm_address_t *_zones;
+    vm_address_t *zones = NULL;
     uint32_t count = 0;
+    kern_return_t err = malloc_get_all_zones(mach_task_self(), nil, &zones, &count);
 
-    kern_return_t res = malloc_get_all_zones(mach_task_self(), nil, &_zones, &count);
+    assert(err == KERN_SUCCESS);
 
-    assert(res == 0);
+    assert(count <= _proxies.count);
 
-//    malloc_zone_t *zones;
-//    assert(count <= proxies.count);
+    for (NSUInteger i = 0; i < count; i++) {
+        malloc_zone_t *zone = (malloc_zone_t *) zones[i];
+        mprotect(zone, sizeof(malloc_zone_t *), PROT_READ | PROT_WRITE);
+        char const *name = malloc_get_zone_name(zone);
 
-    for (NSUInteger index = 0; index < count; index++) {
-        malloc_zone_t *zoneArray = (malloc_zone_t *)_zones[index];
-        char const *__unused name = malloc_get_zone_name(zoneArray);
-//        zoneArray->malloc = proxies[index];
+        assert(name != NULL);
 
-        vm_size_t __unused protectSize = ((vm_size_t) sizeof(malloc_zone_t)) * ((vm_size_t) count);
+        [_mallocFunctions addPointer:zone->malloc];
 
-//        vm_protect(mach_task_self(), zoneArray->malloc, protectSize, 0, VM_PROT_READ | VM_PROT_WRITE);
+        zone->malloc = [_proxies pointerAtIndex:i];
 
-        /*
-         * let protectSize = vm_size_t(sizeof(malloc_zone_t)) * vm_size_t(count)
+        size_t protectSize = sizeof(malloc_zone_t) * count;
 
-        if true {
-            let addressPointer = UnsafeMutablePointer<vm_address_t>(zoneArray)
-            let res = vm_protect(mach_task_self_, addressPointer.memory, protectSize, 0, PROT_READ | PROT_WRITE)
-            assert(res == 0)
-        }
+        // https://www.gnu.org/software/hurd/gnumach-doc/Memory-Attributes.html
+        kern_return_t protect = vm_protect(mach_task_self(), (vm_address_t) zone, protectSize, 0, PROT_READ | PROT_WRITE);
+        assert(protect == KERN_SUCCESS);
 
-        zoneArray.memory.memory = zone
-
-        if true {
-            let res = vm_protect(mach_task_self_, _zones.memory, protectSize, 0, PROT_READ)
-            assert(res == 0)
-        }
-         */
+        kern_return_t res = vm_protect(mach_task_self(), *zones, protectSize, 0, PROT_READ);
+        assert(res == KERN_SUCCESS);
     }
 }
+
+@end

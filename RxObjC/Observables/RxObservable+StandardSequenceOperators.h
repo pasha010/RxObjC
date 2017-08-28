@@ -124,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param selector: A transform function to apply to each element.
  * @return: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.
  */
-- (nonnull RxObservable<E> *)flatMap:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element))selector;
+- (nonnull RxObservable<id> *)flatMap:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element))selector;
 
 /**
  * Projects each element of an observable sequence to an observable sequence by incorporating the element's index and merges the resulting observable sequences into one observable sequence.
@@ -132,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param selector: A transform function to apply to each element; the second parameter of the function represents the index of the source element.
  * @return: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.
  */
-- (nonnull RxObservable<E> *)flatMapWithIndex:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element, NSUInteger index))selector;
+- (nonnull RxObservable<id> *)flatMapWithIndex:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element, NSUInteger index))selector;
 
 @end
 
@@ -144,7 +144,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param selector: A transform function to apply to element that was observed while no observable is executing in parallel.
  * @return: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence that was received while no other sequence was being calculated.
  */
-- (nonnull RxObservable<E> *)flatMapFirst:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element))selector;
+- (nonnull RxObservable<id> *)flatMapFirst:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element))selector;
 
 @end
 
@@ -158,7 +158,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return: An observable sequence whose elements are the result of invoking the transform function on each element of source producing an
             Observable of Observable sequences and that at any point in time produces the elements of the most recent inner observable sequence that has been received.
  */
-- (nonnull RxObservable<E> *)flatMapLatest:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element))selector;
+- (nonnull RxObservable<id> *)flatMapLatest:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element))selector;
 
 @end
 

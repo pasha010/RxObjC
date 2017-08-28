@@ -8,7 +8,8 @@
 
 #import <XCTest/XCTest.h>
 #import "RxTest.h"
-#import "RxObjCCocoa.h"
+#import <RxObjC_KVO/RxObjC_KVO.h>
+#import <RxObjC_Dealloc/RxObjC_Dealloc.h>
 
 #if TARGET_OS_IOS
 #import <UIKit/UIKit.h>
@@ -601,7 +602,7 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
 
         XCTAssertTrue(latest == one);
 
-        dealloc = one.rx_deallocating;
+        dealloc = one.rx_deallocated;
 
         one = nil;
 
@@ -644,7 +645,7 @@ typedef NS_ENUM(uint64_t, UInt64Enum) {
 
         XCTAssertTrue(latest == one);
 
-        dealloc = middle.rx_deallocating;
+        dealloc = middle.rx_deallocated;
     }
 
     [dealloc subscribeCompleted:^{

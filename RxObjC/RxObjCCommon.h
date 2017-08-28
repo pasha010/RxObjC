@@ -9,7 +9,7 @@
 #import "RxObjCExt.h"
 #import <libkern/OSAtomic.h>
 
-#define TRACE_RESOURCES 1
+#define TRACE_RESOURCES 0
 
 FOUNDATION_EXTERN int32_t rx_resourceCount;
 
@@ -23,9 +23,8 @@ FOUNDATION_EXTERN NSUInteger rx_decrementCheckedUnsigned(NSUInteger *i);
 FOUNDATION_EXTERN void rx_tryCatch(void (^tryBlock)(), void (^catchBlock)(NSError *));
 
 /**
-Counts number of `SerialDispatchQueueObservables`.
-
-Purposed for unit tests.
+ * Counts number of `SerialDispatchQueueObservables`.
+ * Purposed for unit tests.
 */
 #if TRACE_RESOURCES
 FOUNDATION_EXTERN int32_t rx_numberOfSerialDispatchQueueObservables;

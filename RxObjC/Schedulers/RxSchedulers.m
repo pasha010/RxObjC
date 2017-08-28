@@ -8,29 +8,27 @@
 
 #import "RxSchedulers.h"
 #import "RxSerialDispatchQueueScheduler.h"
-#import "RxDispatchQueueSchedulerQOS.h"
-
 
 @implementation RxSchedulers
 
 + (nonnull RxSerialDispatchQueueScheduler *)userInteractive {
-    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS userInteractive]];
+    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_USER_INTERACTIVE];
 }
 
 + (nonnull RxSerialDispatchQueueScheduler *)userInitiated {
-    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS userInitiated]];
+    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_USER_INITIATED];
 }
 
 + (nonnull RxSerialDispatchQueueScheduler *)default {
-    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 }
 
 + (nonnull RxSerialDispatchQueueScheduler *)utility {
-    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS utility]];
+    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_UTILITY];
 }
 
 + (nonnull RxSerialDispatchQueueScheduler *)background {
-    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS background]];
+    return [[RxSerialDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_BACKGROUND];
 }
 
 @end

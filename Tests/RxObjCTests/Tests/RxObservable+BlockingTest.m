@@ -41,7 +41,7 @@
 }
 
 - (void)testToArray_withRealScheduler {
-    RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSArray<NSNumber *> *array = [[[[RxObservable interval:0.001 scheduler:scheduler]
             take:10] 
@@ -57,7 +57,7 @@
 
 - (void)testToArray_independent {
     for (NSUInteger i = 0; i < 10; i++) {
-        RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+        __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
         RxObservable<NSNumber *> *(^operation1)() = ^{
             return [[RxObservable of:@[@1, @2]] subscribeOn:scheduler];
@@ -102,7 +102,7 @@
 }
 
 - (void)testFirst_withRealScheduler {
-    RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSNumber *v = [[[[RxObservable interval:0.001 scheduler:scheduler]
             take:10]
@@ -114,7 +114,7 @@
 
 - (void)testFirst_independent {
     for (NSUInteger i = 0; i < 10; i++) {
-        RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+        __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
         RxObservable<NSNumber *> *(^operation1)() = ^{
             return [[RxObservable just:@1] subscribeOn:scheduler];
@@ -158,7 +158,7 @@
 }
 
 - (void)testLast_withRealScheduler {
-    RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSNumber *v = [[[[RxObservable interval:0.001 scheduler:scheduler]
             take:10]
@@ -170,7 +170,7 @@
 
 - (void)testLast_independent {
     for (NSUInteger i = 0; i < 10; i++) {
-        RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+        __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
         RxObservable<NSNumber *> *(^operation1)() = ^{
             return [[RxObservable just:@1] subscribeOn:scheduler];
@@ -235,7 +235,7 @@
 }
 
 - (void)testSingle_withRealScheduler {
-    RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSNumber *obj = [[[[RxObservable interval:0.001 scheduler:scheduler]
             take:1]
@@ -351,7 +351,7 @@
 }
 
 - (void)testSingle_predicate_withRealScheduler {
-    RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSNumber *obj = [[[[RxObservable interval:0.001 scheduler:scheduler]
             take:4] 
@@ -364,7 +364,7 @@
 
 - (void)testSingle_independent {
     for (NSUInteger i = 0; i < 10; i++) {
-        RxConcurrentDispatchQueueScheduler *scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+        __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
         RxObservable<NSNumber *> *(^operation1)() = ^{
             return [[RxObservable just:@1] subscribeOn:scheduler];

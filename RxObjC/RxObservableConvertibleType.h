@@ -13,7 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Type that can be converted to observable sequence (`Observer<E>`).
  */
 @protocol RxObservableConvertibleType <NSObject>
+
 - (nonnull RxObservable<id> *)asObservable;
+
 @end
 
 NS_ASSUME_NONNULL_END

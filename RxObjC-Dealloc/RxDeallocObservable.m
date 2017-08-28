@@ -6,8 +6,8 @@
 //  Copyright (c) 2016 Pavel Malkov. All rights reserved.
 //
 
+#import <RxObjC/RxObjC.h>
 #import "RxDeallocObservable.h"
-
 
 @implementation RxDeallocObservable
 

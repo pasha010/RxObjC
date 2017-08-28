@@ -11,15 +11,21 @@
 NS_ASSUME_NONNULL_BEGIN
 
 struct RxMemoryInfo {
-    int64_t bytesAllocated;
-    int64_t allocCalls;
+    int64_t bytes;
+    int64_t allocations;
 };
 
 typedef struct RxMemoryInfo RxMemoryInfo;
 
-FOUNDATION_EXPORT RxMemoryInfo rx_getMemoryInfo();
+@interface RxPerformanceTools : NSObject
 
-FOUNDATION_EXPORT void rx_registerMallocHooks();
+@property (class, atomic, nonnull, strong, readonly) RxPerformanceTools *defaultTools;
+
+@property (atomic, assign, readonly) RxMemoryInfo memoryInfo;
+
+- (void)registerMallocHooks;
+
+@end
 
 
 

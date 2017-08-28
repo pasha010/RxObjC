@@ -4,7 +4,6 @@
 //
 
 #import "RxSerialDispatchQueueScheduler.h"
-#import "RxDispatchQueueSchedulerQOS.h"
 #import "RxSingleAssignmentDisposable.h"
 #import "RxMainScheduler.h"
 #import "RxCompositeDisposable.h"
@@ -34,7 +33,7 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
 }
 
 - (nonnull instancetype)initWithInternalSerialQueueName:(nonnull NSString *)internalSerialQueueName
-                            andSerialQueueConfiguration:(nullable void(^)(dispatch_queue_t))serialQueueConfiguration {
+                            andSerialQueueConfiguration:(nullable void (^)(dispatch_queue_t))serialQueueConfiguration {
     dispatch_queue_t queue = dispatch_queue_create([internalSerialQueueName cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_SERIAL);
     if (serialQueueConfiguration) {
         serialQueueConfiguration(queue);
@@ -53,15 +52,14 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
     return [self initWithSerialQueue:serialQueue];
 }
 
-- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS
-                              andInternalSerialQueueName:(nullable NSString *)internalSerialQueueName {
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOSClass:(qos_class_t)qosClass
+                                   andInternalSerialQueueName:(nullable NSString *)internalSerialQueueName {
     NSString *queueName = internalSerialQueueName ?: RxGlobalDispatchQueueName;
-    qos_class_t priority = globalConcurrentQueueQOS.QOSClass;
-    return [self initWithQueue:dispatch_get_global_queue(priority, 0) andInternalSerialQueueName:queueName];
+    return [self initWithQueue:dispatch_get_global_queue(qosClass, 0) andInternalSerialQueueName:queueName];
 }
 
-- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS {
-    return [self initWithGlobalConcurrentQueueQOS:globalConcurrentQueueQOS andInternalSerialQueueName:nil];
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOSClass:(qos_class_t)qosClass {
+    return [self initWithGlobalConcurrentQueueQOSClass:qosClass andInternalSerialQueueName:nil];
 }
 
 - (nonnull NSDate *)now {
@@ -93,7 +91,7 @@ static NSString *const RxGlobalDispatchQueueName = @"rx.global_dispatch_queue.se
 
 - (nonnull id <RxDisposable>)scheduleRelative:(nullable id)state dueTime:(RxTimeInterval)dueTime action:(id <RxDisposable>(^)(id))action {
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _serialQueue);
-    
+
     dispatch_time_t dispatchInterval = [RxMainScheduler convertTimeIntervalToDispatchTime:dueTime];
 
     __block RxCompositeDisposable *compositeDisposable = [[RxCompositeDisposable alloc] init];
@@ -129,10 +127,10 @@ Schedules a periodic piece of work.
                                        period:(RxTimeInterval)period
                                        action:(id(^)(id __nullable))action {
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _serialQueue);
-    
+
     dispatch_time_t initial = [RxMainScheduler convertTimeIntervalToDispatchTime:startAfter];
     int64_t dispatchInterval = [RxMainScheduler convertTimeIntervalToDispatchInterval:period];
-    
+
     __block id timerState = state;
 
     uint64_t validDispatchInterval = dispatchInterval < 0 ? 0 : ((uint64_t) dispatchInterval);

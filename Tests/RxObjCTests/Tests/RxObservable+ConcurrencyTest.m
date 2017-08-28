@@ -559,7 +559,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 @implementation RxObservableConcurrentSchedulerConcurrencyTest2
 
 - (nonnull id <RxImmediateSchedulerType>)createScheduler {
-    return [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOS:[RxDispatchQueueSchedulerQOS default]];
+    return [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 }
 
 @end

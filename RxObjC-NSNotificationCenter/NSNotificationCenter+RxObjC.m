@@ -1,15 +1,15 @@
 //
-//  NSNotificationCenter(Rx)
+//  NSNotificationCenter(RxObjC)
 //  RxObjC
 // 
-//  Created by Pavel Malkov on 03.08.16.
-//  Copyright (c) 2016 Pavel Malkov. All rights reserved.
+//  Created by Pavel Malkov on 25.08.17.
+//  Copyright (c) 2014-2017 Pavel Malkov. All rights reserved.
 //
 
-#import "NSNotificationCenter+Rx.h"
+#import <RxObjC/RxObjC.h>
+#import "NSNotificationCenter+RxObjC.h"
 
-
-@implementation NSNotificationCenter (Rx)
+@implementation NSNotificationCenter (RxObjC)
 
 - (nonnull RxObservable<NSNotification *> *)rx_notificationForName:(NSString *)name object:(id)object {
     @weakify(object);

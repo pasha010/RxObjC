@@ -6,8 +6,6 @@
 #import <Foundation/Foundation.h>
 #import "RxImmediateSchedulerType.h"
 
-@class RxDispatchQueueSchedulerQOS;
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -58,20 +56,18 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Constructs new `SerialDispatchQueueScheduler` that wraps on of the global concurrent dispatch queues.
  *
- * @param globalConcurrentQueueQOS: Identifier for global dispatch queue with specified quality of service class.
- * @param internalSerialQueueName: Custom name for internal serial dispatch queue proxy.
- * @return: RxSerialDispatchQueueScheduler instance
+ * @param qosClass Identifier for global dispatch queue with specified quality of service class.
+ * @param internalSerialQueueName Custom name for internal serial dispatch queue proxy.
+ * @return RxSerialDispatchQueueScheduler instance
  */
-- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOSClass:(qos_class_t)qosClass
                               andInternalSerialQueueName:(nullable  NSString *)internalSerialQueueName NS_AVAILABLE(10_10, 8_0);
-
 /**
  * Constructs new `SerialDispatchQueueScheduler` that wraps on of the global concurrent dispatch queues.
- *
- * @param globalConcurrentQueueQOS: Identifier for global dispatch queue with specified quality of service class.
- * @return: RxSerialDispatchQueueScheduler instance
+ * @param qosClass Identifier for global dispatch queue with specified quality of service class.
+ * @return RxSerialDispatchQueueScheduler instance
  */
-- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS NS_AVAILABLE(10_10, 8_0);
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOSClass:(qos_class_t)qosClass NS_AVAILABLE(10_10, 8_0);
 
 + (int64_t)convertTimeIntervalToDispatchInterval:(NSTimeInterval)timeInterval;
 

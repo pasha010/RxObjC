@@ -1,17 +1,18 @@
 //
-//  NSNotificationCenter(Rx)
+//  NSNotificationCenter(RxObjC)
 //  RxObjC
 // 
-//  Created by Pavel Malkov on 03.08.16.
-//  Copyright (c) 2016 Pavel Malkov. All rights reserved.
+//  Created by Pavel Malkov on 25.08.17.
+//  Copyright (c) 2014-2017 Pavel Malkov. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <RxObjC/RxObjC.h>
+
+@class RxObservable<E>;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSNotificationCenter (Rx)
+@interface NSNotificationCenter (RxObjC)
 /**
  * Transforms notifications posted to notification center to observable sequence of notifications.
  * @param name: Filter notifications by name.
@@ -23,5 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nonnull RxObservable<NSNotification *> *)rx_notificationForName:(nullable NSString *)name;
 
 @end
+
 
 NS_ASSUME_NONNULL_END

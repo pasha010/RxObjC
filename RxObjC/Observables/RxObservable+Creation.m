@@ -92,7 +92,9 @@
     return [[RxGenerate alloc] initWithInitialState:initialState
                                           condition:condition
                                             iterate:iterate
-                                     resultSelector:^id(id o) {return o;}
+                                     resultSelector:^id(id o) {
+                                         return o;
+                                     }
                                           scheduler:scheduler];
 }
 
@@ -120,14 +122,14 @@
 
 @implementation RxObservable (Range)
 
-+ (nonnull RxObservable *)range:(NSInteger)start
-                          count:(NSUInteger)count
-                      scheduler:(nonnull RxImmediateScheduler *)scheduler {
++ (nonnull RxObservable<NSNumber *> *)range:(NSInteger)start
+                                      count:(NSUInteger)count
+                                  scheduler:(nonnull RxImmediateScheduler *)scheduler {
     return [[RxRangeProducer alloc] initWithStart:start count:count scheduler:scheduler];
 }
 
-+ (nonnull RxObservable *)range:(NSInteger)start
-                          count:(NSUInteger)count {
++ (nonnull RxObservable<NSNumber *> *)range:(NSInteger)start
+                                      count:(NSUInteger)count {
     return [self range:start count:count scheduler:[RxCurrentThreadScheduler sharedInstance]];
 }
 @end

@@ -9,14 +9,18 @@
 #import "RxTest.h"
 #import "RxPerformanceTools.h"
 
+@interface RxTest ()
+
 #if TRACE_RESOURCES
-static int64_t __unused RxTestsTotalNumberOfAllocations = 0;
-static int64_t __unused RxTestsTotalNumberOfAllocatedBytes = 0;
+@property (class, atomic, assign) int64_t totalNumberOfAllocations;
+@property (class, atomic, assign) int64_t totalNumberOfAllocatedBytes;
 #endif
 
+@end
+
 @implementation RxTest {
-    int32_t _startResourceCount;
 #if TRACE_RESOURCES
+    int32_t _startResourceCount;
     int64_t _startNumberOfAllocations;
     int64_t _startNumberOfAllocatedBytes;
 #endif
@@ -38,53 +42,69 @@ static int64_t __unused RxTestsTotalNumberOfAllocatedBytes = 0;
 
 - (void)setUpActions {
 #if TRACE_RESOURCES
-//    _startResourceCount = rx_resourceCount;
-//   registerMallocHooks()
+    _startResourceCount = rx_resourceCount;
+    [RxPerformanceTools.defaultTools registerMallocHooks];
+    RxMemoryInfo memoryInfo = RxPerformanceTools.defaultTools.memoryInfo;
+    _startNumberOfAllocatedBytes = memoryInfo.bytes;
+    _startNumberOfAllocations = memoryInfo.allocations;
 
-//    RxMemoryInfo memoryInfo = rx_getMemoryInfo();
-//    _startNumberOfAllocatedBytes = memoryInfo.bytesAllocated;
-//    _startNumberOfAllocations = memoryInfo.allocCalls;
-
-//   (startNumberOfAllocatedBytes, startNumberOfAllocations) = getMemoryInfo()
 #endif
 }
 
 - (void)tearDownActions {
 #if TRACE_RESOURCES
-/*
+
     // give 5 sec to clean up resources
     for (NSUInteger i = 0; i < 30; i++) {
         if (_startResourceCount < rx_resourceCount) {
             // main schedulers need to finish work
             printf("Waiting for resource cleanup ...");
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
+            [NSRunLoop.currentRunLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
         } else {
             break;
         }
     }
 
-    XCTAssertTrue(_startResourceCount == rx_resourceCount);
-    RxMemoryInfo memoryInfo = rx_getMemoryInfo();
+    XCTAssertEqual(_startResourceCount, rx_resourceCount, "rx resource count allocations");
+    
+    RxMemoryInfo memoryInfo = RxPerformanceTools.defaultTools.memoryInfo;
 
-    int64_t newBytes = memoryInfo.bytesAllocated - _startNumberOfAllocatedBytes;
-    int64_t newAllocations = memoryInfo.allocCalls - _startNumberOfAllocations;
+    int64_t newBytes = memoryInfo.bytes - _startNumberOfAllocatedBytes;
+    int64_t newAllocations = memoryInfo.allocations - _startNumberOfAllocations;
 
     if ([self accumulateStatistics]) {
-        RxTestsTotalNumberOfAllocations += newAllocations;
-        RxTestsTotalNumberOfAllocatedBytes += newBytes;
+        RxTest.totalNumberOfAllocatedBytes += newBytes;
+        RxTest.totalNumberOfAllocations += newAllocations;
     }
 
 
-    printf("allocatedBytes = %lli, allocations = %lli (totalBytes = %lli, totalAllocations = %lli",
-            newBytes, newAllocations, RxTestsTotalNumberOfAllocatedBytes, RxTestsTotalNumberOfAllocations);
-*/
+    NSLog(@"allocatedBytes = %lli, allocations = %lli (totalBytes = %lli, totalAllocations = %lli)",
+            newBytes, newAllocations, RxTest.totalNumberOfAllocatedBytes, RxTest.totalNumberOfAllocations);
+
 
 #endif
 }
 
 - (void)sleep:(NSTimeInterval)interval {
-    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:interval]];
+    [NSRunLoop.currentRunLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:interval]];
 }
 
++ (int64_t)totalNumberOfAllocations {
+    NSNumber *n = objc_getAssociatedObject(self, @selector(totalNumberOfAllocations));
+    return n.integerValue;
+}
+
++ (void)setTotalNumberOfAllocations:(int64_t)totalNumberOfAllocations {
+    objc_setAssociatedObject(self, @selector(totalNumberOfAllocations), @(totalNumberOfAllocations), OBJC_ASSOCIATION_RETAIN);
+}
+
++ (int64_t)totalNumberOfAllocatedBytes {
+    NSNumber *n = objc_getAssociatedObject(self, @selector(totalNumberOfAllocatedBytes));
+    return n.integerValue;
+}
+
++ (void)setTotalNumberOfAllocatedBytes:(int64_t)totalNumberOfAllocatedBytes {
+    objc_setAssociatedObject(self, @selector(totalNumberOfAllocatedBytes), @(totalNumberOfAllocatedBytes), OBJC_ASSOCIATION_RETAIN);
+}
 
 @end

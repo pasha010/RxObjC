@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "RxTest.h"
-#import "RxObjCCocoa.h"
+#import <RxObjC_NSNotificationCenter/RxObjC-NSNotificationCenter.h>
 
 @interface NSNotificationCenterTests : RxTest
 

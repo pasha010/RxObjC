@@ -91,7 +91,6 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxConcurrentDispatchQueueScheduler.h"
 #import "RxConcurrentMainScheduler.h"
 #import "RxCurrentThreadScheduler.h"
-#import "RxDispatchQueueSchedulerQOS.h"
 #import "RxHistoricalScheduler.h"
 #import "RxHistoricalSchedulerTimeConverter.h"
 #import "RxMainScheduler.h"

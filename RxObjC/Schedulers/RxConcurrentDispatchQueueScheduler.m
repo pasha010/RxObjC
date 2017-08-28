@@ -7,7 +7,6 @@
 //
 
 #import "RxConcurrentDispatchQueueScheduler.h"
-#import "RxDispatchQueueSchedulerQOS.h"
 #import "RxSingleAssignmentDisposable.h"
 #import "RxMainScheduler.h"
 #import "RxCompositeDisposable.h"
@@ -19,9 +18,8 @@
     uint64_t _leeway;
 }
 
-- (nonnull instancetype)initWithGlobalConcurrentQueueQOS:(nonnull RxDispatchQueueSchedulerQOS *)globalConcurrentQueueQOS {
-    qos_class_t priority = globalConcurrentQueueQOS.QOSClass;
-    return [self initWithQueue:dispatch_get_global_queue(priority, 0)];
+- (nonnull instancetype)initWithGlobalConcurrentQueueQOSClass:(qos_class_t)qosClass {
+    return [self initWithQueue:dispatch_get_global_queue(qosClass, 0)];
 }
 
 - (nonnull instancetype)initWithQueue:(dispatch_queue_t)queue {
