@@ -803,6 +803,39 @@
 		3649A19A1D34FD230052141A /* RxTestsDefTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 36499F6D1D34F78F0052141A /* RxTestsDefTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3649A19B1D34FD300052141A /* RxTestsDefTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 36499F6D1D34F78F0052141A /* RxTestsDefTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		364AD4691F50339A00E76A38 /* RxObjC-NSNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 364AD4671F50339A00E76A38 /* RxObjC-NSNotificationCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4711F56B91B00E76A38 /* NSObject+RxObjC_KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECB1CD40EB11BDA0B0B1A /* NSObject+RxObjC_KVO.m */; };
+		364AD4741F56B91B00E76A38 /* RxObjC_KVO.h in Headers */ = {isa = PBXBuildFile; fileRef = 361AAD841F14FDAE000A11AD /* RxObjC_KVO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4751F56B91B00E76A38 /* NSObject+RxObjC_KVO.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC4085E892D43EC4DA31D /* NSObject+RxObjC_KVO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4801F56BA1E00E76A38 /* NSObject+RxObjC_KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECB1CD40EB11BDA0B0B1A /* NSObject+RxObjC_KVO.m */; };
+		364AD4831F56BA1E00E76A38 /* RxObjC_KVO.h in Headers */ = {isa = PBXBuildFile; fileRef = 361AAD841F14FDAE000A11AD /* RxObjC_KVO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4841F56BA1E00E76A38 /* NSObject+RxObjC_KVO.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC4085E892D43EC4DA31D /* NSObject+RxObjC_KVO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD48F1F56BA4500E76A38 /* NSObject+RxObjC_KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECB1CD40EB11BDA0B0B1A /* NSObject+RxObjC_KVO.m */; };
+		364AD4921F56BA4500E76A38 /* RxObjC_KVO.h in Headers */ = {isa = PBXBuildFile; fileRef = 361AAD841F14FDAE000A11AD /* RxObjC_KVO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4931F56BA4500E76A38 /* NSObject+RxObjC_KVO.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC4085E892D43EC4DA31D /* NSObject+RxObjC_KVO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4A01F56BAC600E76A38 /* NSObject+RxObjC_Dealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7C893C0434899973745 /* NSObject+RxObjC_Dealloc.m */; };
+		364AD4A11F56BAC600E76A38 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC344D10B0C1A9E95D9DB /* RxDeallocObservable.m */; };
+		364AD4A41F56BAC600E76A38 /* RxObjC_Dealloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 361AADA21F1501A5000A11AD /* RxObjC_Dealloc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4A51F56BAC600E76A38 /* NSObject+RxObjC_Dealloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC250C5C85A5BF2571996 /* NSObject+RxObjC_Dealloc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4A61F56BAC600E76A38 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECABBA193AACC8DB60EC4 /* RxDeallocObservable.h */; };
+		364AD4B31F56BADC00E76A38 /* NSObject+RxObjC_Dealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7C893C0434899973745 /* NSObject+RxObjC_Dealloc.m */; };
+		364AD4B41F56BADC00E76A38 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC344D10B0C1A9E95D9DB /* RxDeallocObservable.m */; };
+		364AD4B71F56BADC00E76A38 /* RxObjC_Dealloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 361AADA21F1501A5000A11AD /* RxObjC_Dealloc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4B81F56BADC00E76A38 /* NSObject+RxObjC_Dealloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC250C5C85A5BF2571996 /* NSObject+RxObjC_Dealloc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4B91F56BADC00E76A38 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECABBA193AACC8DB60EC4 /* RxDeallocObservable.h */; };
+		364AD4C61F56BADE00E76A38 /* NSObject+RxObjC_Dealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC7C893C0434899973745 /* NSObject+RxObjC_Dealloc.m */; };
+		364AD4C71F56BADE00E76A38 /* RxDeallocObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC344D10B0C1A9E95D9DB /* RxDeallocObservable.m */; };
+		364AD4CA1F56BADE00E76A38 /* RxObjC_Dealloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 361AADA21F1501A5000A11AD /* RxObjC_Dealloc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4CB1F56BADE00E76A38 /* NSObject+RxObjC_Dealloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC250C5C85A5BF2571996 /* NSObject+RxObjC_Dealloc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4CC1F56BADE00E76A38 /* RxDeallocObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EECABBA193AACC8DB60EC4 /* RxDeallocObservable.h */; };
+		364AD4D51F56BBCD00E76A38 /* NSNotificationCenter+RxObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC8CE2B9507F5235E3E17 /* NSNotificationCenter+RxObjC.m */; };
+		364AD4D81F56BBCD00E76A38 /* RxObjC-NSNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 364AD4671F50339A00E76A38 /* RxObjC-NSNotificationCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4D91F56BBCD00E76A38 /* NSNotificationCenter+RxObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC3B7AC7ED08C142B390F /* NSNotificationCenter+RxObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4E21F56BBE600E76A38 /* NSNotificationCenter+RxObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC8CE2B9507F5235E3E17 /* NSNotificationCenter+RxObjC.m */; };
+		364AD4E51F56BBE600E76A38 /* RxObjC-NSNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 364AD4671F50339A00E76A38 /* RxObjC-NSNotificationCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4E61F56BBE600E76A38 /* NSNotificationCenter+RxObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC3B7AC7ED08C142B390F /* NSNotificationCenter+RxObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4EF1F56BBE900E76A38 /* NSNotificationCenter+RxObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC8CE2B9507F5235E3E17 /* NSNotificationCenter+RxObjC.m */; };
+		364AD4F21F56BBE900E76A38 /* RxObjC-NSNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 364AD4671F50339A00E76A38 /* RxObjC-NSNotificationCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		364AD4F31F56BBE900E76A38 /* NSNotificationCenter+RxObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EEC3B7AC7ED08C142B390F /* NSNotificationCenter+RxObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		365044041D155DDF008CBABA /* RxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365043F91D155DDE008CBABA /* RxObjC.framework */; };
 		365F35D81D33A8C20096A86C /* RxEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EECEFD0E78FE2DA62A24AF /* RxEvent.m */; };
 		365F35DA1D33A8C20096A86C /* RxObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEC720402F5C6F6F87472A /* RxObservable.m */; };
@@ -1395,6 +1428,132 @@
 			remoteGlobalIDString = 361AAD811F14FDAD000A11AD;
 			remoteInfo = "RxObjC-KVO-OSX";
 		};
+		364AD46F1F56B91B00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 365F35D51D33A8C20096A86C;
+			remoteInfo = "RxObjC-OSX";
+		};
+		364AD47E1F56BA1E00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 365F35D51D33A8C20096A86C;
+			remoteInfo = "RxObjC-OSX";
+		};
+		364AD48D1F56BA4500E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 365F35D51D33A8C20096A86C;
+			remoteInfo = "RxObjC-OSX";
+		};
+		364AD49C1F56BAC600E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 361AAD811F14FDAD000A11AD;
+			remoteInfo = "RxObjC-KVO-OSX";
+		};
+		364AD49E1F56BAC600E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 365F35D51D33A8C20096A86C;
+			remoteInfo = "RxObjC-OSX";
+		};
+		364AD4AF1F56BADC00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 361AAD811F14FDAD000A11AD;
+			remoteInfo = "RxObjC-KVO-OSX";
+		};
+		364AD4B11F56BADC00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 365F35D51D33A8C20096A86C;
+			remoteInfo = "RxObjC-OSX";
+		};
+		364AD4C21F56BADE00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 361AAD811F14FDAD000A11AD;
+			remoteInfo = "RxObjC-KVO-OSX";
+		};
+		364AD4C41F56BADE00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 365F35D51D33A8C20096A86C;
+			remoteInfo = "RxObjC-OSX";
+		};
+		364AD4FA1F56BC7F00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 364AD46D1F56B91B00E76A38;
+			remoteInfo = "RxObjC-KVO-iOS";
+		};
+		364AD4FC1F56BC7F00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 364AD49A1F56BAC600E76A38;
+			remoteInfo = "RxObjC-Dealloc-iOS";
+		};
+		364AD4FE1F56BC7F00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 364AD4D31F56BBCD00E76A38;
+			remoteInfo = "RxObjC-NSNotificationCenter-iOS";
+		};
+		364AD5001F56BC8E00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 361AAD811F14FDAD000A11AD;
+			remoteInfo = "RxObjC-KVO-OSX";
+		};
+		364AD5021F56BC8E00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 361AAD9F1F1501A5000A11AD;
+			remoteInfo = "RxObjC-Dealloc-OSX";
+		};
+		364AD5041F56BC8E00E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 364AD4641F50339A00E76A38;
+			remoteInfo = "RxObjC-NSNotificationCenter-OSX";
+		};
+		364AD5061F56BC9700E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 364AD47C1F56BA1E00E76A38;
+			remoteInfo = "RxObjC-KVO-tvOS";
+		};
+		364AD5081F56BC9700E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 364AD4AD1F56BADC00E76A38;
+			remoteInfo = "RxObjC-Dealloc-tvOS";
+		};
+		364AD50A1F56BC9700E76A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 364AD4E01F56BBE600E76A38;
+			remoteInfo = "RxObjC-NSNotificationCenter-tvOS";
+		};
 		365044051D155DDF008CBABA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 365043F01D155DDE008CBABA /* Project object */;
@@ -1815,6 +1974,15 @@
 		364AD4651F50339A00E76A38 /* RxObjC_NSNotificationCenter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_NSNotificationCenter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		364AD4671F50339A00E76A38 /* RxObjC-NSNotificationCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RxObjC-NSNotificationCenter.h"; sourceTree = "<group>"; };
 		364AD4681F50339A00E76A38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		364AD47A1F56B91B00E76A38 /* RxObjC_KVO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_KVO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		364AD4891F56BA1E00E76A38 /* RxObjC_KVO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_KVO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		364AD4981F56BA4500E76A38 /* RxObjC_KVO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_KVO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		364AD4AB1F56BAC600E76A38 /* RxObjC_Dealloc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_Dealloc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		364AD4BE1F56BADC00E76A38 /* RxObjC_Dealloc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_Dealloc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		364AD4D11F56BADE00E76A38 /* RxObjC_Dealloc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_Dealloc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		364AD4DE1F56BBCD00E76A38 /* RxObjC_NSNotificationCenter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_NSNotificationCenter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		364AD4EB1F56BBE600E76A38 /* RxObjC_NSNotificationCenter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_NSNotificationCenter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		364AD4F81F56BBE900E76A38 /* RxObjC_NSNotificationCenter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC_NSNotificationCenter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		365043F91D155DDE008CBABA /* RxObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		365043FC1D155DDE008CBABA /* RxObjCCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxObjCCommon.h; sourceTree = "<group>"; };
 		365043FE1D155DDE008CBABA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1929,6 +2097,69 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		364AD4611F50339A00E76A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4721F56B91B00E76A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4811F56BA1E00E76A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4901F56BA4500E76A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4A21F56BAC600E76A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4B51F56BADC00E76A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4C81F56BADE00E76A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4D61F56BBCD00E76A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4E31F56BBE600E76A38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4F01F56BBE900E76A38 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2438,6 +2669,15 @@
 				361AAD821F14FDAD000A11AD /* RxObjC_KVO.framework */,
 				361AADA01F1501A5000A11AD /* RxObjC_Dealloc.framework */,
 				364AD4651F50339A00E76A38 /* RxObjC_NSNotificationCenter.framework */,
+				364AD47A1F56B91B00E76A38 /* RxObjC_KVO.framework */,
+				364AD4891F56BA1E00E76A38 /* RxObjC_KVO.framework */,
+				364AD4981F56BA4500E76A38 /* RxObjC_KVO.framework */,
+				364AD4AB1F56BAC600E76A38 /* RxObjC_Dealloc.framework */,
+				364AD4BE1F56BADC00E76A38 /* RxObjC_Dealloc.framework */,
+				364AD4D11F56BADE00E76A38 /* RxObjC_Dealloc.framework */,
+				364AD4DE1F56BBCD00E76A38 /* RxObjC_NSNotificationCenter.framework */,
+				364AD4EB1F56BBE600E76A38 /* RxObjC_NSNotificationCenter.framework */,
+				364AD4F81F56BBE900E76A38 /* RxObjC_NSNotificationCenter.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2693,6 +2933,90 @@
 			files = (
 				364AD4691F50339A00E76A38 /* RxObjC-NSNotificationCenter.h in Headers */,
 				17EEC97812C149FC3B1F71B1 /* NSNotificationCenter+RxObjC.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4731F56B91B00E76A38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4741F56B91B00E76A38 /* RxObjC_KVO.h in Headers */,
+				364AD4751F56B91B00E76A38 /* NSObject+RxObjC_KVO.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4821F56BA1E00E76A38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4831F56BA1E00E76A38 /* RxObjC_KVO.h in Headers */,
+				364AD4841F56BA1E00E76A38 /* NSObject+RxObjC_KVO.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4911F56BA4500E76A38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4921F56BA4500E76A38 /* RxObjC_KVO.h in Headers */,
+				364AD4931F56BA4500E76A38 /* NSObject+RxObjC_KVO.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4A31F56BAC600E76A38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4A41F56BAC600E76A38 /* RxObjC_Dealloc.h in Headers */,
+				364AD4A51F56BAC600E76A38 /* NSObject+RxObjC_Dealloc.h in Headers */,
+				364AD4A61F56BAC600E76A38 /* RxDeallocObservable.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4B61F56BADC00E76A38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4B71F56BADC00E76A38 /* RxObjC_Dealloc.h in Headers */,
+				364AD4B81F56BADC00E76A38 /* NSObject+RxObjC_Dealloc.h in Headers */,
+				364AD4B91F56BADC00E76A38 /* RxDeallocObservable.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4C91F56BADE00E76A38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4CA1F56BADE00E76A38 /* RxObjC_Dealloc.h in Headers */,
+				364AD4CB1F56BADE00E76A38 /* NSObject+RxObjC_Dealloc.h in Headers */,
+				364AD4CC1F56BADE00E76A38 /* RxDeallocObservable.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4D71F56BBCD00E76A38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4D81F56BBCD00E76A38 /* RxObjC-NSNotificationCenter.h in Headers */,
+				364AD4D91F56BBCD00E76A38 /* NSNotificationCenter+RxObjC.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4E41F56BBE600E76A38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4E51F56BBE600E76A38 /* RxObjC-NSNotificationCenter.h in Headers */,
+				364AD4E61F56BBE600E76A38 /* NSNotificationCenter+RxObjC.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4F11F56BBE900E76A38 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4F21F56BBE900E76A38 /* RxObjC-NSNotificationCenter.h in Headers */,
+				364AD4F31F56BBE900E76A38 /* NSNotificationCenter+RxObjC.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3464,6 +3788,177 @@
 			productReference = 364AD4651F50339A00E76A38 /* RxObjC_NSNotificationCenter.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		364AD46D1F56B91B00E76A38 /* RxObjC-KVO-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364AD4771F56B91B00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-KVO-iOS" */;
+			buildPhases = (
+				364AD4701F56B91B00E76A38 /* Sources */,
+				364AD4721F56B91B00E76A38 /* Frameworks */,
+				364AD4731F56B91B00E76A38 /* Headers */,
+				364AD4761F56B91B00E76A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				364AD46E1F56B91B00E76A38 /* PBXTargetDependency */,
+			);
+			name = "RxObjC-KVO-iOS";
+			productName = "RxObjC-KVO";
+			productReference = 364AD47A1F56B91B00E76A38 /* RxObjC_KVO.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		364AD47C1F56BA1E00E76A38 /* RxObjC-KVO-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364AD4861F56BA1E00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-KVO-tvOS" */;
+			buildPhases = (
+				364AD47F1F56BA1E00E76A38 /* Sources */,
+				364AD4811F56BA1E00E76A38 /* Frameworks */,
+				364AD4821F56BA1E00E76A38 /* Headers */,
+				364AD4851F56BA1E00E76A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				364AD47D1F56BA1E00E76A38 /* PBXTargetDependency */,
+			);
+			name = "RxObjC-KVO-tvOS";
+			productName = "RxObjC-KVO";
+			productReference = 364AD4891F56BA1E00E76A38 /* RxObjC_KVO.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		364AD48B1F56BA4500E76A38 /* RxObjC-KVO-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364AD4951F56BA4500E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-KVO-watchOS" */;
+			buildPhases = (
+				364AD48E1F56BA4500E76A38 /* Sources */,
+				364AD4901F56BA4500E76A38 /* Frameworks */,
+				364AD4911F56BA4500E76A38 /* Headers */,
+				364AD4941F56BA4500E76A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				364AD48C1F56BA4500E76A38 /* PBXTargetDependency */,
+			);
+			name = "RxObjC-KVO-watchOS";
+			productName = "RxObjC-KVO";
+			productReference = 364AD4981F56BA4500E76A38 /* RxObjC_KVO.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		364AD49A1F56BAC600E76A38 /* RxObjC-Dealloc-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364AD4A81F56BAC600E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-Dealloc-iOS" */;
+			buildPhases = (
+				364AD49F1F56BAC600E76A38 /* Sources */,
+				364AD4A21F56BAC600E76A38 /* Frameworks */,
+				364AD4A31F56BAC600E76A38 /* Headers */,
+				364AD4A71F56BAC600E76A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				364AD49B1F56BAC600E76A38 /* PBXTargetDependency */,
+				364AD49D1F56BAC600E76A38 /* PBXTargetDependency */,
+			);
+			name = "RxObjC-Dealloc-iOS";
+			productName = "RxObjC-Dealloc";
+			productReference = 364AD4AB1F56BAC600E76A38 /* RxObjC_Dealloc.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		364AD4AD1F56BADC00E76A38 /* RxObjC-Dealloc-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364AD4BB1F56BADC00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-Dealloc-tvOS" */;
+			buildPhases = (
+				364AD4B21F56BADC00E76A38 /* Sources */,
+				364AD4B51F56BADC00E76A38 /* Frameworks */,
+				364AD4B61F56BADC00E76A38 /* Headers */,
+				364AD4BA1F56BADC00E76A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				364AD4AE1F56BADC00E76A38 /* PBXTargetDependency */,
+				364AD4B01F56BADC00E76A38 /* PBXTargetDependency */,
+			);
+			name = "RxObjC-Dealloc-tvOS";
+			productName = "RxObjC-Dealloc";
+			productReference = 364AD4BE1F56BADC00E76A38 /* RxObjC_Dealloc.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		364AD4C01F56BADE00E76A38 /* RxObjC-Dealloc-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364AD4CE1F56BADE00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-Dealloc-watchOS" */;
+			buildPhases = (
+				364AD4C51F56BADE00E76A38 /* Sources */,
+				364AD4C81F56BADE00E76A38 /* Frameworks */,
+				364AD4C91F56BADE00E76A38 /* Headers */,
+				364AD4CD1F56BADE00E76A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				364AD4C11F56BADE00E76A38 /* PBXTargetDependency */,
+				364AD4C31F56BADE00E76A38 /* PBXTargetDependency */,
+			);
+			name = "RxObjC-Dealloc-watchOS";
+			productName = "RxObjC-Dealloc";
+			productReference = 364AD4D11F56BADE00E76A38 /* RxObjC_Dealloc.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		364AD4D31F56BBCD00E76A38 /* RxObjC-NSNotificationCenter-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364AD4DB1F56BBCD00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-NSNotificationCenter-iOS" */;
+			buildPhases = (
+				364AD4D41F56BBCD00E76A38 /* Sources */,
+				364AD4D61F56BBCD00E76A38 /* Frameworks */,
+				364AD4D71F56BBCD00E76A38 /* Headers */,
+				364AD4DA1F56BBCD00E76A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RxObjC-NSNotificationCenter-iOS";
+			productName = "RxObjC-NSNotificationCenter";
+			productReference = 364AD4DE1F56BBCD00E76A38 /* RxObjC_NSNotificationCenter.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		364AD4E01F56BBE600E76A38 /* RxObjC-NSNotificationCenter-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364AD4E81F56BBE600E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-NSNotificationCenter-tvOS" */;
+			buildPhases = (
+				364AD4E11F56BBE600E76A38 /* Sources */,
+				364AD4E31F56BBE600E76A38 /* Frameworks */,
+				364AD4E41F56BBE600E76A38 /* Headers */,
+				364AD4E71F56BBE600E76A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RxObjC-NSNotificationCenter-tvOS";
+			productName = "RxObjC-NSNotificationCenter";
+			productReference = 364AD4EB1F56BBE600E76A38 /* RxObjC_NSNotificationCenter.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		364AD4ED1F56BBE900E76A38 /* RxObjC-NSNotificationCenter-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364AD4F51F56BBE900E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-NSNotificationCenter-watchOS" */;
+			buildPhases = (
+				364AD4EE1F56BBE900E76A38 /* Sources */,
+				364AD4F01F56BBE900E76A38 /* Frameworks */,
+				364AD4F11F56BBE900E76A38 /* Headers */,
+				364AD4F41F56BBE900E76A38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RxObjC-NSNotificationCenter-watchOS";
+			productName = "RxObjC-NSNotificationCenter";
+			productReference = 364AD4F81F56BBE900E76A38 /* RxObjC_NSNotificationCenter.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		365043F81D155DDE008CBABA /* RxObjC-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3650440D1D155DDF008CBABA /* Build configuration list for PBXNativeTarget "RxObjC-iOS" */;
@@ -3493,6 +3988,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				364AD4FB1F56BC7F00E76A38 /* PBXTargetDependency */,
+				364AD4FD1F56BC7F00E76A38 /* PBXTargetDependency */,
+				364AD4FF1F56BC7F00E76A38 /* PBXTargetDependency */,
 				365F3B6B1D33BD150096A86C /* PBXTargetDependency */,
 				365F3B6D1D33BD150096A86C /* PBXTargetDependency */,
 				365044061D155DDF008CBABA /* PBXTargetDependency */,
@@ -3719,6 +4217,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				364AD5011F56BC8E00E76A38 /* PBXTargetDependency */,
+				364AD5031F56BC8E00E76A38 /* PBXTargetDependency */,
+				364AD5051F56BC8E00E76A38 /* PBXTargetDependency */,
 				365F3B9A1D33BDE10096A86C /* PBXTargetDependency */,
 				365F3B9E1D33BDE10096A86C /* PBXTargetDependency */,
 				365F3BA01D33BDE10096A86C /* PBXTargetDependency */,
@@ -3739,6 +4240,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				364AD5071F56BC9700E76A38 /* PBXTargetDependency */,
+				364AD5091F56BC9700E76A38 /* PBXTargetDependency */,
+				364AD50B1F56BC9700E76A38 /* PBXTargetDependency */,
 				365F3BA21D33BDE90096A86C /* PBXTargetDependency */,
 				365F3BA61D33BDE90096A86C /* PBXTargetDependency */,
 				365F3BA81D33BDE90096A86C /* PBXTargetDependency */,
@@ -3770,6 +4274,15 @@
 					364AD4641F50339A00E76A38 = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
+					};
+					364AD49A1F56BAC600E76A38 = {
+						DevelopmentTeam = NF3Z42SEZ7;
+					};
+					364AD4AD1F56BADC00E76A38 = {
+						DevelopmentTeam = NF3Z42SEZ7;
+					};
+					364AD4C01F56BADE00E76A38 = {
+						DevelopmentTeam = NF3Z42SEZ7;
 					};
 					365043F81D155DDE008CBABA = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -3814,9 +4327,18 @@
 				365F3B831D33BDA70096A86C /* AllTests-tvOS */,
 				3685A40D1D37A3EA00DD1C61 /* OCLint-OSX */,
 				3685A4121D37A4E900DD1C61 /* OCLint-iOS */,
+				364AD46D1F56B91B00E76A38 /* RxObjC-KVO-iOS */,
 				361AAD811F14FDAD000A11AD /* RxObjC-KVO-OSX */,
+				364AD47C1F56BA1E00E76A38 /* RxObjC-KVO-tvOS */,
+				364AD48B1F56BA4500E76A38 /* RxObjC-KVO-watchOS */,
+				364AD49A1F56BAC600E76A38 /* RxObjC-Dealloc-iOS */,
 				361AAD9F1F1501A5000A11AD /* RxObjC-Dealloc-OSX */,
+				364AD4AD1F56BADC00E76A38 /* RxObjC-Dealloc-tvOS */,
+				364AD4C01F56BADE00E76A38 /* RxObjC-Dealloc-watchOS */,
+				364AD4D31F56BBCD00E76A38 /* RxObjC-NSNotificationCenter-iOS */,
 				364AD4641F50339A00E76A38 /* RxObjC-NSNotificationCenter-OSX */,
+				364AD4E01F56BBE600E76A38 /* RxObjC-NSNotificationCenter-tvOS */,
+				364AD4ED1F56BBE900E76A38 /* RxObjC-NSNotificationCenter-watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -3837,6 +4359,69 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		364AD4631F50339A00E76A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4761F56B91B00E76A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4851F56BA1E00E76A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4941F56BA4500E76A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4A71F56BAC600E76A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4BA1F56BADC00E76A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4CD1F56BADE00E76A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4DA1F56BBCD00E76A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4E71F56BBE600E76A38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4F41F56BBE900E76A38 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4002,6 +4587,81 @@
 			buildActionMask = 2147483647;
 			files = (
 				17EECE29D746151746E2CDB0 /* NSNotificationCenter+RxObjC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4701F56B91B00E76A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4711F56B91B00E76A38 /* NSObject+RxObjC_KVO.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD47F1F56BA1E00E76A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4801F56BA1E00E76A38 /* NSObject+RxObjC_KVO.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD48E1F56BA4500E76A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD48F1F56BA4500E76A38 /* NSObject+RxObjC_KVO.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD49F1F56BAC600E76A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4A01F56BAC600E76A38 /* NSObject+RxObjC_Dealloc.m in Sources */,
+				364AD4A11F56BAC600E76A38 /* RxDeallocObservable.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4B21F56BADC00E76A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4B31F56BADC00E76A38 /* NSObject+RxObjC_Dealloc.m in Sources */,
+				364AD4B41F56BADC00E76A38 /* RxDeallocObservable.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4C51F56BADE00E76A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4C61F56BADE00E76A38 /* NSObject+RxObjC_Dealloc.m in Sources */,
+				364AD4C71F56BADE00E76A38 /* RxDeallocObservable.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4D41F56BBCD00E76A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4D51F56BBCD00E76A38 /* NSNotificationCenter+RxObjC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4E11F56BBE600E76A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4E21F56BBE600E76A38 /* NSNotificationCenter+RxObjC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364AD4EE1F56BBE900E76A38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364AD4EF1F56BBE900E76A38 /* NSNotificationCenter+RxObjC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4826,6 +5486,96 @@
 			target = 361AAD811F14FDAD000A11AD /* RxObjC-KVO-OSX */;
 			targetProxy = 361AADAF1F150766000A11AD /* PBXContainerItemProxy */;
 		};
+		364AD46E1F56B91B00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 365F35D51D33A8C20096A86C /* RxObjC-OSX */;
+			targetProxy = 364AD46F1F56B91B00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD47D1F56BA1E00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 365F35D51D33A8C20096A86C /* RxObjC-OSX */;
+			targetProxy = 364AD47E1F56BA1E00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD48C1F56BA4500E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 365F35D51D33A8C20096A86C /* RxObjC-OSX */;
+			targetProxy = 364AD48D1F56BA4500E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD49B1F56BAC600E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 361AAD811F14FDAD000A11AD /* RxObjC-KVO-OSX */;
+			targetProxy = 364AD49C1F56BAC600E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD49D1F56BAC600E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 365F35D51D33A8C20096A86C /* RxObjC-OSX */;
+			targetProxy = 364AD49E1F56BAC600E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD4AE1F56BADC00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 361AAD811F14FDAD000A11AD /* RxObjC-KVO-OSX */;
+			targetProxy = 364AD4AF1F56BADC00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD4B01F56BADC00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 365F35D51D33A8C20096A86C /* RxObjC-OSX */;
+			targetProxy = 364AD4B11F56BADC00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD4C11F56BADE00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 361AAD811F14FDAD000A11AD /* RxObjC-KVO-OSX */;
+			targetProxy = 364AD4C21F56BADE00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD4C31F56BADE00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 365F35D51D33A8C20096A86C /* RxObjC-OSX */;
+			targetProxy = 364AD4C41F56BADE00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD4FB1F56BC7F00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 364AD46D1F56B91B00E76A38 /* RxObjC-KVO-iOS */;
+			targetProxy = 364AD4FA1F56BC7F00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD4FD1F56BC7F00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 364AD49A1F56BAC600E76A38 /* RxObjC-Dealloc-iOS */;
+			targetProxy = 364AD4FC1F56BC7F00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD4FF1F56BC7F00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 364AD4D31F56BBCD00E76A38 /* RxObjC-NSNotificationCenter-iOS */;
+			targetProxy = 364AD4FE1F56BC7F00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD5011F56BC8E00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 361AAD811F14FDAD000A11AD /* RxObjC-KVO-OSX */;
+			targetProxy = 364AD5001F56BC8E00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD5031F56BC8E00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 361AAD9F1F1501A5000A11AD /* RxObjC-Dealloc-OSX */;
+			targetProxy = 364AD5021F56BC8E00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD5051F56BC8E00E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 364AD4641F50339A00E76A38 /* RxObjC-NSNotificationCenter-OSX */;
+			targetProxy = 364AD5041F56BC8E00E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD5071F56BC9700E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 364AD47C1F56BA1E00E76A38 /* RxObjC-KVO-tvOS */;
+			targetProxy = 364AD5061F56BC9700E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD5091F56BC9700E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 364AD4AD1F56BADC00E76A38 /* RxObjC-Dealloc-tvOS */;
+			targetProxy = 364AD5081F56BC9700E76A38 /* PBXContainerItemProxy */;
+		};
+		364AD50B1F56BC9700E76A38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 364AD4E01F56BBE600E76A38 /* RxObjC-NSNotificationCenter-tvOS */;
+			targetProxy = 364AD50A1F56BC9700E76A38 /* PBXContainerItemProxy */;
+		};
 		365044061D155DDF008CBABA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 365043F81D155DDE008CBABA /* RxObjC-iOS */;
@@ -5054,6 +5804,459 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-NSNotificationCenter";
 				PRODUCT_NAME = RxObjC_NSNotificationCenter;
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		364AD4781F56B91B00E76A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/RxObjC-KVO/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjC_KVO;
+				PRODUCT_NAME = RxObjC_KVO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = Debug;
+		};
+		364AD4791F56B91B00E76A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/RxObjC-KVO/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjC_KVO;
+				PRODUCT_NAME = RxObjC_KVO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = Release;
+		};
+		364AD4871F56BA1E00E76A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/RxObjC-KVO/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjC_KVO;
+				PRODUCT_NAME = RxObjC_KVO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+			};
+			name = Debug;
+		};
+		364AD4881F56BA1E00E76A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/RxObjC-KVO/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjC_KVO;
+				PRODUCT_NAME = RxObjC_KVO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+			};
+			name = Release;
+		};
+		364AD4961F56BA4500E76A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "RxObjC-KVO-tvOS copy-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjC_KVO;
+				PRODUCT_NAME = RxObjC_KVO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+			};
+			name = Debug;
+		};
+		364AD4971F56BA4500E76A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "RxObjC-KVO-tvOS copy-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxObjC_KVO;
+				PRODUCT_NAME = RxObjC_KVO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+			};
+			name = Release;
+		};
+		364AD4A91F56BAC600E76A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NF3Z42SEZ7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "RxObjC-Dealloc/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-Dealloc";
+				PRODUCT_NAME = RxObjC_Dealloc;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = Debug;
+		};
+		364AD4AA1F56BAC600E76A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NF3Z42SEZ7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "RxObjC-Dealloc/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-Dealloc";
+				PRODUCT_NAME = RxObjC_Dealloc;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = Release;
+		};
+		364AD4BC1F56BADC00E76A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NF3Z42SEZ7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "RxObjC-Dealloc/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-Dealloc";
+				PRODUCT_NAME = RxObjC_Dealloc;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+			};
+			name = Debug;
+		};
+		364AD4BD1F56BADC00E76A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NF3Z42SEZ7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "RxObjC-Dealloc/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-Dealloc";
+				PRODUCT_NAME = RxObjC_Dealloc;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+			};
+			name = Release;
+		};
+		364AD4CF1F56BADE00E76A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NF3Z42SEZ7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "RxObjC-Dealloc/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-Dealloc";
+				PRODUCT_NAME = RxObjC_Dealloc;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+			};
+			name = Debug;
+		};
+		364AD4D01F56BADE00E76A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NF3Z42SEZ7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "RxObjC-Dealloc/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-Dealloc";
+				PRODUCT_NAME = RxObjC_Dealloc;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+			};
+			name = Release;
+		};
+		364AD4DC1F56BBCD00E76A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "RxObjC-NSNotificationCenter/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-NSNotificationCenter";
+				PRODUCT_NAME = RxObjC_NSNotificationCenter;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = Debug;
+		};
+		364AD4DD1F56BBCD00E76A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "RxObjC-NSNotificationCenter/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-NSNotificationCenter";
+				PRODUCT_NAME = RxObjC_NSNotificationCenter;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = Release;
+		};
+		364AD4E91F56BBE600E76A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "RxObjC-NSNotificationCenter/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-NSNotificationCenter";
+				PRODUCT_NAME = RxObjC_NSNotificationCenter;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+			};
+			name = Debug;
+		};
+		364AD4EA1F56BBE600E76A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "RxObjC-NSNotificationCenter/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-NSNotificationCenter";
+				PRODUCT_NAME = RxObjC_NSNotificationCenter;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+			};
+			name = Release;
+		};
+		364AD4F61F56BBE900E76A38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "RxObjC-NSNotificationCenter/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-NSNotificationCenter";
+				PRODUCT_NAME = RxObjC_NSNotificationCenter;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+			};
+			name = Debug;
+		};
+		364AD4F71F56BBE900E76A38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "RxObjC-NSNotificationCenter/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "reactivex.RxObjC-NSNotificationCenter";
+				PRODUCT_NAME = RxObjC_NSNotificationCenter;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
 			};
 			name = Release;
 		};
@@ -5532,7 +6735,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxCocoa;
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxBlocking;
 				PRODUCT_NAME = RxBlocking;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -5556,7 +6759,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxCocoa;
+				PRODUCT_BUNDLE_IDENTIFIER = reactivex.RxBlocking;
 				PRODUCT_NAME = RxBlocking;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -5867,6 +7070,87 @@
 			buildConfigurations = (
 				364AD46B1F50339A00E76A38 /* Debug */,
 				364AD46C1F50339A00E76A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364AD4771F56B91B00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-KVO-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364AD4781F56B91B00E76A38 /* Debug */,
+				364AD4791F56B91B00E76A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364AD4861F56BA1E00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-KVO-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364AD4871F56BA1E00E76A38 /* Debug */,
+				364AD4881F56BA1E00E76A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364AD4951F56BA4500E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-KVO-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364AD4961F56BA4500E76A38 /* Debug */,
+				364AD4971F56BA4500E76A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364AD4A81F56BAC600E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-Dealloc-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364AD4A91F56BAC600E76A38 /* Debug */,
+				364AD4AA1F56BAC600E76A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364AD4BB1F56BADC00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-Dealloc-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364AD4BC1F56BADC00E76A38 /* Debug */,
+				364AD4BD1F56BADC00E76A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364AD4CE1F56BADE00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-Dealloc-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364AD4CF1F56BADE00E76A38 /* Debug */,
+				364AD4D01F56BADE00E76A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364AD4DB1F56BBCD00E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-NSNotificationCenter-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364AD4DC1F56BBCD00E76A38 /* Debug */,
+				364AD4DD1F56BBCD00E76A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364AD4E81F56BBE600E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-NSNotificationCenter-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364AD4E91F56BBE600E76A38 /* Debug */,
+				364AD4EA1F56BBE600E76A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364AD4F51F56BBE900E76A38 /* Build configuration list for PBXNativeTarget "RxObjC-NSNotificationCenter-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364AD4F61F56BBE900E76A38 /* Debug */,
+				364AD4F71F56BBE900E76A38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
