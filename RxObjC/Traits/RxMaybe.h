@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "RxPrimitiveSequence.h"
 
+@class RxMaybeEvent;
+@protocol RxDisposable;
+
 NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT RxPrimitiveTrait const RxPrimitiveTraitMaybe;
@@ -19,7 +22,39 @@ FOUNDATION_EXPORT RxPrimitiveTrait const RxPrimitiveTraitMaybe;
 @interface RxMaybe<__covariant Element> : RxPrimitiveSequence<Element>
 @end
 
+typedef void (^RxMaybeObserver)(RxMaybeEvent *_Nonnull event);
+
 @interface RxMaybe<__covariant Element> (Creation)
+
+/**
+ * Creates an observable sequence from a specified subscribe method implementation.
+ * @param subscribe Implementation of the resulting observable sequence's `subscribe` method.
+ * @return The observable sequence with the specified implementation for the `subscribe` method.
+ */
++ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(RxMaybeObserver))subscribe;
+
+/**
+ * Subscribes `observer` to receive events for this sequence.
+ * @param observer
+ * @return Subscription for `observer` that can be used to cancel production of sequence elements and free resources.
+ */
+- (nonnull id <RxDisposable>)subscribe:(void (^ _Nonnull)(RxMaybeEvent *))observer;
+
+/**
+ * Subscribes a success handler, an error handler, and a completion handler for this sequence.
+ * @param onSuccess Action to invoke for each element in the observable sequence.
+ * @param onError Action to invoke upon errored termination of the observable sequence.
+ * @param onCompleted Action to invoke upon graceful termination of the observable sequence.
+ * @return Subscription object used to unsubscribe from the observable sequence.
+ */
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void (^ _Nullable)(Element))onSuccess
+                                        onError:(void (^ _Nullable)(NSError *))onError
+                                    onCompleted:(void (^ _Nullable)())onCompleted;
+
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void (^ _Nullable)(Element))onSuccess;
+
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void (^ _Nullable)(Element))onSuccess
+                                        onError:(void (^ _Nullable)(NSError *))onError;
 
 @end
 

@@ -136,4 +136,14 @@
     return [[self alloc] initWithSource:[RxObservable timer:dueTime scheduler:scheduler]];
 }
 
++ (nonnull RxPrimitiveSequence<RxTuple *> *)zip:(nonnull NSArray<__kindof RxPrimitiveSequence<id> *> *)sources {
+    NSMutableArray<RxObservable *> *convertedArray = [NSMutableArray array];
+    [sources enumerateObjectsUsingBlock:^(RxCompletable *obj, NSUInteger idx, BOOL *stop) {
+        [convertedArray addObject:[obj asObservable]];
+    }];
+    return [[self alloc] initWithSource:[RxObservable zip:convertedArray resultSelector:^id(RxTuple *tuple) {
+        return tuple;
+    }]];
+}
+
 @end

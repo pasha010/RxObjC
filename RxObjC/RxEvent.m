@@ -100,15 +100,7 @@
 @implementation RxEvent (Properties)
 
 - (BOOL)isStopEvent {
-    switch (self.type) {
-        case RxEventTypeNext:
-            return NO;
-        case RxEventTypeError:
-            return YES;
-        case RxEventTypeCompleted:
-            return YES;
-    }
-    return NO;
+    return self.type == RxEventTypeError || self.type == RxEventTypeCompleted;
 }
 
 - (nullable id)element {

@@ -31,7 +31,7 @@ typedef void (^RxSingleObserver)(RxSingleEvent *_Nonnull event);
  * @param subscribe Implementation of the resulting observable sequence's `subscribe` method.
  * @return The observable sequence with the specified implementation for the `subscribe` method.
  */
-+ (nonnull RxSingle<Element> *)create:(id <RxDisposable>(^_Nonnull)(RxSingleObserver))subscribe;
++ (nonnull instancetype)create:(id <RxDisposable>(^_Nonnull)(RxSingleObserver))subscribe;
 
 /**
  * Subscribes `observer` to receive events for this sequence.
@@ -47,6 +47,8 @@ typedef void (^RxSingleObserver)(RxSingleEvent *_Nonnull event);
  */
 - (nonnull id <RxDisposable>)subscribeOnSuccess:(void(^_Nullable)(Element))success
                                         onError:(void(^_Nullable)(NSError *))error;
+
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void(^_Nullable)(Element))success;
 
 @end
 

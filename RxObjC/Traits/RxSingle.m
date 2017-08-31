@@ -24,7 +24,7 @@ RxPrimitiveTrait const RxPrimitiveTraitSingle = @"rx.traits.single";
 
 @implementation RxSingle (Creation)
 
-+ (nonnull RxSingle<id> *)create:(id <RxDisposable>(^ _Nonnull)(RxSingleObserver))subscribe {
++ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(RxSingleObserver))subscribe {
     RxObservable *o = [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
         return subscribe(^(RxSingleEvent *event) {
             if (event.isSuccess) {
@@ -73,6 +73,10 @@ RxPrimitiveTrait const RxPrimitiveTraitSingle = @"rx.traits.single";
             }
         }
     }];
+}
+
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void(^_Nullable)(id))success {
+    return [self subscribeOnSuccess:success onError:nil];
 }
 
 @end

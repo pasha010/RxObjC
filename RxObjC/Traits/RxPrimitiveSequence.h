@@ -181,6 +181,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nonnull instancetype)timer:(RxTimeInterval)dueTime scheduler:(nonnull id <RxSchedulerType>)scheduler;
 
+/**
+ * Merges the specified observable sequences into one observable sequence of tuples whenever
+ * all of the observable sequences have produced an element at a corresponding index.
+ * @return An observable sequence containing the result of combining elements of the sources using the specified result selector function.
+ */
++ (nonnull RxPrimitiveSequence<RxTuple *> *)zip:(nonnull NSArray<__kindof RxPrimitiveSequence<id> *> *)sources;
+
 @end
 
 NS_ASSUME_NONNULL_END

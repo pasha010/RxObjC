@@ -9,6 +9,7 @@
 #import "RxMaybe.h"
 #import "RxObservable+Creation.h"
 #import "RxAsMaybe.h"
+#import "RxAnyObserver.h"
 
 RxPrimitiveTrait const RxPrimitiveTraitMaybe = @"rx.traits.maybe";
 
@@ -21,6 +22,72 @@ RxPrimitiveTrait const RxPrimitiveTraitMaybe = @"rx.traits.maybe";
 @end
 
 @implementation RxMaybe (Creation)
+
++ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(RxMaybeObserver))subscribe {
+    __auto_type source = [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
+        return subscribe(^(RxMaybeEvent *_Nonnull event) {
+            if (event.isSuccess) {
+                [observer onNext:((RxMaybeEventSuccess *) event).element];
+                [observer onCompleted];
+            } else if (event.isError) {
+                [observer onError:((RxMaybeEventError *) event).error];
+            } else {
+                [observer onCompleted];
+            }
+        });
+    }];
+    return [[RxMaybe alloc] initWithSource:source];
+}
+
+- (nonnull id <RxDisposable>)subscribe:(void (^ _Nonnull)(RxMaybeEvent *))observer {
+    __block BOOL stopped = NO;
+    return [[self asObservable] subscribeWith:^(RxEvent *event) {
+        if (stopped) {
+            return;
+        }
+        stopped = YES;
+
+        switch (event.type) {
+            case RxEventTypeNext:
+                observer([RxMaybeEventSuccess success:event.element]);
+                break;
+            case RxEventTypeError:
+                observer([RxMaybeEventError error:event.error]);
+                break;
+            case RxEventTypeCompleted:
+                observer([RxMaybeEventCompleted completed]);
+                break;
+        }
+    }];
+}
+
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void (^ _Nullable)(id))onSuccess
+                                        onError:(void (^ _Nullable)(NSError *))onError
+                                    onCompleted:(void (^ _Nullable)())onCompleted {
+    return [self subscribe:^(RxMaybeEvent *event) {
+        if (event.isSuccess) {
+            if (onSuccess) {
+                onSuccess(((RxMaybeEventSuccess *) event).element);
+            }
+        } else if (event.isError) {
+            if (onError) {
+                onError(((RxMaybeEventError *) event).error);
+            }
+        } else {
+            if (onCompleted) {
+                onCompleted();
+            }
+        }
+    }];
+}
+
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void (^ _Nullable)(id))onSuccess {
+    return [self subscribeOnSuccess:onSuccess onError:nil];
+}
+
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void (^ _Nullable)(id))onSuccess onError:(void (^ _Nullable)(NSError *))onError {
+    return [self subscribeOnSuccess:onSuccess onError:onError onCompleted:nil];
+}
 
 @end
 

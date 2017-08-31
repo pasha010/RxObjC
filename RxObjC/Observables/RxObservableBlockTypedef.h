@@ -35,14 +35,14 @@ typedef RxObservable *__nonnull (^RxSelectorType)(RxObservable *__nonnull);
 typedef id <RxDisposable> __nonnull(^RxAnonymousSubscribeHandler)(RxAnyObserver *__nonnull);
 
 /// zip
-typedef id __nonnull (^RxZip2ResultSelector)(id __nonnull o1, id __nonnull o2);
-typedef id __nonnull (^RxZip3ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3);
-typedef id __nonnull (^RxZip4ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4);
-typedef id __nonnull (^RxZip5ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4, id __nonnull o5);
-typedef id __nonnull (^RxZip6ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4, id __nonnull o5, id __nonnull o6);
-typedef id __nonnull (^RxZip7ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4, id __nonnull o5, id __nonnull o6, id __nonnull o7);
-typedef id __nonnull (^RxZip8ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4, id __nonnull o5, id __nonnull o6, id __nonnull o7, id __nonnull o8);
-typedef id __nonnull (^RxZipTupleResultSelector)(RxTuple *__nonnull);
+typedef id (^_Nonnull RxZip2ResultSelector)(id __nonnull o1, id __nonnull o2);
+typedef id (^_Nonnull RxZip3ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3);
+typedef id (^_Nonnull RxZip4ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4);
+typedef id (^_Nonnull RxZip5ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4, id __nonnull o5);
+typedef id (^_Nonnull RxZip6ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4, id __nonnull o5, id __nonnull o6);
+typedef id (^_Nonnull RxZip7ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4, id __nonnull o5, id __nonnull o6, id __nonnull o7);
+typedef id (^_Nonnull RxZip8ResultSelector)(id __nonnull o1, id __nonnull o2, id __nonnull o3, id __nonnull o4, id __nonnull o5, id __nonnull o6, id __nonnull o7, id __nonnull o8);
+typedef id (^_Nonnull RxZipTupleResultSelector)(RxTuple *_Nonnull);
 
 typedef void (^RxZipObserverValueSetter)(id __nonnull);
 
