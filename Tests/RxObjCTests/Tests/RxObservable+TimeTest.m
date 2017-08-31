@@ -234,7 +234,7 @@
     NSNumber *a = [[[[[@[[RxObservable just:@0], [RxObservable never]] toObservable] concat]
             throttle:2.0 scheduler:scheduler]
             toBlocking]
-            blocking_first];
+            first];
 
     NSDate *end = [NSDate date];
 
@@ -459,7 +459,7 @@
     NSNumber *a = [[[[[@[[RxObservable just:@0], [RxObservable just:@2], [RxObservable never]] toObservable] concat]
             throttleFirst:2.0 scheduler:scheduler]
             toBlocking]
-            blocking_first];
+            first];
 
     NSDate *end = [NSDate date];
 
@@ -763,7 +763,7 @@
     NSArray<NSNumber *> *a = [[[[RxObservable interval:1 scheduler:scheduler]
             take:2]
             toBlocking]
-            blocking_toArray];
+            toArray];
 
     NSDate *end = [NSDate date];
 
@@ -1282,7 +1282,7 @@
             buffer:1000 count:3 scheduler:backgroundScheduler]
             skip:1]
             toBlocking]
-            blocking_first];
+            first];
 
     NSArray *array = @[@4, @5, @6];
     XCTAssertEqualObjects(result, array);
@@ -1490,7 +1490,7 @@
             merge]
             skip:4]
             toBlocking]
-            blocking_first];
+            first];
 
     XCTAssertEqualObjects(result, @"1 5");
 }

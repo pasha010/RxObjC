@@ -358,7 +358,7 @@ typedef id <RxDisposable> __nonnull (^RxObservableConcurrencyTests)(RxSerialDisp
 
     [scheduler schedule:nil action:concurrent];
 
-    [[stop toBlocking] blocking_last];
+    [[stop toBlocking] last];
 
     NSArray *array = @[@"Started", @"Started", @"Ended", @"Ended"];
     XCTAssertEqualObjects(events, array);

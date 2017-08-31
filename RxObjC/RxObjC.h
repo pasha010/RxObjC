@@ -112,4 +112,9 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #pragma mark - Extensions
 #import "NSEnumerator+Operators.h"
 
+#pragma mark - Traits
+#import "RxSingle.h"
+#import "RxMaybe.h"
+#import "RxCompletable.h"
+
 #endif // RxObjC_H

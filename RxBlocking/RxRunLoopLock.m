@@ -25,8 +25,8 @@
 
 - (void)dispatch:(nonnull void (^)())action {
     CFRunLoopPerformBlock(_currentRunLoop, kCFRunLoopDefaultMode, ^{
-        if ([RxCurrentThreadScheduler sharedInstance].isScheduleRequired) {
-            [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType __unused _) {
+        if ([RxCurrentThreadScheduler defaultInstance].isScheduleRequired) {
+            [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id <RxDisposable>(RxStateType __unused _) {
                 action();
                 return [RxNopDisposable sharedInstance];
             }];

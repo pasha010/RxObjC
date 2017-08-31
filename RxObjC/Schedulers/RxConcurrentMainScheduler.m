@@ -29,7 +29,7 @@
     static RxConcurrentMainScheduler *_instance = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
-        _instance = [[self alloc] initWithMainScheduler:[RxMainScheduler sharedInstance]];
+        _instance = [[self alloc] initWithMainScheduler:[RxMainScheduler instance]];
     });
     return _instance;
 }

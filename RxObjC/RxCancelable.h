@@ -9,12 +9,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
-Represents disposable resource with state tracking.
-*/
+ * Represents disposable resource with state tracking.
+ */
 @protocol RxCancelable <RxDisposable>
 /**
-- returns: Was resource disposed.
-*/
+ * @return Was resource disposed.
+ */
 - (BOOL)disposed;
 
 @end

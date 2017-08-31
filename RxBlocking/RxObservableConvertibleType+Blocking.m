@@ -16,3 +16,10 @@
 }
 
 @end
+@implementation RxPrimitiveSequence (Blocking)
+
+- (nonnull RxBlockingObservable *)toBlocking {
+    return [[RxBlockingObservable alloc] initWithSource:[self asObservable]];
+}
+
+@end

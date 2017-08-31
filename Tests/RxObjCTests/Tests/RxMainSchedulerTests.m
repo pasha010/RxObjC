@@ -31,12 +31,12 @@ void runRunLoop() {
     NSMutableArray<NSNumber *> *messages = [NSMutableArray array];
     __block BOOL executedImmediatelly = NO;
 
-    [[RxMainScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType s) {
+    [[RxMainScheduler instance] schedule:nil action:^id <RxDisposable>(RxStateType s) {
         executedImmediatelly = YES;
         [messages addObject:@1];
-        [[RxMainScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
+        [[RxMainScheduler instance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
             [messages addObject:@3];
-            [[RxMainScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType _o) {
+            [[RxMainScheduler instance] schedule:nil action:^id <RxDisposable>(RxStateType _o) {
                 [messages addObject:@5];
                 return [RxNopDisposable sharedInstance];
             }];
@@ -58,11 +58,11 @@ void runRunLoop() {
 - (void)testMainScheduler_disposing1 {
     NSMutableArray<NSNumber *> *messages = [NSMutableArray array];
 
-    [[RxMainScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType s) {
+    [[RxMainScheduler instance] schedule:nil action:^id <RxDisposable>(RxStateType s) {
         [messages addObject:@1];
-        id <RxDisposable> d3 = [[RxMainScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
+        id <RxDisposable> d3 = [[RxMainScheduler instance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
             [messages addObject:@3];
-            id <RxDisposable> d5 = [[RxMainScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType _o) {
+            id <RxDisposable> d5 = [[RxMainScheduler instance] schedule:nil action:^id <RxDisposable>(RxStateType _o) {
                 [messages addObject:@5];
                 return [RxNopDisposable sharedInstance];
             }];
@@ -83,11 +83,11 @@ void runRunLoop() {
 - (void)testMainScheduler_disposing2 {
     NSMutableArray<NSNumber *> *messages = [NSMutableArray array];
 
-    [[RxMainScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
+    [[RxMainScheduler instance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
         [messages addObject:@1];
-        id <RxDisposable> d3 = [[RxMainScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
+        id <RxDisposable> d3 = [[RxMainScheduler instance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
             [messages addObject:@3];
-            id <RxDisposable> d5 = [[RxMainScheduler sharedInstance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
+            id <RxDisposable> d5 = [[RxMainScheduler instance] schedule:nil action:^id <RxDisposable>(RxStateType o) {
                 [messages addObject:@5];
                 return [RxNopDisposable sharedInstance];
             }];

@@ -12,16 +12,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RxObservable<E> (Debug)
+
 /**
  * Prints received events for all observers on standard output.
  * @see [do operator on reactivex.io](http://reactivex.io/documentation/operators/do.html)
- * @param identifier: Identifier that is printed together with event description to standard output.
- * @return: An observable sequence whose events are printed to standard output.
+ * @param identifier Identifier that is printed together with event description to standard output.
+ * @return An observable sequence whose events are printed to standard output.
  */
-- (nonnull RxObservable<E> *)debug:(nullable NSString *)identifier;
-- (nonnull RxObservable<E> *)debug:(nullable NSString *)identifier file:(nonnull NSString *)file;
-- (nonnull RxObservable<E> *)debug:(nullable NSString *)identifier file:(nonnull NSString *)file line:(NSUInteger)line ;
-- (nonnull RxObservable<E> *)debug:(nullable NSString *)identifier file:(nonnull NSString *)file line:(NSUInteger)line function:(nonnull NSString *)function;
+- (nonnull instancetype)debug:(nonnull NSString *)identifier;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1324,8 +1324,8 @@ RxObservable *generateCollection(NSUInteger startIndex, RxObservable *(^generato
 - (void)testConcat_TailRecursionCollection {
     rx_maxTailRecursiveSinkStackSize = 0;
     NSArray *elements = [[[generateCollection(0, ^RxObservable *(NSUInteger i) {
-        return [RxObservable just:@(i) scheduler:[RxCurrentThreadScheduler sharedInstance]];
-    }) take:10000] toBlocking] blocking_toArray];
+        return [RxObservable just:@(i) scheduler:[RxCurrentThreadScheduler defaultInstance]];
+    }) take:10000] toBlocking] toArray];
 
     NSMutableArray<NSNumber *> *array = [NSMutableArray arrayWithCapacity:10000];
     for (NSUInteger i = 0; i < 10000; i++) {

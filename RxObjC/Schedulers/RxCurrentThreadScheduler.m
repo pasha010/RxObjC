@@ -74,7 +74,7 @@ RxCurrentThreadSchedulerQueueKey *rx_getCurrentThreadSchedulerQueueKeyInstance()
 
 @implementation RxCurrentThreadScheduler
 
-+ (nonnull instancetype)sharedInstance {
++ (nonnull RxCurrentThreadScheduler *)defaultInstance {
     static dispatch_once_t token;
     static RxCurrentThreadScheduler *instance;
     dispatch_once(&token, ^{

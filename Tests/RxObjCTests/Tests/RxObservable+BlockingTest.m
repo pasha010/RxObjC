@@ -19,16 +19,16 @@
 @implementation RxObservableBlockingTest (ToArray)
 
 - (void)testToArray_empty {
-    XCTAssert([[[[RxObservable empty] toBlocking] blocking_toArray] isEqualToArray:@[]]);
+    XCTAssert([[[[RxObservable empty] toBlocking] toArray] isEqualToArray:@[]]);
 }
 
 - (void)testToArray_return {
-    XCTAssert([[[[RxObservable just:@42] toBlocking] blocking_toArray] isEqualToArray:@[@42]]);
+    XCTAssert([[[[RxObservable just:@42] toBlocking] toArray] isEqualToArray:@[@42]]);
 }
 
 - (void)testToArray_fail {
     rx_tryCatch(^{
-        [[[RxObservable error:[RxTestError testError]] toBlocking] blocking_toArray];
+        [[[RxObservable error:[RxTestError testError]] toBlocking] toArray];
         XCTFail(@"It should fail");
     }, ^(NSError *error) {
         XCTAssert([error isEqual:[RxTestError testError]]);
@@ -36,7 +36,7 @@
 }
 
 - (void)testToArray_someData {
-    BOOL b = [[[[RxObservable of:@[@42, @43, @44, @45]] toBlocking] blocking_toArray] isEqualToArray:@[@42, @43, @44, @45]];
+    BOOL b = [[[[RxObservable of:@[@42, @43, @44, @45]] toBlocking] toArray] isEqualToArray:@[@42, @43, @44, @45]];
     XCTAssert(b);
 }
 
@@ -44,9 +44,9 @@
     __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSArray<NSNumber *> *array = [[[[RxObservable interval:0.001 scheduler:scheduler]
-            take:10] 
+            take:10]
             toBlocking]
-            blocking_toArray];
+            toArray];
     
     NSMutableArray<NSNumber *> *numbers = [NSMutableArray arrayWithCapacity:10];
     for (NSUInteger i = 0; i < 10; i++) {
@@ -63,10 +63,10 @@
             return [[RxObservable of:@[@1, @2]] subscribeOn:scheduler];
         };
 
-        NSArray<NSNumber *> *a = [[operation1() toBlocking] blocking_toArray];
-        NSArray<NSNumber *> *b = [[operation1() toBlocking] blocking_toArray];
-        NSArray<NSNumber *> *c = [[operation1() toBlocking] blocking_toArray];
-        NSArray<NSNumber *> *d = [[operation1() toBlocking] blocking_toArray];
+        NSArray<NSNumber *> *a = [[operation1() toBlocking] toArray];
+        NSArray<NSNumber *> *b = [[operation1() toBlocking] toArray];
+        NSArray<NSNumber *> *c = [[operation1() toBlocking] toArray];
+        NSArray<NSNumber *> *d = [[operation1() toBlocking] toArray];
 
         NSArray<NSNumber *> *n = @[@1, @2];
         XCTAssertEqualObjects(a, n);
@@ -80,16 +80,16 @@
 @implementation RxObservableBlockingTest (First)
 
 - (void)testFirst_empty {
-    XCTAssert([[[RxObservable empty] toBlocking] blocking_first] == nil);
+    XCTAssert([[[RxObservable empty] toBlocking] first] == nil);
 }
 
 - (void)testFirst_return {
-    XCTAssert([[[[RxObservable just:@42] toBlocking] blocking_first] isEqualToNumber:@42]);
+    XCTAssert([[[[RxObservable just:@42] toBlocking] first] isEqualToNumber:@42]);
 }
 
 - (void)testFirst_fail {
     rx_tryCatch(^{
-        [[[RxObservable error:[RxTestError testError]] toBlocking] blocking_first];
+        [[[RxObservable error:[RxTestError testError]] toBlocking] first];
         XCTFail(@"");
     }, ^(NSError *error) {
         XCTAssert([error isEqual:[RxTestError testError]]);
@@ -97,7 +97,7 @@
 }
 
 - (void)testFirst_someData {
-    BOOL b = [[[[RxObservable of:@[@42, @43, @44, @45]] toBlocking] blocking_first] isEqualToNumber:@42];
+    BOOL b = [[[[RxObservable of:@[@42, @43, @44, @45]] toBlocking] first] isEqualToNumber:@42];
     XCTAssert(b);
 }
 
@@ -107,7 +107,7 @@
     NSNumber *v = [[[[RxObservable interval:0.001 scheduler:scheduler]
             take:10]
             toBlocking]
-            blocking_first];
+            first];
 
     XCTAssert([v isEqualToNumber:@0]);
 }
@@ -120,10 +120,10 @@
             return [[RxObservable just:@1] subscribeOn:scheduler];
         };
 
-        NSNumber *a = [[operation1() toBlocking] blocking_first];
-        NSNumber *b = [[operation1() toBlocking] blocking_first];
-        NSNumber *c = [[operation1() toBlocking] blocking_first];
-        NSNumber *d = [[operation1() toBlocking] blocking_first];
+        NSNumber *a = [[operation1() toBlocking] first];
+        NSNumber *b = [[operation1() toBlocking] first];
+        NSNumber *c = [[operation1() toBlocking] first];
+        NSNumber *d = [[operation1() toBlocking] first];
 
         XCTAssertEqualObjects(a, @1);
         XCTAssertEqualObjects(b, @1);
@@ -136,16 +136,16 @@
 @implementation RxObservableBlockingTest (Last)
 
 - (void)testLast_empty {
-    XCTAssert([[[RxObservable empty] toBlocking] blocking_last] == nil);
+    XCTAssert([[[RxObservable empty] toBlocking] last] == nil);
 }
 
 - (void)testLast_return {
-    XCTAssert([[[[RxObservable just:@42] toBlocking] blocking_last] isEqualToNumber:@42]);
+    XCTAssert([[[[RxObservable just:@42] toBlocking] last] isEqualToNumber:@42]);
 }
 
 - (void)testLast_fail {
     rx_tryCatch(^{
-        [[[RxObservable error:[RxTestError testError]] toBlocking] blocking_last];
+        [[[RxObservable error:[RxTestError testError]] toBlocking] last];
         XCTFail(@"");
     }, ^(NSError *error) {
         XCTAssert([error isEqual:[RxTestError testError]]);
@@ -153,7 +153,7 @@
 }
 
 - (void)testLast_someData {
-    BOOL b = [[[[RxObservable of:@[@42, @43, @44, @45]] toBlocking] blocking_last] isEqualToNumber:@45];
+    BOOL b = [[[[RxObservable of:@[@42, @43, @44, @45]] toBlocking] last] isEqualToNumber:@45];
     XCTAssert(b);
 }
 
@@ -163,7 +163,7 @@
     NSNumber *v = [[[[RxObservable interval:0.001 scheduler:scheduler]
             take:10]
             toBlocking]
-            blocking_last];
+            last];
 
     XCTAssert([v isEqualToNumber:@9]);
 }
@@ -176,10 +176,10 @@
             return [[RxObservable just:@1] subscribeOn:scheduler];
         };
 
-        NSNumber *a = [[operation1() toBlocking] blocking_last];
-        NSNumber *b = [[operation1() toBlocking] blocking_last];
-        NSNumber *c = [[operation1() toBlocking] blocking_last];
-        NSNumber *d = [[operation1() toBlocking] blocking_last];
+        NSNumber *a = [[operation1() toBlocking] last];
+        NSNumber *b = [[operation1() toBlocking] last];
+        NSNumber *c = [[operation1() toBlocking] last];
+        NSNumber *d = [[operation1() toBlocking] last];
 
         XCTAssertEqualObjects(a, @1);
         XCTAssertEqualObjects(b, @1);
@@ -193,7 +193,7 @@
 
 - (void)testSingle_empty {
     rx_tryCatch(^{
-        [[[RxObservable empty] toBlocking] blocking_single];
+        [[[RxObservable empty] toBlocking] single];
         XCTFail(@"");
     }, ^(NSError *e) {
         RxError *error = (RxError *)e;
@@ -202,13 +202,13 @@
 }
 
 - (void)testSingle_return {
-    XCTAssert([[[[RxObservable just:@42] toBlocking] blocking_single] isEqualToNumber:@42]);
+    XCTAssert([[[[RxObservable just:@42] toBlocking] single] isEqualToNumber:@42]);
 }
 
 - (void)testSingle_two {
     NSArray *array = @[@42, @43];
     rx_tryCatch(^{
-        [[[RxObservable of:array] toBlocking] blocking_single];
+        [[[RxObservable of:array] toBlocking] single];
     }, ^(NSError *e) {
         RxError *error = (RxError *)e;
         XCTAssert(error.code == [RxError moreThanOneElement].code);
@@ -218,7 +218,7 @@
 - (void)testSingle_someData {
     NSArray *array = @[@42, @43, @44, @45];
     rx_tryCatch(^{
-        [[[RxObservable of:array] toBlocking] blocking_single];
+        [[[RxObservable of:array] toBlocking] single];
         XCTFail(@"");
     }, ^(NSError *e) {
         RxError *error = (RxError *)e;
@@ -228,7 +228,7 @@
 
 - (void)testSingle_fail {
     rx_tryCatch(^{
-       [[[RxObservable error:[RxTestError testError]] toBlocking] blocking_single]; 
+        [[[RxObservable error:[RxTestError testError]] toBlocking] single];
     }, ^(NSError *error) {
         XCTAssert([error isEqual:[RxTestError testError]]);
     });
@@ -240,14 +240,14 @@
     NSNumber *obj = [[[[RxObservable interval:0.001 scheduler:scheduler]
             take:1]
             toBlocking]
-            blocking_single];
+            single];
     
     XCTAssert([obj isEqualToNumber:@0]);
 }
 
 - (void)testSingle_predicate_empty {
     rx_tryCatch(^{
-        [[[RxObservable empty] toBlocking] blocking_single:^BOOL(id o) {
+        [[[RxObservable empty] toBlocking] singleWithPredicate:^BOOL(id o) {
             return YES;
         }];
         XCTFail(@"");
@@ -258,7 +258,7 @@
 }
 
 - (void)testSingle_predicate_return {
-    XCTAssert([[[[RxObservable just:@42] toBlocking] blocking_single:^BOOL(id o) {
+    XCTAssert([[[[RxObservable just:@42] toBlocking] singleWithPredicate:^BOOL(id o) {
         return YES;
     }] isEqualToNumber:@42]);
 }
@@ -267,7 +267,7 @@
     NSMutableArray<NSNumber *> *predicateVals = [NSMutableArray array];
     
     @try {
-        [[[RxObservable of:@[@42, @43, @44, @45]] toBlocking] blocking_single:^BOOL(NSNumber *e) {
+        [[[RxObservable of:@[@42, @43, @44, @45]] toBlocking] singleWithPredicate:^BOOL(NSNumber *e) {
             [predicateVals addObject:e];;
             return [e isEqualToNumber:@44];
         }];
@@ -285,7 +285,7 @@
 
     NSArray *array1 = @[@42, @43, @44, @45];
     rx_tryCatch(^{
-        [[[RxObservable of:array1] toBlocking] blocking_single:^BOOL(NSNumber *element) {
+        [[[RxObservable of:array1] toBlocking] singleWithPredicate:^BOOL(NSNumber *element) {
             [predicateVals addObject:element];
             return element.integerValue >= 43;
         }];
@@ -304,7 +304,7 @@
 
     NSArray *array1 = @[@42, @43, @44, @45];
     rx_tryCatch(^{
-        [[[RxObservable of:array1] toBlocking] blocking_single:^BOOL(NSNumber *element) {
+        [[[RxObservable of:array1] toBlocking] singleWithPredicate:^BOOL(NSNumber *element) {
             [predicateVals addObject:element];
             return element.integerValue > 50;
         }];
@@ -323,7 +323,7 @@
 
     NSArray *array1 = @[@42, @43, @44, @45];
     rx_tryCatch(^{
-        [[[RxObservable of:array1 scheduler:[RxCurrentThreadScheduler sharedInstance]] toBlocking] blocking_single:^BOOL(NSNumber *element) {
+        [[[RxObservable of:array1 scheduler:[RxCurrentThreadScheduler defaultInstance]] toBlocking] singleWithPredicate:^BOOL(NSNumber *element) {
             [predicateVals addObject:element];
             if (element.integerValue < 43) {
                 return NO;
@@ -341,7 +341,7 @@
 
 - (void)testSingle_predicate_fail {
     rx_tryCatch(^{
-        [[[RxObservable error:[RxTestError testError]] toBlocking] blocking_single:^BOOL(id o) {
+        [[[RxObservable error:[RxTestError testError]] toBlocking] singleWithPredicate:^BOOL(id o) {
             return YES;
         }];
         XCTFail(@"");
@@ -354,9 +354,9 @@
     __auto_type scheduler = [[RxConcurrentDispatchQueueScheduler alloc] initWithGlobalConcurrentQueueQOSClass:QOS_CLASS_DEFAULT];
 
     NSNumber *obj = [[[[RxObservable interval:0.001 scheduler:scheduler]
-            take:4] 
-            toBlocking] 
-            blocking_single:^BOOL(NSNumber *n) {
+            take:4]
+            toBlocking]
+            singleWithPredicate:^BOOL(NSNumber *n) {
                 return n.integerValue == 3;
             }];
     XCTAssert(obj.integerValue == 3);
@@ -370,10 +370,10 @@
             return [[RxObservable just:@1] subscribeOn:scheduler];
         };
 
-        NSNumber *a = [[operation1() toBlocking] blocking_single];
-        NSNumber *b = [[operation1() toBlocking] blocking_single];
-        NSNumber *c = [[operation1() toBlocking] blocking_single];
-        NSNumber *d = [[operation1() toBlocking] blocking_single];
+        NSNumber *a = [[operation1() toBlocking] single];
+        NSNumber *b = [[operation1() toBlocking] single];
+        NSNumber *c = [[operation1() toBlocking] single];
+        NSNumber *d = [[operation1() toBlocking] single];
 
         XCTAssertEqualObjects(a, @1);
         XCTAssertEqualObjects(b, @1);

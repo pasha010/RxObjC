@@ -162,7 +162,7 @@ NSInteger const RxObjCInvalidPropertyNameError = 124;
 @implementation RxObservable (FinishWhenDealloc)
 
 - (nonnull RxObservable *)finishWithNilWhenDealloc:(nonnull NSObject *)target {
-    return [[[target.rx_deallocating
+    return [[[target.rx_deallocated
             map:^id(id __unused _) {
                 return [RxObservable just:nil];
             }]

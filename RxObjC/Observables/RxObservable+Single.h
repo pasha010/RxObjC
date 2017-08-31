@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns an observable sequence that contains only distinct contiguous elements according to equality operator.
  * @see [distinct operator on reactivex.io](http://reactivex.io/documentation/operators/distinct.html)
- * @return: An observable sequence only containing the distinct contiguous elements, based on equality operator, from the source sequence.
+ * @return An observable sequence only containing the distinct contiguous elements, based on equality operator, from the source sequence.
  */
 - (nonnull RxObservable<E> *)distinctUntilChanged;
 
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @see [distinct operator on reactivex.io](http://reactivex.io/documentation/operators/distinct.html)
  * @param keySelector: A function to compute the comparison key for each element.
- * @return: An observable sequence only containing the distinct contiguous elements, based on a computed key value, from the source sequence.
+ * @return An observable sequence only containing the distinct contiguous elements, based on a computed key value, from the source sequence.
  */
 - (nonnull RxObservable<E> *)distinctUntilChangedWithKeySelector:(id(^)(E))keySelector;
 
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns an observable sequence that contains only distinct contiguous elements according to the `comparer`.
  * @see [distinct operator on reactivex.io](http://reactivex.io/documentation/operators/distinct.html)
  * @param comparer: Equality comparer for computed key values.
- * @return: An observable sequence only containing the distinct contiguous elements, based on `comparer`, from the source sequence.
+ * @return An observable sequence only containing the distinct contiguous elements, based on `comparer`, from the source sequence.
  */
 - (nonnull RxObservable<E> *)distinctUntilChangedWithComparer:(BOOL(^)(E lhs, E rhs))comparer;
 
@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @see [distinct operator on reactivex.io](http://reactivex.io/documentation/operators/distinct.html)
  * @param keySelector: A function to compute the comparison key for each element.
  * @param comparer: Equality comparer for computed key values.
- * @return: An observable sequence only containing the distinct contiguous elements, based on a computed key value and the comparer, from the source sequence.
+ * @return An observable sequence only containing the distinct contiguous elements, based on a computed key value and the comparer, from the source sequence.
  */
 - (nonnull RxObservable<E> *)distinctUntilChanged:(id(^)(E))keySelector comparer:(BOOL(^)(E lhs, E rhs))comparer;
 
@@ -53,41 +53,41 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Invokes an action for each event in the observable sequence, and propagates all observer messages through the result sequence.
  * @see [do operator on reactivex.io](http://reactivex.io/documentation/operators/do.html)
- * @param eventHandler: Action to invoke for each event in the observable sequence.
- * @return: The source sequence with the side-effecting behavior applied.
+ * @param eventHandler Action to invoke for each event in the observable sequence.
+ * @return The source sequence with the side-effecting behavior applied.
  */
-- (nonnull RxObservable<E> *)doOn:(void(^)(RxEvent<E> *))eventHandler;
+- (nonnull RxObservable<E> *)doOn:(void(^_Nonnull)(RxEvent<E> *))eventHandler;
 
 /**
  * Invokes an action for each event in the observable sequence, and propagates all observer messages through the result sequence.
  * @see [do operator on reactivex.io](http://reactivex.io/documentation/operators/do.html)
- * @param onNext: Action to invoke for each element in the observable sequence.
- * @param onError: Action to invoke upon errored termination of the observable sequence.
- * @param onCompleted: Action to invoke upon graceful termination of the observable sequence.
- * @return: The source sequence with the side-effecting behavior applied.
+ * @param onNext Action to invoke for each element in the observable sequence.
+ * @param onError Action to invoke upon errored termination of the observable sequence.
+ * @param onCompleted Action to invoke upon graceful termination of the observable sequence.
+ * @return The source sequence with the side-effecting behavior applied.
  */
-- (nonnull RxObservable<E> *)doOn:(nullable void(^)(E value))onNext onError:(nullable void(^)(NSError *))onError onCompleted:(nullable void(^)())onCompleted;
+- (nonnull RxObservable<E> *)doOnNext:(void (^_Nullable)(E value))onNext onError:(void (^_Nullable)(NSError *))onError onCompleted:(void(^_Nullable)())onCompleted;
 
 /**
  * Invokes an action for each Next event in the observable sequence, and propagates all observer messages through the result sequence.
- * @param onNext: Action to invoke for each element in the observable sequence.
- * @return: The source sequence with the side-effecting behavior applied.
+ * @param onNext Action to invoke for each element in the observable sequence.
+ * @return The source sequence with the side-effecting behavior applied.
  */
-- (nonnull RxObservable<E> *)doOnNext:(void(^)(E value))onNext;
+- (nonnull RxObservable<E> *)doOnNext:(void(^_Nonnull)(E value))onNext;
 
 /**
  * Invokes an action for the Error event in the observable sequence, and propagates all observer messages through the result sequence.
- * @param onError: Action to invoke upon errored termination of the observable sequence.
- * @return: The source sequence with the side-effecting behavior applied.
+ * @param onError Action to invoke upon errored termination of the observable sequence.
+ * @return The source sequence with the side-effecting behavior applied.
  */
-- (nonnull RxObservable<E> *)doOnError:(void(^)(NSError *))onError;
+- (nonnull RxObservable<E> *)doOnError:(void(^_Nonnull)(NSError *))onError;
 
 /**
  * Invokes an action for the Completed event in the observable sequence, and propagates all observer messages through the result sequence.
- * @param onCompleted: Action to invoke upon graceful termination of the observable sequence.
- * @return: The source sequence with the side-effecting behavior applied.
+ * @param onCompleted Action to invoke upon graceful termination of the observable sequence.
+ * @return The source sequence with the side-effecting behavior applied.
  */
-- (nonnull RxObservable<E> *)doOnCompleted:(void(^)())onCompleted;
+- (nonnull RxObservable<E> *)doOnCompleted:(void(^_Nonnull)())onCompleted;
 
 @end
 
@@ -95,8 +95,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Prepends a sequence of values to an observable sequence.
  * @see [startWith operator on reactivex.io](http://reactivex.io/documentation/operators/startwith.html)
- * @param elements: Elements to prepend to the specified sequence.
- * @return: The source sequence prepended with the specified values.
+ * @param elements Elements to prepend to the specified sequence.
+ * @return The source sequence prepended with the specified values.
  */
 - (nonnull RxObservable<E> *)startWithElements:(nonnull NSArray<E> *)elements;
 
@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Repeats the source observable sequence until it successfully terminates.
  * **This could potentially create an infinite sequence.**
  * @see [retry operator on reactivex.io](http://reactivex.io/documentation/operators/retry.html)
- * @return: Observable sequence to repeat until it successfully terminates.
+ * @return Observable sequence to repeat until it successfully terminates.
  */
 - (nonnull RxObservable<E> *)retry;
 
@@ -118,8 +118,8 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * If you encounter an error and want it to retry once, then you must use `retry(2)`
  * @see [retry operator on reactivex.io](http://reactivex.io/documentation/operators/retry.html)
- * @param maxAttemptCount: Maximum number of times to repeat the sequence.
- * @return: An observable sequence producing the elements of the given sequence repeatedly until it terminates successfully.
+ * @param maxAttemptCount Maximum number of times to repeat the sequence.
+ * @return An observable sequence producing the elements of the given sequence repeatedly until it terminates successfully.
  */
 - (nonnull RxObservable<E> *)retry:(NSUInteger)maxAttemptCount;
 
@@ -127,12 +127,12 @@ NS_ASSUME_NONNULL_BEGIN
  * Repeats the source observable sequence on error when the notifier emits a next value.
  * If the source observable errors and the notifier completes, it will complete the source sequence.
  * @see [retry operator on reactivex.io](http://reactivex.io/documentation/operators/retry.html)
- * @param notificationHandler: A handler that is passed an observable sequence of errors raised by the source observable and returns and observable that either continues, completes or errors. This behavior is then applied to the source observable.
- * @return: An observable sequence producing the elements of the given sequence repeatedly until it terminates successfully or is notified to error or complete.
+ * @param notificationHandler A handler that is passed an observable sequence of errors raised by the source observable and returns and observable that either continues, completes or errors. This behavior is then applied to the source observable.
+ * @return An observable sequence producing the elements of the given sequence repeatedly until it terminates successfully or is notified to error or complete.
  */
-- (nonnull RxObservable<E> *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler;
+- (nonnull RxObservable<E> *)retryWhen:(id <RxObservableType>(^ _Nonnull)(RxObservable<__kindof NSError *> *_Nonnull))notificationHandler;
 
-- (nonnull RxObservable<E> *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler
+- (nonnull RxObservable<E> *)retryWhen:(id <RxObservableType>(^ _Nonnull)(RxObservable<__kindof NSError *> *_Nonnull))notificationHandler
                       customErrorClass:(nullable Class)errorClass;
 
 @end
@@ -143,9 +143,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * For aggregation behavior with no intermediate results, see `reduce`.
  * @see [scan operator on reactivex.io](http://reactivex.io/documentation/operators/scan.html)
- * @param seed: The initial accumulator value.
- * @param accumulator: An accumulator function to be invoked on each element.
- * @return: An observable sequence containing the accumulated values.
+ * @param seed The initial accumulator value.
+ * @param accumulator An accumulator function to be invoked on each element.
+ * @return An observable sequence containing the accumulated values.
  */
 - (nonnull RxObservable<id> *)scan:(nonnull id)seed accumulator:(nonnull id __nonnull(^)(id __nonnull accumulate, E __nonnull element))accumulator;
 

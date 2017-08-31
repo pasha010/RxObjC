@@ -11,7 +11,7 @@
 
 @implementation RxBlockingObservable (ToArray)
 
-- (nonnull NSArray *)blocking_toArray {
+- (nonnull NSArray *)toArray {
     NSMutableArray *elements = [NSMutableArray array];
     __block NSError *error = nil;
 
@@ -62,7 +62,7 @@
 
 @implementation RxBlockingObservable (First)
 
-- (nullable id)blocking_first {
+- (nullable id)first {
     __block id element = nil;
     __block NSError *error = nil;
 
@@ -113,7 +113,7 @@
 
 @implementation RxBlockingObservable (Last)
 
-- (nullable id)blocking_last {
+- (nullable id)last {
     __block id element = nil;
     __block NSError *error = nil;
 
@@ -164,13 +164,13 @@
 
 @implementation RxBlockingObservable (Single)
 
-- (nullable id)blocking_single {
-    return [self blocking_single:^BOOL(id o) {
+- (nullable id)single {
+    return [self singleWithPredicate:^BOOL(id o) {
         return YES;
     }];
 }
 
-- (nullable id)blocking_single:(nonnull BOOL(^)(id __nullable))predicate {
+- (nullable id)singleWithPredicate:(BOOL(^_Nonnull)(id __nullable))predicate {
     __block id element = nil;
     __block NSError *error = nil;
 

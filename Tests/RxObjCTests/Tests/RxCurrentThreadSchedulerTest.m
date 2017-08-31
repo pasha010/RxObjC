@@ -17,27 +17,27 @@
 @implementation RxCurrentThreadSchedulerTest
 
 - (void)testCurrentThreadScheduler_scheduleRequired {
-    XCTAssertTrue([RxCurrentThreadScheduler sharedInstance].isScheduleRequired);
+    XCTAssertTrue([RxCurrentThreadScheduler defaultInstance].isScheduleRequired);
     
     __block BOOL executed = NO;
-    [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull s) {
+    [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull s) {
         executed = YES;
-        XCTAssertTrue(![RxCurrentThreadScheduler sharedInstance].isScheduleRequired);
+        XCTAssertTrue(![RxCurrentThreadScheduler defaultInstance].isScheduleRequired);
         return [RxNopDisposable sharedInstance];
     }];
     XCTAssertTrue(executed);
 }
 
 - (void)testCurrentThreadScheduler_basicScenario {
-    XCTAssertTrue([RxCurrentThreadScheduler sharedInstance].isScheduleRequired);
+    XCTAssertTrue([RxCurrentThreadScheduler defaultInstance].isScheduleRequired);
     
     __block NSMutableArray<NSNumber *> *messages = [NSMutableArray array];
     
-    [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull s) {
+    [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull s) {
         [messages addObject:@1];
-        [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull _s) {
+        [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull _s) {
             [messages addObject:@3];
-            [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull __s) {
+            [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull __s) {
                 [messages addObject:@5];
                 return [RxNopDisposable sharedInstance];
             }];
@@ -53,15 +53,15 @@
 }
 
 - (void)testCurrentThreadScheduler_disposing1 {
-    XCTAssertTrue([RxCurrentThreadScheduler sharedInstance].isScheduleRequired);
+    XCTAssertTrue([RxCurrentThreadScheduler defaultInstance].isScheduleRequired);
     
     __block NSMutableArray<NSNumber *> *messages = [NSMutableArray array];
     
-    [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull s) {
+    [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull s) {
         [messages addObject:@1];
-        id <RxDisposable> disposable3 = [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull _s) {
+        id <RxDisposable> disposable3 = [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull _s) {
             [messages addObject:@3];
-            id <RxDisposable> disposable5 = [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull __s) {
+            id <RxDisposable> disposable5 = [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull __s) {
                 [messages addObject:@5];
                 return [RxNopDisposable sharedInstance];
             }];
@@ -78,14 +78,14 @@
 }
 
 - (void)testCurrentThreadScheduler_disposing2 {
-    XCTAssertTrue([RxCurrentThreadScheduler sharedInstance].isScheduleRequired);
+    XCTAssertTrue([RxCurrentThreadScheduler defaultInstance].isScheduleRequired);
 
     __block NSMutableArray<NSNumber *> *messages = [NSMutableArray array];
-    [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull s) {
+    [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull s) {
         [messages addObject:@1];
-        id <RxDisposable> disposable3 = [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull __s) {
+        id <RxDisposable> disposable3 = [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull __s) {
             [messages addObject:@3];
-            id <RxDisposable> disposable5 = [[RxCurrentThreadScheduler sharedInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull __s) {
+            id <RxDisposable> disposable5 = [[RxCurrentThreadScheduler defaultInstance] schedule:nil action:^id<RxDisposable> _Nonnull(RxStateType _Nonnull __s) {
                 [messages addObject:@5];
                 return [RxNopDisposable sharedInstance];
             }];

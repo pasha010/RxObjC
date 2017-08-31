@@ -82,7 +82,7 @@
 }
 
 - (void)testJust_DefaultScheduler {
-    NSArray<NSNumber *> *res = [[[RxObservable just:@42 scheduler:[RxMainScheduler sharedInstance]] toBlocking] blocking_toArray];
+    NSArray<NSNumber *> *res = [[[RxObservable just:@42 scheduler:[RxMainScheduler instance]] toBlocking] toArray];
     XCTAssert([res isEqualToArray:@[@42]]);
 }
 

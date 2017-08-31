@@ -101,7 +101,7 @@
 + (nonnull RxObservable *)generate:(nonnull id)initialState
                          condition:(BOOL(^)(id))condition
                            iterate:(id(^)(id))iterate {
-    return [self generate:initialState condition:condition scheduler:[RxCurrentThreadScheduler sharedInstance] iterate:iterate];
+    return [self generate:initialState condition:condition scheduler:[RxCurrentThreadScheduler defaultInstance] iterate:iterate];
 }
 
 + (nonnull RxObservable *)repeatElement:(nonnull id)element
@@ -110,7 +110,7 @@
 }
 
 + (nonnull RxObservable *)repeatElement:(nonnull id)element {
-    return [self repeatElement:element scheduler:[RxCurrentThreadScheduler sharedInstance]];
+    return [self repeatElement:element scheduler:[RxCurrentThreadScheduler defaultInstance]];
 }
 
 + (nonnull RxObservable<id> *)using:(id <RxDisposable>(^)())resourceFactory
@@ -130,7 +130,7 @@
 
 + (nonnull RxObservable<NSNumber *> *)range:(NSInteger)start
                                       count:(NSUInteger)count {
-    return [self range:start count:count scheduler:[RxCurrentThreadScheduler sharedInstance]];
+    return [self range:start count:count scheduler:[RxCurrentThreadScheduler defaultInstance]];
 }
 @end
 

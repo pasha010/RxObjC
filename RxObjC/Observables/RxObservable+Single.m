@@ -49,7 +49,7 @@
     return [[RxDo alloc] initWithSource:[self asObservable] eventHandler:eventHandler];
 }
 
-- (nonnull RxObservable<id> *)doOn:(nullable void (^)(id value))onNext onError:(nullable void (^)(NSError *))onError onCompleted:(nullable void (^)())onCompleted {
+- (nonnull RxObservable<id> *)doOnNext:(nullable void (^)(id value))onNext onError:(nullable void (^)(NSError *))onError onCompleted:(nullable void (^)())onCompleted {
     return [self doOn:^(RxEvent *event) {
         switch (event.type) {
             case RxEventTypeNext: {
@@ -75,15 +75,15 @@
 }
 
 - (nonnull RxObservable<id> *)doOnNext:(void (^)(id value))onNext {
-    return [self doOn:onNext onError:nil onCompleted:nil];
+    return [self doOnNext:onNext onError:nil onCompleted:nil];
 }
 
 - (nonnull RxObservable<id> *)doOnError:(void (^)(NSError *))onError {
-    return [self doOn:nil onError:onError onCompleted:nil];
+    return [self doOnNext:nil onError:onError onCompleted:nil];
 }
 
 - (nonnull RxObservable<id> *)doOnCompleted:(void (^)())onCompleted {
-    return [self doOn:nil onError:nil onCompleted:onCompleted];
+    return [self doOnNext:nil onError:nil onCompleted:onCompleted];
 }
 
 @end
@@ -117,11 +117,11 @@
     return [[RxCatchSequence alloc] initWithSources:[array objectEnumerator]];
 }
 
-- (nonnull RxObservable<id> *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler {
+- (nonnull RxObservable<id> *)retryWhen:(id <RxObservableType>(^ _Nonnull)(RxObservable<__kindof NSError *> *_Nonnull))notificationHandler {
     return [self retryWhen:notificationHandler customErrorClass:nil];
 }
 
-- (nonnull RxObservable<id> *)retryWhen:(nonnull id <RxObservableType>(^)(RxObservable<__kindof NSError *> *))notificationHandler
+- (nonnull RxObservable<id> *)retryWhen:(id <RxObservableType>(^ _Nonnull)(RxObservable<__kindof NSError *> *_Nonnull))notificationHandler
                        customErrorClass:(nullable Class)errorClass {
     return [[RxRetryWhenSequence alloc] initWithSources:[[RxInfiniteSequence alloc] initWithRepeatedValue:[self asObservable]]
                                     notificationHandler:notificationHandler

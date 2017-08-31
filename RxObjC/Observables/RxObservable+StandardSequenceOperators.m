@@ -23,7 +23,7 @@
 
 @implementation RxObservable (Filter)
 
-- (nonnull RxObservable *)filter:(nonnull BOOL(^)(id __nonnull))predicate {
+- (nonnull RxObservable *)filter:(BOOL(^_Nonnull)(id _Nonnull))predicate {
     return [[RxFilter alloc] initWithSource:[self asObservable] predicate:predicate];
 }
 
@@ -82,23 +82,23 @@
 
 @implementation RxObservable (Map)
 
-- (nonnull RxObservable *)map:(RxMapSelector)mapSelector {
-    return [[self asObservable] _composeMap:mapSelector];
+- (nonnull RxObservable *)map:(nonnull RxMapSelector)transform {
+    return [[self asObservable] _composeMap:transform];
 }
 
-- (nonnull RxObservable *)mapWithIndex:(RxMapWithIndexSelector)mapSelector {
-    return [[RxMapWithIndex alloc] initWithSource:[self asObservable] selector:mapSelector];
+- (nonnull RxObservable *)mapWithIndex:(nonnull RxMapWithIndexSelector)transform {
+    return [[RxMapWithIndex alloc] initWithSource:[self asObservable] selector:transform];
 }
 
 @end
 
 @implementation RxObservable (FlatMap)
 
-- (nonnull RxObservable *)flatMap:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element))selector {
+- (nonnull RxObservable *)flatMap:(id <RxObservableConvertibleType>(^_Nonnull)(id _Nonnull element))selector {
     return [[RxFlatMap alloc] initWithSource:[self asObservable] selector:selector];
 }
 
-- (nonnull RxObservable *)flatMapWithIndex:(nonnull id <RxObservableConvertibleType>(^)(id __nonnull element, NSUInteger index))selector {
+- (nonnull RxObservable *)flatMapWithIndex:(id <RxObservableConvertibleType>(^_Nonnull)(id _Nonnull element, NSUInteger index))selector {
     return [[RxFlatMapWithIndex alloc] initWithSource:[self asObservable] selector:selector];
 }
 

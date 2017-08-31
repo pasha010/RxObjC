@@ -9,40 +9,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RxError : NSError
 
-/**
-Unknown error occured.
-*/
-+ (nonnull instancetype)unknown;
+//! Unknown error occured.
+@property (class, nonnull, nonatomic, readonly) RxError *unknown;
 
-/**
-Performing an action on disposed object.
-*/
+//! Arifmetic overflow error.
+@property (class, nonnull, nonatomic, readonly) RxError *overflow;
+
+//! Argument out of range error.
+@property (class, nonnull, nonatomic, readonly) RxError *argumentOutOfRange;
+
+//! Sequence doesn't contain any elements.
+@property (class, nonnull, nonatomic, readonly) RxError *noElements;
+
+//! Sequence contains more than one element.
+@property (class, nonnull, nonatomic, readonly) RxError *moreThanOneElement;
+
+//! Timeout error.
+@property (class, nonnull, nonatomic, readonly) RxError *timeout;
+
+//! Performing an action on disposed object.
 + (nonnull instancetype)disposedObject:(nonnull id)object;
-
-/**
-Aritmetic overflow error.
-*/
-+ (nonnull instancetype)overflow;
-
-/**
-Argument out of range error.
-*/
-+ (nonnull instancetype)argumentOutOfRange;
-
-/**
-Sequence doesn't contain any elements.
-*/
-+ (nonnull instancetype)noElements;
-
-/**
-Sequence contains more than one element.
-*/
-+ (nonnull instancetype)moreThanOneElement;
-
-/**
- Timeout error.
- */
-+ (nonnull instancetype)timeout;
 
 @end
 

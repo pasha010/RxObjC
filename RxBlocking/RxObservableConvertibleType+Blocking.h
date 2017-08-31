@@ -22,4 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface RxPrimitiveSequence<__covariant Element> (Blocking)
+/**
+ * Converts an Observable into a `BlockingObservable` (an Observable with blocking operators).
+ * @return `BlockingObservable` version of `self`
+ */
+- (nonnull RxBlockingObservable<Element> *)toBlocking;
+
+@end
+
 NS_ASSUME_NONNULL_END

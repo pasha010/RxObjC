@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Filters the elements of an observable sequence based on a predicate.
  * @see [filter operator on reactivex.io](http://reactivex.io/documentation/operators/filter.html)
  * @param predicate: A function to test each source element for a condition.
- * @return: An observable sequence that contains elements from the input sequence that satisfy the condition.
+ * @return An observable sequence that contains elements from the input sequence that satisfy the condition.
  */
-- (nonnull RxObservable<E> *)filter:(nonnull BOOL(^)(E __nonnull element))predicate;
+- (nonnull RxObservable<E> *)filter:(BOOL(^_Nonnull)(E _Nonnull))predicate;
 
 @end
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns elements from an observable sequence as long as a specified condition is true.
  * @see [takeWhile operator on reactivex.io](http://reactivex.io/documentation/operators/takewhile.html)
  * @param predicate: A function to test each element for a condition.
- * @return: An observable sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.
+ * @return An observable sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.
  */
 - (nonnull RxObservable<E> *)takeWhile:(nonnull BOOL(^)(E __nonnull element))predicate;
 
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The element's index is used in the logic of the predicate function.
  * @see [takeWhile operator on reactivex.io](http://reactivex.io/documentation/operators/takewhile.html)
  * @param predicate: A function to test each element for a condition; the second parameter of the function represents the index of the source element.
- * @return: An observable sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.
+ * @return An observable sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.
  */
 - (nonnull RxObservable<E> *)takeWhileWithIndex:(nonnull BOOL(^)(E __nonnull element, NSUInteger index))predicate;
 
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns a specified number of contiguous elements from the start of an observable sequence.
  * @see [take operator on reactivex.io](http://reactivex.io/documentation/operators/take.html)
  * @param count: The number of elements to return.
- * @return: An observable sequence that contains the specified number of elements from the start of the input sequence.
+ * @return An observable sequence that contains the specified number of elements from the start of the input sequence.
  */
 - (nonnull RxObservable<E> *)take:(NSUInteger)count;
 
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
  * This operator accumulates a buffer with a length enough to store elements count elements. Upon completion of the source sequence, this buffer is drained on the result sequence. This causes the elements to be delayed.
  * @see [takeLast operator on reactivex.io](http://reactivex.io/documentation/operators/takelast.html)
  * @param count: Number of elements to take from the end of the source sequence.
- * @return: An observable sequence containing the specified number of elements from the end of the source sequence.
+ * @return An observable sequence containing the specified number of elements from the end of the source sequence.
  */
 - (nonnull RxObservable<E> *)takeLast:(NSUInteger)count;
 
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Bypasses a specified number of elements in an observable sequence and then returns the remaining elements.
  * @see [skip operator on reactivex.io](http://reactivex.io/documentation/operators/skip.html)
  * @param count: The number of elements to skip before returning the remaining elements.
- * @return: An observable sequence that contains the elements that occur after the specified index in the input sequence.
+ * @return An observable sequence that contains the elements that occur after the specified index in the input sequence.
  */
 - (nonnull RxObservable<E> *)skip:(NSUInteger)count;
 
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Bypasses elements in an observable sequence as long as a specified condition is true and then returns the remaining elements.
  * @see [skipWhile operator on reactivex.io](http://reactivex.io/documentation/operators/skipwhile.html)
  * @param predicate: A function to test each element for a condition.
- * @return: An observable sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by predicate.
+ * @return An observable sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by predicate.
  */
 - (nonnull RxObservable<E> *)skipWhile:(nonnull BOOL(^)(E __nonnull element))predicate;
 
@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The element's index is used in the logic of the predicate function.
  * @see [skipWhile operator on reactivex.io](http://reactivex.io/documentation/operators/skipwhile.html)
  * @param predicate: A function to test each element for a condition; the second parameter of the function represents the index of the source element.
- * @return: An observable sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by predicate.
+ * @return An observable sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by predicate.
  */
 - (nonnull RxObservable<E> *)skipWhileWithIndex:(nonnull BOOL(^)(E __nonnull element, NSUInteger index))predicate;
 
@@ -102,18 +102,18 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Projects each element of an observable sequence into a new form.
  * @see [map operator on reactivex.io](http://reactivex.io/documentation/operators/map.html)
- * @param mapSelector: A transform function to apply to each source element.
- * @return: An observable sequence whose elements are the result of invoking the transform function on each element of source.
+ * @param transform A transform function to apply to each source element.
+ * @return An observable sequence whose elements are the result of invoking the transform function on each element of source.
  */
-- (nonnull RxObservable<id> *)map:(nonnull id(^)(E __nonnull element))mapSelector;
+- (nonnull RxObservable<id> *)map:(nonnull RxMapSelector)transform;
 
 /**
  * Projects each element of an observable sequence into a new form by incorporating the element's index.
  * @see [map operator on reactivex.io](http://reactivex.io/documentation/operators/map.html)
- * @param mapSelector: A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
- * @return: An observable sequence whose elements are the result of invoking the transform function on each element of source.
+ * @param transform A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
+ * @return An observable sequence whose elements are the result of invoking the transform function on each element of source.
  */
-- (nonnull RxObservable<id> *)mapWithIndex:(nonnull id(^)(E __nonnull element, NSInteger index))mapSelector;
+- (nonnull RxObservable<id> *)mapWithIndex:(nonnull RxMapWithIndexSelector)transform;
 
 @end
 
@@ -121,18 +121,18 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Projects each element of an observable sequence to an observable sequence and merges the resulting observable sequences into one observable sequence.
  * @see [flatMap operator on reactivex.io](http://reactivex.io/documentation/operators/flatmap.html)
- * @param selector: A transform function to apply to each element.
- * @return: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.
+ * @param selector A transform function to apply to each element.
+ * @return An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.
  */
-- (nonnull RxObservable<id> *)flatMap:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element))selector;
+- (nonnull RxObservable<id> *)flatMap:(id <RxObservableConvertibleType>(^_Nonnull)(E _Nonnull element))selector;
 
 /**
  * Projects each element of an observable sequence to an observable sequence by incorporating the element's index and merges the resulting observable sequences into one observable sequence.
  * @see [flatMap operator on reactivex.io](http://reactivex.io/documentation/operators/flatmap.html)
- * @param selector: A transform function to apply to each element; the second parameter of the function represents the index of the source element.
- * @return: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.
+ * @param selector A transform function to apply to each element; the second parameter of the function represents the index of the source element.
+ * @return An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.
  */
-- (nonnull RxObservable<id> *)flatMapWithIndex:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element, NSUInteger index))selector;
+- (nonnull RxObservable<id> *)flatMapWithIndex:(id <RxObservableConvertibleType>(^_Nonnull)(E _Nonnull element, NSUInteger index))selector;
 
 @end
 
@@ -142,7 +142,7 @@ NS_ASSUME_NONNULL_BEGIN
  * If element is received while there is some projected observable sequence being merged it will simply be ignored.
  * @see [flatMapFirst operator on reactivex.io](http://reactivex.io/documentation/operators/flatmap.html)
  * @param selector: A transform function to apply to element that was observed while no observable is executing in parallel.
- * @return: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence that was received while no other sequence was being calculated.
+ * @return An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence that was received while no other sequence was being calculated.
  */
 - (nonnull RxObservable<id> *)flatMapFirst:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element))selector;
 
@@ -155,7 +155,7 @@ NS_ASSUME_NONNULL_BEGIN
  * It is a combination of `map` + `switchLatest` operator
  * @see [flatMapLatest operator on reactivex.io](http://reactivex.io/documentation/operators/flatmap.html)
  * @param selector: A transform function to apply to each element.
- * @return: An observable sequence whose elements are the result of invoking the transform function on each element of source producing an
+ * @return An observable sequence whose elements are the result of invoking the transform function on each element of source producing an
             Observable of Observable sequences and that at any point in time produces the elements of the most recent inner observable sequence that has been received.
  */
 - (nonnull RxObservable<id> *)flatMapLatest:(nonnull id <RxObservableConvertibleType>(^)(E __nonnull element))selector;
@@ -167,7 +167,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns a sequence emitting only item _n_ emitted by an Observable
  * @see [elementAt operator on reactivex.io](http://reactivex.io/documentation/operators/elementat.html)
  * @param index: The index of the required item (starting from 0).
- * @return: An observable sequence that emits the desired item as its own sole emission.
+ * @return An observable sequence that emits the desired item as its own sole emission.
  */
 - (nonnull RxObservable<E> *)elementAt:(NSUInteger)index;
 
@@ -178,7 +178,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The single operator is similar to first, but throws a `RxError.NoElements` or `RxError.MoreThanOneElement`
  * if the source Observable does not emit exactly one item before successfully completing.
  * @see [single operator on reactivex.io](http://reactivex.io/documentation/operators/first.html)
- * @return: An observable sequence that emits a single item or throws an exception if more (or none) of them are emitted.
+ * @return An observable sequence that emits a single item or throws an exception if more (or none) of them are emitted.
  */
 - (nonnull RxObservable<E> *)single;
 
@@ -187,7 +187,7 @@ NS_ASSUME_NONNULL_BEGIN
  * if the source Observable does not emit exactly one item before successfully completing.
  * @see [single operator on reactivex.io](http://reactivex.io/documentation/operators/first.html)
  * @param predicate: A function to test each source element for a condition.
- * @return: An observable sequence that emits a single item or throws an exception if more (or none) of them are emitted.
+ * @return An observable sequence that emits a single item or throws an exception if more (or none) of them are emitted.
  */
 - (nonnull RxObservable<E> *)single:(nonnull BOOL(^)(E __nonnull element))predicate;
 

@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param element - Single element in the resulting observable sequence.
  * @return: An observable sequence containing the single specified element.
  */
-+ (nonnull RxObservable<E> *)just:(nullable E)element;
++ (nonnull instancetype)just:(nullable E)element;
 
 /**
  * Returns an observable sequence that contains a single element.
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param scheduler - Scheduler to send the single element on.
  * @return: An observable sequence containing the single specified element.
  */
-+ (nonnull RxObservable<E> *)just:(nullable E)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
++ (nonnull instancetype)just:(nullable E)element scheduler:(nonnull id <RxImmediateSchedulerType>)scheduler;
 
 @end
 
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param error - error for providing
  * @return: The observable sequence that terminates with specified error.
  */
-+ (nonnull RxObservable<E> *)error:(nonnull NSError *)error;
++ (nonnull instancetype)error:(nonnull NSError *)error;
 @end
 
 @interface RxObservable<E> (Of)

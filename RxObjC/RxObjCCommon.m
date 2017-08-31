@@ -17,7 +17,15 @@ id rx_abstractMethod() {
 }
 
 void rx_fatalError(NSString *message) {
-    assert(NO && [message cStringUsingEncoding:NSUTF8StringEncoding]);
+#if DEBUG == 1
+    [NSAssertionHandler.currentHandler handleFailureInFunction:@"rx_fatalError"
+                                                          file:@""
+                                                    lineNumber:0
+                                                   description:message, nil];
+#else
+    NSLog(message, nil);
+#endif
+
 }
 
 NSInteger rx_incrementChecked(NSInteger *i) {

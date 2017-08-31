@@ -47,10 +47,8 @@
         _source = source;
         _eventHandler = eventHandler;
     }
-
     return self;
 }
-
 
 - (nonnull id <RxDisposable>)run:(nonnull id <RxObserverType>)observer {
     RxDoSink *sink = [[RxDoSink alloc] initWithParent:self observer:observer];
