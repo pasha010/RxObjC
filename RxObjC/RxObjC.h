@@ -19,6 +19,7 @@ FOUNDATION_EXPORT double RxObjCVersionNumber;
 FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 
 #pragma mark - Concurrency
+
 #import "RxAsyncLock.h"
 #import "RxLock.h"
 #import "RxLockOwnerType.h"
@@ -27,6 +28,7 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxSynchronizedUnsubscribeType.h"
 
 #pragma mark - DataStructures
+
 #import "RxBag.h"
 #import "RxInfiniteSequence.h"
 #import "RxPriorityQueue.h"
@@ -34,6 +36,7 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxTuple.h"
 
 #pragma mark - Disposables
+
 #import "RxAnonymousDisposable.h"
 #import "RxBinaryDisposable.h"
 #import "RxBooleanDisposable.h"
@@ -49,6 +52,7 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxSubscriptionDisposable.h"
 
 #pragma mark - Observables operations
+
 #import "RxObservable+Aggregate.h"
 #import "RxObservable+Binding.h"
 #import "RxObservable+CombineLatest.h"
@@ -63,12 +67,14 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxObservableBlockTypedef.h"
 
 #pragma mark - Observers
+
 #import "RxAnonymousObserver.h"
 #import "RxObserverBase.h"
 #import "RxTailRecursiveSink.h"
 #import "NSThread+RxLocalStorageValue.h"
 
 #pragma mark - Common
+
 #import "RxAnyObserver.h"
 #import "RxCancelable.h"
 #import "RxConnectableObservableType.h"
@@ -87,6 +93,7 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxObserverType.h"
 
 #pragma mark - Schedulers
+
 #import "RxSchedulers.h"
 #import "RxConcurrentDispatchQueueScheduler.h"
 #import "RxConcurrentMainScheduler.h"
@@ -103,6 +110,7 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxVirtualTimeScheduler.h"
 
 #pragma mark - Subjects
+
 #import "RxBehaviorSubject.h"
 #import "RxPublishSubject.h"
 #import "RxReplaySubject.h"
@@ -110,9 +118,12 @@ FOUNDATION_EXPORT const unsigned char RxObjCVersionString[];
 #import "RxVariable.h"
 
 #pragma mark - Extensions
+
 #import "NSEnumerator+Operators.h"
 
 #pragma mark - Traits
+
+#import "RxPrimitiveSequence.h"
 #import "RxSingle.h"
 #import "RxMaybe.h"
 #import "RxCompletable.h"

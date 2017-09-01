@@ -11,14 +11,7 @@
 #import "RxAsMaybe.h"
 #import "RxAnyObserver.h"
 
-RxPrimitiveTrait const RxPrimitiveTraitMaybe = @"rx.traits.maybe";
-
 @implementation RxMaybe
-
-- (RxPrimitiveTrait)trait {
-    return RxPrimitiveTraitMaybe;
-}
-
 @end
 
 @implementation RxMaybe (Creation)

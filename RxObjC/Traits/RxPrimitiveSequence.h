@@ -8,19 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "RxObservableConvertibleType.h"
+#import "RxObservable.h"
+#import "RxImmediateSchedulerType.h"
 
-@class RxObservable<E>;
-@protocol RxImmediateSchedulerType;
 @class RxMaybe<E>;
-
-typedef NSString *RxPrimitiveTrait NS_STRING_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RxPrimitiveSequence<__covariant Element> : NSObject <RxObservableConvertibleType>
 
 @property (nonnull, strong, readonly) RxObservable<Element> *source;
-@property (readonly) RxPrimitiveTrait trait;
 
 - (instancetype)initWithSource:(RxObservable *)source;
 

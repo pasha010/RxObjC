@@ -15,8 +15,6 @@
 
 @implementation RxPrimitiveSequence
 
-@dynamic trait;
-
 - (instancetype)initWithSource:(RxObservable *)source {
     self = [super init];
     if (self) {
@@ -118,7 +116,7 @@
     return [(RxPrimitiveSequence *) [[self class] alloc] initWithSource:[self.source retryWhen:notificationHandler customErrorClass:errorClass]];
 }
 
-- (nonnull instancetype)debug:(nullable NSString *)identifier {
+- (nonnull instancetype)debug:(nonnull NSString *)identifier {
     return [(RxPrimitiveSequence *) [[self class] alloc] initWithSource:[self.source debug:identifier]];
 }
 

@@ -12,28 +12,79 @@
 #import "RxObservable+Creation.h"
 #import "RxObjCCommon.h"
 
-RxPrimitiveTrait const RxPrimitiveTraitSingle = @"rx.traits.single";
-
 @implementation RxSingle
+@end
 
-- (RxPrimitiveTrait)trait {
-    return RxPrimitiveTraitSingle;
+@interface RxSingleObserver : NSObject <RxSingleObserver>
+
+@property (nullable, nonatomic, copy) void (^onSuccess)(id);
+@property (nullable, nonatomic, copy) void (^onError)(NSError *);
+
+@end
+
+@implementation RxSingleObserver
+
+- (instancetype)initWithOnSuccess:(void (^)(id))onSuccess onError:(void (^)(NSError *))onError {
+    self = [super init];
+    if (self) {
+        _onSuccess = [onSuccess copy];
+        _onError = [onError copy];
+    }
+    return self;
 }
+
+- (void)onSuccess:(id)element {
+    if (_onSuccess) {
+        _onSuccess(element);
+    }
+}
+
+- (void)onError:(NSError *)error {
+    if (_onError) {
+        _onError(error);
+    }
+}
+
+@end
+
+/**
+ * Event for single observable
+ */
+@interface RxSingleEvent : NSObject
+
+@property (readonly) BOOL isSuccess;
+@property (readonly) BOOL isError;
+
+@end
+
+@interface RxSingleEventSuccess<__covariant Element> : RxSingleEvent
+
+@property (nullable, strong, readonly) Element element;
+
++ (nonnull instancetype)create:(Element)element;
+
+@end
+
+
+@interface RxSingleEventError : RxSingleEvent
+
+@property (nullable, strong, readonly) NSError *error;
+
++ (nonnull instancetype)create:(NSError *)error;
 
 @end
 
 @implementation RxSingle (Creation)
 
-+ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(RxSingleObserver))subscribe {
++ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(id <RxSingleObserver>))subscribe {
     RxObservable *o = [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
-        return subscribe(^(RxSingleEvent *event) {
-            if (event.isSuccess) {
-                [observer onNext:((RxSingleEventSuccess *) event).element];
-                [observer onCompleted];
-            } else {
-                [observer onError:((RxSingleEventError *) event).error];
-            }
-        });
+        RxSingleObserver *singleObserver = [[RxSingleObserver alloc] initWithOnSuccess:^(id element) {
+            [observer onNext:element];
+            [observer onCompleted];
+        } onError:^(NSError *error) {
+            [observer onError:error];
+        }];
+        return subscribe(singleObserver);
     }];
     return [[RxSingle alloc] initWithSource:o];
 }

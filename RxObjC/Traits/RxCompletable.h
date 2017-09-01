@@ -15,8 +15,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT RxPrimitiveTrait const RxPrimitiveTraitCompletable;
-
 /**
  * Represents a push style sequence containing 0 elements.
  */

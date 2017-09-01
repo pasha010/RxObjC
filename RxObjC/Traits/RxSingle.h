@@ -10,19 +10,15 @@
 #import "RxPrimitiveSequence.h"
 
 @protocol RxDisposable;
-@class RxSingleEvent;
+@protocol RxSingleObserver;
 
 NS_ASSUME_NONNULL_BEGIN
-
-FOUNDATION_EXPORT RxPrimitiveTrait const RxPrimitiveTraitSingle;
 
 /**
  * Represents a push style sequence containing 1 element.
  */
 @interface RxSingle<__covariant Element> : RxPrimitiveSequence<Element>
 @end
-
-typedef void (^RxSingleObserver)(RxSingleEvent *_Nonnull event);
 
 @interface RxSingle<__covariant Element> (Creation)
 
@@ -31,13 +27,7 @@ typedef void (^RxSingleObserver)(RxSingleEvent *_Nonnull event);
  * @param subscribe Implementation of the resulting observable sequence's `subscribe` method.
  * @return The observable sequence with the specified implementation for the `subscribe` method.
  */
-+ (nonnull instancetype)create:(id <RxDisposable>(^_Nonnull)(RxSingleObserver))subscribe;
-
-/**
- * Subscribes `observer` to receive events for this sequence.
- * @return Subscription for `observer` that can be used to cancel production of sequence elements and free resources.
- */
-- (nonnull id <RxDisposable>)subscribe:(void(^_Nonnull)(RxSingleEvent *))observer;
++ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(id <RxSingleObserver> observer))subscribe;
 
 /**
  * Subscribes a success handler, and an error handler for this sequence.
@@ -45,10 +35,10 @@ typedef void (^RxSingleObserver)(RxSingleEvent *_Nonnull event);
  * @param error Action to invoke upon errored termination of the observable sequence.
  * @return Subscription object used to unsubscribe from the observable sequence.
  */
-- (nonnull id <RxDisposable>)subscribeOnSuccess:(void(^_Nullable)(Element))success
-                                        onError:(void(^_Nullable)(NSError *))error;
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void (^ _Nullable)(Element))success
+                                        onError:(void (^ _Nullable)(NSError *))error;
 
-- (nonnull id <RxDisposable>)subscribeOnSuccess:(void(^_Nullable)(Element))success;
+- (nonnull id <RxDisposable>)subscribeOnSuccess:(void (^ _Nullable)(Element))success;
 
 @end
 
@@ -71,30 +61,13 @@ typedef void (^RxSingleObserver)(RxSingleEvent *_Nonnull event);
 @end
 
 /**
- * Event for single observable
+ * Observer for single events
  */
-@interface RxSingleEvent : NSObject
+@protocol RxSingleObserver <NSObject>
 
-@property (readonly) BOOL isSuccess;
-@property (readonly) BOOL isError;
+- (void)onSuccess:(id)element;
 
-@end
-
-@interface RxSingleEventSuccess<__covariant Element> : RxSingleEvent
-
-@property (nullable, strong, readonly) Element element;
-
-+ (nonnull instancetype)create:(Element)element;
-
-@end
-
-
-@interface RxSingleEventError: RxSingleEvent
-
-@property (nullable, strong, readonly) NSError *error;
-
-+ (nonnull instancetype)create:(NSError *)error;
-
+- (void)onError:(NSError *)error;
 @end
 
 NS_ASSUME_NONNULL_END

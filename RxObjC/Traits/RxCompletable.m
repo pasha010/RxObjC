@@ -17,14 +17,7 @@
 #import "RxSerialDisposable.h"
 #import "RxMaybe.h"
 
-RxPrimitiveTrait const RxPrimitiveTraitCompletable = @"rx.traits.completable";
-
 @implementation RxCompletable
-
-- (RxPrimitiveTrait)trait {
-    return RxPrimitiveTraitCompletable;
-}
-
 @end
 
 @implementation RxCompletable (Creation)

@@ -14,8 +14,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT RxPrimitiveTrait const RxPrimitiveTraitMaybe;
-
 /**
  * Represents a push style sequence containing 0 or 1 element.
  */
@@ -35,7 +33,6 @@ typedef void (^RxMaybeObserver)(RxMaybeEvent *_Nonnull event);
 
 /**
  * Subscribes `observer` to receive events for this sequence.
- * @param observer
  * @return Subscription for `observer` that can be used to cancel production of sequence elements and free resources.
  */
 - (nonnull id <RxDisposable>)subscribe:(void (^ _Nonnull)(RxMaybeEvent *))observer;
