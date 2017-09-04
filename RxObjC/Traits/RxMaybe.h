@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "RxPrimitiveSequence.h"
 
-@class RxMaybeEvent;
 @protocol RxDisposable;
+@protocol RxMaybeObserver;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,8 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RxMaybe<__covariant Element> : RxPrimitiveSequence<Element>
 @end
 
-typedef void (^RxMaybeObserver)(RxMaybeEvent *_Nonnull event);
-
 @interface RxMaybe<__covariant Element> (Creation)
 
 /**
@@ -29,13 +27,7 @@ typedef void (^RxMaybeObserver)(RxMaybeEvent *_Nonnull event);
  * @param subscribe Implementation of the resulting observable sequence's `subscribe` method.
  * @return The observable sequence with the specified implementation for the `subscribe` method.
  */
-+ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(RxMaybeObserver))subscribe;
-
-/**
- * Subscribes `observer` to receive events for this sequence.
- * @return Subscription for `observer` that can be used to cancel production of sequence elements and free resources.
- */
-- (nonnull id <RxDisposable>)subscribe:(void (^ _Nonnull)(RxMaybeEvent *))observer;
++ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(id <RxMaybeObserver>))subscribe;
 
 /**
  * Subscribes a success handler, an error handler, and a completion handler for this sequence.
@@ -76,34 +68,12 @@ typedef void (^RxMaybeObserver)(RxMaybeEvent *_Nonnull event);
 
 @end
 
-@interface RxMaybeEvent : NSObject
+@protocol RxMaybeObserver <NSObject>
+- (void)onSuccess:(id)element;
 
-@property (readonly) BOOL isSuccess;
-@property (readonly) BOOL isError;
-@property (readonly) BOOL isCompleted;
+- (void)onComplete;
 
-@end
-
-@interface RxMaybeEventSuccess<__covariant Element> : RxMaybeEvent
-
-@property (nullable, strong, readonly) Element element;
-
-+ (nonnull instancetype)success:(nullable Element)element;
-
-@end
-
-@interface RxMaybeEventError : RxMaybeEvent
-
-@property (nullable, strong, readonly) NSError *error;
-
-+ (nonnull instancetype)error:(NSError *)error;
-
-@end
-
-@interface RxMaybeEventCompleted : RxMaybeEvent
-
-+ (nonnull instancetype)completed;
-
+- (void)onError:(NSError *)error;
 @end
 
 NS_ASSUME_NONNULL_END

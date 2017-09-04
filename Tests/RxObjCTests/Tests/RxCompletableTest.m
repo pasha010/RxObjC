@@ -15,5 +15,8 @@
 
 @implementation RxCompletableTest
 
+- (void)test_create {
+
+}
 
 @end

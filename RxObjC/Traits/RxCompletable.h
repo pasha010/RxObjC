@@ -12,6 +12,7 @@
 @class RxCompletableEvent;
 @protocol RxDisposable;
 @class RxSingle<E>;
+@protocol RxCompletableObserver;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,8 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RxCompletable : RxPrimitiveSequence
 @end
 
-typedef void (^RxCompletableObserver)(RxCompletableEvent *_Nonnull event);
-
 @interface RxCompletable (Creation)
 
 /**
@@ -30,7 +29,7 @@ typedef void (^RxCompletableObserver)(RxCompletableEvent *_Nonnull event);
  * @param subscribe Implementation of the resulting observable sequence's `subscribe` method.
  * @return The observable sequence with the specified implementation for the `subscribe` method.
  */
-+ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(RxCompletableObserver))subscribe;
++ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(id <RxCompletableObserver>))subscribe;
 
 /**
  * Subscribes `observer` to receive events for this sequence.
@@ -99,26 +98,10 @@ typedef void (^RxCompletableObserver)(RxCompletableEvent *_Nonnull event);
 
 @end
 
-@interface RxCompletableEvent : NSObject
+@protocol RxCompletableObserver <NSObject>
+- (void)onComplete;
 
-@property (readonly) BOOL isCompleted;
-@property (readonly) BOOL isError;
-
+- (void)onError:(NSError *)error;
 @end
-
-@interface RxCompletableEventError : RxCompletableEvent
-
-@property (nullable, strong, readonly) NSError *error;
-
-+ (nonnull instancetype)error:(NSError *)error;
-
-@end
-
-@interface RxCompletableEventCompleted : RxCompletableEvent
-
-+ (nonnull instancetype)completed;
-
-@end
-
 
 NS_ASSUME_NONNULL_END

@@ -20,17 +20,71 @@
 @implementation RxCompletable
 @end
 
+@interface RxCompletableObserver : NSObject <RxCompletableObserver>
+
+@property (nullable, nonatomic, copy) void (^onCompleteBlock)();
+@property (nullable, nonatomic, copy) void (^onError)(NSError *);
+
+- (instancetype)initWithOnComplete:(void (^)())onComplete onError:(void (^)(NSError *))onError;
+
+@end
+
+@implementation RxCompletableObserver
+
+- (instancetype)initWithOnComplete:(void (^)())onComplete onError:(void (^)(NSError *))onError {
+    self = [super init];
+    if (self) {
+        _onCompleteBlock = [onComplete copy];
+        _onError = [onError copy];
+    }
+    return self;
+}
+
+- (void)onComplete {
+    if (_onCompleteBlock) {
+        _onCompleteBlock();
+    }
+}
+
+- (void)onError:(NSError *)error {
+    if (_onError) {
+        _onError(error);
+    }
+}
+
+@end
+
+@interface RxCompletableEvent : NSObject
+
+@property (readonly) BOOL isCompleted;
+@property (readonly) BOOL isError;
+
+@end
+
+@interface RxCompletableEventError : RxCompletableEvent
+
+@property (nullable, strong, readonly) NSError *error;
+
++ (nonnull instancetype)error:(NSError *)error;
+
+@end
+
+@interface RxCompletableEventCompleted : RxCompletableEvent
+
++ (nonnull instancetype)completed;
+
+@end
+
 @implementation RxCompletable (Creation)
 
-+ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(RxCompletableObserver))subscribe {
++ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(id <RxCompletableObserver>))subscribe {
     return [[RxCompletable alloc] initWithSource:[RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
-        return subscribe(^(RxCompletableEvent *_Nonnull event) {
-            if (event.isError) {
-                [observer onError:((RxCompletableEventError *) event).error];
-            } else {
-                [observer onCompleted];
-            }
-        });
+        RxCompletableObserver *completableObserver = [[RxCompletableObserver alloc] initWithOnComplete:^{
+            [observer onCompleted];
+        } onError:^(NSError *error) {
+            [observer onError:error];
+        }];
+        return subscribe(completableObserver);
     }]];
 }
 

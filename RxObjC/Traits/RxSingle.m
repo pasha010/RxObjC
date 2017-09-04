@@ -20,6 +20,8 @@
 @property (nullable, nonatomic, copy) void (^onSuccess)(id);
 @property (nullable, nonatomic, copy) void (^onError)(NSError *);
 
+- (instancetype)initWithOnSuccess:(void (^)(id))onSuccess onError:(void (^)(NSError *))onError;
+
 @end
 
 @implementation RxSingleObserver

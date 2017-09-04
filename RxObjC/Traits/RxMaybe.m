@@ -11,23 +11,94 @@
 #import "RxAsMaybe.h"
 #import "RxAnyObserver.h"
 
+@interface RxMaybeObserver : NSObject <RxMaybeObserver>
+
+@property (nullable, nonatomic, copy) void (^onSuccess)(id);
+@property (nullable, nonatomic, copy) void (^onError)(NSError *);
+@property (nullable, nonatomic, copy) void (^onCompleteBlock)();
+
+- (instancetype)initWithOnSuccess:(void (^)(id))onSuccess onError:(void (^)(NSError *))onError onComplete:(void (^)())onComplete;
+
+@end
+
+@implementation RxMaybeObserver
+
+- (instancetype)initWithOnSuccess:(void (^)(id))onSuccess onError:(void (^)(NSError *))onError onComplete:(void (^)())onComplete {
+    self = [super init];
+    if (self) {
+        _onSuccess = [onSuccess copy];
+        _onCompleteBlock = [onComplete copy];
+        _onError = [onError copy];
+    }
+    return self;
+}
+
+- (void)onSuccess:(id)element {
+    if (_onSuccess) {
+        _onSuccess(element);
+    }
+}
+
+- (void)onComplete {
+    if (_onCompleteBlock) {
+        _onCompleteBlock();
+    }
+}
+
+- (void)onError:(NSError *)error {
+    if (_onError) {
+        _onError(error);
+    }
+}
+
+@end
+
+@interface RxMaybeEvent : NSObject
+
+@property (readonly) BOOL isSuccess;
+@property (readonly) BOOL isError;
+@property (readonly) BOOL isCompleted;
+
+@end
+
+@interface RxMaybeEventSuccess<__covariant Element> : RxMaybeEvent
+
+@property (nullable, strong, readonly) Element element;
+
++ (nonnull instancetype)success:(nullable Element)element;
+
+@end
+
+@interface RxMaybeEventError : RxMaybeEvent
+
+@property (nullable, strong, readonly) NSError *error;
+
++ (nonnull instancetype)error:(NSError *)error;
+
+@end
+
+@interface RxMaybeEventCompleted : RxMaybeEvent
+
++ (nonnull instancetype)completed;
+
+@end
+
 @implementation RxMaybe
 @end
 
 @implementation RxMaybe (Creation)
 
-+ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(RxMaybeObserver))subscribe {
++ (nonnull instancetype)create:(id <RxDisposable>(^ _Nonnull)(id <RxMaybeObserver>))subscribe {
     __auto_type source = [RxObservable create:^id <RxDisposable>(RxAnyObserver *observer) {
-        return subscribe(^(RxMaybeEvent *_Nonnull event) {
-            if (event.isSuccess) {
-                [observer onNext:((RxMaybeEventSuccess *) event).element];
-                [observer onCompleted];
-            } else if (event.isError) {
-                [observer onError:((RxMaybeEventError *) event).error];
-            } else {
-                [observer onCompleted];
-            }
-        });
+        RxMaybeObserver *maybeObserver = [[RxMaybeObserver alloc] initWithOnSuccess:^(id element) {
+            [observer onNext:element];
+            [observer onCompleted];
+        } onError:^(NSError *error) {
+            [observer onError:error];
+        } onComplete:^ {
+            [observer onCompleted];
+        }];
+        return subscribe(maybeObserver);
     }];
     return [[RxMaybe alloc] initWithSource:source];
 }
