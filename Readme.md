@@ -11,7 +11,7 @@ Current version is 1.0 ~ 2.5 RxSwift.
 RxObjC 1.0 contains only core of rx, without RxCocoa module.
 
 
-###How install
+### How install
 Use [CocoaPods](https://guides.cocoapods.org/using/using-cocoapods.html)
 
 **:warning: IMPORTANT! For tvOS support, CocoaPods `0.39` is required. :warning:**
@@ -31,20 +31,20 @@ target 'YOUR_TESTING_TARGET' do
 end
 ```
 
-##Modules:
-###RxCocoa:
+## Modules:
+### RxCocoa:
 _(see [RxSwift/RxCocoa](https://github.com/ReactiveX/RxSwift/tree/master/RxCocoa))_
 * KVO extensions
 * Dealloc observing
 
-###RxBlocking: 
+### RxBlocking: 
 _(see [RxSwift/RxBlocking](https://github.com/ReactiveX/RxSwift/tree/master/RxBlocking))_
 Set of blocking operators for RxObjC. These operators are mostly intended for unit/integration tests
 with a couple of other special scenarios where they could be useful.
 E.g.
 Waiting for observable sequence to complete before exiting command line application.
 
-###RxTests:
+### RxTests:
 _(see [RxSwift/RxTests](https://github.com/ReactiveX/RxSwift/tree/master/RxTests))_
 Unit testing extensions for RxObjC. This library contains mock schedulers, observables, and observers
 that should make unit testing your operators easy as unit testing RxObjC built-in operators.
